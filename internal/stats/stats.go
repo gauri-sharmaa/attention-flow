@@ -160,7 +160,13 @@ func (r *RLS) Update(x []float64, y float64) float64 {
 			row[j] = (row[j] - ki*px[j]) * inv
 		}
 	}
-	// Keep P symmetric and bounded so long runs with idle features cannot blow up.
+	// Keep P symmetric and bounded so long runs with idle features cannot blow
+	// up. Rounding drift is slow, so every 32 updates is plenty.
+	r.N++
+	r.Resid.Add(err)
+	if r.N%32 != 0 {
+		return err
+	}
 	for i := 0; i < d; i++ {
 		for j := i + 1; j < d; j++ {
 			m := 0.5 * (r.P[i*d+j] + r.P[j*d+i])
@@ -170,8 +176,6 @@ func (r *RLS) Update(x []float64, y float64) float64 {
 			r.P[i*d+i] = 1e6
 		}
 	}
-	r.N++
-	r.Resid.Add(err)
 	return err
 }
 

@@ -14,6 +14,9 @@ type Shock struct {
 	Size     float64 // log move above the source's typical move
 	Children []*ShockChild
 	Done     bool
+	// EchoOf is the parent entity whose earlier shock explains this one
+	// (it arrived on schedule along a learned edge), or -1 for a new source.
+	EchoOf int
 }
 
 // ShockChild is one entity the shock is predicted to reach.
@@ -52,7 +55,13 @@ func (e *Engine) detectShocks(t int) {
 		}
 		e.lastShock[j] = t
 		e.stats.Shocks++
-		s := &Shock{Source: j, Bar: t, Time: e.BarTime(), Z: z, Size: rt[j] - e.robust[j].Med}
+		s := &Shock{Source: j, Bar: t, Time: e.BarTime(), Z: z, Size: rt[j] - e.robust[j].Med, EchoOf: -1}
+		for _, p := range e.parents[j] {
+			if age := t - e.lastShock[p.From]; age >= max(1, p.Lag-1) && age <= p.Lag+2 {
+				s.EchoOf = p.From
+				break
+			}
+		}
 		s.Children = e.impulse(j, s.Size)
 		e.Shocks = append(e.Shocks, s)
 		if len(e.Shocks) > 400 {

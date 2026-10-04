@@ -57,6 +57,9 @@ type ForecastScore struct {
 	R2Full     float64 `json:"r2_full"`
 	ExcessR2   float64 `json:"excess_r2"`   // 1 - SSE(excess - disl)/SS(excess)
 	ExcessCorr float64 `json:"excess_corr"` // corr(dislocation, realised excess)
+	// Same metrics for a forecaster that knows the planted model (sim only).
+	OracleR2   float64 `json:"oracle_excess_r2,omitempty"`
+	OracleCorr float64 `json:"oracle_excess_corr,omitempty"`
 }
 
 // Decile is signal quality for one decile of |dislocation|/σ (10 = strongest).
@@ -124,11 +127,11 @@ type Latency struct {
 }
 
 type pending struct {
-	x, fd, fc, sig []float64
-	valid          bool
+	x, fd, fc, sig, or, p []float64
+	valid                 bool
 }
 
-type sample struct{ score, disl, excess, p float64 }
+type sample struct{ score, disl, excess, p, oracle float64 }
 
 // Run replays evs through a fresh engine and scores it.
 func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Config, opt Options) *Report {
@@ -137,7 +140,11 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 	H := cfg.Horizon
 	ring := make([]pending, H+1)
 	for i := range ring {
-		ring[i] = pending{x: make([]float64, n), fd: make([]float64, n), fc: make([]float64, n), sig: make([]float64, n)}
+		ring[i] = pending{x: make([]float64, n), fd: make([]float64, n), fc: make([]float64, n), sig: make([]float64, n), or: make([]float64, n), p: make([]float64, n)}
+	}
+	var orc *oracle
+	if opt.Truth != nil {
+		orc = newOracle(u, opt.Truth, H)
 	}
 	var samples []sample
 	var sumAbs [3]float64
@@ -169,8 +176,7 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 				if old.sig[j] > 0 {
 					sc = math.Abs(disl) / old.sig[j]
 				}
-				p := 0.5 * math.Erfc(-sc/math.Sqrt2)
-				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: p})
+				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: old.p[j], oracle: old.or[j] - old.fd[j]})
 			}
 		}
 		cur := &ring[t%len(ring)]
@@ -179,6 +185,10 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 			cur.fd[j] = e.DecayPath(j, H)
 			cur.fc[j] = e.FullPath(j, H)
 			cur.sig[j] = e.Sig[j]
+			cur.p[j] = e.Prob(j)
+		}
+		if orc != nil {
+			orc.observe(e, t, H, cur.or)
 		}
 		cur.valid = true
 		for checkIdx < len(opt.Checkpoints) && t >= opt.Checkpoints[checkIdx] {
@@ -232,6 +242,17 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 		}
 		f.ExcessR2 = 1 - se/ss
 		f.ExcessCorr = corr(xs, ys)
+		if orc != nil {
+			var so float64
+			os := make([]float64, len(samples))
+			for i, s := range samples {
+				// Both are scored on the same target: the move beyond the engine's decay path.
+				so += (s.excess - s.oracle) * (s.excess - s.oracle)
+				os[i] = s.oracle
+			}
+			f.OracleR2 = 1 - so/ss
+			f.OracleCorr = corr(os, ys)
+		}
 	}
 	rep.Signals = deciles(samples)
 	rep.Calib, rep.Brier, rep.BrierRef = calibration(samples)

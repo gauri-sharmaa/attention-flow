@@ -19,6 +19,10 @@ func Format(r *Report) string {
 		f.MAEZero, f.MAEDecay, f.MAEFull, 100*(1-f.MAEFull/f.MAEDecay))
 	p("  R²   decay %.3f · full %.3f\n", f.R2Decay, f.R2Full)
 	p("  excess move  R² %.3f · corr %.3f\n", f.ExcessR2, f.ExcessCorr)
+	if f.OracleCorr != 0 {
+		p("  oracle       R² %.3f · corr %.3f  (true model; engine gets %.0f%% of the reachable R²)\n",
+			f.OracleR2, f.OracleCorr, 100*f.ExcessR2/f.OracleR2)
+	}
 
 	p("\nsignals   by decile of |dislocation|/σ\n")
 	p("  dec      n   mean|d|   hit   capture\n")

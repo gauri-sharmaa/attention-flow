@@ -93,6 +93,18 @@ type model struct {
 	x     []float64 // features for the bar being predicted
 }
 
+const (
+	calBins  = 24
+	calWidth = 0.25 // score units per bin; the last bin is open-ended
+)
+
+func calBin(score float64) int { return min(calBins-1, int(score/calWidth)) }
+
+type pastFc struct {
+	fd, disl, sig []float64 // raw (uncalibrated) sig
+	valid         bool
+}
+
 type pairStat struct {
 	a, b   int
 	ab, ba []float64 // EW E[u_a(t-l) v_b(t)] and E[u_b(t-l) v_a(t)], index l-1
@@ -143,8 +155,15 @@ type Engine struct {
 	fd    [][]float64 // decay-only path
 	rf    [][]float64 // forecast innovations
 	Disl  []float64   // fc[H]-fd[H]
-	Sig   []float64   // forecast std of the excess move
+	Sig   []float64   // forecast std of the excess move, calibrated
 	Catch []int       // bars until 90% of the dislocation is expected
+
+	// Self-calibration: every forecast is scored H bars later and the running
+	// mean squared standardised error rescales Sig, so stated confidence keeps
+	// matching realised accuracy as the data drifts.
+	past  []pastFc
+	calib []stats.EW
+	pBins [calBins][2]float64 // EW (hits, count) by score bin, pooled over entities
 
 	Shocks    []*Shock
 	onShock   ShockHook
@@ -153,6 +172,7 @@ type Engine struct {
 	bfsDepth  []int
 	bfsProb   []float64
 	children  [][]*Edge
+	lagRows   [][]float64
 	stats     Counters
 }
 
@@ -223,6 +243,15 @@ func New(u *core.Universe, cand []semantic.Pair, cfg Config) *Engine {
 		e.lastShock[j] = math.MinInt32
 	}
 	e.children = make([][]*Edge, n)
+	e.lagRows = make([][]float64, cfg.MaxLag)
+	e.past = make([]pastFc, H+1)
+	for i := range e.past {
+		e.past[i] = pastFc{fd: make([]float64, n), disl: make([]float64, n), sig: make([]float64, n)}
+	}
+	e.calib = make([]stats.EW, n)
+	for j := range e.calib {
+		e.calib[j].Alpha = stats.Alpha(cfg.ModelHalfLife)
+	}
 	return e
 }
 
@@ -518,7 +547,11 @@ func (e *Engine) updateModels(t int) {
 // produce a spurious a→c edge.
 func (e *Engine) updatePairs(t int) {
 	a := e.alphaStat
-	L := e.cfg.MaxLag
+	L := min(e.cfg.MaxLag, t)
+	rows := e.lagRows[:L]
+	for l := 1; l <= L; l++ {
+		rows[l-1] = e.at(e.u, t-l)
+	}
 	for k := range e.pairs {
 		p := &e.pairs[k]
 		va, vb := e.v[p.a], e.v[p.b]
@@ -528,13 +561,10 @@ func (e *Engine) updatePairs(t int) {
 		if e.missing[p.b] {
 			vb = 0
 		}
-		for l := 1; l <= L; l++ {
-			if t-l < 0 {
-				break
-			}
-			ul := e.at(e.u, t-l)
-			p.ab[l-1] += a * (ul[p.a]*vb - p.ab[l-1])
-			p.ba[l-1] += a * (ul[p.b]*va - p.ba[l-1])
+		ab, ba := p.ab[:L], p.ba[:L]
+		for l, ul := range rows {
+			ab[l] += a * (ul[p.a]*vb - ab[l])
+			ba[l] += a * (ul[p.b]*va - ba[l])
 		}
 	}
 }
@@ -653,13 +683,14 @@ func (e *Engine) editGraph(t int) {
 }
 
 func (e *Engine) bestLag(mom []float64, su, sv float64) (float64, int) {
-	best, lag := math.Inf(-1), 0
+	// z is monotone in the moment for fixed su, sv: pick the lag first.
+	best := 0
 	for l, m := range mom {
-		if z := e.zscore(m, su, sv); z > best {
-			best, lag = z, l+1
+		if m > mom[best] {
+			best = l
 		}
 	}
-	return best, lag
+	return e.zscore(mom[best], su, sv), best + 1
 }
 
 // edgeCoef returns the summed coefficient of edge p in j's model and its
@@ -693,19 +724,43 @@ func (e *Engine) edgeCoef(j int, m *model, p *Edge) (w, se float64) {
 // the move the graph and factor say is coming that the level has not made yet.
 func (e *Engine) forecast(t int) {
 	H := e.cfg.Horizon
+	defer func() { e.past[t%(H+1)].valid = true }()
 	for j := 0; j < e.n; j++ {
 		e.fc[0][j], e.fd[0][j], e.rf[0][j] = e.x[j], e.x[j], 0
 	}
 	for h := 1; h <= H; h++ {
+		tgt := t + h
 		for j := 0; j < e.n; j++ {
 			m := e.models[j]
+			w := m.rls.W
 			base := e.lvl[j].Mean
-			e.fill(j, m, t+h, t, 0, e.fc[h-1][j], base)
-			r := m.rls.Predict(m.x)
+			c := e.clusterOf[j]
+			r := 0.0
+			for i, f := range m.feats {
+				switch f.kind {
+				case featParent:
+					if tau := tgt - f.lag; tau <= t {
+						if tau >= 0 && t-tau < e.hist {
+							r += w[i] * e.r[tau%e.hist][f.src]
+						}
+					} else {
+						r += w[i] * e.rf[tau-t][f.src]
+					}
+				case featFactorLag:
+					// Future factor innovations are unpredictable (zero).
+					if tau := tgt - f.lag; tau >= 0 && tau <= t && t-tau < e.hist {
+						r += w[i] * e.f[tau%e.hist][c]
+					}
+				case featDecay:
+					r += w[i] * (e.fc[h-1][j] - base)
+				case featConst:
+					r += w[i]
+				}
+			}
 			e.rf[h][j] = r
 			e.fc[h][j] = e.fc[h-1][j] + r
 			// Decay-only: same fitted decay and intercept, nothing else.
-			dk, ck := m.rls.W[len(m.feats)-2], m.rls.W[len(m.feats)-1]
+			dk, ck := w[len(m.feats)-2], w[len(m.feats)-1]
 			e.fd[h][j] = e.fd[h-1][j] + dk*(e.fd[h-1][j]-base) + ck
 		}
 	}
@@ -718,7 +773,29 @@ func (e *Engine) forecast(t int) {
 		lam0 := m.rls.W[len(m.feats)-2-e.cfg.FactorLags-1]
 		fs := e.fStd[e.clusterOf[j]].Std()
 		s2 := m.rls.Resid.Var + lam0*lam0*fs*fs
-		e.Sig[j] = math.Sqrt(float64(H) * math.Max(s2, 1e-10))
+		raw := math.Sqrt(float64(H) * math.Max(s2, 1e-10))
+		old, cur := &e.past[(t-H+(H+1)*1024)%(H+1)], &e.past[t%(H+1)]
+		if t >= H && old.valid && !e.missing[j] && old.sig[j] > 0 {
+			exc := e.x[j] - old.fd[j]
+			z := (exc - old.disl[j]) / old.sig[j]
+			e.calib[j].Add(math.Min(z*z, 25))
+			if old.disl[j] != 0 {
+				b := &e.pBins[calBin(math.Abs(old.disl[j])/old.sig[j])]
+				hit := 0.0
+				if exc*old.disl[j] > 0 {
+					hit = 1
+				}
+				const a = 2e-5 // ≈ 35k pooled samples per bin half-life
+				b[0] += a * (hit - b[0])
+				b[1] += a * (1 - b[1])
+			}
+		}
+		scale := 1.0
+		if e.calib[j].N > 200 {
+			scale = math.Min(3, math.Max(0.5, math.Sqrt(e.calib[j].Mean)))
+		}
+		e.Sig[j] = raw * scale
+		cur.fd[j], cur.disl[j], cur.sig[j] = e.fd[H][j], d, raw
 		e.Catch[j] = H
 		if math.Abs(d) > 1e-12 {
 			for h := 1; h <= H; h++ {
@@ -731,13 +808,59 @@ func (e *Engine) forecast(t int) {
 	}
 }
 
-// Prob is the model's probability that j's excess move over H bars has the
-// sign of its dislocation.
+// Prob is the probability that j's excess move over H bars has the sign of its
+// dislocation. It starts from the Gaussian Φ(|d|/σ) and, once enough forecasts
+// have been scored, switches to the realised hit rate of past forecasts with a
+// similar score (pooled across entities, monotone by construction).
 func (e *Engine) Prob(j int) float64 {
-	if e.Sig[j] <= 0 {
+	if e.Sig[j] <= 0 || e.Disl[j] == 0 {
 		return 0.5
 	}
-	return stats.NormCDF(math.Abs(e.Disl[j]) / e.Sig[j])
+	H := e.cfg.Horizon
+	raw := e.past[(e.T-1)%(H+1)].sig[j]
+	if raw <= 0 {
+		return 0.5
+	}
+	sc := math.Abs(e.Disl[j]) / raw
+	return e.calibrated(sc, stats.NormCDF(math.Abs(e.Disl[j])/e.Sig[j]))
+}
+
+// calibrated maps a score to a realised hit rate. Bins are merged upward
+// (pool-adjacent-violators) so the curve never decreases.
+func (e *Engine) calibrated(score, prior float64) float64 {
+	var rate [calBins]float64
+	var w [calBins]float64
+	for i, b := range e.pBins {
+		// Shrink thin bins toward the Gaussian prior with 0.002 pseudo-weight.
+		const k = 0.002
+		rate[i] = (b[0] + k*stats.NormCDF(float64(i)*calWidth+calWidth/2)) / (b[1] + k)
+		w[i] = b[1] + k
+	}
+	if e.pBins[calBin(score)][1] < 0.01 {
+		return prior
+	}
+	// Pool adjacent violators for a non-decreasing fit.
+	type blk struct {
+		v, w float64
+		n    int
+	}
+	var st []blk
+	for i := 0; i < calBins; i++ {
+		st = append(st, blk{rate[i], w[i], 1})
+		for len(st) > 1 && st[len(st)-2].v > st[len(st)-1].v {
+			a, b := st[len(st)-2], st[len(st)-1]
+			st = st[:len(st)-2]
+			st = append(st, blk{(a.v*a.w + b.v*b.w) / (a.w + b.w), a.w + b.w, a.n + b.n})
+		}
+	}
+	bin := calBin(score)
+	for _, b := range st {
+		if bin < b.n {
+			return math.Max(0.5, b.v)
+		}
+		bin -= b.n
+	}
+	return prior
 }
 
 // DecayPath returns the decay-only forecast level for j at step h.

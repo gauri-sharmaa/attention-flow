@@ -116,7 +116,8 @@ func cmdReplay(args []string) error {
 	events := fs.String("events", "data/sim/events.csv", "events CSV")
 	truthPath := fs.String("truth", "", "answer key from sim (optional)")
 	bar := fs.Int64("bar", 60, "bar width in seconds")
-	k := fs.Int("k", 12, "semantic neighbours per entity")
+	k := fs.Int("k", 40, "semantic neighbours per entity")
+	minSim := fs.Float64("minsim", 0.05, "minimum semantic similarity for a candidate pair")
 	out := fs.String("out", "", "write the report as JSON here")
 	fs.Parse(args)
 
@@ -129,7 +130,7 @@ func cmdReplay(args []string) error {
 		return err
 	}
 	cfg := engineConfig(*bar)
-	cand := semantic.Candidates(u, *k, 0.05)
+	cand := semantic.Candidates(u, *k, *minSim)
 	opt := replay.Options{EvalStart: cfg.Warmup * 2}
 	if *truthPath != "" {
 		var tr sim.Truth

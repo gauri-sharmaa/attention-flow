@@ -72,6 +72,9 @@ type Truth struct {
 	Shocks    []Shock
 	MidBar    int
 	BaseLevel []float64
+	Decay     float64
+	MaxLag    int
+	Factor    [][]float64 // per-bar cluster factor innovations
 }
 
 // Shock is a planted attention shock.
@@ -169,11 +172,13 @@ func plantEdges(u *core.Universe, cfg Config, rng *rand.Rand, regime int, indeg 
 // Run simulates the universe and returns the event stream plus its answer key.
 func Run(u *core.Universe, cfg Config) ([]core.Event, *Truth) {
 	rng := rand.New(rand.NewPCG(cfg.Seed, cfg.Seed^0x9e3779b97f4a7c15))
+	cfg.Start -= cfg.Start % cfg.BarSeconds // bars must align with the engine's bar clock
 	n := len(u.Entities)
 	clusterOf := u.ClusterIndex()
 	tr := &Truth{
 		Loading: make([]float64, n), SlowLoad: make([]float64, n), SlowLag: make([]int, n),
 		MidBar: cfg.Bars / 2, BaseLevel: make([]float64, n),
+		Decay: cfg.Decay, MaxLag: cfg.MaxLag, Factor: make([][]float64, cfg.Bars),
 	}
 
 	indeg := make([]int, n)
@@ -225,6 +230,7 @@ func Run(u *core.Universe, cfg Config) ([]core.Event, *Truth) {
 		for c := range f {
 			f[c] = cfg.FactorStd * rng.NormFloat64()
 		}
+		tr.Factor[t] = append([]float64(nil), f...)
 		for j := 0; j < n; j++ {
 			c := clusterOf[j]
 			v := tr.Loading[j]*f[c] + cfg.IdioStd*rng.NormFloat64()
