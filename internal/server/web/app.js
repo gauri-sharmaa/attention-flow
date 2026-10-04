@@ -87,6 +87,7 @@
   // ---- graph: tiny force layout, persistent positions across frames ----
   const canvas = $("graph"), ctx = canvas.getContext("2d");
   const nodes = new Map(); // id -> {x,y,vx,vy}
+  let lastEdges = [];
   let edges = [], hot = new Set(), shockSrc = new Set(), hover = -1;
 
   // Fruchterman-Reingold with cooling; reheats when the node set changes.
@@ -208,7 +209,8 @@
     renderDisl(s.disl || []);
     renderShocks(s.shocks || []);
     renderFactors(s.factors || []);
-    renderGraph({ edges: s.edges || [], disl: s.disl || [], shocks: s.shocks || [] });
+    if (s.edges) lastEdges = s.edges; // static frames omit unchanged edge lists
+    renderGraph({ edges: lastEdges, disl: s.disl || [], shocks: s.shocks || [] });
   }
 
   async function start() {

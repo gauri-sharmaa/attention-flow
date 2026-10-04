@@ -4,6 +4,7 @@
 //	attnflow replay  -events E -truth T       replay a stream and print the scorecard
 //	attnflow fetch   -out data/wiki           download Wikipedia pageviews (needs network)
 //	attnflow serve   -events E                live dashboard, replaying E in real time
+//	attnflow export  -events E -out site      static dashboard (no server) for hosting
 package main
 
 import (
@@ -37,6 +38,8 @@ func main() {
 		err = cmdFetch(os.Args[2:])
 	case "serve":
 		err = cmdServe(os.Args[2:])
+	case "export":
+		err = cmdExport(os.Args[2:])
 	default:
 		usage()
 	}
@@ -47,7 +50,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|serve [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -202,6 +205,35 @@ func cmdServe(args []string) error {
 		Addr: *addr, Speed: *speed, Label: *label, SkipBars: 2 * cfg.Warmup,
 		NewEngine: func() *engine.Engine { return engine.New(u, cand, cfg) },
 	})
+}
+
+func cmdExport(args []string) error {
+	fs := flag.NewFlagSet("export", flag.ExitOnError)
+	uni := fs.String("universe", "data/universe.txt", "universe file")
+	text := fs.String("text", "", "optional entity descriptions")
+	events := fs.String("events", "data/sim/events.csv", "events CSV")
+	bar := fs.Int64("bar", 60, "bar width in seconds")
+	out := fs.String("out", "site", "output directory")
+	every := fs.Int("every", 3, "bars between frames")
+	frames := fs.Int("frames", 400, "maximum frames")
+	label := fs.String("label", "simulated", "data label shown in the UI")
+	fs.Parse(args)
+	u, err := loadUniverse(*uni, *text)
+	if err != nil {
+		return err
+	}
+	evs, err := core.LoadEvents(*events)
+	if err != nil {
+		return err
+	}
+	cfg := engineConfig(*bar)
+	e := engine.New(u, semantic.Candidates(u, 40, 0.05), cfg)
+	n, err := server.Export(u, evs, e, *out, *label, 3*cfg.Warmup, *every, *frames)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%d frames -> %s\n", n, *out)
+	return nil
 }
 
 func writeJSON(path string, v any) error {
