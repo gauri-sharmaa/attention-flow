@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attention Flow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Ccircle cx=%274%27 cy=%278%27 r=%273%27 fill=%27%233d5afe%27/%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%273%27 fill=%27%23e08a00%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">attention<span>flow</span></div>
+  <span id="label" class="badge"></span>
+  <span id="clock" class="muted"></span>
+  <div class="spacer"></div>
+  <div id="speed" class="seg" role="group" aria-label="Replay speed">
+    <button data-v="2">2×</button><button data-v="10">10×</button><button data-v="30" class="on">30×</button><button data-v="120">120×</button>
+  </div>
+  <button id="pause" class="icon" aria-label="Pause">❚❚</button>
+</header>
+
+<main>
+  <section class="card" id="disl-card">
+    <h2>Dislocations <span class="hint">where attention hasn't caught up yet</span></h2>
+    <div class="cols"><span></span><span>path</span><span>gap</span><span>odds</span><span>in</span></div>
+    <ol id="disl"></ol>
+  </section>
+
+  <section class="card" id="shock-card">
+    <h2>Shocks <span class="hint">moved / expected, net of sector</span></h2>
+    <div id="shocks"></div>
+  </section>
+
+  <section class="card" id="graph-card">
+    <h2>Lead-lag graph <span class="hint" id="graph-stats"></span></h2>
+    <canvas id="graph"></canvas>
+    <div id="tip" class="tip"></div>
+  </section>
+
+  <section class="card" id="factor-card">
+    <h2>Sector factors <span class="hint">expected → actual, last 30 bars</span></h2>
+    <div id="factors"></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

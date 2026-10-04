@@ -70,13 +70,14 @@ func cmdSim(args []string) error {
 	out := fs.String("out", "data/sim", "output directory")
 	bars := fs.Int("bars", 20000, "bars to simulate")
 	seed := fs.Uint64("seed", 7, "random seed")
+	bar := fs.Int64("bar", 60, "bar width in seconds")
 	fs.Parse(args)
 	u, err := core.LoadUniverse(*uni)
 	if err != nil {
 		return err
 	}
 	cfg := sim.Default()
-	cfg.Bars, cfg.Seed = *bars, *seed
+	cfg.Bars, cfg.Seed, cfg.BarSeconds = *bars, *seed, *bar
 	evs, truth := sim.Run(u, cfg)
 	if err := os.MkdirAll(*out, 0o755); err != nil {
 		return err
@@ -99,12 +100,11 @@ func cmdSim(args []string) error {
 func engineConfig(barSeconds int64) engine.Config {
 	cfg := engine.DefaultConfig(barSeconds)
 	if barSeconds >= 3600 {
-		// Hourly data: far fewer bars, so shorter windows and a looser bar for
-		// promotion (the z-score already accounts for the smaller sample).
+		// Hourly data: far fewer bars, so shorter windows. The promotion
+		// z-score already accounts for the smaller sample.
 		cfg.StatHalfLife, cfg.ModelHalfLife, cfg.FactorHalf = 720, 1000, 500
 		cfg.MaxLag, cfg.Horizon = 6, 12
 		cfg.Warmup, cfg.MinEdgeAge = 336, 240
-		cfg.PromoteZ = 4.5
 	}
 	return cfg
 }
@@ -119,6 +119,8 @@ func cmdReplay(args []string) error {
 	k := fs.Int("k", 40, "semantic neighbours per entity")
 	minSim := fs.Float64("minsim", 0.05, "minimum semantic similarity for a candidate pair")
 	out := fs.String("out", "", "write the report as JSON here")
+	promote := fs.Float64("promote", 0, "override the edge promotion z-score")
+	statHL := fs.Float64("stathl", 0, "override the lead-lag statistics half-life (bars)")
 	fs.Parse(args)
 
 	u, err := loadUniverse(*uni, *text)
@@ -130,6 +132,12 @@ func cmdReplay(args []string) error {
 		return err
 	}
 	cfg := engineConfig(*bar)
+	if *promote > 0 {
+		cfg.PromoteZ = *promote
+	}
+	if *statHL > 0 {
+		cfg.StatHalfLife = *statHL
+	}
 	cand := semantic.Candidates(u, *k, *minSim)
 	opt := replay.Options{EvalStart: cfg.Warmup * 2}
 	if *truthPath != "" {
@@ -189,8 +197,11 @@ func cmdServe(args []string) error {
 		return err
 	}
 	cfg := engineConfig(*bar)
-	e := engine.New(u, semantic.Candidates(u, 12, 0.05), cfg)
-	return server.Serve(*addr, e, evs, *speed, *label)
+	cand := semantic.Candidates(u, 40, 0.05)
+	return server.Serve(u, evs, server.Options{
+		Addr: *addr, Speed: *speed, Label: *label, SkipBars: 2 * cfg.Warmup,
+		NewEngine: func() *engine.Engine { return engine.New(u, cand, cfg) },
+	})
 }
 
 func writeJSON(path string, v any) error {

@@ -26,7 +26,10 @@ type ShockChild struct {
 	Prob     float64   // product of edge hit rates along the path (smoothed)
 	Pred     []float64 // predicted excess log move at h = 0..H
 	base     []float64 // decay-only path at detection time
-	Realized float64   // realised excess move so far
+	Realized float64   // realised excess move so far, net of the child's sector factor
+	Tested   bool      // every edge on the path has seen at least one shock
+	facCum   float64   // child's cluster factor move since the shock
+	facLoad  float64   // child's total factor loading
 	PeakBar  int       // predicted bars to 90% of the final move
 	edge     *Edge     // direct edge from the source, if depth 1
 }
@@ -98,13 +101,15 @@ func (e *Engine) impulse(src int, delta float64) []*ShockChild {
 			irX[h][j] = irX[h-1][j] + s
 		}
 	}
-	depth, prob := e.bfs(src)
+	depth, prob, tested := e.bfs(src)
 	var out []*ShockChild
 	for j := 0; j < e.n; j++ {
 		if j == src || depth[j] == 0 || math.Abs(irX[H][j]) < 0.1*math.Abs(delta) {
 			continue
 		}
-		c := &ShockChild{Entity: j, Depth: depth[j], Prob: prob[j], Pred: make([]float64, H+1), base: make([]float64, H+1)}
+		_, load := e.Loading(j)
+		c := &ShockChild{Entity: j, Depth: depth[j], Prob: prob[j], Tested: tested[j], facLoad: load,
+			Pred: make([]float64, H+1), base: make([]float64, H+1)}
 		for h := 0; h <= H; h++ {
 			c.Pred[h] = irX[h][j]
 			c.base[h] = e.fd[h][j] // decay-only path from this bar's forecast
@@ -131,13 +136,14 @@ func (e *Engine) impulse(src int, delta float64) []*ShockChild {
 
 // bfs returns hop depth and path probability from src along live edges, using
 // Laplace-smoothed shock hit rates as edge probabilities.
-func (e *Engine) bfs(src int) (depth []int, prob []float64) {
-	depth, prob = e.bfsDepth, e.bfsProb
+func (e *Engine) bfs(src int) (depth []int, prob []float64, tested []bool) {
+	depth, prob, tested = e.bfsDepth, e.bfsProb, e.bfsTested
 	clear(depth)
 	clear(prob)
-	prob[src] = 1
+	clear(tested)
+	prob[src], tested[src] = 1, true
 	frontier := []int{src}
-	for d := 1; len(frontier) > 0 && d <= 4; d++ {
+	for d := 1; len(frontier) > 0 && d <= 2; d++ { // beyond 2 hops accuracy is near chance
 		var next []int
 		for _, a := range frontier {
 			for _, c := range e.children[a] {
@@ -148,12 +154,13 @@ func (e *Engine) bfs(src int) (depth []int, prob []float64) {
 				}
 				if depth[c.To] == d && p > prob[c.To] {
 					prob[c.To] = p
+					tested[c.To] = tested[a] && c.Trials > 0
 				}
 			}
 		}
 		frontier = next
 	}
-	return depth, prob
+	return depth, prob, tested
 }
 
 // trackShocks fills in realised moves for live shocks and closes them after H bars.
@@ -168,7 +175,10 @@ func (e *Engine) trackShocks(t int) {
 			age = H
 		}
 		for _, c := range s.Children {
-			c.Realized = e.x[c.Entity] - c.base[age]
+			if t > s.Bar && t-s.Bar <= H {
+				c.facCum += e.Factor(e.clusterOf[c.Entity], t)
+			}
+			c.Realized = e.x[c.Entity] - c.base[age] - c.facLoad*c.facCum
 		}
 		if t-s.Bar < H {
 			continue

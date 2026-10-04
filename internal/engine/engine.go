@@ -178,8 +178,10 @@ type Engine struct {
 	irR, irX  [][]float64
 	bfsDepth  []int
 	bfsProb   []float64
+	bfsTested []bool
 	children  [][]*Edge
 	lagRows   [][]float64
+	levels    [][]float64 // levels[t%histLevels][j], for charts
 	stats     Counters
 }
 
@@ -244,13 +246,14 @@ func New(u *core.Universe, cand []semantic.Pair, cfg Config) *Engine {
 	e.fc, e.fd, e.rf = mk(H+1, n), mk(H+1, n), mk(H+1, n)
 	e.Disl, e.Sig, e.Catch = make([]float64, n), make([]float64, n), make([]int, n)
 	e.irR, e.irX = mk(H+1, n), mk(H+1, n)
-	e.bfsDepth, e.bfsProb = make([]int, n), make([]float64, n)
+	e.bfsDepth, e.bfsProb, e.bfsTested = make([]int, n), make([]float64, n), make([]bool, n)
 	e.lastShock = make([]int, n)
 	for j := range e.lastShock {
 		e.lastShock[j] = math.MinInt32
 	}
 	e.children = make([][]*Edge, n)
 	e.lagRows = make([][]float64, cfg.MaxLag)
+	e.levels = mk(histLevels, n)
 	e.past = make([]pastFc, H+1)
 	for i := range e.past {
 		e.past[i] = pastFc{fd: make([]float64, n), disl: make([]float64, n), sig: make([]float64, n)}
@@ -386,6 +389,7 @@ func (e *Engine) Close() {
 		for j := 0; j < e.n; j++ {
 			e.lvl[j].Add(e.x[j])
 		}
+		copy(e.levels[0], e.x)
 		return
 	}
 	e.updateFactors(t)
@@ -400,6 +404,7 @@ func (e *Engine) Close() {
 	for j := 0; j < e.n; j++ {
 		e.lvl[j].Add(e.x[j])
 	}
+	copy(e.levels[t%histLevels], e.x)
 }
 
 func clip(x, lim float64) float64 {
