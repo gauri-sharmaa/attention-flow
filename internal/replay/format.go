@@ -51,11 +51,11 @@ func Format(r *Report) string {
 
 	if len(r.Graph) > 0 {
 		p("\ngraph     learned vs planted\n")
-		p("  bar     learned true  prec  recall  (in cand)  cand-recall  lag=  lag±1  indirect rev other\n")
+		p("  bar     learned true  prec  recall  (in cand)  cand-recall  lag=  lag±1  false: retired shortcut confounded other\n")
 		for _, g := range r.Graph {
-			p("  %-7d %-7d %-5d %.3f %.3f   (%.3f)    %.3f        %.3f %.3f  %-8d %-3d %d\n",
+			p("  %-7d %-7d %-5d %.3f %.3f   (%.3f)    %.3f        %.3f %.3f  %7d %8d %10d %5d\n",
 				g.Bar, g.Learned, g.True, g.Precision, g.Recall, g.RecallInCand, g.CandRecall,
-				g.LagExact, g.LagWithin1, g.Indirect, g.Reversed, g.Spurious)
+				g.LagExact, g.LagWithin1, g.Retired, g.Indirect, g.Confounded, g.Spurious+g.Reversed)
 		}
 	}
 

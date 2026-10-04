@@ -142,7 +142,8 @@ func cmdReplay(args []string) error {
 			return err
 		}
 		opt.Truth = &tr
-		opt.Checkpoints = []int{tr.MidBar - 1, tr.MidBar + tr.MidBar/2, 2*tr.MidBar - 2}
+		m := tr.MidBar
+		opt.Checkpoints = []int{m - 1, m + 250, m + 500, m + 1000, m + 2000, m + 4000, 2*m - 2}
 	}
 	start := time.Now()
 	rep := replay.Run(u, evs, cand, cfg, opt)

@@ -113,6 +113,8 @@ type GraphScore struct {
 	LagWithin1   float64 `json:"lag_within_1"`
 	Indirect     int     `json:"false_indirect"` // false edges that shortcut a true path
 	Reversed     int     `json:"false_reversed"`
+	Confounded   int     `json:"false_confounded"` // both ends share a true upstream driver
+	Retired      int     `json:"false_retired"`    // planted edge that died at the regime change
 	Spurious     int     `json:"false_other"`
 }
 
@@ -396,6 +398,16 @@ func scoreGraph(e *engine.Engine, tr *sim.Truth, t int) GraphScore {
 	for k := range truth {
 		adj[k[0]] = append(adj[k[0]], k[1])
 	}
+	retired := map[[2]int]bool{}
+	for _, te := range tr.Edges {
+		if te.Regime == 1 && t >= tr.MidBar {
+			retired[[2]int{te.From, te.To}] = true
+		}
+	}
+	radj := map[int][]int{}
+	for k := range truth {
+		radj[k[1]] = append(radj[k[1]], k[0])
+	}
 	g := GraphScore{Bar: t, True: len(truth)}
 	learned := e.Edges()
 	g.Learned = len(learned)
@@ -416,8 +428,12 @@ func scoreGraph(e *engine.Engine, tr *sim.Truth, t int) GraphScore {
 			}
 		case truth[[2]int{le.To, le.From}] != (sim.TrueEdge{}):
 			g.Reversed++
+		case retired[k]:
+			g.Retired++
 		case reach(adj, le.From, le.To):
 			g.Indirect++
+		case commonAncestor(radj, le.From, le.To):
+			g.Confounded++
 		default:
 			g.Spurious++
 		}
@@ -446,6 +462,33 @@ func scoreGraph(e *engine.Engine, tr *sim.Truth, t int) GraphScore {
 		g.LagWithin1 = float64(within) / float64(tp)
 	}
 	return g
+}
+
+func ancestors(radj map[int][]int, a int) map[int]bool {
+	seen := map[int]bool{}
+	q := []int{a}
+	for len(q) > 0 {
+		x := q[0]
+		q = q[1:]
+		for _, y := range radj[x] {
+			if !seen[y] {
+				seen[y] = true
+				q = append(q, y)
+			}
+		}
+	}
+	return seen
+}
+
+func commonAncestor(radj map[int][]int, a, b int) bool {
+	aa := ancestors(radj, a)
+	aa[a] = true
+	for y := range ancestors(radj, b) {
+		if aa[y] {
+			return true
+		}
+	}
+	return false
 }
 
 func absInt(x int) int {

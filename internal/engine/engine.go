@@ -60,7 +60,14 @@ type Edge struct {
 	Weight   float64 // summed RLS coefficient across its lag window
 	T        float64 // t-statistic of Weight
 	Hits     int     // shock propagation hits
-	Trials   int
+	// Health: EW E[v·c] and E[c²] where c is this edge's contribution to the
+	// child's forecast and v the child's forecast error. A live edge has
+	// E[v·c] ≈ 0; a dead one has its whole contribution show up as error,
+	// E[v·c] ≈ -E[c²]. Health = E[v·c]/E[c²] reacts in a few hundred bars,
+	// far faster than the RLS coefficient decays.
+	vc, cc  float64
+	healthN int
+	Trials  int
 }
 
 // HitRate is the share of source shocks that propagated to the child.
@@ -530,6 +537,9 @@ func (e *Engine) updateModels(t int) {
 			e.v[j] = 0
 			continue
 		}
+		if len(e.parents[j]) > 0 {
+			e.edgeHealth(j, m, rt[j])
+		}
 		e.v[j] = m.rls.Update(m.x, rt[j])
 		lim := 5 * math.Max(e.vStd[j].Std(), 1e-6)
 		if e.vStd[j].N < 50 {
@@ -538,6 +548,33 @@ func (e *Engine) updateModels(t int) {
 		e.v[j] = clip(e.v[j], lim)
 		e.vStd[j].Add(e.v[j])
 	}
+}
+
+// edgeHealth updates every incoming edge's health statistic for one bar,
+// using the a-priori forecast (before the RLS learns from this bar).
+func (e *Engine) edgeHealth(j int, m *model, y float64) {
+	v := y - m.rls.Predict(m.x)
+	const a = 1 - 0.9977 // ≈ 300-bar half-life
+	for _, p := range e.parents[j] {
+		c := 0.0
+		for i, f := range m.feats {
+			if f.kind == featParent && f.src == p.From {
+				c += m.rls.W[i] * m.x[i]
+			}
+		}
+		p.vc += a * (v*c - p.vc)
+		p.cc += a * (c*c - p.cc)
+		p.healthN++
+	}
+}
+
+// Health is the edge's recent E[v·c]/E[c²]: near 0 when the edge is earning its
+// keep, near -1 when its predicted contribution keeps failing to show up.
+func (p *Edge) Health() float64 {
+	if p.cc <= 0 {
+		return 0
+	}
+	return p.vc / p.cc
 }
 
 // updatePairs updates lagged cross-moments for every candidate pair in both
@@ -605,7 +642,8 @@ func (e *Engine) editGraph(t int) {
 			if se > 0 {
 				p.T = w / se
 			}
-			if t-p.Born >= e.cfg.MinEdgeAge && math.Abs(p.T) < e.cfg.DropT {
+			dead := p.healthN > 300 && p.cc > 0 && p.vc/p.cc < -0.6
+			if dead || (t-p.Born >= e.cfg.MinEdgeAge && math.Abs(p.T) < e.cfg.DropT) {
 				e.stats.Dropped++
 				changed[j] = true
 				continue
