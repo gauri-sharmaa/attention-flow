@@ -1,0 +1,5 @@
+/attnflow
+/data/sim/
+/data/wiki/
+*.test
+*.prof

@@ -1,0 +1,149 @@
+# name | wikipedia title | cluster/subtopic | tags
+# One line per tracked entity. Tags drive the semantic candidate graph.
+OpenAI | OpenAI | ai/lab | chatgpt gpt altman llm frontier microsoft
+Anthropic | Anthropic | ai/lab | claude amodei llm frontier safety amazon
+Google DeepMind | Google_DeepMind | ai/lab | gemini hassabis llm frontier google
+Meta AI | Meta_AI | ai/lab | llama lecun llm opensource meta
+Mistral AI | Mistral_AI | ai/lab | llm opensource europe
+xAI | XAI_(company) | ai/lab | grok musk llm frontier
+Cohere | Cohere | ai/lab | llm enterprise
+Perplexity AI | Perplexity_AI | ai/product | search llm answer
+Hugging Face | Hugging_Face | ai/lab | opensource models hub
+Stability AI | Stability_AI | ai/lab | diffusion image opensource
+Midjourney | Midjourney | ai/product | image diffusion art
+Character.ai | Character.ai | ai/product | chatbot companion llm
+Scale AI | Scale_AI | ai/infra | data labeling
+Databricks | Databricks | ai/infra | data enterprise lakehouse
+Inflection AI | Inflection_AI | ai/lab | suleyman chatbot
+ChatGPT | ChatGPT | ai/product | openai gpt chatbot llm
+Claude | Claude_(language_model) | ai/product | anthropic chatbot llm
+Gemini | Gemini_(chatbot) | ai/product | google deepmind chatbot llm
+Llama | Llama_(language_model) | ai/product | meta opensource llm
+Grok | Grok_(chatbot) | ai/product | xai musk chatbot
+GPT-4 | GPT-4 | ai/product | openai gpt llm frontier
+Sora | Sora_(text-to-video_model) | ai/product | openai video diffusion
+DALL-E | DALL-E | ai/product | openai image diffusion
+GitHub Copilot | GitHub_Copilot | ai/product | coding microsoft openai
+Cursor | Cursor_(code_editor) | ai/product | coding editor llm
+Sam Altman | Sam_Altman | ai/people | openai chatgpt ceo
+Dario Amodei | Dario_Amodei | ai/people | anthropic claude ceo safety
+Demis Hassabis | Demis_Hassabis | ai/people | deepmind google gemini ceo
+Ilya Sutskever | Ilya_Sutskever | ai/people | openai safety research
+Andrej Karpathy | Andrej_Karpathy | ai/people | openai tesla research education
+Yann LeCun | Yann_LeCun | ai/people | meta research opensource
+Geoffrey Hinton | Geoffrey_Hinton | ai/people | research safety nobel
+Mustafa Suleyman | Mustafa_Suleyman | ai/people | microsoft deepmind inflection
+Jensen Huang | Jensen_Huang | ai/people | nvidia gpu ceo
+Nvidia | Nvidia | ai/chips | gpu huang datacenter
+AMD | AMD | ai/chips | gpu cpu datacenter
+TSMC | TSMC | ai/chips | foundry semiconductor taiwan
+Intel | Intel | ai/chips | cpu foundry semiconductor
+Broadcom | Broadcom | ai/chips | semiconductor networking custom
+Cerebras | Cerebras | ai/chips | wafer inference
+Groq | Groq | ai/chips | inference lpu
+Arm | Arm_Holdings | ai/chips | cpu design softbank
+ASML | ASML_Holding | ai/chips | lithography semiconductor europe
+CoreWeave | CoreWeave | ai/infra | gpu cloud datacenter nvidia
+AI safety | AI_safety | ai/policy | alignment risk safety
+Artificial general intelligence | Artificial_general_intelligence | ai/policy | agi frontier risk
+Large language model | Large_language_model | ai/concept | llm transformer gpt
+Transformer | Transformer_(deep_learning_architecture) | ai/concept | attention llm research
+Diffusion model | Diffusion_model | ai/concept | image diffusion research
+RLHF | Reinforcement_learning_from_human_feedback | ai/concept | alignment llm training
+EU AI Act | Artificial_Intelligence_Act | ai/policy | regulation europe
+AI alignment | AI_alignment | ai/policy | alignment safety research
+Deepfake | Deepfake | ai/policy | video misinformation diffusion
+Prompt engineering | Prompt_engineering | ai/concept | llm chatgpt
+Microsoft Copilot | Microsoft_Copilot | ai/product | microsoft openai assistant
+Apple Intelligence | Apple_Intelligence | ai/product | apple iphone assistant
+Amazon Bedrock | Amazon_Bedrock | ai/infra | amazon cloud anthropic
+Neuralink | Neuralink | ai/product | musk brain implant
+Figure AI | Figure_AI | ai/product | robot humanoid openai
+Elon Musk | Elon_Musk | ai/people | tesla spacex xai twitter
+Bitcoin | Bitcoin | crypto/coin | btc satoshi halving etf
+Ethereum | Ethereum | crypto/coin | eth vitalik defi smartcontract
+Solana | Solana_(blockchain_platform) | crypto/coin | sol memecoin defi
+XRP | XRP_Ledger | crypto/coin | ripple sec
+Cardano | Cardano_(blockchain_platform) | crypto/coin | ada smartcontract
+Dogecoin | Dogecoin | crypto/coin | doge memecoin musk
+Shiba Inu | Shiba_Inu_(cryptocurrency) | crypto/coin | memecoin doge
+Polygon | Polygon_(blockchain) | crypto/coin | ethereum layer2
+Avalanche | Avalanche_(blockchain_platform) | crypto/coin | avax defi
+Chainlink | Chainlink_(blockchain) | crypto/coin | oracle defi
+Tether | Tether_(cryptocurrency) | crypto/stable | stablecoin usdt
+USD Coin | USD_Coin | crypto/stable | stablecoin usdc circle
+Toncoin | Toncoin | crypto/coin | telegram
+Tron | Tron_(cryptocurrency) | crypto/coin | sun stablecoin
+Binance | Binance | crypto/exchange | cz exchange bnb
+Coinbase | Coinbase | crypto/exchange | armstrong exchange base etf
+Kraken | Kraken_(company) | crypto/exchange | exchange
+FTX | FTX | crypto/exchange | sbf collapse fraud
+Circle | Circle_Internet_Group | crypto/stable | usdc stablecoin ipo
+MicroStrategy | MicroStrategy | crypto/treasury | saylor bitcoin treasury
+Michael Saylor | Michael_J._Saylor | crypto/people | microstrategy bitcoin
+Vitalik Buterin | Vitalik_Buterin | crypto/people | ethereum founder
+Changpeng Zhao | Changpeng_Zhao | crypto/people | binance cz
+Sam Bankman-Fried | Sam_Bankman-Fried | crypto/people | ftx sbf fraud trial
+Brian Armstrong | Brian_Armstrong_(businessman) | crypto/people | coinbase ceo
+Satoshi Nakamoto | Satoshi_Nakamoto | crypto/people | bitcoin founder
+Justin Sun | Justin_Sun | crypto/people | tron
+Bitcoin ETF | Bitcoin_exchange-traded_fund | crypto/market | bitcoin etf blackrock sec
+Stablecoin | Stablecoin | crypto/stable | tether usdc regulation
+Decentralized finance | Decentralized_finance | crypto/defi | defi ethereum lending
+Non-fungible token | Non-fungible_token | crypto/defi | nft art ethereum
+Uniswap | Uniswap | crypto/defi | defi dex ethereum
+Aave | Aave | crypto/defi | defi lending ethereum
+Lido | Lido_Finance | crypto/defi | staking ethereum
+Arbitrum | Arbitrum | crypto/coin | ethereum layer2
+Base | Base_(blockchain) | crypto/coin | coinbase layer2 ethereum
+Polymarket | Polymarket | crypto/market | prediction betting election
+Kalshi | Kalshi | crypto/market | prediction betting regulation
+Zora | Zora_(protocol) | crypto/defi | nft creator attention
+Pump.fun | Pump.fun | crypto/defi | memecoin solana launchpad
+Memecoin | Memecoin | crypto/market | doge memecoin solana
+Worldcoin | World_(blockchain) | crypto/coin | altman iris identity
+Hyperliquid | Hyperliquid | crypto/exchange | perps dex
+Bitcoin halving | Bitcoin_halving | crypto/market | bitcoin mining halving
+SEC | U.S._Securities_and_Exchange_Commission | crypto/policy | regulation etf ripple
+Gary Gensler | Gary_Gensler | crypto/policy | sec regulation
+Ripple Labs | Ripple_Labs | crypto/exchange | xrp sec lawsuit
+Apple | Apple_Inc. | tech/bigtech | iphone cook mac
+iPhone | IPhone | tech/product | apple smartphone
+Tim Cook | Tim_Cook | tech/people | apple ceo
+Microsoft | Microsoft | tech/bigtech | nadella windows azure openai
+Satya Nadella | Satya_Nadella | tech/people | microsoft ceo
+Google | Google | tech/bigtech | pichai search android
+Sundar Pichai | Sundar_Pichai | tech/people | google ceo
+Amazon | Amazon_(company) | tech/bigtech | aws jassy retail
+Andy Jassy | Andy_Jassy | tech/people | amazon ceo
+Meta Platforms | Meta_Platforms | tech/bigtech | zuckerberg facebook instagram
+Mark Zuckerberg | Mark_Zuckerberg | tech/people | meta facebook ceo
+Tesla | Tesla,_Inc. | tech/bigtech | musk ev
+SpaceX | SpaceX | tech/bigtech | musk rocket starlink
+Starlink | Starlink | tech/product | spacex satellite internet
+Twitter | Twitter | tech/social | musk x social
+Threads | Threads_(social_network) | tech/social | meta social
+TikTok | TikTok | tech/social | bytedance video ban
+ByteDance | ByteDance | tech/bigtech | tiktok china
+Netflix | Netflix | tech/media | streaming video
+Spotify | Spotify | tech/media | music streaming
+Reddit | Reddit | tech/social | forum ipo
+Discord | Discord | tech/social | chat gaming
+Snapchat | Snapchat | tech/social | messaging
+YouTube | YouTube | tech/media | google video streaming
+Instagram | Instagram | tech/social | meta photo
+WhatsApp | WhatsApp | tech/social | meta messaging
+Samsung | Samsung_Electronics | tech/bigtech | smartphone semiconductor
+Vision Pro | Apple_Vision_Pro | tech/product | apple headset
+Palantir | Palantir_Technologies | tech/enterprise | data defense
+Oracle | Oracle_Corporation | tech/enterprise | database cloud
+Salesforce | Salesforce | tech/enterprise | crm cloud
+Shopify | Shopify | tech/enterprise | ecommerce
+Stripe | Stripe,_Inc. | tech/enterprise | payments
+Uber | Uber | tech/enterprise | rideshare
+Airbnb | Airbnb | tech/enterprise | travel
+Nintendo | Nintendo | tech/gaming | switch console
+PlayStation | PlayStation | tech/gaming | sony console
+Steam | Steam_(service) | tech/gaming | valve pc
+Roblox | Roblox | tech/gaming | metaverse kids
+Figma | Figma | tech/enterprise | design ipo
