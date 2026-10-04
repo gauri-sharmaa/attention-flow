@@ -172,13 +172,14 @@ func cmdFetch(args []string) error {
 	out := fs.String("out", "data/wiki", "output directory")
 	days := fs.Int("days", 90, "days of hourly history")
 	contact := fs.String("contact", "", "contact email for the Wikimedia User-Agent (required by their API policy)")
+	gran := fs.String("granularity", "hourly", "hourly or daily (use -bar 86400 when replaying daily data)")
 	fs.Parse(args)
 	u, err := core.LoadUniverse(*uni)
 	if err != nil {
 		return err
 	}
 	end := time.Now().UTC().Truncate(time.Hour)
-	return source.FetchWikipedia(u, *out, end.AddDate(0, 0, -*days), end, *contact)
+	return source.FetchWikipedia(u, *out, end.AddDate(0, 0, -*days), end, *gran, *contact)
 }
 
 func cmdServe(args []string) error {

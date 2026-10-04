@@ -21,7 +21,7 @@ import (
 	"github.com/gauri-sharmaa/attention-flow/internal/core"
 )
 
-const pageviewsAPI = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/%s/hourly/%s/%s"
+const pageviewsAPI = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/%s/%s/%s/%s"
 const extractAPI = "https://en.wikipedia.org/api/rest_v1/page/summary/%s"
 
 type pvResponse struct {
@@ -39,7 +39,7 @@ func ParsePageviews(r io.Reader, entity int) ([]core.Event, error) {
 	}
 	out := make([]core.Event, 0, len(resp.Items))
 	for _, it := range resp.Items {
-		ts, err := time.Parse("2006010215", it.Timestamp)
+		ts, err := time.Parse("2006010215", it.Timestamp[:min(10, len(it.Timestamp))])
 		if err != nil {
 			return nil, fmt.Errorf("timestamp %q: %w", it.Timestamp, err)
 		}
@@ -78,9 +78,10 @@ func get(client *http.Client, u, contact string) (*http.Response, error) {
 	}
 }
 
-// FetchWikipedia downloads hourly pageviews for every entity between from and
-// to, plus each article's summary text, and writes events.csv and text.json.
-func FetchWikipedia(u *core.Universe, outDir string, from, to time.Time, contact string) error {
+// FetchWikipedia downloads pageviews ("hourly" or "daily") for every entity
+// between from and to, plus each article's summary text, and writes events.csv
+// and text.json.
+func FetchWikipedia(u *core.Universe, outDir string, from, to time.Time, granularity, contact string) error {
 	if contact == "" {
 		return fmt.Errorf("pass -contact you@example.com (Wikimedia requires a contact in the User-Agent)")
 	}
@@ -92,9 +93,13 @@ func FetchWikipedia(u *core.Universe, outDir string, from, to time.Time, contact
 	text := map[string]string{}
 	for _, e := range u.Entities {
 		title := url.PathEscape(e.Wiki)
-		resp, err := get(client, fmt.Sprintf(pageviewsAPI, title, from.Format("2006010215"), to.Format("2006010215")), contact)
+		resp, err := get(client, fmt.Sprintf(pageviewsAPI, title, granularity, from.Format("2006010215"), to.Format("2006010215")), contact)
 		if err != nil {
 			return fmt.Errorf("%s: %w", e.Name, err)
+		}
+		if resp.StatusCode == http.StatusBadRequest {
+			resp.Body.Close()
+			return fmt.Errorf("%s: API rejected granularity %q (try -granularity daily)", e.Name, granularity)
 		}
 		if resp.StatusCode == http.StatusNotFound {
 			resp.Body.Close()
@@ -115,7 +120,7 @@ func FetchWikipedia(u *core.Universe, outDir string, from, to time.Time, contact
 			}
 			resp.Body.Close()
 		}
-		fmt.Fprintf(os.Stderr, "%-32s %5d hours\n", e.Name, len(evs))
+		fmt.Fprintf(os.Stderr, "%-32s %5d points\n", e.Name, len(evs))
 		time.Sleep(100 * time.Millisecond) // stay well under the API rate limit
 	}
 	sort.SliceStable(all, func(i, j int) bool { return all[i].TS < all[j].TS })
