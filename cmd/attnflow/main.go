@@ -9,6 +9,7 @@
 //	attnflow bluesky -out data/bsky           record live Bluesky mentions per minute
 //	attnflow polyall -out data/pm             every busy Polymarket market, 5-minute prices
 //	attnflow polytrades -out data/pmt         per market: trading activity + price from its trade log
+//	attnflow hawkes -dir data/pmt             does trading in one market excite related markets? (event time)
 //	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
 
@@ -60,6 +61,8 @@ func main() {
 		err = cmdPolyAll(os.Args[2:])
 	case "polytrades":
 		err = cmdPolyTrades(os.Args[2:])
+	case "hawkes":
+		err = cmdHawkes(os.Args[2:])
 	case "resample":
 		err = cmdResample(os.Args[2:])
 	default:
@@ -72,7 +75,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -155,6 +158,8 @@ func cmdReplay(args []string) error {
 	promote := fs.Float64("promote", 0, "override the edge promotion z-score")
 	statHL := fs.Float64("stathl", 0, "override the lead-lag statistics half-life (bars)")
 	placebo := fs.String("placebo", "", "cluster:hours — circularly shift that cluster's series in time to measure false links")
+	drop := fs.String("drop", "", "drop all events of entities whose cluster contains this text (ablation)")
+	smooth := fs.String("smooth", "", "text:halflife — treat entities whose cluster contains text as counts and smooth them into burst intensity")
 	fs.Parse(args)
 
 	u, err := loadUniverse(*uni, *text)
@@ -169,6 +174,24 @@ func cmdReplay(args []string) error {
 		if evs, err = shiftCluster(u, evs, *placebo); err != nil {
 			return err
 		}
+	}
+	if *smooth != "" {
+		text, hl, _ := strings.Cut(*smooth, ":")
+		h, err := strconv.ParseFloat(hl, 64)
+		if err != nil {
+			return fmt.Errorf("-smooth wants text:halflife, got %q", *smooth)
+		}
+		evs = core.SmoothCounts(evs, clusterMatch(u, text), h)
+	}
+	if *drop != "" {
+		m := clusterMatch(u, *drop)
+		kept := evs[:0]
+		for _, e := range evs {
+			if !m[e.Entity] {
+				kept = append(kept, e)
+			}
+		}
+		evs = kept
 	}
 	cfg := engineConfig(*bar)
 	if *promote > 0 {
@@ -371,6 +394,16 @@ func cmdResample(args []string) error {
 	}
 	defer f.Close()
 	return core.WriteEvents(f, rs)
+}
+
+func clusterMatch(u *core.Universe, text string) map[int32]bool {
+	m := map[int32]bool{}
+	for _, e := range u.Entities {
+		if strings.Contains(e.Cluster, text) {
+			m[int32(e.ID)] = true
+		}
+	}
+	return m
 }
 
 // shiftCluster circularly shifts every series in one cluster by a fixed number

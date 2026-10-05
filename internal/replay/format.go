@@ -31,9 +31,9 @@ func Format(r *Report) string {
 	}
 
 	if len(r.Clusters) > 1 {
-		p("\nby cluster    excess corr   R²     strongest 10%%: hit  capture\n")
+		p("\nby cluster          excess corr  top-10%% hit   skill vs no-change  vs own history\n")
 		for _, c := range r.Clusters {
-			p("  %-10s  %.3f       %6.3f  %.3f  %.2f   (n=%d)\n", c.Cluster, c.ExcessCorr, c.ExcessR2, c.TopHit, c.TopCapture, c.N)
+			p("  %-18s %6.3f       %.3f        %+7.3f            %+7.3f   (n=%d)\n", c.Cluster, c.ExcessCorr, c.TopHit, c.SkillVsZero, c.SkillVsOwn, c.N)
 		}
 	}
 	if len(r.Links) > 0 {

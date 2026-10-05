@@ -1,0 +1,49 @@
+events    228023 across 228 streams · 30.0 days · 2722 candidate links · train 70% / test 30%
+held-out  89593 test events · cross-links improve log-likelihood by +0.1039 nats/event
+placebo   timing destroyed (each stream shifted by a random whole 1-20 days, keeping time of day): -0.0041 · -0.0013 · -0.0016 nats/event
+
+links     695 with branching ≥ 0.02 (extra follower trades per leader trade): 364 within one event, 331 across events
+
+strongest links across different events
+  0.568    2.5m  Will Strait of Hormuz traffic not return to normal in 2026?
+                → Strait of Hormuz traffic returns to normal by December 31?
+  0.465   19.4m  Another Fed rate hike in 2026?
+                → Will there be no change in Fed interest rates after the October 2026 …
+  0.274   20.0m  Perim Island no longer under Houthi control by October 31?
+                → Will there be no change in Fed interest rates after the October 2026 …
+  0.257   20.0m  Next US-Iran senior diplomatic meeting by December 31, 2026?
+                → US announces end of Iranian blockade by October 31, 2026?
+  0.241   20.0m  US announces end of Iranian blockade by November 30, 2026?
+                → US x Iran ceasefire continues through November 30?
+  0.231   20.0m  Another Fed rate hike in 2026?
+                → Will the Fed increase interest rates by 25 bps after the October 2026…
+  0.229   20.0m  Saudi-Houthi ceasefire agreement announced by October 31?
+                → Saudi Oil Pipeline (East-West) restarts by October 31?
+  0.213   20.0m  Saudi-Houthi ceasefire agreement announced by October 31?
+                → US x Iran ceasefire continues through October 31?
+  0.165   19.3m  Will Russia announce a new forced mobilization by December 31, 2026?
+                → NATO x Russia military clash by December 31, 2026?
+  0.162   19.8m  Will there be no next Google Gemini Pro model release by October 31, …
+                → Will there be no change in Fed interest rates after the October 2026 …
+  0.159   20.0m  Next US-Iran senior diplomatic meeting by December 31, 2026?
+                → US x Iran ceasefire continues through October 31?
+  0.154   19.4m  Next US-Iran senior diplomatic meeting by December 31, 2026?
+                → US x Iran ceasefire continues through November 30?
+  0.144     10s  Will there be no next Google Gemini Pro model release by October 31, …
+                → Will the next Google Gemini Pro model be released by October 31, 2026?
+  0.138   19.8m  Will the Democrats win the Ohio Senate race in 2026?
+                → Will the Democrats win the Texas Senate race in 2026?
+  0.128   16.2m  Will Russia invade another country in 2026?
+                → NATO x Russia military clash by October 31, 2026?
+
+strongest links between outcomes of the same event
+  0.561    9.7m  Will Aleksandar Vučić – United Serbia win the most seats in the 2…
+                → Will Student List – Students Win win the most seats in the 2026 Ser…
+  0.417     10s  Will Google have the best AI model at the end of October 2026?
+                → Will Anthropic have the best AI model at the end of October 2026?
+  0.370    8.2m  Will Student List – Students Win win the most seats in the 2026 Ser…
+                → Will Aleksandar Vučić – United Serbia win the most seats in the 2…
+  0.358    6.7m  Will Lorne Doerkson be the next Premier of British Columbia?
+                → Will David Eby be the next Premier of British Columbia?
+  0.352    6.4m  Will Chiang Wan-an win the next Taipei Mayor election?
+                → Will Puma Shen win the next Taipei Mayor election?

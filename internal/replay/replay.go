@@ -137,6 +137,7 @@ type pending struct {
 
 type sample struct {
 	score, disl, excess, p, oracle float64
+	y, full, own                   float64 // realised H-bar change; full and own-history forecasts of it
 	cluster                        int
 }
 
@@ -148,6 +149,10 @@ type ClusterScore struct {
 	ExcessR2   float64 `json:"excess_r2"`
 	TopHit     float64 `json:"top_decile_hit"` // within-cluster strongest 10%
 	TopCapture float64 `json:"top_decile_capture"`
+	// Skill of the full forecast of the H-bar change, 1 - SSE(full)/SSE(ref):
+	// against "no change", and against the entity's own history alone.
+	SkillVsZero float64 `json:"skill_vs_zero"`
+	SkillVsOwn  float64 `json:"skill_vs_own"`
 }
 
 // LinkCount counts live edges by (leader cluster → follower cluster) at the end.
@@ -200,7 +205,8 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 				if old.sig[j] > 0 {
 					sc = math.Abs(disl) / old.sig[j]
 				}
-				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: old.p[j], oracle: old.or[j] - old.fd[j], cluster: clusterOf[j]})
+				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: old.p[j], oracle: old.or[j] - old.fd[j], cluster: clusterOf[j],
+					y: y, full: old.fc[j] - old.x[j], own: old.fd[j] - old.x[j]})
 			}
 		}
 		cur := &ring[t%len(ring)]
@@ -298,6 +304,15 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 			ss += x.excess * x.excess
 		}
 		cs.ExcessCorr, cs.ExcessR2 = corr(xs, ys), 1-se/ss
+		var sf, sz, so float64
+		for _, x := range sub {
+			sf += (x.y - x.full) * (x.y - x.full)
+			sz += x.y * x.y
+			so += (x.y - x.own) * (x.y - x.own)
+		}
+		if sz > 0 && so > 0 {
+			cs.SkillVsZero, cs.SkillVsOwn = 1-sf/sz, 1-sf/so
+		}
 		if d := deciles(sub); len(d) == 10 {
 			cs.TopHit, cs.TopCapture = d[9].HitRate, d[9].Capture
 		}

@@ -110,6 +110,13 @@ func FetchMarketTrades(outDir string, n, days int, barSeconds int64, workers int
 	wg.Wait()
 
 	nBars := int((now - from) / barSeconds)
+	ticks, err := os.Create(filepath.Join(outDir, "ticks.csv"))
+	if err != nil {
+		return err
+	}
+	defer ticks.Close()
+	fmt.Fprintln(ticks, "ts,market,yes_price,usd")
+	var names []string
 	var lines []string
 	var all []core.Event
 	clean := strings.NewReplacer("|", " ", "\n", " ")
@@ -152,6 +159,20 @@ func FetchMarketTrades(outDir string, n, days int, barSeconds int64, workers int
 		sec := sectorOf(m.Question + " " + event)
 		q := clean.Replace(m.Question)
 		tags := strings.ReplaceAll(eslug, "-", " ")
+		// Raw ticks for event-time models (Hawkes, Hayashi-Yoshida): one row
+		// per trade, YES price, dollar size. Market index matches markets.txt.
+		mi := len(names)
+		names = append(names, q)
+		for _, t := range trades[i] {
+			if t.Timestamp < from || t.Timestamp >= now {
+				continue
+			}
+			p := t.Price
+			if t.Asset == toks[1] {
+				p = 1 - p
+			}
+			fmt.Fprintf(ticks, "%d,%d,%.4f,%.2f\n", t.Timestamp, mi, p, t.Size*t.Price)
+		}
 		actID, pxID := len(lines), len(lines)+1
 		lines = append(lines,
 			fmt.Sprintf("Activity: %s | - | %s-activity/%s | %s", q, sec, eslug, tags),
@@ -164,6 +185,9 @@ func FetchMarketTrades(outDir string, n, days int, barSeconds int64, workers int
 				all = append(all, core.Event{TS: ts, Entity: int32(pxID), Value: p / (1 - p)})
 			}
 		}
+	}
+	if err := os.WriteFile(filepath.Join(outDir, "markets.txt"), []byte(strings.Join(names, "\n")+"\n"), 0o644); err != nil {
+		return err
 	}
 	uni := "# Polymarket: per market, trading activity and price from its trade log\n" + strings.Join(lines, "\n") + "\n"
 	if err := os.WriteFile(filepath.Join(outDir, "universe.txt"), []byte(uni), 0o644); err != nil {

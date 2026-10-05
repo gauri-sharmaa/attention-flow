@@ -65,6 +65,7 @@ func sectorOf(text string) string {
 func ListActiveMarkets(n int) ([]pmMarket, error) {
 	client := &http.Client{Timeout: 30 * time.Second}
 	var out []pmMarket
+	seen := map[string]bool{} // the ranking shifts while paging, so pages can overlap
 	cutoff := time.Now().Add(14 * 24 * time.Hour)
 	for off := 0; off <= 2000 && len(out) < n; off += 100 {
 		resp, err := client.Get(fmt.Sprintf(pmMarkets, off))
@@ -87,6 +88,11 @@ func ListActiveMarkets(n int) ([]pmMarket, error) {
 			if err != nil || p <= 0.03 || p >= 0.97 || end.Before(cutoff) || strings.Contains(m.Question, " vs. ") || m.Volume24hr <= 0 {
 				continue
 			}
+			key := m.ConditionID + m.Slug
+			if seen[key] {
+				continue
+			}
+			seen[key] = true
 			out = append(out, m)
 			if len(out) == n {
 				break

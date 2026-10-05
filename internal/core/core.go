@@ -6,6 +6,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -192,5 +193,26 @@ func ResampleCounts(evs []Event, barSeconds int64) []Event {
 		out[i] = Event{TS: k.bar, Entity: k.id, Value: sum[k] + 1}
 	}
 	sort.SliceStable(out, func(i, j int) bool { return out[i].TS < out[j].TS })
+	return out
+}
+
+// SmoothCounts turns count series (stored as count+1, one event per bar)
+// into a causal burst intensity: an exponentially weighted rate over past
+// bars only, plus a small floor so quiet periods stay finite after the log.
+// Raw counts are mostly zeros with rare spikes; the log of a smoothed rate
+// behaves like the attention levels the engine models.
+func SmoothCounts(evs []Event, ids map[int32]bool, halfLifeBars float64) []Event {
+	a := 1 - math.Exp(-math.Ln2/halfLifeBars)
+	rate := map[int32]float64{}
+	out := make([]Event, len(evs))
+	for i, e := range evs {
+		if ids[e.Entity] {
+			r := rate[e.Entity]
+			r += a * ((e.Value - 1) - r)
+			rate[e.Entity] = r
+			e.Value = r + 0.05
+		}
+		out[i] = e
+	}
 	return out
 }
