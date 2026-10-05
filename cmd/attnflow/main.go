@@ -7,6 +7,7 @@
 //	attnflow export  -events E -out site      static dashboard (no server) for hosting
 //	attnflow markets -out data/poly           Polymarket prices for markets about each topic
 //	attnflow bluesky -out data/bsky           record live Bluesky mentions per minute
+//	attnflow polyall -out data/pm             every busy Polymarket market, 5-minute prices
 //	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
 
@@ -54,6 +55,8 @@ func main() {
 		err = cmdMarkets(os.Args[2:])
 	case "bluesky":
 		err = cmdBluesky(os.Args[2:])
+	case "polyall":
+		err = cmdPolyAll(os.Args[2:])
 	case "resample":
 		err = cmdResample(os.Args[2:])
 	default:
@@ -66,7 +69,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -118,6 +121,13 @@ func cmdSim(args []string) error {
 
 func engineConfig(barSeconds int64) engine.Config {
 	cfg := engine.DefaultConfig(barSeconds)
+	if barSeconds >= 300 && barSeconds < 3600 {
+		// 5-minute bars: lags up to an hour, forecasts an hour ahead, windows
+		// of about a week. Prediction-market prices have no daily cycle.
+		cfg.MaxLag, cfg.Horizon = 12, 12
+		cfg.StatHalfLife, cfg.ModelHalfLife, cfg.FactorHalf = 2000, 2000, 1000
+		cfg.Warmup, cfg.MinEdgeAge = 1000, 600
+	}
 	if barSeconds >= 3600 {
 		// Hourly data: far fewer bars, so shorter windows. The promotion
 		// z-score already accounts for the smaller sample.
@@ -283,6 +293,17 @@ func cmdMarkets(args []string) error {
 		return err
 	}
 	return source.FetchPolymarket(u, *uni, *out, time.Now().AddDate(0, 0, -*days), *per, *minVol)
+}
+
+func cmdPolyAll(args []string) error {
+	fs := flag.NewFlagSet("polyall", flag.ExitOnError)
+	out := fs.String("out", "data/pm", "output directory")
+	n := fs.Int("n", 400, "how many of the busiest tradable markets")
+	days := fs.Int("days", 30, "days of history")
+	bar := fs.Int64("bar", 300, "bar width in seconds (60 = 1-minute prices)")
+	workers := fs.Int("workers", 6, "parallel downloads")
+	fs.Parse(args)
+	return source.FetchAllMarkets(*out, *n, *days, *bar, *workers)
 }
 
 func cmdBluesky(args []string) error {
