@@ -29,10 +29,22 @@ import (
 	"sort"
 )
 
-// Event is one occurrence in stream Dim at time T (seconds).
+// Event is one occurrence in stream Dim at time T (seconds). W > 1 stands
+// for W identical events at the same instant (e.g. 40 articles naming Iran in
+// one 15-minute news batch). Because events sharing a timestamp never excite
+// each other, this is exactly equivalent to listing them separately, and much
+// cheaper. W = 0 means 1.
 type Event struct {
 	T   float64
 	Dim int
+	W   float64
+}
+
+func (e Event) weight() float64 {
+	if e.W == 0 {
+		return 1
+	}
+	return e.W
 }
 
 // Model is a fitted multivariate Hawkes process.
@@ -161,8 +173,9 @@ func (s *state) flush(t float64, betas []float64) {
 	}
 	for _, e := range s.pend {
 		r := s.at(e.Dim, e.T, betas)
+		w := e.weight()
 		for k := range r {
-			r[k]++
+			r[k] += w
 		}
 	}
 	s.pend = s.pend[:0]
@@ -204,8 +217,8 @@ func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64,
 					lam += m.Alpha[e.Dim][p][k] * b * r[k]
 				}
 			}
-			ll += math.Log(math.Max(lam, 1e-300))
-			n++
+			ll += e.weight() * math.Log(math.Max(lam, 1e-300))
+			n += int(e.weight())
 		}
 		st.defer_(e)
 	}
@@ -237,8 +250,9 @@ func (m *Model) kernelMass(evs []Event, from, to float64) [][]float64 {
 			break
 		}
 		a := math.Max(from, e.T)
+		w := e.weight()
 		for k, b := range m.Betas {
-			mass[e.Dim][k] += math.Exp(-b*(a-e.T)) - math.Exp(-b*(to-e.T))
+			mass[e.Dim][k] += w * (math.Exp(-b*(a-e.T)) - math.Exp(-b*(to-e.T)))
 		}
 	}
 	return mass
@@ -254,8 +268,8 @@ func (m *Model) Fit(evs []Event, opt Options) float64 {
 	nTrain := 0
 	for _, e := range evs {
 		if e.T >= from && e.T < to {
-			counts[e.Dim]++
-			nTrain++
+			counts[e.Dim] += e.weight()
+			nTrain += int(e.weight())
 		}
 	}
 	// Start: background explains half of each stream, excitation the rest, spread thinly.
@@ -309,16 +323,17 @@ func (m *Model) Fit(evs []Event, opt Options) float64 {
 					}
 				}
 				lam = math.Max(lam, 1e-300)
-				ll += math.Log(lam)
+				w := e.weight()
+				ll += w * math.Log(lam)
 				// E-step: split this event among background and each parent/scale.
-				rb := m.Mu[i] * sea / lam
+				rb := w * m.Mu[i] * sea / lam
 				bg[i] += rb
 				if m.Season != nil {
 					bgSlot[slot(e.T)] += rb
 				}
 				for p := range m.Parents[i] {
 					for k := 0; k < K; k++ {
-						acc[i][p][k] += contrib[p*K+k] / lam
+						acc[i][p][k] += w * contrib[p*K+k] / lam
 					}
 				}
 			}

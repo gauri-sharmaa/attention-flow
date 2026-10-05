@@ -87,3 +87,24 @@ func TestCrossLinksWinOutOfSample(t *testing.T) {
 		t.Errorf("held-out gain from cross links = %.4f nats/event, want clearly positive", gain)
 	}
 }
+
+// A weighted event must be exactly equivalent to that many copies.
+func TestWeightsEqualCopies(t *testing.T) {
+	tr := truth()
+	evs := tr.Simulate(2*86400, rand.New(rand.NewPCG(5, 6)))
+	var dup, wt []Event
+	for i, e := range evs {
+		if i%7 == 0 {
+			dup = append(dup, e, e, e)
+			wt = append(wt, Event{T: e.T, Dim: e.Dim, W: 3})
+		} else {
+			dup = append(dup, e)
+			wt = append(wt, e)
+		}
+	}
+	a, na := tr.LogLik(dup, 3600, 2*86400)
+	b, nb := tr.LogLik(wt, 3600, 2*86400)
+	if na != nb || math.Abs(a-b) > 1e-6*math.Abs(a) {
+		t.Errorf("copies: %.6f over %d events, weights: %.6f over %d", a, na, b, nb)
+	}
+}

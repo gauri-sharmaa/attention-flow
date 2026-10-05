@@ -242,36 +242,48 @@ func mod(a, b float64) float64 {
 
 // loadExtra reads outside mentions (ts,source,keyword) as one stream per
 // source and keyword, numbered after the markets.
-func loadExtra(path string, offset int) ([]stream, []hawkes.Event, error) {
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, nil, err
-	}
-	defer f.Close()
-	sc := bufio.NewScanner(f)
-	sc.Scan()
+func loadExtra(paths string, offset int) ([]stream, []hawkes.Event, error) {
 	idx := map[string]int{}
 	var streams []stream
 	var evs []hawkes.Event
-	for sc.Scan() {
-		parts := strings.SplitN(sc.Text(), ",", 3)
-		if len(parts) < 3 {
-			continue
-		}
-		ts, err := strconv.ParseInt(parts[0], 10, 64)
+	at := map[[2]int64]int{} // (ts, stream) → index in evs, to merge same-instant mentions into one weighted event
+	for _, path := range strings.Split(paths, ",") {
+		f, err := os.Open(path)
 		if err != nil {
-			continue
+			return nil, nil, err
 		}
-		key := parts[1] + ": " + parts[2]
-		i, ok := idx[key]
-		if !ok {
-			i = len(streams)
-			idx[key] = i
-			streams = append(streams, stream{name: key, sector: parts[1], event: parts[2], extra: true})
+		sc := bufio.NewScanner(f)
+		sc.Scan()
+		for sc.Scan() {
+			parts := strings.SplitN(sc.Text(), ",", 3)
+			if len(parts) < 3 {
+				continue
+			}
+			ts, err := strconv.ParseInt(parts[0], 10, 64)
+			if err != nil {
+				continue
+			}
+			key := parts[1] + ": " + parts[2]
+			i, ok := idx[key]
+			if !ok {
+				i = len(streams)
+				idx[key] = i
+				streams = append(streams, stream{name: key, sector: parts[1], event: parts[2], extra: true})
+			}
+			key2 := [2]int64{ts, int64(i)}
+			if j, ok := at[key2]; ok {
+				evs[j].W++
+				continue
+			}
+			at[key2] = len(evs)
+			evs = append(evs, hawkes.Event{T: float64(ts), Dim: offset + i, W: 1})
 		}
-		evs = append(evs, hawkes.Event{T: float64(ts), Dim: offset + i})
+		f.Close()
+		if err := sc.Err(); err != nil {
+			return nil, nil, err
+		}
 	}
-	return streams, evs, sc.Err()
+	return streams, evs, nil
 }
 
 // linkExtraOnly adds just the links among outside streams (same keyword,
@@ -300,13 +312,13 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 		isM[i] = i < nM
 		isX[i] = i >= nM
 	}
-	nX := 0
+	nX := 0.0
 	for _, e := range evs {
 		if e.Dim >= nM {
-			nX++
+			nX += e.W
 		}
 	}
-	fmt.Printf("outside   %d mentions in %d streams (source × name) next to %d markets\n", nX, d-nM, nM)
+	fmt.Printf("outside   %.0f mentions in %d streams (source × name) next to %d markets\n", nX, d-nM, nM)
 	fit := func(evs []hawkes.Event, c [][]int) *hawkes.Model {
 		m := hawkes.New(d, betas, c)
 		if season {
