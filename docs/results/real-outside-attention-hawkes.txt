@@ -1,0 +1,58 @@
+events    389292 across 452 streams · 30.0 days · 4420 candidate links · train 70% / test 30%
+outside   1977186 mentions in 224 streams (source × name) next to 228 markets
+held-out  outside → markets: -0.0122 nats per market trade · markets → outside: -0.0014 nats per mention
+placebo   outside streams shifted by whole days: -0.0017 -0.0018 (→ markets) · -0.0051 -0.0047 (→ outside)
+links     outside → market: 169 (total branching 6.68, mean lag 13.1m) · market → outside: 209 (42.87, 17.2m)
+check     cross-event market→market branching: 26.75 without outside links, 26.68 with them
+
+strongest outside → market links
+  0.198   19.0m  reddit: Strait of Hormuz
+                → Strait of Hormuz traffic returns to normal by December 31?
+  0.187   18.9m  reddit: Romania
+                → Will Alexandru Nazare be the next Prime Minister of Romania?
+  0.180   18.1m  reddit: Israel
+                → Israel x Iran ceasefire continues through October 31?
+  0.175    2.0m  hn: NFL
+                → Will the Baltimore Ravens win the 2027 NFL league championship?
+  0.163   19.4m  reddit: Greenland
+                → Will the US acquire part of Greenland in 2026?
+  0.147   19.9m  reddit: Treasury
+                → Will the 10-year Treasury yield hit 5.5% before 2027?
+  0.147   14.3m  reddit: Fed
+                → Will there be no change in Fed interest rates after the October 2026 …
+  0.138    2.0m  hn: NFL
+                → Will the Dallas Cowboys win the 2027 NFL league championship?
+  0.132   20.0m  hn: Iranian
+                → US announces end of Iranian blockade by December 31, 2026?
+  0.130     86s  news: Ballon
+                → Will Harry Kane win the 2026 Ballon d'Or?
+  0.125   20.0m  hn: Republicans
+                → Will the Republicans win the Idaho Senate race in 2026?
+  0.123   20.0m  reddit: Fed
+                → Will the Fed increase interest rates by 25 bps after the December 202…
+
+strongest market → outside links
+  3.238   20.0m  Reserve Bank of Australia increases interest rates by 25 bps at the N…
+                → news: Australia
+  2.691   18.6m  Pedro Sánchez out as PM of Spain by December 31, 2026?
+                → news: Spain
+  1.951   20.0m  Russia x Ukraine ceasefire agreement by December 31, 2026?
+                → news: Ukraine
+  1.942   20.0m  Russia x Ukraine ceasefire agreement by December 31, 2026?
+                → news: Russia
+  1.835   17.0m  US x Iran ceasefire continues through December 31?
+                → news: Iran
+  1.536   20.0m  Israel x Iran ceasefire continues through October 31?
+                → news: Israel
+  1.412   20.0m  Will Mojtaba Khamenei be head of state in Iran end of 2026?
+                → news: Iran
+  1.202   16.4m  No change in Reserve Bank of Australia's interest rates at the Novemb…
+                → news: Australia
+  1.183   20.0m  Will Ukraine recapture Crimean territory by December 31, 2026?
+                → news: Ukraine
+  1.177   17.0m  NATO x Russia military clash by October 31, 2026?
+                → news: Russia
+  1.141   20.0m  Alexandre de Moraes out as Brazil Supreme Court Justice?
+                → news: Brazil
+  1.014     10s  Will Xavier Becerra win the California Governor Election in 2026?
+                → news: California

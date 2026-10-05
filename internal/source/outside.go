@@ -276,20 +276,26 @@ func FetchHN(keywords []string, from, to time.Time, out io.Writer) (int, error) 
 			}
 			u := fmt.Sprintf("https://hn.algolia.com/api/v1/search_by_date?query=%s&tags=story&hitsPerPage=1000&numericFilters=%s",
 				url.QueryEscape(`"`+kw+`"`), url.QueryEscape(fmt.Sprintf("created_at_i>=%d,created_at_i<%d", start.Unix(), end.Unix())))
-			resp, err := client.Get(u)
-			if err != nil {
-				return mw.n, err
-			}
 			var body struct {
 				Hits []struct {
 					Created int64  `json:"created_at_i"`
 					Title   string `json:"title"`
 				} `json:"hits"`
 			}
-			err = json.NewDecoder(resp.Body).Decode(&body)
-			resp.Body.Close()
+			var err error
+			for attempt := 0; attempt < 5; attempt++ {
+				var resp *http.Response
+				if resp, err = client.Get(u); err == nil {
+					err = json.NewDecoder(resp.Body).Decode(&body)
+					resp.Body.Close()
+				}
+				if err == nil {
+					break
+				}
+				time.Sleep(time.Duration(1<<attempt) * time.Second)
+			}
 			if err != nil {
-				continue
+				return mw.n, fmt.Errorf("%s: %w", kw, err)
 			}
 			var hits []int
 			for _, h := range body.Hits {
