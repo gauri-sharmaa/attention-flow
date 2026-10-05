@@ -124,6 +124,7 @@ func engineConfig(barSeconds int64) engine.Config {
 		cfg.StatHalfLife, cfg.ModelHalfLife, cfg.FactorHalf = 720, 1000, 500
 		cfg.MaxLag, cfg.Horizon = 6, 12
 		cfg.Warmup, cfg.MinEdgeAge = 336, 240
+		cfg.Period = 24
 	}
 	return cfg
 }

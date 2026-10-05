@@ -39,6 +39,10 @@ type Config struct {
 	Warmup        int // bars before any edge is added
 	ShockZ        float64
 	FactorLags    int
+	// Period, if > 0, removes a repeating cycle of this many bars (24 for
+	// hourly data: people read more in the afternoon than at 4am). The engine
+	// then works entirely in seasonally adjusted log levels.
+	Period int
 }
 
 // DefaultConfig suits minute bars; scale the windows for hourly data.
@@ -82,6 +86,7 @@ type featKind uint8
 
 const (
 	featParent featKind = iota
+	featOwn             // own past innovations: the baseline knows spikes fade
 	featFactorNow
 	featFactorLag
 	featDecay
@@ -106,6 +111,8 @@ const (
 )
 
 func calBin(score float64) int { return min(calBins-1, int(score/calWidth)) }
+
+const ownLags = 3
 
 type pastFc struct {
 	fd, disl, sig []float64 // raw (uncalibrated) sig
@@ -161,6 +168,7 @@ type Engine struct {
 	fc    [][]float64 // fc[h][j], h=0..H: log level path, full model
 	fd    [][]float64 // decay-only path
 	rf    [][]float64 // forecast innovations
+	rfo   [][]float64 // own-history-only forecast innovations
 	Disl  []float64   // fc[H]-fd[H]
 	Sig   []float64   // forecast std of the excess move, calibrated
 	Catch []int       // bars until 90% of the dislocation is expected
@@ -181,6 +189,9 @@ type Engine struct {
 	bfsTested []bool
 	children  [][]*Edge
 	lagRows   [][]float64
+	fl        [][]float64 // fl[t%hist][j]: leave-one-out factor, so lagged factor terms never carry j's own move
+	seas      [][]float64
+	seasN     []int
 	levels    [][]float64 // levels[t%histLevels][j], for charts
 	stats     Counters
 }
@@ -253,6 +264,8 @@ func New(u *core.Universe, cand []semantic.Pair, cfg Config) *Engine {
 	}
 	e.children = make([][]*Edge, n)
 	e.lagRows = make([][]float64, cfg.MaxLag)
+	e.fl = mk(e.hist, n)
+	e.rfo = mk(H+1, n)
 	e.levels = mk(histLevels, n)
 	e.past = make([]pastFc, H+1)
 	for i := range e.past {
@@ -286,6 +299,9 @@ func (e *Engine) featureList(j int) []feat {
 		for l := max(1, p.Lag-1); l <= p.Lag+1; l++ {
 			fs = append(fs, feat{kind: featParent, src: p.From, lag: l})
 		}
+	}
+	for l := 1; l <= ownLags; l++ {
+		fs = append(fs, feat{kind: featOwn, lag: l})
 	}
 	fs = append(fs, feat{kind: featFactorNow})
 	for k := 1; k <= e.cfg.FactorLags; k++ {
@@ -375,7 +391,7 @@ func (e *Engine) Close() {
 			e.missing[j] = true
 			continue
 		}
-		lx := math.Log(v)
+		lx := e.deseason(j, math.Log(v))
 		e.missing[j] = !e.hasX[j]
 		if e.hasX[j] {
 			rt[j] = lx - e.x[j]
@@ -405,6 +421,44 @@ func (e *Engine) Close() {
 		e.lvl[j].Add(e.x[j])
 	}
 	copy(e.levels[t%histLevels], e.x)
+}
+
+// deseason removes j's time-of-cycle profile from a raw log level. The
+// profile is an EW mean, per slot, of the level's deviation from its slow
+// baseline, re-centred so it sums to zero over a cycle.
+func (e *Engine) deseason(j int, lx float64) float64 {
+	P := e.cfg.Period
+	if P <= 0 {
+		return lx
+	}
+	if e.seas == nil {
+		e.seas = make([][]float64, e.n)
+		for i := range e.seas {
+			e.seas[i] = make([]float64, P)
+		}
+		e.seasN = make([]int, e.n)
+	}
+	slot := int(e.curBar % int64(P))
+	prof := e.seas[j]
+	if e.lvl[j].N > 0 {
+		const a = 0.05 // ≈ 14-cycle half-life per slot
+		prof[slot] += a * ((lx - e.lvl[j].Mean) - prof[slot])
+		e.seasN[j]++
+		if e.seasN[j]%P == 0 {
+			m := 0.0
+			for _, v := range prof {
+				m += v
+			}
+			m /= float64(P)
+			for k := range prof {
+				prof[k] -= m
+			}
+		}
+	}
+	if e.seasN[j] < 2*P {
+		return lx // profile not learned yet
+	}
+	return lx - prof[slot]
 }
 
 func clip(x, lim float64) float64 {
@@ -459,6 +513,7 @@ func (e *Engine) updateFactors(t int) {
 				continue
 			}
 			e.fLOO[j] = (num - w*clip(rt[j], lim)) / d
+			e.at(e.fl, t)[j] = e.fLOO[j]
 		}
 	}
 	// Loadings by EW regression of r on the leave-one-out factor, then
@@ -513,12 +568,19 @@ func (e *Engine) fill(j int, m *model, tgt, now int, fLOO float64, level, base f
 			} else {
 				m.x[i] = e.rf[tau-now][f.src]
 			}
+		case featOwn:
+			tau := tgt - f.lag
+			if tau <= now {
+				m.x[i] = e.R(j, tau)
+			} else {
+				m.x[i] = e.rf[tau-now][j]
+			}
 		case featFactorNow:
 			m.x[i] = fLOO
 		case featFactorLag:
 			tau := tgt - f.lag
 			if tau <= now && tau >= 0 && now-tau < e.hist {
-				m.x[i] = e.at(e.f, tau)[e.clusterOf[j]]
+				m.x[i] = e.at(e.fl, tau)[j]
 			} else {
 				m.x[i] = 0 // future factor innovations are unpredictable
 			}
@@ -777,8 +839,7 @@ func (e *Engine) forecast(t int) {
 			m := e.models[j]
 			w := m.rls.W
 			base := e.lvl[j].Mean
-			c := e.clusterOf[j]
-			r := 0.0
+			r, ro := 0.0, 0.0 // full model, own-history-only baseline
 			for i, f := range m.feats {
 				switch f.kind {
 				case featParent:
@@ -789,22 +850,43 @@ func (e *Engine) forecast(t int) {
 					} else {
 						r += w[i] * e.rf[tau-t][f.src]
 					}
+				case featOwn:
+					if tau := tgt - f.lag; tau <= t {
+						if tau >= 0 && t-tau < e.hist {
+							v := w[i] * e.r[tau%e.hist][j]
+							r += v
+							ro += v
+						}
+					} else {
+						r += w[i] * e.rf[tau-t][j]
+						ro += w[i] * e.rfo[tau-t][j]
+					}
 				case featFactorLag:
 					// Future factor innovations are unpredictable (zero).
 					if tau := tgt - f.lag; tau >= 0 && tau <= t && t-tau < e.hist {
-						r += w[i] * e.f[tau%e.hist][c]
+						r += w[i] * e.fl[tau%e.hist][j]
 					}
 				case featDecay:
-					r += w[i] * (e.fc[h-1][j] - base)
+					// Attention fades back to normal; it never self-amplifies,
+					// so the fitted decay is held in [-0.5, 0] when projecting.
+					dk := math.Min(0, math.Max(-0.5, w[i]))
+					r += dk * (e.fc[h-1][j] - base)
+					ro += dk * (e.fd[h-1][j] - base)
 				case featConst:
 					r += w[i]
+					ro += w[i]
 				}
 			}
-			e.rf[h][j] = r
+			// Cap one-step forecasts at 6σ of the entity's own moves (a fixed
+			// cap before that is known) so no model can run away over H.
+			lim := 0.5
+			if e.rStd[j].N > 50 {
+				lim = 6 * math.Max(e.rStd[j].Std(), 1e-4)
+			}
+			r, ro = clip(r, lim), clip(ro, lim)
+			e.rf[h][j], e.rfo[h][j] = r, ro
 			e.fc[h][j] = e.fc[h-1][j] + r
-			// Decay-only: same fitted decay and intercept, nothing else.
-			dk, ck := w[len(m.feats)-2], w[len(m.feats)-1]
-			e.fd[h][j] = e.fd[h-1][j] + dk*(e.fd[h-1][j]-base) + ck
+			e.fd[h][j] = e.fd[h-1][j] + ro
 		}
 	}
 	for j := 0; j < e.n; j++ {
@@ -813,7 +895,7 @@ func (e *Engine) forecast(t int) {
 		m := e.models[j]
 		// Excess-move uncertainty: H bars of model residual plus the
 		// unpredictable part of the contemporaneous factor.
-		lam0 := m.rls.W[len(m.feats)-2-e.cfg.FactorLags-1]
+		lam0, _ := e.Loading(j)
 		fs := e.fStd[e.clusterOf[j]].Std()
 		s2 := m.rls.Resid.Var + lam0*lam0*fs*fs
 		raw := math.Sqrt(float64(H) * math.Max(s2, 1e-10))
@@ -964,7 +1046,9 @@ func (e *Engine) Drivers(j int) []Driver {
 				}
 			case featFactorLag:
 				if tau <= t {
-					fac += m.rls.W[i] * e.Factor(e.clusterOf[j], tau)
+					if t-tau < e.hist && tau >= 0 {
+						fac += m.rls.W[i] * e.at(e.fl, tau)[j]
+					}
 				}
 			}
 		}

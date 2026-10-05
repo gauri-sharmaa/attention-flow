@@ -1,0 +1,50 @@
+data      188 entities · 2208 bars of 3600s · 398228 events · 2074 candidate pairs · H=12 bars
+
+forecast  (H-bar level change, 286512 scored)
+  MAE  zero 0.2440 · decay 0.2327 · full 0.2330  (-0.1% better than decay)
+  R²   decay 0.129 · full 0.128
+  excess move  R² -0.001 · corr 0.003
+
+signals   by decile of |dislocation|/σ
+  dec      n   mean|d|   hit   capture
+    1   28651   0.0000   0.187  3107.10
+    2   28651   0.0001   0.503  79.05
+    3   28651   0.0003   0.505  29.42
+    4   28651   0.0008   0.510  13.01
+    5   28652   0.0018   0.514  6.71
+    6   28651   0.0032   0.516  3.95
+    7   28651   0.0053   0.524  3.12
+    8   28651   0.0083   0.530  2.28
+    9   28651   0.0135   0.550  1.85
+   10   28652   0.0304   0.522  0.25
+
+by cluster    excess corr   R²     strongest 10%: hit  capture
+  ai          0.019       -0.000  0.534  0.39   (n=91440)
+  crypto      -0.010       -0.001  0.493  -0.20   (n=71628)
+  tech        -0.012       -0.006  0.495  -0.23   (n=60960)
+  market      0.017       -0.003  0.520  0.45   (n=62484)
+
+links at end  market→market 10 · crypto→crypto 2 ·
+
+calibration  (Brier 0.2498 vs coin flip 0.2500)
+  stated   actual      n
+  0.514    0.486   286083
+  0.581    0.532       77
+  0.625    0.520       50
+  0.676    0.662       77
+  0.724    0.473       74
+  0.773    0.524       42
+  0.825    0.368       19
+  0.878    0.727       22
+  0.918    0.448       29
+  0.980    0.282       39
+
+shocks    1706 detected · 317 predicted child moves
+  corr 0.039 · right direction 0.549 · ≥half the size 0.473
+  depth 1  n=281    direction 0.559  corr 0.025
+  depth 2  n=36     direction 0.472  corr 0.099
+
+latency   ingest p50 38ns · bar close p50 456µs p99 1302µs max 3778µs · 0.17M events/s
+engine    303 edges added · 291 dropped · 1723 shocks
+
+(replayed in 2.6s)

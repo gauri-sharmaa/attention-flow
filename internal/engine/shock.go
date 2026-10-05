@@ -93,8 +93,12 @@ func (e *Engine) impulse(src int, delta float64) []*ShockChild {
 					if h-f.lag >= 0 {
 						s += m.rls.W[i] * irR[h-f.lag][f.src]
 					}
+				case featOwn:
+					if h-f.lag >= 0 {
+						s += m.rls.W[i] * irR[h-f.lag][j]
+					}
 				case featDecay:
-					s += m.rls.W[i] * irX[h-1][j]
+					s += math.Min(0, math.Max(-0.5, m.rls.W[i])) * irX[h-1][j]
 				}
 			}
 			irR[h][j] = s
