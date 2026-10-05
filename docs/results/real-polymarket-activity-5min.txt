@@ -1,0 +1,62 @@
+data      458 entities · 8640 bars of 300s · 2106608 events · 8970 candidate pairs · H=12 bars
+
+forecast  (H-bar level change, 3035624 scored)
+  MAE  zero 0.0675 · decay 0.1243 · full 0.1248  (-0.4% better than decay)
+  R²   decay -0.122 · full -0.127
+  excess move  R² -0.004 · corr 0.049
+
+signals   by decile of |dislocation|/σ
+  dec      n   mean|d|   hit   capture
+    1  303562   0.0000   0.105  183877349769.68
+    2  303562   0.0000   0.505  -68018.15
+    3  303563   0.0000   0.509  2407.43
+    4  303562   0.0000   0.514  -5.19
+    5  303563   0.0001   0.522  0.94
+    6  303562   0.0006   0.511  -0.77
+    7  303562   0.0016   0.503  -1.52
+    8  303563   0.0033   0.509  0.75
+    9  303562   0.0071   0.506  0.57
+   10  303563   0.0433   0.528  0.22
+
+by cluster    excess corr   R²     strongest 10%: hit  capture
+  politics-activity  -0.004       -0.001  0.498  -0.14   (n=357912)
+  politics-price  0.047       -0.012  0.539  0.23   (n=357912)
+  world-activity  0.002       -0.001  0.510  -0.54   (n=377796)
+  world-price  0.068       -0.040  0.559  0.44   (n=377796)
+  econ-activity  -0.004       -0.008  0.473  -0.44   (n=125932)
+  econ-price  -0.027       -0.028  0.506  -0.82   (n=125932)
+  culture-activity  0.000       -0.000  0.306  -1.85   (n=39768)
+  culture-price  0.077       -0.040  0.553  0.59   (n=39768)
+  crypto-activity  -0.006       -0.025  0.523  -0.17   (n=139188)
+  crypto-price  0.073       -0.006  0.560  0.41   (n=139188)
+  other-activity  -0.007       -0.001  0.496  -1.17   (n=132560)
+  other-price  0.015       -0.021  0.526  0.17   (n=132560)
+  sports-activity  0.006       -0.003  0.488  0.19   (n=192212)
+  sports-price  0.189        0.023  0.569  1.31   (n=192212)
+  tech-activity  -0.046       -0.010  0.493  -1.05   (n=152444)
+  tech-price  0.233        0.052  0.521  0.38   (n=152444)
+
+links at end  crypto-activity→crypto-activity 16 · crypto-activity→econ-activity 12 · politics-activity→politics-activity 9 · crypto-activity→crypto-price 5 · other-activity→world-activity 4 · econ-activity→crypto-price 3 · econ-activity→crypto-activity 3 · other-activity→other-activity 3 · world-activity→world-activity 3 · tech-activity→crypto-activity 2 · sports-activity→sports-activity 2 · econ-activity→econ-activity 2 · tech-activity→tech-activity 2 · sports-activity→sports-price 1 · politics-activity→world-activity 1 · econ-price→crypto-price 1 · other-activity→crypto-activity 1 · world-activity→world-price 1 ·
+
+calibration  (Brier 0.2507 vs coin flip 0.2500)
+  stated   actual      n
+  0.514    0.470  2991742
+  0.575    0.557    14604
+  0.623    0.605     1194
+  0.681    0.563     1180
+  0.724    0.537     2873
+  0.781    0.580     4164
+  0.824    0.522     4928
+  0.874    0.590     4284
+  0.924    0.596     3447
+  0.986    0.572     7208
+
+shocks    52301 detected · 904 predicted child moves
+  corr 0.002 · right direction 0.480 · ≥half the size 0.351
+  depth 1  n=834    direction 0.476  corr -0.000
+  depth 2  n=70     direction 0.529  corr 0.098
+
+latency   ingest p50 38ns · bar close p50 3002µs p99 8491µs max 17186µs · 0.05M events/s
+engine    1463 edges added · 1392 dropped · 52428 shocks
+
+(replayed in 47.7s)
