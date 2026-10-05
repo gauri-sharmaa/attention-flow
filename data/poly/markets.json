@@ -1,0 +1,242 @@
+[
+  {
+    "parent": 0,
+    "question": "Will OpenAI not IPO by December 31, 2026?",
+    "token": "56615676606297588259337956203332341775475048285080710344367729433788967812170",
+    "volume": 806031.776627
+  },
+  {
+    "parent": 1,
+    "question": "Will Anthropic announce bankruptcy by December 31, 2027?",
+    "token": "17089873339510493583130721327117290536779565918479254716887985637191946608224",
+    "volume": 1350024.17612
+  },
+  {
+    "parent": 4,
+    "question": "Mistral AI IPO before 2027?",
+    "token": "59882819080993378517421421718790840646191419182127143698531813340380148096554",
+    "volume": 166935.493136
+  },
+  {
+    "parent": 5,
+    "question": "Will xAI have the best AI model at the end of December 2026?",
+    "token": "438228197299155092123951605741577797243893462557265199678631512660798614549",
+    "volume": 154339.06734500002
+  },
+  {
+    "parent": 7,
+    "question": "Will Perplexity AI be acquired before 2027?",
+    "token": "42574248959284530646091368047066126180445434974022460106859680414580532069710",
+    "volume": 2401250.3875820017
+  },
+  {
+    "parent": 13,
+    "question": "Will Databricks have the highest IPO Market Cap 2026?",
+    "token": "456765096519419893477275685513676486643336036298638773735553309186326179342",
+    "volume": 628434.5402319998
+  },
+  {
+    "parent": 17,
+    "question": "Gemini 4.0 released by October 31, 2026?",
+    "token": "68078935114524021997910962679757987638473539130247054589847481924647902196800",
+    "volume": 145630.41287399997
+  },
+  {
+    "parent": 19,
+    "question": "Will Grok AI beat T1 in 2026? ",
+    "token": "104282291059413542365063689338883743489763941813522234045325493604544843033020",
+    "volume": 89259.60142200002
+  },
+  {
+    "parent": 24,
+    "question": "Anysphere (Cursor) IPO before 2027?",
+    "token": "64144344870036344049885940185903831067897427524871345481335978826371945996458",
+    "volume": 106834.02064299998
+  },
+  {
+    "parent": 33,
+    "question": "Will Jensen Huang be richest person on December 31?",
+    "token": "21700256477953461322829595595971259189286852519906289976553977571532870719897",
+    "volume": 180878.48235500001
+  },
+  {
+    "parent": 43,
+    "question": "Will CoreWeave announce bankruptcy by December 31, 2027?",
+    "token": "55894031647621904438253674467236696490985438796207236752533772073470268878422",
+    "volume": 50619.820005999994
+  },
+  {
+    "parent": 44,
+    "question": "U.S. enacts AI safety bill before 2027?",
+    "token": "112508072057994582792425094054868799670328706955765422423524843982075694185575",
+    "volume": 197679.84031399994
+  },
+  {
+    "parent": 60,
+    "question": "Will Bitcoin dip to $45,000 by December 31, 2026?",
+    "token": "9894510651052373088408067031031513212801618531203062911959630395716258202132",
+    "volume": 8162824.952247
+  },
+  {
+    "parent": 61,
+    "question": "Will Ethereum dip to $1,500 by December 31, 2026?",
+    "token": "101639751789549589765350117072740510018809594718571111931328241076831078702528",
+    "volume": 3062788.4086280013
+  },
+  {
+    "parent": 62,
+    "question": "Will Solana dip to $40 by December 31, 2026?",
+    "token": "60939283599971443205863441964389237273348599405730669904573366241715938687248",
+    "volume": 232050.02713700006
+  },
+  {
+    "parent": 63,
+    "question": "Will XRP reach $5.00 by December 31, 2026?",
+    "token": "49298809552663577090953558115623306552793446323919551228841438478206311771334",
+    "volume": 141646.10532
+  },
+  {
+    "parent": 75,
+    "question": "Over $1B raised on Coinbase in 2026?",
+    "token": "80786178240271117262906213519018908283409389425271913717015622156764405414662",
+    "volume": 103588.98774299998
+  },
+  {
+    "parent": 76,
+    "question": "Kraken IPO by December 31, 2026?",
+    "token": "34626184950254225208692030156208941308358060420950772251072421141618169142241",
+    "volume": 571909.0568499999
+  },
+  {
+    "parent": 79,
+    "question": "Will MicroStrategy announce holding 1M+ BTC by December 31, 2026?-bV81",
+    "token": "81376564113205313962670402623035723408891351486682543183723967037757376935125",
+    "volume": 330171.75185299997
+  },
+  {
+    "parent": 80,
+    "question": "Michael Saylor federally charged by December 31, 2026?",
+    "token": "46285539774592557138324692880898920515189407458189841200111778679932987338100",
+    "volume": 78296.760393
+  },
+  {
+    "parent": 82,
+    "question": "Will Trump meet with Changpeng Zhao in 2026?",
+    "token": "90997207624168524219863286879854334339650599883510834310874958620031479453810",
+    "volume": 51345.16195
+  },
+  {
+    "parent": 83,
+    "question": "Will Trump pardon Sam Bankman-Fried before 2027?",
+    "token": "37471669506212746145630697105729341454357839635860072815533679305363968161991",
+    "volume": 143596.894888
+  },
+  {
+    "parent": 84,
+    "question": "Brian Armstrong out as Coinbase CEO before 2027?",
+    "token": "83222070317388442532274647342051196715216053104933549999785501358606627621161",
+    "volume": 85665.73583399999
+  },
+  {
+    "parent": 88,
+    "question": "Will stablecoins hit $500B before 2027?",
+    "token": "111765777432361767817016751424857155311481989136107421374410759927320901025756",
+    "volume": 601325.1697960004
+  },
+  {
+    "parent": 95,
+    "question": "Will Base launch a token by December 31, 2026?",
+    "token": "44816229620748629831606438593495518497709847643579849056284090396785477672494",
+    "volume": 752559.6829759999
+  },
+  {
+    "parent": 99,
+    "question": "Will Pump.fun perform an airdrop by December 31, 2026",
+    "token": "23979773390611496299652546131606735686099256186322678196712320732715801255871",
+    "volume": 185666.57310500005
+  },
+  {
+    "parent": 102,
+    "question": "Will Hyperliquid reach $100 by December 31, 2026?",
+    "token": "55632531164259874581532086463096765375675122310464288883906870061905029632548",
+    "volume": 704057.9944509999
+  },
+  {
+    "parent": 104,
+    "question": "SEC removes quarterly reporting requirement?",
+    "token": "95165071835992180785358850440140042732791490703763015245411917066463497950231",
+    "volume": 52583.68046
+  },
+  {
+    "parent": 106,
+    "question": "Ripple Labs IPO before 2027?",
+    "token": "53064735435943082896229789060556980462299092393496448053760217080993877300736",
+    "volume": 158150.23702300005
+  },
+  {
+    "parent": 107,
+    "question": "Will Apple release a foldable iPhone before 2027?",
+    "token": "35608595602971585131748334524997534059288005974951964270070510209825391272871",
+    "volume": 704550.5698840002
+  },
+  {
+    "parent": 108,
+    "question": "Will Apple release a foldable iPhone by October 31?",
+    "token": "114248477943306970222801446407854064615090687971567511853418332617367425107208",
+    "volume": 108126.34501199999
+  },
+  {
+    "parent": 112,
+    "question": "Will the next Google Gemini Pro model be released by October 31, 2026?",
+    "token": "74989412290282424785641548034226561759737333823859293272015453303249060892790",
+    "volume": 138421.1892580001
+  },
+  {
+    "parent": 117,
+    "question": "Will Mark Zuckerberg be richest person on December 31?",
+    "token": "18241160633130205209616350465780865909185289965882997691321004640467937174771",
+    "volume": 133876.035982
+  },
+  {
+    "parent": 118,
+    "question": "Tesla and SpaceX merger officially announced by December 31?",
+    "token": "54008746047030401937229622392846672148881831664328316511258982815120785809185",
+    "volume": 200046.783439
+  },
+  {
+    "parent": 119,
+    "question": "Will 7-8 SpaceX Starship launches successfully reach Space in 2026?",
+    "token": "1840177612036013575448372082807311040387833663832563938882269252171934676747",
+    "volume": 163068.533192
+  },
+  {
+    "parent": 124,
+    "question": "Will ByteDance have the highest IPO Market Cap 2026?",
+    "token": "94581648756114274442860590326460003281047753391238650231536126898736438146236",
+    "volume": 220965.30059499998
+  },
+  {
+    "parent": 128,
+    "question": "Discord IPO before 2027?",
+    "token": "109050763670844840136258774913985651681686873718595787515613754504575546820460",
+    "volume": 486756.1668199999
+  },
+  {
+    "parent": 129,
+    "question": "Will Snapchat be acquired before 2027?",
+    "token": "62780808278969531638786026928407853049620076930842963388102875757599323764741",
+    "volume": 149460.22932699998
+  },
+  {
+    "parent": 139,
+    "question": "Stripe IPO before 2027?",
+    "token": "78980421215689264629590568648383231578826659618891400448902061227448879469650",
+    "volume": 269039.0333799999
+  },
+  {
+    "parent": 140,
+    "question": "Will Uber ask Travis Kalanick back by June 30, 2027?",
+    "token": "83567807743192494284569744762886518763361403493681563587515634016326540158323",
+    "volume": 90443.020197
+  }
+]

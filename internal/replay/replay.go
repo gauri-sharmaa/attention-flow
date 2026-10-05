@@ -35,6 +35,8 @@ type Report struct {
 	BrierRef float64         `json:"brier_coinflip"`
 	Shocks   ShockScore      `json:"shocks"`
 	Graph    []GraphScore    `json:"graph,omitempty"`
+	Clusters []ClusterScore  `json:"clusters"`
+	Links    []LinkCount     `json:"links"`
 	Latency  Latency         `json:"latency"`
 	Engine   engine.Counters `json:"engine"`
 }
@@ -133,12 +135,32 @@ type pending struct {
 	valid                 bool
 }
 
-type sample struct{ score, disl, excess, p, oracle float64 }
+type sample struct {
+	score, disl, excess, p, oracle float64
+	cluster                        int
+}
+
+// ClusterScore is forecast quality restricted to one cluster's entities.
+type ClusterScore struct {
+	Cluster    string  `json:"cluster"`
+	N          int     `json:"n"`
+	ExcessCorr float64 `json:"excess_corr"`
+	ExcessR2   float64 `json:"excess_r2"`
+	TopHit     float64 `json:"top_decile_hit"` // within-cluster strongest 10%
+	TopCapture float64 `json:"top_decile_capture"`
+}
+
+// LinkCount counts live edges by (leader cluster → follower cluster) at the end.
+type LinkCount struct {
+	From, To string
+	N        int
+}
 
 // Run replays evs through a fresh engine and scores it.
 func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Config, opt Options) *Report {
 	e := engine.New(u, cand, cfg)
 	n := len(u.Entities)
+	clusterOf := u.ClusterIndex()
 	H := cfg.Horizon
 	ring := make([]pending, H+1)
 	for i := range ring {
@@ -178,7 +200,7 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 				if old.sig[j] > 0 {
 					sc = math.Abs(disl) / old.sig[j]
 				}
-				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: old.p[j], oracle: old.or[j] - old.fd[j]})
+				samples = append(samples, sample{score: sc, disl: disl, excess: exc, p: old.p[j], oracle: old.or[j] - old.fd[j], cluster: clusterOf[j]})
 			}
 		}
 		cur := &ring[t%len(ring)]
@@ -257,6 +279,38 @@ func Run(u *core.Universe, evs []core.Event, cand []semantic.Pair, cfg engine.Co
 		}
 	}
 	rep.Signals = deciles(samples)
+	for c, name := range u.Clusters {
+		var sub []sample
+		for _, x := range samples {
+			if x.cluster == c {
+				sub = append(sub, x)
+			}
+		}
+		if len(sub) < 100 {
+			continue
+		}
+		cs := ClusterScore{Cluster: name, N: len(sub)}
+		xs, ys := make([]float64, len(sub)), make([]float64, len(sub))
+		var se, ss float64
+		for i, x := range sub {
+			xs[i], ys[i] = x.disl, x.excess
+			se += (x.excess - x.disl) * (x.excess - x.disl)
+			ss += x.excess * x.excess
+		}
+		cs.ExcessCorr, cs.ExcessR2 = corr(xs, ys), 1-se/ss
+		if d := deciles(sub); len(d) == 10 {
+			cs.TopHit, cs.TopCapture = d[9].HitRate, d[9].Capture
+		}
+		rep.Clusters = append(rep.Clusters, cs)
+	}
+	lc := map[[2]int]int{}
+	for _, ed := range e.Edges() {
+		lc[[2]int{clusterOf[ed.From], clusterOf[ed.To]}]++
+	}
+	for k, v := range lc {
+		rep.Links = append(rep.Links, LinkCount{From: u.Clusters[k[0]], To: u.Clusters[k[1]], N: v})
+	}
+	sort.Slice(rep.Links, func(i, j int) bool { return rep.Links[i].N > rep.Links[j].N })
 	rep.Calib, rep.Brier, rep.BrierRef = calibration(samples)
 	rep.Shocks = scoreShocks(shocks, opt.Truth, e, cfg)
 	rep.Latency = Latency{

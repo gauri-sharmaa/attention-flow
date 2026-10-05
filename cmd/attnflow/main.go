@@ -5,14 +5,21 @@
 //	attnflow fetch   -out data/wiki           download Wikipedia pageviews (needs network)
 //	attnflow serve   -events E                live dashboard, replaying E in real time
 //	attnflow export  -events E -out site      static dashboard (no server) for hosting
+//	attnflow markets -out data/poly           Polymarket prices for markets about each topic
+//	attnflow bluesky -out data/bsky           record live Bluesky mentions per minute
+//	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
 	"path/filepath"
+	"syscall"
 	"time"
 
 	"github.com/gauri-sharmaa/attention-flow/internal/core"
@@ -40,6 +47,12 @@ func main() {
 		err = cmdServe(os.Args[2:])
 	case "export":
 		err = cmdExport(os.Args[2:])
+	case "markets":
+		err = cmdMarkets(os.Args[2:])
+	case "bluesky":
+		err = cmdBluesky(os.Args[2:])
+	case "resample":
+		err = cmdResample(os.Args[2:])
 	default:
 		usage()
 	}
@@ -50,7 +63,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -171,14 +184,22 @@ func cmdFetch(args []string) error {
 	uni := fs.String("universe", "data/universe.txt", "universe file")
 	out := fs.String("out", "data/wiki", "output directory")
 	days := fs.Int("days", 90, "days of hourly history")
-	contact := fs.String("contact", "", "contact email for the Wikimedia User-Agent (required by their API policy)")
+	contact := fs.String("contact", "https://github.com/gauri-sharmaa/attention-flow", "contact URL or email for the Wikimedia User-Agent (required by their API policy)")
 	gran := fs.String("granularity", "hourly", "hourly or daily (use -bar 86400 when replaying daily data)")
+	dumps := fs.Bool("dumps", false, "build hourly data from raw dump files (no API rate limits, ~55 MB per hour downloaded)")
+	workers := fs.Int("workers", 6, "parallel downloads with -dumps")
 	fs.Parse(args)
 	u, err := core.LoadUniverse(*uni)
 	if err != nil {
 		return err
 	}
-	end := time.Now().UTC().Truncate(time.Hour)
+	end := time.Now().UTC().Truncate(time.Hour).Add(-3 * time.Hour) // dumps lag a couple of hours
+	if *dumps {
+		if *contact == "" {
+			return fmt.Errorf("pass -contact <url or email>")
+		}
+		return source.FetchWikiDumps(u, *out, end.AddDate(0, 0, -*days), end, *workers, *contact)
+	}
 	return source.FetchWikipedia(u, *out, end.AddDate(0, 0, -*days), end, *gran, *contact)
 }
 
@@ -235,6 +256,74 @@ func cmdExport(args []string) error {
 	}
 	fmt.Printf("%d frames -> %s\n", n, *out)
 	return nil
+}
+
+func cmdMarkets(args []string) error {
+	fs := flag.NewFlagSet("markets", flag.ExitOnError)
+	uni := fs.String("universe", "data/universe.txt", "universe file")
+	out := fs.String("out", "data/poly", "output directory")
+	days := fs.Int("days", 30, "days of hourly history")
+	per := fs.Int("per", 1, "markets per topic")
+	minVol := fs.Float64("minvol", 50000, "minimum market volume (USD)")
+	fs.Parse(args)
+	u, err := core.LoadUniverse(*uni)
+	if err != nil {
+		return err
+	}
+	return source.FetchPolymarket(u, *uni, *out, time.Now().AddDate(0, 0, -*days), *per, *minVol)
+}
+
+func cmdBluesky(args []string) error {
+	fs := flag.NewFlagSet("bluesky", flag.ExitOnError)
+	uni := fs.String("universe", "data/universe.txt", "universe file")
+	out := fs.String("out", "data/bsky", "output directory")
+	dur := fs.Duration("for", 0, "stop after this long (0 = run until killed)")
+	fs.Parse(args)
+	u, err := core.LoadUniverse(*uni)
+	if err != nil {
+		return err
+	}
+	if err := os.MkdirAll(*out, 0o755); err != nil {
+		return err
+	}
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+	if *dur > 0 {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *dur)
+		defer cancel()
+	}
+	err = source.CollectBluesky(ctx, u, filepath.Join(*out, "events.csv"), time.Minute, nil)
+	if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+		return nil
+	}
+	return err
+}
+
+func cmdResample(args []string) error {
+	fs := flag.NewFlagSet("resample", flag.ExitOnError)
+	events := fs.String("events", "data/bsky/events.csv", "count events CSV")
+	bar := fs.Int64("bar", 3600, "new bar width in seconds")
+	out := fs.String("out", "", "output CSV (required)")
+	offset := fs.Int("offset", 0, "add this to every entity id (to merge with a larger universe)")
+	fs.Parse(args)
+	if *out == "" {
+		return fmt.Errorf("pass -out")
+	}
+	evs, err := core.LoadEvents(*events)
+	if err != nil {
+		return err
+	}
+	rs := core.ResampleCounts(evs, *bar)
+	for i := range rs {
+		rs[i].Entity += int32(*offset)
+	}
+	f, err := os.Create(*out)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return core.WriteEvents(f, rs)
 }
 
 func writeJSON(path string, v any) error {

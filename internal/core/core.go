@@ -148,12 +148,49 @@ func ReadEvents(r io.Reader) ([]Event, error) {
 	return out, nil
 }
 
-// LoadEvents reads an events CSV from disk.
-func LoadEvents(path string) ([]Event, error) {
+// LoadEvents reads one or more comma-separated events CSVs and merges them in time order.
+func LoadEvents(paths string) ([]Event, error) {
+	var all []Event
+	for _, p := range strings.Split(paths, ",") {
+		evs, err := loadEvents(strings.TrimSpace(p))
+		if err != nil {
+			return nil, fmt.Errorf("%s: %w", p, err)
+		}
+		all = append(all, evs...)
+	}
+	sort.SliceStable(all, func(i, j int) bool { return all[i].TS < all[j].TS })
+	return all, nil
+}
+
+func loadEvents(path string) ([]Event, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
 	return ReadEvents(f)
+}
+
+// ResampleCounts sums count events (stored as count+1) into wider bars, keeping
+// the +1 offset so a bar with no mentions is still a valid observation.
+func ResampleCounts(evs []Event, barSeconds int64) []Event {
+	type key struct {
+		bar int64
+		id  int32
+	}
+	sum := map[key]float64{}
+	var order []key
+	for _, e := range evs {
+		k := key{e.TS / barSeconds * barSeconds, e.Entity}
+		if _, ok := sum[k]; !ok {
+			order = append(order, k)
+		}
+		sum[k] += e.Value - 1
+	}
+	out := make([]Event, len(order))
+	for i, k := range order {
+		out[i] = Event{TS: k.bar, Entity: k.id, Value: sum[k] + 1}
+	}
+	sort.SliceStable(out, func(i, j int) bool { return out[i].TS < out[j].TS })
+	return out
 }

@@ -1,4 +1,6 @@
 /attnflow
+/site/
+/data/*/events.csv
 /data/sim/
 /data/wiki/
 *.test

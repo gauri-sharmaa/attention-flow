@@ -30,6 +30,20 @@ func Format(r *Report) string {
 		p("  %3d %7d   %.4f   %.3f  %.2f\n", s.Decile, s.N, s.MeanAbs, s.HitRate, s.Capture)
 	}
 
+	if len(r.Clusters) > 1 {
+		p("\nby cluster    excess corr   R²     strongest 10%%: hit  capture\n")
+		for _, c := range r.Clusters {
+			p("  %-10s  %.3f       %6.3f  %.3f  %.2f   (n=%d)\n", c.Cluster, c.ExcessCorr, c.ExcessR2, c.TopHit, c.TopCapture, c.N)
+		}
+	}
+	if len(r.Links) > 0 {
+		p("\nlinks at end ")
+		for _, l := range r.Links {
+			p(" %s→%s %d ·", l.From, l.To, l.N)
+		}
+		p("\n")
+	}
+
 	p("\ncalibration  (Brier %.4f vs coin flip %.4f)\n", r.Brier, r.BrierRef)
 	p("  stated   actual      n\n")
 	for _, c := range r.Calib {
