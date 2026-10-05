@@ -8,6 +8,7 @@
 //	attnflow markets -out data/poly           Polymarket prices for markets about each topic
 //	attnflow bluesky -out data/bsky           record live Bluesky mentions per minute
 //	attnflow polyall -out data/pm             every busy Polymarket market, 5-minute prices
+//	attnflow polytrades -out data/pmt         per market: trading activity + price from its trade log
 //	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
 
@@ -57,6 +58,8 @@ func main() {
 		err = cmdBluesky(os.Args[2:])
 	case "polyall":
 		err = cmdPolyAll(os.Args[2:])
+	case "polytrades":
+		err = cmdPolyTrades(os.Args[2:])
 	case "resample":
 		err = cmdResample(os.Args[2:])
 	default:
@@ -69,7 +72,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -304,6 +307,17 @@ func cmdPolyAll(args []string) error {
 	workers := fs.Int("workers", 6, "parallel downloads")
 	fs.Parse(args)
 	return source.FetchAllMarkets(*out, *n, *days, *bar, *workers)
+}
+
+func cmdPolyTrades(args []string) error {
+	fs := flag.NewFlagSet("polytrades", flag.ExitOnError)
+	out := fs.String("out", "data/pmt", "output directory")
+	n := fs.Int("n", 400, "how many of the busiest tradable markets")
+	days := fs.Int("days", 30, "days of history")
+	bar := fs.Int64("bar", 300, "bar width in seconds")
+	workers := fs.Int("workers", 6, "parallel downloads")
+	fs.Parse(args)
+	return source.FetchMarketTrades(*out, *n, *days, *bar, *workers)
 }
 
 func cmdBluesky(args []string) error {

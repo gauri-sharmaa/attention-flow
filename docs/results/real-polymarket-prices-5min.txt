@@ -1,0 +1,55 @@
+data      400 entities · 8641 bars of 300s · 2871574 events · 6568 candidate pairs · H=12 bars
+
+forecast  (H-bar level change, 2651600 scored)
+  MAE  zero 0.0158 · decay 0.0207 · full 0.0208  (-0.4% better than decay)
+  R²   decay -0.173 · full -0.178
+  excess move  R² -0.004 · corr 0.001
+
+signals   by decile of |dislocation|/σ
+  dec      n   mean|d|   hit   capture
+    1  265160   0.0000   0.043  -Inf
+    2  265160   0.0000   0.186  -19120.20
+    3  265160   0.0000   0.499  -140.32
+    4  265160   0.0000   0.497  -2.65
+    5  265160   0.0000   0.500  2.09
+    6  265160   0.0000   0.499  6.52
+    7  265160   0.0001   0.501  -4.37
+    8  265160   0.0001   0.501  1.76
+    9  265160   0.0004   0.500  -0.04
+   10  265160   0.0034   0.492  -0.13
+
+by cluster    excess corr   R²     strongest 10%: hit  capture
+  politics    0.009       -0.000  0.493  -0.42   (n=536949)
+  world       -0.011       -0.015  0.486  -0.12   (n=570094)
+  econ        -0.019       -0.004  0.509  0.16   (n=218757)
+  culture     -0.006       -0.000  0.490  -0.59   (n=53032)
+  crypto      0.024       -0.005  0.499  0.07   (n=278418)
+  other       -0.005       -0.002  0.470  -0.69   (n=490546)
+  sports      0.003       -0.000  0.503  0.86   (n=278418)
+  tech        0.021       -0.000  0.503  -0.04   (n=225386)
+
+links at end  sports→sports 8 · crypto→crypto 4 · politics→politics 2 · other→other 2 · culture→other 1 · crypto→politics 1 · world→world 1 ·
+
+calibration  (Brier 0.2501 vs coin flip 0.2500)
+  stated   actual      n
+  0.501    0.422  2650236
+  0.583    0.688       16
+  0.631    0.378       45
+  0.677    0.533       90
+  0.725    0.512       82
+  0.777    0.456      195
+  0.825    0.508      238
+  0.874    0.434      205
+  0.923    0.409      159
+  0.986    0.485      334
+
+shocks    47498 detected · 1823 predicted child moves
+  corr 0.043 · right direction 0.506 · ≥half the size 0.455
+  depth 1  n=1746   direction 0.509  corr 0.067
+  depth 2  n=77     direction 0.442  corr -0.029
+
+latency   ingest p50 38ns · bar close p50 2337µs p99 6240µs max 12728µs · 0.09M events/s
+engine    1308 edges added · 1289 dropped · 47632 shocks
+
+(replayed in 36.8s)
+error: json: unsupported value: -Inf

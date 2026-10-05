@@ -21,6 +21,7 @@ const pmMarkets = "https://gamma-api.polymarket.com/markets?active=true&closed=f
 
 type pmMarket struct {
 	Question      string  `json:"question"`
+	ConditionID   string  `json:"conditionId"`
 	Slug          string  `json:"slug"`
 	EndDate       string  `json:"endDate"`
 	OutcomePrices string  `json:"outcomePrices"`
