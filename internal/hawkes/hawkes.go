@@ -159,6 +159,12 @@ func (s *state) at(j int, t float64, betas []float64) []float64 {
 // LogLik returns the log-likelihood of the events that fall in [from, to),
 // using all earlier events as history, and the number of events scored.
 func (m *Model) LogLik(evs []Event, from, to float64) (float64, int) {
+	return m.LogLikDims(evs, from, to, nil)
+}
+
+// LogLikDims is LogLik restricted to the streams with only[i] true (nil = all).
+// All streams still act as history; only the selected ones are scored.
+func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64, int) {
 	ll, n := 0.0, 0
 	K := len(m.Betas)
 	st := newState(m.D, K)
@@ -166,7 +172,7 @@ func (m *Model) LogLik(evs []Event, from, to float64) (float64, int) {
 		if e.T >= to {
 			break
 		}
-		if e.T >= from {
+		if e.T >= from && (only == nil || only[e.Dim]) {
 			lam := m.Mu[e.Dim] * m.season(e.T)
 			for p, j := range m.Parents[e.Dim] {
 				r := st.at(j, e.T, m.Betas)
@@ -186,6 +192,9 @@ func (m *Model) LogLik(evs []Event, from, to float64) (float64, int) {
 	mass := m.kernelMass(evs, from, to)
 	bm := m.bgMass(from, to)
 	for i := 0; i < m.D; i++ {
+		if only != nil && !only[i] {
+			continue
+		}
 		ll -= m.Mu[i] * bm
 		for p, j := range m.Parents[i] {
 			for k := range m.Betas {

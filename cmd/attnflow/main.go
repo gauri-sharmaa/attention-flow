@@ -10,6 +10,7 @@
 //	attnflow polyall -out data/pm             every busy Polymarket market, 5-minute prices
 //	attnflow polytrades -out data/pmt         per market: trading activity + price from its trade log
 //	attnflow hawkes -dir data/pmt             does trading in one market excite related markets? (event time)
+//	attnflow outside -dir data/pmt            news, Reddit and Hacker News mentions of the markets' subjects
 //	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
 
@@ -19,12 +20,14 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 	"os/signal"
 	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -63,6 +66,8 @@ func main() {
 		err = cmdPolyTrades(os.Args[2:])
 	case "hawkes":
 		err = cmdHawkes(os.Args[2:])
+	case "outside":
+		err = cmdOutside(os.Args[2:])
 	case "resample":
 		err = cmdResample(os.Args[2:])
 	default:
@@ -75,7 +80,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|outside|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -341,6 +346,66 @@ func cmdPolyTrades(args []string) error {
 	workers := fs.Int("workers", 6, "parallel downloads")
 	fs.Parse(args)
 	return source.FetchMarketTrades(*out, *n, *days, *bar, *workers)
+}
+
+func cmdOutside(args []string) error {
+	fs := flag.NewFlagSet("outside", flag.ExitOnError)
+	dir := fs.String("dir", "data/pmt", "polytrades output (markets.txt, ticks.csv)")
+	maxKW := fs.Int("keywords", 120, "how many names to track")
+	workers := fs.Int("workers", 8, "parallel GDELT downloads")
+	srcs := fs.String("sources", "news,reddit,hn", "which sources to fetch")
+	fs.Parse(args)
+	b, err := os.ReadFile(filepath.Join(*dir, "markets.txt"))
+	if err != nil {
+		return err
+	}
+	kws := source.Keywords(strings.Split(strings.TrimSpace(string(b)), "\n"), *maxKW)
+	if err := os.WriteFile(filepath.Join(*dir, "keywords.txt"), []byte(strings.Join(kws, "\n")+"\n"), 0o644); err != nil {
+		return err
+	}
+	// Same window as the trades.
+	evs, err := core.LoadEvents(filepath.Join(*dir, "events.csv"))
+	if err != nil {
+		return err
+	}
+	from, to := time.Unix(evs[0].TS, 0).UTC(), time.Unix(evs[len(evs)-1].TS, 0).UTC()
+	fmt.Fprintf(os.Stderr, "%d keywords · %s to %s\n", len(kws), from.Format("Jan 2"), to.Format("Jan 2"))
+	type job struct {
+		name string
+		run  func(io.Writer) (int, error)
+	}
+	all := map[string]job{
+		"news":   {"news", func(w io.Writer) (int, error) { return source.FetchGDELT(kws, from, to, w, *workers) }},
+		"reddit": {"reddit", func(w io.Writer) (int, error) { return source.FetchReddit(kws, source.DefaultSubreddits, from, to, w) }},
+		"hn":     {"hn", func(w io.Writer) (int, error) { return source.FetchHN(kws, from, to, w) }},
+	}
+	var wg sync.WaitGroup
+	errs := make(chan error, 3)
+	for _, s := range strings.Split(*srcs, ",") {
+		j, ok := all[s]
+		if !ok {
+			return fmt.Errorf("unknown source %q", s)
+		}
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			f, err := os.Create(filepath.Join(*dir, "outside-"+j.name+".csv"))
+			if err != nil {
+				errs <- err
+				return
+			}
+			defer f.Close()
+			fmt.Fprintln(f, "ts,source,keyword")
+			n, err := j.run(f)
+			fmt.Fprintf(os.Stderr, "%s: %d mentions\n", j.name, n)
+			if err != nil {
+				errs <- fmt.Errorf("%s: %w", j.name, err)
+			}
+		}()
+	}
+	wg.Wait()
+	close(errs)
+	return <-errs
 }
 
 func cmdBluesky(args []string) error {
