@@ -1,0 +1,4 @@
+moves     17521 price moves of ≥ 2¢ across 228 markets, next to 228023 trades
+held-out  7368 test moves · trading activity improves price-move log-likelihood by +0.2430 nats/move
+placebo   activity shifted by whole days: -0.1830 · -0.4424 nats/move
+links     activity → own price moves: total branching 6.48 (mean lag 6.0m) · → related markets' moves: 4.91 (12.3m)

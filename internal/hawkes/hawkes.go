@@ -134,6 +134,7 @@ func (m *Model) UseSeason() {
 type state struct {
 	r    [][]float64
 	last []float64
+	pend []Event // events at the current timestamp, not yet history
 }
 
 func newState(d, k int) *state {
@@ -143,6 +144,28 @@ func newState(d, k int) *state {
 		s.last[j] = math.Inf(-1)
 	}
 	return s
+}
+
+// defer_ records that event e happened; it joins the history only once time
+// moves past e.T, so events sharing a timestamp never excite each other. A
+// trade and the price move it causes, or one bot hitting two markets in the
+// same second, are simultaneous, not one predicting the other.
+func (s *state) defer_(e Event) {
+	s.pend = append(s.pend, e)
+}
+
+// flush adds deferred events older than t to the history.
+func (s *state) flush(t float64, betas []float64) {
+	if len(s.pend) == 0 || s.pend[0].T >= t {
+		return
+	}
+	for _, e := range s.pend {
+		r := s.at(e.Dim, e.T, betas)
+		for k := range r {
+			r[k]++
+		}
+	}
+	s.pend = s.pend[:0]
 }
 
 // at decays stream j's sums to time t and returns them.
@@ -172,6 +195,7 @@ func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64,
 		if e.T >= to {
 			break
 		}
+		st.flush(e.T, m.Betas)
 		if e.T >= from && (only == nil || only[e.Dim]) {
 			lam := m.Mu[e.Dim] * m.season(e.T)
 			for p, j := range m.Parents[e.Dim] {
@@ -183,10 +207,7 @@ func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64,
 			ll += math.Log(math.Max(lam, 1e-300))
 			n++
 		}
-		r := st.at(e.Dim, e.T, m.Betas)
-		for k := range r {
-			r[k]++
-		}
+		st.defer_(e)
 	}
 	// Compensator over [from, to): ∫ λ_i = μ_i (to-from) + Σ α_ijk Σ_m [kernel mass of event m inside the window].
 	mass := m.kernelMass(evs, from, to)
@@ -273,6 +294,7 @@ func (m *Model) Fit(evs []Event, opt Options) float64 {
 			if e.T >= to {
 				break
 			}
+			st.flush(e.T, m.Betas)
 			if e.T >= from {
 				i := e.Dim
 				contrib = contrib[:0]
@@ -300,10 +322,7 @@ func (m *Model) Fit(evs []Event, opt Options) float64 {
 					}
 				}
 			}
-			r := st.at(e.Dim, e.T, m.Betas)
-			for k := range r {
-				r[k]++
-			}
+			st.defer_(e)
 		}
 		bm := m.bgMass(from, to)
 		for i := 0; i < m.D; i++ {

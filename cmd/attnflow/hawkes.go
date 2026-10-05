@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"math"
 	"math/rand/v2"
 	"os"
 	"path/filepath"
@@ -28,11 +29,15 @@ func cmdHawkes(args []string) error {
 	iters := fs.Int("iters", 400, "EM iterations")
 	placebos := fs.Int("placebos", 3, "placebo runs with each stream shifted by a random whole number of days")
 	season := fs.Bool("season", true, "model the shared hour-of-week activity cycle in the background rate")
+	moves := fs.Float64("moves", 0, "if > 0: test whether trading activity predicts price moves of at least this size (e.g. 0.02)")
 	fs.Parse(args)
 
 	streams, evs, err := loadTicks(*dir)
 	if err != nil {
 		return err
+	}
+	if *moves > 0 {
+		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos)
 	}
 	cand := marketCandidates(streams, *k)
 	nMarkets := len(streams)
@@ -358,7 +363,7 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 	// Confounding check: do market→market links shrink once news is in the model?
 	mm := func(m *hawkes.Model) float64 {
 		s := 0.0
-		for _, e := range m.Edges(0) {
+		for _, e := range m.Edges(1e-9) {
 			if e.From < nM && e.To < nM && streams[e.From].event != streams[e.To].event {
 				s += e.Branch
 			}
@@ -380,11 +385,151 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 	return nil
 }
 
+// movesTest asks whether trading activity predicts price moves. Each market
+// gets a second stream with one event per price move of at least `size`
+// (measured from the last move, so a trade bouncing between bid and ask does
+// not count). Both models see identical events; the full model also lets each
+// market's activity, and its candidates' activity, excite its moves.
+func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos int) error {
+	nM := len(streams)
+	mv, err := priceMoves(dir, nM, size)
+	if err != nil {
+		return err
+	}
+	evs := append(append([]hawkes.Event(nil), act...), mv...)
+	sort.Slice(evs, func(a, b int) bool { return evs[a].T < evs[b].T })
+	d := 2 * nM
+	mc := marketCandidates(streams, k)
+	base := make([][]int, d) // moves excited by moves (own + candidates); activity by activity
+	full := make([][]int, d) // ... plus activity → moves
+	for i := 0; i < nM; i++ {
+		base[i] = append([]int(nil), mc[i]...)
+		full[i] = append([]int(nil), mc[i]...)
+		base[nM+i] = []int{}
+		for _, j := range mc[i] {
+			base[nM+i] = append(base[nM+i], nM+j)
+		}
+		full[nM+i] = append(append([]int(nil), base[nM+i]...), i)
+		full[nM+i] = append(full[nM+i], mc[i]...)
+	}
+	t0, t1 := evs[0].T, evs[len(evs)-1].T+1
+	split := t0 + 0.7*(t1-t0)
+	isMove := make([]bool, d)
+	for i := nM; i < d; i++ {
+		isMove[i] = true
+	}
+	betas := []float64{1.0 / 10, 1.0 / 120, 1.0 / 1200}
+	fit := func(evs []hawkes.Event, c [][]int) *hawkes.Model {
+		m := hawkes.New(d, betas, c)
+		if season {
+			m.UseSeason()
+		}
+		m.Fit(evs, hawkes.Options{Iters: iters, Tol: 1e-8, L1: l1, Window: [2]float64{t0, split}})
+		return m
+	}
+	gain := func(evs []hawkes.Event) (float64, int, *hawkes.Model) {
+		f, b := fit(evs, full), fit(evs, base)
+		lf, n := f.LogLikDims(evs, split, t1, isMove)
+		lb, _ := b.LogLikDims(evs, split, t1, isMove)
+		return (lf - lb) / float64(n), n, f
+	}
+	fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets, next to %d trades\n", len(mv), size*100, nM, len(act))
+	g, n, f := gain(evs)
+	fmt.Printf("held-out  %d test moves · trading activity improves price-move log-likelihood by %+.4f nats/move\n", n, g)
+	rng := rand.New(rand.NewPCG(31, 32))
+	var pg []string
+	for p := 0; p < placebos; p++ {
+		// Shift activity only, by whole days: keeps its time-of-day shape.
+		shifted := shiftRange(evs, d, 0, nM, t0, t1, rng)
+		pg = append(pg, fmt.Sprintf("%+.4f", func() float64 { x, _, _ := gain(shifted); return x }()))
+	}
+	if placebos > 0 {
+		fmt.Printf("placebo   activity shifted by whole days: %s nats/move\n", strings.Join(pg, " · "))
+	}
+	var own, other float64
+	var ownLag, otherLag float64
+	for _, e := range f.Edges(1e-9) {
+		if e.To < nM || e.From >= nM {
+			continue
+		}
+		if e.From == e.To-nM {
+			own += e.Branch
+			ownLag += e.Branch * e.MeanLag
+		} else {
+			other += e.Branch
+			otherLag += e.Branch * e.MeanLag
+		}
+	}
+	if own > 0 {
+		ownLag /= own
+	}
+	if other > 0 {
+		otherLag /= other
+	}
+	fmt.Printf("links     activity → own price moves: total branching %.2f (mean lag %s) · → related markets' moves: %.2f (%s)\n",
+		own, lagStr(ownLag), other, lagStr(otherLag))
+	return nil
+}
+
+// priceMoves reads ticks.csv and emits an event for market i (as stream
+// nM+i) each time its YES price has moved at least `size` from the price at
+// its previous move.
+func priceMoves(dir string, nM int, size float64) ([]hawkes.Event, error) {
+	f, err := os.Open(filepath.Join(dir, "ticks.csv"))
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	type tick struct {
+		t  float64
+		m  int
+		px float64
+	}
+	var ts []tick
+	sc := bufio.NewScanner(f)
+	sc.Scan()
+	for sc.Scan() {
+		p := strings.Split(sc.Text(), ",")
+		t, _ := strconv.ParseFloat(p[0], 64)
+		m, _ := strconv.Atoi(p[1])
+		px, _ := strconv.ParseFloat(p[2], 64)
+		if m < nM {
+			ts = append(ts, tick{t, m, px})
+		}
+	}
+	sort.SliceStable(ts, func(a, b int) bool { return ts[a].t < ts[b].t })
+	ref := make([]float64, nM)
+	for i := range ref {
+		ref[i] = -1
+	}
+	var out []hawkes.Event
+	lastT := make([]float64, nM)
+	for _, x := range ts {
+		if ref[x.m] < 0 {
+			ref[x.m] = x.px
+			continue
+		}
+		if math.Abs(x.px-ref[x.m]) >= size-1e-9 {
+			ref[x.m] = x.px
+			if x.t > lastT[x.m] { // one move event per second per market
+				out = append(out, hawkes.Event{T: x.t, Dim: nM + x.m})
+				lastT[x.m] = x.t
+			}
+		}
+	}
+	return out, sc.Err()
+}
+
 // shiftSome shifts only streams with index ≥ from by whole days.
 func shiftSome(evs []hawkes.Event, d, from int, t0, t1 float64, rng *rand.Rand) []hawkes.Event {
+	return shiftRange(evs, d, from, d, t0, t1, rng)
+}
+
+// shiftRange shifts streams with index in [lo, hi) by whole days.
+func shiftRange(evs []hawkes.Event, d, lo, hi int, t0, t1 float64, rng *rand.Rand) []hawkes.Event {
 	span := t1 - t0
 	off := make([]float64, d)
-	for i := from; i < d; i++ {
+	for i := lo; i < hi; i++ {
 		off[i] = 86400 * float64(1+rng.IntN(20))
 	}
 	out := make([]hawkes.Event, len(evs))
