@@ -19,6 +19,9 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"sort"
+	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -137,6 +140,7 @@ func cmdReplay(args []string) error {
 	out := fs.String("out", "", "write the report as JSON here")
 	promote := fs.Float64("promote", 0, "override the edge promotion z-score")
 	statHL := fs.Float64("stathl", 0, "override the lead-lag statistics half-life (bars)")
+	placebo := fs.String("placebo", "", "cluster:hours — circularly shift that cluster's series in time to measure false links")
 	fs.Parse(args)
 
 	u, err := loadUniverse(*uni, *text)
@@ -146,6 +150,11 @@ func cmdReplay(args []string) error {
 	evs, err := core.LoadEvents(*events)
 	if err != nil {
 		return err
+	}
+	if *placebo != "" {
+		if evs, err = shiftCluster(u, evs, *placebo); err != nil {
+			return err
+		}
 	}
 	cfg := engineConfig(*bar)
 	if *promote > 0 {
@@ -188,12 +197,14 @@ func cmdFetch(args []string) error {
 	gran := fs.String("granularity", "hourly", "hourly or daily (use -bar 86400 when replaying daily data)")
 	dumps := fs.Bool("dumps", false, "build hourly data from raw dump files (no API rate limits, ~55 MB per hour downloaded)")
 	workers := fs.Int("workers", 6, "parallel downloads with -dumps")
+	ago := fs.Int("ago", 0, "end the window this many days ago (to backfill older history)")
 	fs.Parse(args)
 	u, err := core.LoadUniverse(*uni)
 	if err != nil {
 		return err
 	}
 	end := time.Now().UTC().Truncate(time.Hour).Add(-3 * time.Hour) // dumps lag a couple of hours
+	end = end.AddDate(0, 0, -*ago)
 	if *dumps {
 		if *contact == "" {
 			return fmt.Errorf("pass -contact <url or email>")
@@ -324,6 +335,38 @@ func cmdResample(args []string) error {
 	}
 	defer f.Close()
 	return core.WriteEvents(f, rs)
+}
+
+// shiftCluster circularly shifts every series in one cluster by a fixed number
+// of hours, keeping each series' own dynamics but destroying any real timing
+// relationship with the other clusters. Links the engine still finds between
+// the shifted cluster and the rest are false discoveries.
+func shiftCluster(u *core.Universe, evs []core.Event, spec string) ([]core.Event, error) {
+	name, h, ok := strings.Cut(spec, ":")
+	hours, err := strconv.Atoi(h)
+	if !ok || err != nil {
+		return nil, fmt.Errorf("-placebo wants cluster:hours, got %q", spec)
+	}
+	in := map[int32]bool{}
+	for _, e := range u.Entities {
+		if e.Cluster == name {
+			in[int32(e.ID)] = true
+		}
+	}
+	if len(in) == 0 {
+		return nil, fmt.Errorf("no entities in cluster %q", name)
+	}
+	lo, hi := evs[0].TS, evs[len(evs)-1].TS
+	span, shift := hi-lo+1, int64(hours)*3600
+	out := make([]core.Event, len(evs))
+	for i, e := range evs {
+		if in[e.Entity] {
+			e.TS = lo + (e.TS-lo+shift)%span
+		}
+		out[i] = e
+	}
+	sort.SliceStable(out, func(i, j int) bool { return out[i].TS < out[j].TS })
+	return out, nil
 }
 
 func writeJSON(path string, v any) error {

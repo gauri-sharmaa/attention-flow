@@ -155,6 +155,7 @@ PM: Will xAI have the best AI model at the end of December 2026? | - | market/ai
 PM: Will Perplexity AI be acquired before 2027? | - | market/ai | perplexityai polymarket search llm answer
 PM: Will Databricks have the highest IPO Market Cap 2026? | - | market/ai | databricks polymarket data enterprise lakehouse
 PM: Gemini 4.0 released by October 31, 2026? | - | market/ai | gemini polymarket google deepmind chatbot llm
+PM: Villena: Pablo Llamas Ruiz vs Luca Nardi | - | market/ai | llama polymarket meta opensource llm
 PM: Will Grok AI beat T1 in 2026?  | - | market/ai | grok polymarket xai musk chatbot
 PM: Anysphere (Cursor) IPO before 2027? | - | market/ai | cursor polymarket coding editor llm
 PM: Will Jensen Huang be richest person on December 31? | - | market/ai | jensenhuang polymarket nvidia gpu ceo

@@ -18,7 +18,7 @@ import (
 
 const (
 	pmSearch  = "https://gamma-api.polymarket.com/public-search?q=%s&limit_per_type=10&events_status=active"
-	pmHistory = "https://clob.polymarket.com/prices-history?market=%s&interval=max&fidelity=60"
+	pmHistory = "https://clob.polymarket.com/prices-history?market=%s&startTs=%d&endTs=%d&fidelity=60"
 )
 
 // Market is a prediction market attached to a universe entity.
@@ -97,27 +97,32 @@ func FindMarkets(u *core.Universe, perEntity int, minVolume float64) ([]Market, 
 // is the odds p/(1-p), so the engine's log transform works in log-odds, the
 // natural scale for probabilities.
 func MarketHistory(client *http.Client, m Market, entity int, from int64) ([]core.Event, error) {
-	resp, err := client.Get(fmt.Sprintf(pmHistory, m.Token))
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	var body struct {
-		History []struct {
-			T int64   `json:"t"`
-			P float64 `json:"p"`
-		} `json:"history"`
-	}
-	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-		return nil, err
-	}
+	// The endpoint caps how much hourly history one request returns, so page
+	// through the window two weeks at a time.
+	const page = 14 * 86400
+	now := time.Now().Unix()
 	var out []core.Event
-	for _, h := range body.History {
-		if h.T < from {
-			continue
+	for start := from; start < now; start += page {
+		resp, err := client.Get(fmt.Sprintf(pmHistory, m.Token, start, min(start+page, now)))
+		if err != nil {
+			return nil, err
 		}
-		p := math.Min(0.99, math.Max(0.01, h.P))
-		out = append(out, core.Event{TS: h.T, Entity: int32(entity), Value: p / (1 - p)})
+		var body struct {
+			History []struct {
+				T int64   `json:"t"`
+				P float64 `json:"p"`
+			} `json:"history"`
+		}
+		err = json.NewDecoder(resp.Body).Decode(&body)
+		resp.Body.Close()
+		if err != nil {
+			return nil, err
+		}
+		for _, h := range body.History {
+			p := math.Min(0.99, math.Max(0.01, h.P))
+			out = append(out, core.Event{TS: h.T, Entity: int32(entity), Value: p / (1 - p)})
+		}
+		time.Sleep(50 * time.Millisecond)
 	}
 	return out, nil
 }
