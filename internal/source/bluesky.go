@@ -15,7 +15,15 @@ import (
 )
 
 // Jetstream is Bluesky's public JSON firehose: every new post, in real time.
-const jetstream = "wss://jetstream2.us-east.bsky.network/subscribe?wantedCollections=app.bsky.feed.post"
+// Instances drop connections now and then, so the collector rotates through
+// them and resumes from the last post it saw (the cursor replays a short
+// buffer on the server side).
+var jetstreams = []string{
+	"wss://jetstream2.us-east.bsky.network",
+	"wss://jetstream1.us-east.bsky.network",
+	"wss://jetstream1.us-west.bsky.network",
+	"wss://jetstream2.us-west.bsky.network",
+}
 
 // Matcher finds which entities a post mentions. Names match as whole words
 // (or whole phrases for multi-word names) and are case-sensitive, so "Apple"
@@ -129,11 +137,16 @@ func CollectBluesky(ctx context.Context, u *core.Universe, outPath string, bar t
 		}
 	}
 	var hits []int
-	for ctx.Err() == nil {
-		c, _, err := websocket.Dial(ctx, jetstream, nil)
+	var lastUS int64
+	for attempt := 0; ctx.Err() == nil; attempt++ {
+		u := jetstreams[attempt%len(jetstreams)] + "/subscribe?wantedCollections=app.bsky.feed.post"
+		if lastUS > 0 {
+			u += fmt.Sprintf("&cursor=%d", lastUS)
+		}
+		c, _, err := websocket.Dial(ctx, u, nil)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "connect:", err)
-			time.Sleep(5 * time.Second)
+			time.Sleep(2 * time.Second)
 			continue
 		}
 		c.SetReadLimit(1 << 20)
@@ -147,7 +160,14 @@ func CollectBluesky(ctx context.Context, u *core.Universe, outPath string, bar t
 			if json.Unmarshal(data, &msg) != nil || msg.Kind != "commit" || msg.Commit.Operation != "create" {
 				continue
 			}
+			if msg.TimeUS <= lastUS {
+				continue // replayed by the cursor after a reconnect
+			}
+			lastUS = msg.TimeUS
 			ts := time.UnixMicro(msg.TimeUS)
+			if ts.Before(cur) {
+				continue
+			}
 			if !ts.Before(cur.Add(bar)) {
 				flush(ts.Truncate(bar))
 			}
