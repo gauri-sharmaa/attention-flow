@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gauri-sharmaa/attention-flow/internal/core"
 	"github.com/gauri-sharmaa/attention-flow/internal/hawkes"
@@ -29,6 +30,7 @@ func cmdHawkes(args []string) error {
 	iters := fs.Int("iters", 400, "EM iterations")
 	placebos := fs.Int("placebos", 3, "placebo runs with each stream shifted by a random whole number of days")
 	season := fs.Bool("season", true, "model the shared hour-of-week activity cycle in the background rate")
+	folds := fs.Int("folds", 0, "walk-forward: split the span into folds+1 periods, fit on each and score the next")
 	moves := fs.Float64("moves", 0, "if > 0: test whether trading activity predicts price moves of at least this size (e.g. 0.02)")
 	fs.Parse(args)
 
@@ -37,7 +39,7 @@ func cmdHawkes(args []string) error {
 		return err
 	}
 	if *moves > 0 {
-		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos)
+		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos, *folds)
 	}
 	cand := marketCandidates(streams, *k)
 	nMarkets := len(streams)
@@ -70,18 +72,42 @@ func cmdHawkes(args []string) error {
 		len(evs), d, (t1-t0)/86400, nCand)
 	betas := []float64{1.0 / 10, 1.0 / 120, 1.0 / 1200}
 
-	run := func(evs []hawkes.Event) (self, full *hawkes.Model, gain float64, n int) {
+	runWin := func(evs []hawkes.Event, a, b, c float64) (self, full *hawkes.Model, gain float64, n int) {
 		self = hawkes.New(d, betas, nil)
 		full = hawkes.New(d, betas, cand)
 		if *season {
 			self.UseSeason()
 			full.UseSeason()
 		}
-		self.Fit(evs, hawkes.Options{Iters: *iters, Tol: 1e-8, Window: [2]float64{t0, split}})
-		full.Fit(evs, hawkes.Options{Iters: *iters, Tol: 1e-8, L1: *l1, Window: [2]float64{t0, split}})
-		ls, n := self.LogLik(evs, split, t1)
-		lf, _ := full.LogLik(evs, split, t1)
+		self.Fit(evs, hawkes.Options{Iters: *iters, Tol: 1e-8, Window: [2]float64{a, b}})
+		full.Fit(evs, hawkes.Options{Iters: *iters, Tol: 1e-8, L1: *l1, Window: [2]float64{a, b}})
+		ls, n := self.LogLik(evs, b, c)
+		lf, _ := full.LogLik(evs, b, c)
 		return self, full, (lf - ls) / float64(n), n
+	}
+	run := func(evs []hawkes.Event) (self, full *hawkes.Model, gain float64, n int) {
+		return runWin(evs, t0, split, t1)
+	}
+	if *folds > 0 {
+		// Walk forward: split the span into folds+1 equal periods; fit on one,
+		// score the next with no refitting, then roll forward.
+		step := (t1 - t0) / float64(*folds+1)
+		rng := rand.New(rand.NewPCG(41, 42))
+		fmt.Printf("walk-forward  %d folds of %.0f days each (fit on one period, score the next)\n", *folds, step/86400)
+		for f := 1; f <= *folds; f++ {
+			a, b, c := t0+float64(f-1)*step, t0+float64(f)*step, t0+float64(f+1)*step
+			_, full, g, n := runWin(evs, a, b, c)
+			_, _, pg, _ := runWin(shiftStreams(evs, d, t0, t1, rng), a, b, c)
+			nl := 0
+			for _, e := range full.Edges(0.02) {
+				if streams[e.From].event != streams[e.To].event {
+					nl++
+				}
+			}
+			fmt.Printf("  fold %d  test %s–%s  %6d events  gain %+.4f  placebo %+.4f  cross-event links %d\n",
+				f, dayStr(b), dayStr(c), n, g, pg, nl)
+		}
+		return nil
 	}
 	if candNoLink != nil {
 		return outsideTest(streams, nMarkets, evs, cand, candNoLink, betas, t0, split, t1, *iters, *l1, *season, *placebos)
@@ -138,6 +164,8 @@ func clip(s string, n int) string {
 	}
 	return s[:n-1] + "…"
 }
+
+func dayStr(t float64) string { return time.Unix(int64(t), 0).UTC().Format("Jan 2") }
 
 func lagStr(s float64) string {
 	if s < 90 {
@@ -402,7 +430,7 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 // (measured from the last move, so a trade bouncing between bid and ask does
 // not count). Both models see identical events; the full model also lets each
 // market's activity, and its candidates' activity, excite its moves.
-func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos int) error {
+func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos, folds int) error {
 	nM := len(streams)
 	mv, err := priceMoves(dir, nM, size)
 	if err != nil {
@@ -431,19 +459,32 @@ func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k
 		isMove[i] = true
 	}
 	betas := []float64{1.0 / 10, 1.0 / 120, 1.0 / 1200}
-	fit := func(evs []hawkes.Event, c [][]int) *hawkes.Model {
+	fitW := func(evs []hawkes.Event, c [][]int, a, b float64) *hawkes.Model {
 		m := hawkes.New(d, betas, c)
 		if season {
 			m.UseSeason()
 		}
-		m.Fit(evs, hawkes.Options{Iters: iters, Tol: 1e-8, L1: l1, Window: [2]float64{t0, split}})
+		m.Fit(evs, hawkes.Options{Iters: iters, Tol: 1e-8, L1: l1, Window: [2]float64{a, b}})
 		return m
 	}
-	gain := func(evs []hawkes.Event) (float64, int, *hawkes.Model) {
-		f, b := fit(evs, full), fit(evs, base)
-		lf, n := f.LogLikDims(evs, split, t1, isMove)
-		lb, _ := b.LogLikDims(evs, split, t1, isMove)
-		return (lf - lb) / float64(n), n, f
+	gainW := func(evs []hawkes.Event, a, b, c float64) (float64, int, *hawkes.Model) {
+		f, bm := fitW(evs, full, a, b), fitW(evs, base, a, b)
+		lf, n := f.LogLikDims(evs, b, c, isMove)
+		lb, _ := bm.LogLikDims(evs, b, c, isMove)
+		return (lf - lb) / float64(max(n, 1)), n, f
+	}
+	gain := func(evs []hawkes.Event) (float64, int, *hawkes.Model) { return gainW(evs, t0, split, t1) }
+	if folds > 0 {
+		step := (t1 - t0) / float64(folds+1)
+		rng := rand.New(rand.NewPCG(33, 34))
+		fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets · walk-forward %d folds of %.0f days\n", len(mv), size*100, nM, folds, step/86400)
+		for f := 1; f <= folds; f++ {
+			a, b, c := t0+float64(f-1)*step, t0+float64(f)*step, t0+float64(f+1)*step
+			g, n, _ := gainW(evs, a, b, c)
+			pg, _, _ := gainW(shiftRange(evs, d, 0, nM, t0, t1, rng), a, b, c)
+			fmt.Printf("  fold %d  test %s–%s  %6d moves  gain %+.4f  placebo %+.4f\n", f, dayStr(b), dayStr(c), n, g, pg)
+		}
+		return nil
 	}
 	fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets, next to %d trades\n", len(mv), size*100, nM, len(act))
 	g, n, f := gain(evs)

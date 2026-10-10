@@ -10,6 +10,9 @@
 //	attnflow polyall -out data/pm             every busy Polymarket market, 5-minute prices
 //	attnflow polytrades -out data/pmt         per market: trading activity + price from its trade log
 //	attnflow hawkes -dir data/pmt             does trading in one market excite related markets? (event time)
+//	attnflow leadlag -dir data/pmt90          which prices move first (Hoffmann-Rosenbaum-Yoshida), period by period
+//	attnflow backtest -dir data/pmt90         paper-trade the order-flow signal, walk-forward, with costs
+//	attnflow eventstudy -dir data/pmt         when outside buzz surges, does trading follow? (model-free)
 //	attnflow outside -dir data/pmt            news, Reddit and Hacker News mentions of the markets' subjects
 //	attnflow resample -events E -bar 3600     sum mention counts into wider bars
 package main
@@ -66,6 +69,12 @@ func main() {
 		err = cmdPolyTrades(os.Args[2:])
 	case "hawkes":
 		err = cmdHawkes(os.Args[2:])
+	case "leadlag":
+		err = cmdLeadLag(os.Args[2:])
+	case "backtest":
+		err = cmdBacktest(os.Args[2:])
+	case "eventstudy":
+		err = cmdEventStudy(os.Args[2:])
 	case "outside":
 		err = cmdOutside(os.Args[2:])
 	case "resample":
@@ -80,7 +89,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|outside|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|eventstudy|outside|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -341,11 +350,12 @@ func cmdPolyTrades(args []string) error {
 	fs := flag.NewFlagSet("polytrades", flag.ExitOnError)
 	out := fs.String("out", "data/pmt", "output directory")
 	n := fs.Int("n", 400, "how many of the busiest tradable markets")
+	closed := fs.Int("closed", 0, "also include this many of the biggest markets that resolved during the window")
 	days := fs.Int("days", 30, "days of history")
 	bar := fs.Int64("bar", 300, "bar width in seconds")
 	workers := fs.Int("workers", 6, "parallel downloads")
 	fs.Parse(args)
-	return source.FetchMarketTrades(*out, *n, *days, *bar, *workers)
+	return source.FetchMarketTrades(*out, *n, *closed, *days, *bar, *workers)
 }
 
 func cmdOutside(args []string) error {

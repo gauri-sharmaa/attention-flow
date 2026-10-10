@@ -7,3 +7,4 @@
 *.prof
 /data/*/ticks.csv
 /data/*/outside-*.csv
+/data/*/cache/

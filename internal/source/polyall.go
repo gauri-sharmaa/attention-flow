@@ -226,3 +226,40 @@ func FetchAllMarkets(outDir string, n, days int, barSeconds int64, workers int) 
 	fmt.Fprintf(os.Stderr, "%d markets with history, %d points, sectors %v\n", len(lines), len(all), sec)
 	return core.WriteEvents(f, all)
 }
+
+const pmClosed = "https://gamma-api.polymarket.com/markets?closed=true&limit=100&offset=%d&order=volumeNum&ascending=false&end_date_min=%s"
+
+// ListClosedMarkets returns the n highest-volume markets that resolved after
+// `since` (and are not single games), so walk-forward tests over past months
+// include the markets that were live then.
+func ListClosedMarkets(n int, since time.Time) ([]pmMarket, error) {
+	client := &http.Client{Timeout: 30 * time.Second}
+	var out []pmMarket
+	seen := map[string]bool{}
+	for off := 0; off <= 2000 && len(out) < n; off += 100 {
+		resp, err := client.Get(fmt.Sprintf(pmClosed, off, since.Format("2006-01-02")))
+		if err != nil {
+			return nil, err
+		}
+		var page []pmMarket
+		err = json.NewDecoder(resp.Body).Decode(&page)
+		resp.Body.Close()
+		if err != nil || len(page) == 0 {
+			break
+		}
+		for _, m := range page {
+			end, err := time.Parse(time.RFC3339, m.EndDate)
+			// Need at least a week of trading inside the window.
+			if err != nil || end.Before(since.Add(7*24*time.Hour)) || strings.Contains(m.Question, " vs. ") || seen[m.ConditionID] {
+				continue
+			}
+			seen[m.ConditionID] = true
+			out = append(out, m)
+			if len(out) == n {
+				break
+			}
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	return out, nil
+}
