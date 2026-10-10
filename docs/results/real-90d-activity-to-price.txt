@@ -1,0 +1,3 @@
+moves     56383 price moves of ≥ 2¢ across 382 markets · walk-forward 2 folds of 30 days
+  fold 1  test Aug 11–Sep 10   15016 moves  gain +0.1137  placebo -0.3742
+  fold 2  test Sep 10–Oct 10   21475 moves  gain +0.1660  placebo -0.4480

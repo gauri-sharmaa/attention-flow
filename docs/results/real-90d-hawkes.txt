@@ -1,0 +1,49 @@
+events    1338744 across 382 streams · 90.0 days · 4762 candidate links · train 70% / test 30%
+held-out  278728 test events · cross-links improve log-likelihood by +0.0396 nats/event
+placebo   timing destroyed (each stream shifted by a random whole 1-20 days, keeping time of day): -0.0420 nats/event
+
+links     874 with branching ≥ 0.02 (extra follower trades per leader trade): 486 within one event, 388 across events
+
+strongest links across different events
+  0.480   20.0m  Israel x Iran ceasefire continues through November 30?
+                → Israel closes its airspace by September 30?
+  0.440   20.0m  Will there be no change in Fed interest rates after the January 2027 …
+                → Will the Fed increase interest rates by 25 bps after the September 20…
+  0.421   19.8m  Will the Fed Hike–Pause–Pause in the next three decisions (Sep–…
+                → Will there be no change in Fed interest rates after the September 202…
+  0.396   17.0m  Will Dallas Cowboys win the 2026 NFC East?
+                → Will the New England Patriots win the 2027 NFL league championship?
+  0.323   20.0m  Will Como win the 2026-27 Serie A Championship?
+                → Will Chelsea win the 2026-27 English Premier League (EPL) Championshi…
+  0.280   13.8m  Will Manchester City FC win on 2026-09-20?
+                → Will Chelsea FC win on 2026-09-18?
+  0.271   19.3m  Will AI solve 0 more Millennium Prize Problems in 2026?
+                → Will OpenAI announce another Millennium Prize solution by December 31…
+  0.263   20.0m  Israel closes its airspace by July 31?
+                → Strait of Hormuz traffic returns to normal by July 31?
+  0.247   19.0m  Dota 2: Nigma Galaxy vs Team Falcons (BO3) - The International Playof…
+                → Dota 2: TEAM VISION vs BoomBoys (BO3) - The International Playoffs
+  0.236   17.8m  Exact Score: Spain 1 - 0 Argentina?
+                → Will Argentina win on 2026-07-19?
+  0.230   19.7m  Will Como win the 2026-27 Serie A Championship?
+                → Will Liverpool win the 2026-27 UEFA Champions League Championship?
+  0.226   20.0m  Will the Washington Capitals be named the 2026-27 NHL Stanley Cup Cha…
+                → Will Como win the 2026-27 Serie A Championship?
+  0.206   19.9m  Will Lionel Messi finish in the top 3 of the 2026 Ballon d'Or?
+                → Will Avengers: Doomsday be the top grossing movie of 2026?
+  0.200   20.0m  Israel x Iran ceasefire continues through August 31?
+                → Strait of Hormuz traffic returns to normal by August 31?
+  0.193   20.0m  Will the Washington Capitals be named the 2026-27 NHL Stanley Cup Cha…
+                → Will Chelsea win the 2026-27 English Premier League (EPL) Championshi…
+
+strongest links between outcomes of the same event
+  0.356   18.8m  Will AI solve 1 more Millennium Prize Problem in 2026?
+                → Will AI solve 0 more Millennium Prize Problems in 2026?
+  0.351   14.8m  Will AI solve 0 more Millennium Prize Problems in 2026?
+                → Will AI solve 1 more Millennium Prize Problem in 2026?
+  0.338   20.0m  Israel x Iran ceasefire continues through November 30?
+                → Israel x Iran ceasefire continues through September 30?
+  0.332    1.9m  Exact Score: Spain 1 - 0 Argentina?
+                → Exact Score: Spain 2 - 1 Argentina?
+  0.319   18.9m  Will Jesus Christ return before GTA VI?
+                → Will bitcoin hit $1m before GTA VI?

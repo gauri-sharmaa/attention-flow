@@ -1,0 +1,4 @@
+events    1338744 across 382 streams · 90.0 days · 4762 candidate links · train 70% / test 30%
+walk-forward  2 folds of 30 days each (fit on one period, score the next)
+  fold 1  test Aug 11–Sep 10  370835 events  gain +0.0324  placebo -0.0222  cross-event links 301
+  fold 2  test Sep 10–Oct 10  317233 events  gain +0.0079  placebo -0.0424  cross-event links 361

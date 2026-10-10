@@ -26,6 +26,11 @@ def folds(text):
 
 
 net = json.loads((root / "links.json").read_text())
+# Show links between different events with real strength; sibling outcomes of
+# one event (e.g. "by Oct 31" / "by Dec 31") trade together trivially.
+net["links"] = [l for l in net["links"] if not l["sameEvent"] and l["branch"] >= 0.05]
+used = {l["From"] for l in net["links"]} | {l["To"] for l in net["links"]}
+net["nodes"] = [n for n in net["nodes"] if n["id"] in used]
 hw = folds(read("real-90d-hawkes-walkforward.txt"))
 mv = folds(read("real-90d-activity-to-price.txt"))
 ll = read("real-90d-price-leadlag.txt")
@@ -57,6 +62,10 @@ surge, plac = parse(prof[0]), parse(prof[1])
 nsurge = re.search(r"surges\s+(\d+)", es).group(1)
 
 # Paper trading: average return per trade lines for the combined test set.
+def per(label):
+    return [float(v) for v in re.findall(label + r"\s+\d+ trades · win\s+[\d.]+% · avg\s+([+-][\d.]+)%", bt)]
+
+
 def avg(label):
     vals = [float(v) for v in re.findall(label + r"\s+\d+ trades · win\s+[\d.]+% · avg\s+([+-][\d.]+)%", bt)]
     return sum(vals) / len(vals)
@@ -68,13 +77,12 @@ score = [
      "f1": fmt(mv[0][0]), "f2": fmt(mv[1][0]), "pl": placebo(mv), "ok": all(g > 0 and g > p for g, p in mv), "a": "yes" if all(g > 0 and g > p for g, p in mv) else "no"},
     {"q": "Do some prices move before related prices?", "how": "Hoffmann–Rosenbaum–Yoshida, significant pairs at 1% vs chance",
      "f1": f"{periods[1][0]} vs {periods[1][1]}", "f2": f"{periods[2][0]} vs {periods[2][1]}", "pl": "–", "ok": True, "a": "linked, leader unstable"},
-    {"q": "Is the order-flow signal profitable after costs?", "how": "paper trading, 1¢ per side, walk-forward",
-     "f1": f"{avg('out of sample'):+.1f}%", "f2": "", "pl": f"{avg('placebo: random side'):+.1f}%", "ok": False, "a": "no"},
+    {"q": "Is the order-flow signal profitable after costs?", "how": "paper trading, average return per trade, 1¢ per side",
+     "f1": f"{per('out of sample')[0]:+.1f}%", "f2": f"{per('out of sample')[1]:+.1f}%", "pl": f"{per('placebo: random side')[0]:+.1f}% / {per('placebo: random side')[1]:+.1f}%", "ok": False, "a": "no"},
     {"q": "Does news, Reddit or HN buzz lead trading?", "how": f"event study, {nsurge} surges, vs same time on other days",
      "f1": "flat", "f2": "", "pl": "flat", "ok": False, "a": "no"},
 ]
-score[3]["f2"] = "per trade"
-score[4]["f2"] = "before & after"
+score[4]["f2"] = "flat"
 
 data = {
     "net": net,

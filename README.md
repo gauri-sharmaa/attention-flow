@@ -43,24 +43,31 @@ Engine cost: 175 µs per bar for 147 topics (p99 0.5 ms), 35 ns to ingest an eve
 
 ## Real data
 
-Thirty days of every trade on the 228 busiest Polymarket markets, plus 2M news, Reddit and Hacker News mentions of the names in those markets. Everything is fit on the first 70% of the month and scored on the last 30%. Each test has a placebo: the same streams shifted by whole days, which keeps their own burstiness and time-of-day pattern but destroys real timing.
+Ninety days of every trade on the 382 busiest Polymarket markets (1.67M trades, including markets that resolved during the window), plus 2M news, Reddit and Hacker News mentions. Every test is walk-forward: fit on one 30-day period, scored on the next, which it never saw. Each has a placebo that shifts streams by whole days, keeping their rhythm and destroying real timing.
 
-| Question | Model | Held-out gain | Placebo | Answer |
-|---|---|---|---|---|
-| Does attention lead attention, hourly? | engine, Wikipedia | ≈ 0 | – | No: related topics move in the same hour |
-| Do market prices lead each other? | engine, 5-min bars | ≈ 0 | – | No: prices behave like an efficient market |
-| Does trading in one market set off trading in related ones? | Hawkes, trade times | +0.030 nats/trade | −0.006 to −0.009 | **Yes, modestly** |
-| Does trading activity predict price moves? | Hawkes, trade times | +0.243 nats/move | −0.18 to −0.44 | **Yes**: ~6 min ahead in its own market, ~12 min in related ones |
-| Does news, Reddit or HN buzz predict trading? | Hawkes, mention times | −0.012 | −0.002 | No |
-| Does trading predict buzz? | Hawkes, mention times | −0.001 | −0.005 | No |
+| Question | Method | Month 2 | Month 3 | Placebo | Answer |
+|---|---|---|---|---|---|
+| Does trading in one market set off related markets? | Hawkes, trade times | +0.032 | +0.008 | −0.022 / −0.042 | **Yes, modestly** |
+| Does trading activity predict price moves? | Hawkes, trades → 2¢ moves | +0.114 | +0.166 | −0.37 / −0.45 | **Yes** |
+| Do some prices move before related prices? | Hoffmann–Rosenbaum–Yoshida | 55 pairs (2 by chance) | 121 (5) | – | **Linked, but the leader flips** |
+| Is the order-flow signal profitable? | paper trading, 1¢ per side | −9.3%/trade | −6.7%/trade | −13.7% / −8.0% | No |
+| Does news / Reddit / HN buzz lead trading? | event study, 1,743 surges | flat | flat | flat | No |
 
-What made the difference was dropping bars. In Polymarket, information moves in seconds to minutes, so 5-minute bars smear it away. The Hawkes model (`internal/hawkes`) works on raw event times. Each trade raises the near-term rate of further trades in its own market and in related ones, and the fitted excitation matrix is the lead-lag graph. Three checks keep it honest:
+Gains are held-out log-likelihood per event (nats). A result counts when it beats zero and the placebo in every month.
 
-- **Same-second events never excite each other.** A trade and the price move it causes, or one bot hitting two markets in the same second, are simultaneous, not predictive. Adding this cut the first cross-market estimate from +0.104 to +0.030.
-- **A shared hour-of-week background.** Every market is busier in US daytime, and without this, that alone looks like a link.
-- **News in the model.** The cross-market links barely change (26.75 → 26.68 total excitation), so they aren't just markets reacting to the same headlines.
+- **Prices:** linked markets move together every month, but which one moves first holds only about 46% of the time from one month to the next, a coin flip. Seventeen pairs keep a stable leader. Almost all are the same question at different dates or strikes, where the busier contract reprices first (Iran blockade "by Dec 31" leads "by Oct 31" by up to 30 minutes).
+- **Trading:** order-flow direction has a little information, +0.4% per trade before costs (t = 1.3). A 1¢ spread costs far more. Even half-cent costs lose 3.6% per trade.
+- **Buzz:** around news and Reddit surges, trading in the related markets stays flat before and after. Newsy days are a few percent busier overall, with no timing.
 
-Scorecards: [docs/results](docs/results). Methods follow Bacry, Mastromatteo & Muzy, [Hawkes processes in finance](https://arxiv.org/abs/1502.04592), and Xu, Farajtabar & Zha, [Learning Granger causality for Hawkes processes](http://proceedings.mlr.press/v48/xuc16.pdf).
+Demo page: [docs/site/index.html](docs/site/index.html), built by `python3 docs/site/build.py` from the scorecards in [docs/results](docs/results).
+
+Bars blur timing, so the methods that work use raw event times:
+
+- **Hawkes processes** (`internal/hawkes`): each trade raises the near-term rate of more trades in its own and related markets, and the fitted excitation matrix is the lead-lag graph. Same-second events never excite each other: a trade and the price move it causes are simultaneous, and blocking that cut the first cross-market estimate from +0.104 to +0.030. A shared hour-of-week background stops US daytime from passing for a link.
+- **Hoffmann–Rosenbaum–Yoshida lead-lag** (`internal/leadlag`): covariance of price changes over overlapping observation intervals, scanned across lags, with a p-value from 99 shuffles.
+- **Event study** (`attnflow eventstudy`): trading around each surge against the same clock time on other days.
+
+Methods follow Bacry, Mastromatteo & Muzy, [Hawkes processes in finance](https://arxiv.org/abs/1502.04592); Xu, Farajtabar & Zha, [Learning Granger causality for Hawkes processes](http://proceedings.mlr.press/v48/xuc16.pdf); and Hoffmann, Rosenbaum & Yoshida, [Estimation of the lead-lag parameter from non-synchronous data](https://arxiv.org/abs/1303.4871).
 
 ## Run it
 
@@ -74,9 +81,12 @@ go build -o attnflow ./cmd/attnflow
 ./attnflow serve                                 # dashboard at localhost:8080
 ./attnflow export -out site                      # static dashboard for hosting
 
-./attnflow polytrades                            # every trade on the busiest Polymarket markets
-./attnflow hawkes                                # does trading spread between markets?
-./attnflow hawkes -moves 0.02                    # does trading predict price moves?
+./attnflow polytrades -days 90 -closed 300 -out data/pmt90   # every trade, incl. resolved markets
+./attnflow hawkes -dir data/pmt90 -folds 2       # does trading spread between markets? (walk-forward)
+./attnflow hawkes -dir data/pmt90 -moves 0.02 -folds 2       # does trading predict price moves?
+./attnflow leadlag -dir data/pmt90               # which prices move first
+./attnflow backtest -dir data/pmt90              # paper-trade the order-flow signal
+./attnflow eventstudy                            # does buzz lead trading?
 ./attnflow outside                               # news, Reddit, Hacker News mentions
 ./attnflow hawkes -extra data/pmt/outside-news.csv,data/pmt/outside-reddit.csv,data/pmt/outside-hn.csv
 ```
@@ -103,5 +113,6 @@ internal/stats     online estimators (EW, robust median/MAD, RLS)
 internal/ring      lock-free SPSC queue for ingest
 internal/source    Wikipedia, Polymarket, Bluesky, GDELT, Reddit, Hacker News
 internal/hawkes    multivariate Hawkes processes on raw event times
+internal/leadlag   Hoffmann–Rosenbaum–Yoshida lead-lag for asynchronous prices
 internal/server    SSE server + dashboard
 ```

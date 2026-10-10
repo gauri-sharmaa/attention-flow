@@ -1,0 +1,6497 @@
+{
+ "gain": 0.03957110232734892,
+ "placebo": [
+  "-0.0420"
+ ],
+ "nodes": [
+  {
+   "id": 1,
+   "name": "Will the Republican Party control the House after the 2026 Midterm elections?",
+   "sector": "politics",
+   "event": "which-party-will-win-the-house-in-2026"
+  },
+  {
+   "id": 2,
+   "name": "Will the U.S. invade Iran before 2027?",
+   "sector": "world",
+   "event": "will-the-us-invade-iran-before-2027"
+  },
+  {
+   "id": 3,
+   "name": "2026 Balance of Power: R Senate, R House",
+   "sector": "politics",
+   "event": "balance-of-power-2026-midterms"
+  },
+  {
+   "id": 4,
+   "name": "Will the Democratic Party control the House after the 2026 Midterm elections?",
+   "sector": "politics",
+   "event": "which-party-will-win-the-house-in-2026"
+  },
+  {
+   "id": 5,
+   "name": "US announces end of Iranian blockade by October 31, 2026?",
+   "sector": "world",
+   "event": "us-announces-end-of-iranian-blockade-byptptpt-20260713152715080"
+  },
+  {
+   "id": 6,
+   "name": "Will the Republicans win the Texas Senate race in 2026?",
+   "sector": "politics",
+   "event": "texas-senate-election-winner"
+  },
+  {
+   "id": 7,
+   "name": "2026 Balance of Power: R Senate, D House",
+   "sector": "politics",
+   "event": "balance-of-power-2026-midterms"
+  },
+  {
+   "id": 8,
+   "name": "Will Benjamin Netanyahu be the next Prime Minister of Israel?",
+   "sector": "world",
+   "event": "who-will-be-the-next-prime-minister-of-israel-after-the-next-election"
+  },
+  {
+   "id": 9,
+   "name": "Will there be no change in Fed interest rates after the October 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-october-20260617190323537"
+  },
+  {
+   "id": 10,
+   "name": "NATO x Russia military clash by October 31, 2026?",
+   "sector": "world",
+   "event": "nato-x-russia-military-clash-in-2025"
+  },
+  {
+   "id": 11,
+   "name": "Israel x Iran ceasefire continues through October 31?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 12,
+   "name": "2026 Balance of Power: D Senate, D House",
+   "sector": "politics",
+   "event": "balance-of-power-2026-midterms"
+  },
+  {
+   "id": 13,
+   "name": "Will the Democrats win the Texas Senate race in 2026?",
+   "sector": "politics",
+   "event": "texas-senate-election-winner"
+  },
+  {
+   "id": 14,
+   "name": "Will Harry Kane win the 2026 Ballon d'Or?",
+   "sector": "sports",
+   "event": "ballon-dor-winner-2026"
+  },
+  {
+   "id": 16,
+   "name": "Will the US confirm that aliens exist before 2027?",
+   "sector": "culture",
+   "event": "will-the-us-confirm-that-aliens-exist-before-2027"
+  },
+  {
+   "id": 17,
+   "name": "Bab el-Mandeb Strait effectively closed by December 31?",
+   "sector": "world",
+   "event": "bab-el-mandeb-strait-effectively-closed-by"
+  },
+  {
+   "id": 18,
+   "name": "NATO x Russia military clash by December 31, 2026?",
+   "sector": "world",
+   "event": "nato-x-russia-military-clash-in-2025"
+  },
+  {
+   "id": 19,
+   "name": "Will Bitcoin dip to $55,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 20,
+   "name": "Will Lamine Yamal win the 2026 Ballon d'Or?",
+   "sector": "sports",
+   "event": "ballon-dor-winner-2026"
+  },
+  {
+   "id": 21,
+   "name": "US announces end of Iranian blockade by December 31, 2026?",
+   "sector": "world",
+   "event": "us-announces-end-of-iranian-blockade-byptptpt-20260713152715080"
+  },
+  {
+   "id": 22,
+   "name": "Will Liverpool win the 2026-27 UEFA Champions League Championship?",
+   "sector": "sports",
+   "event": "uefa-champions-league-2027-champion-20260701202025549"
+  },
+  {
+   "id": 23,
+   "name": "Will David Lisnard win the 2027 French presidential election?",
+   "sector": "world",
+   "event": "next-french-presidential-election"
+  },
+  {
+   "id": 24,
+   "name": "Will Marco Rubio win the 2028 US Presidential Election?",
+   "sector": "politics",
+   "event": "presidential-election-winner-2028"
+  },
+  {
+   "id": 25,
+   "name": "Will MOUZ Win the ESL Pro League Season 24?",
+   "sector": "other",
+   "event": "esl-pro-league-season-24-winner-1788882991655"
+  },
+  {
+   "id": 27,
+   "name": "Will the Iranian regime fall before 2027?",
+   "sector": "world",
+   "event": "will-the-iranian-regime-fall-by-the-end-of-2026"
+  },
+  {
+   "id": 28,
+   "name": "Will Ethereum dip to $1,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-ethereum-hit-before-2027"
+  },
+  {
+   "id": 29,
+   "name": "Iran-Oman Hormuz Agreement by October 31?",
+   "sector": "world",
+   "event": "iran-oman-hormuz-management-agreement-byptptpt-20260804222725871"
+  },
+  {
+   "id": 30,
+   "name": "Israel x Iran ceasefire continues through December 31?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 31,
+   "name": "Will the Democrats win the Michigan Senate race in 2026?",
+   "sector": "politics",
+   "event": "michigan-senate-election-winner"
+  },
+  {
+   "id": 32,
+   "name": "Will the Republican Party control the Senate after the 2026 Midterm elections?",
+   "sector": "politics",
+   "event": "which-party-will-win-the-senate-in-2026"
+  },
+  {
+   "id": 34,
+   "name": "Will Puma Shen win the next Taipei Mayor election?",
+   "sector": "politics",
+   "event": "taipei-mayor-election-winner-20260813125857100"
+  },
+  {
+   "id": 35,
+   "name": "Will Gadi Eizenkot be the next Prime Minister of Israel?",
+   "sector": "world",
+   "event": "who-will-be-the-next-prime-minister-of-israel-after-the-next-election"
+  },
+  {
+   "id": 36,
+   "name": "Will Vitality Win the ESL Pro League Season 24?",
+   "sector": "other",
+   "event": "esl-pro-league-season-24-winner-1788882991655"
+  },
+  {
+   "id": 38,
+   "name": "Will Paris Saint-Germain win the 2026-27 Ligue 1 Championship?",
+   "sector": "sports",
+   "event": "ligue-1-2027-champion-20260701201053335"
+  },
+  {
+   "id": 39,
+   "name": "Bab el-Mandeb Strait effectively closed by October 31?",
+   "sector": "world",
+   "event": "bab-el-mandeb-strait-effectively-closed-by"
+  },
+  {
+   "id": 40,
+   "name": "Will Pedro Sánchez be the next Prime Minister of Spain?",
+   "sector": "world",
+   "event": "next-prime-minister-of-spain-20260625005215443"
+  },
+  {
+   "id": 41,
+   "name": "Will Anthropic's valuation hit (HIGH) $4.0T by December 31?",
+   "sector": "tech",
+   "event": "will-anthropics-valuation-hit-by-december-31"
+  },
+  {
+   "id": 42,
+   "name": "Will Bitcoin dip to $45,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 43,
+   "name": "Modi out by December 31, 2026?",
+   "sector": "other",
+   "event": "modi-out-before-2027"
+  },
+  {
+   "id": 44,
+   "name": "Next Fable Model (5.2+) released by October 31, 2026?",
+   "sector": "tech",
+   "event": "next-fable-model-5pt2-released-byptptpt"
+  },
+  {
+   "id": 45,
+   "name": "Will Chiang Wan-an win the next Taipei Mayor election?",
+   "sector": "politics",
+   "event": "taipei-mayor-election-winner-20260813125857100"
+  },
+  {
+   "id": 48,
+   "name": "Will JD Vance win the 2028 US Presidential Election?",
+   "sector": "politics",
+   "event": "presidential-election-winner-2028"
+  },
+  {
+   "id": 49,
+   "name": "Will the Republicans win the Iowa Senate race in 2026?",
+   "sector": "politics",
+   "event": "iowa-senate-election-winner"
+  },
+  {
+   "id": 50,
+   "name": "Will Dallas Cowboys win the 2026 NFC East?",
+   "sector": "sports",
+   "event": "pro-football-nfc-east-champion"
+  },
+  {
+   "id": 51,
+   "name": "Will the San Francisco 49ers win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 52,
+   "name": "Will Aleksandar Vučić be the next Prime Minister of Serbia?",
+   "sector": "world",
+   "event": "next-prime-minister-of-serbia-20260629223938642"
+  },
+  {
+   "id": 53,
+   "name": "Will Bitcoin reach $120,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 55,
+   "name": "Will Anthropic's market cap be between $2.0T and $2.25T at market close on IPO day?",
+   "sector": "tech",
+   "event": "anthropic-ipo-closing-market-cap-higher-strikes"
+  },
+  {
+   "id": 56,
+   "name": "Russia x Ukraine ceasefire agreement by October 31, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-ceasefire-agreement-by"
+  },
+  {
+   "id": 57,
+   "name": "Will Spirit Win the ESL Pro League Season 24?",
+   "sector": "other",
+   "event": "esl-pro-league-season-24-winner-1788882991655"
+  },
+  {
+   "id": 58,
+   "name": "Will the Los Angeles Dodgers win the 2026 World Series?",
+   "sector": "sports",
+   "event": "mlb-world-series-champion-2026"
+  },
+  {
+   "id": 60,
+   "name": "Will Kimi Antonelli be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 61,
+   "name": "Will Predict.fun launch a token by December 31, 2026?",
+   "sector": "crypto",
+   "event": "will-predictfun-launch-a-token-by"
+  },
+  {
+   "id": 62,
+   "name": "Strait of Hormuz traffic returns to normal by November 30?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-november-30-20260810151158765"
+  },
+  {
+   "id": 63,
+   "name": "Will Anthropic IPO by December 31, 2026?",
+   "sector": "tech",
+   "event": "anthropic-ipo-by"
+  },
+  {
+   "id": 64,
+   "name": "Will the Republicans win the Michigan Senate race in 2026?",
+   "sector": "politics",
+   "event": "michigan-senate-election-winner"
+  },
+  {
+   "id": 66,
+   "name": "Will Bayern Munich win the 2026-27 UEFA Champions League Championship?",
+   "sector": "sports",
+   "event": "uefa-champions-league-2027-champion-20260701202025549"
+  },
+  {
+   "id": 67,
+   "name": "Will Аndrey Gyurov win the next Bulgarian presidential election?",
+   "sector": "politics",
+   "event": "bulgaria-presidential-election"
+  },
+  {
+   "id": 68,
+   "name": "Will Marine Le Pen win the 2027 French presidential election?",
+   "sector": "world",
+   "event": "next-french-presidential-election"
+  },
+  {
+   "id": 70,
+   "name": "Will the Democratic Party control the Senate after the 2026 Midterm elections?",
+   "sector": "politics",
+   "event": "which-party-will-win-the-senate-in-2026"
+  },
+  {
+   "id": 72,
+   "name": "Will Mojtaba Khamenei be head of state in Iran end of 2026?",
+   "sector": "world",
+   "event": "iran-leader-end-of-2026"
+  },
+  {
+   "id": 75,
+   "name": "Will Naftali Bennett be the next Prime Minister of Israel?",
+   "sector": "world",
+   "event": "who-will-be-the-next-prime-minister-of-israel-after-the-next-election"
+  },
+  {
+   "id": 77,
+   "name": "Iran leadership change by December 31?",
+   "sector": "world",
+   "event": "iran-leadership-change-by"
+  },
+  {
+   "id": 78,
+   "name": "Will Manchester City win the 2026-27 English Premier League (EPL) Championship?",
+   "sector": "sports",
+   "event": "epl-2027-champion-20260701200428749"
+  },
+  {
+   "id": 79,
+   "name": "Will the Jacksonville Jaguars win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 81,
+   "name": "Will Alberto Núñez Feijóo be the next Prime Minister of Spain?",
+   "sector": "world",
+   "event": "next-prime-minister-of-spain-20260625005215443"
+  },
+  {
+   "id": 82,
+   "name": "Will Arsenal win the 2026-27 English Premier League (EPL) Championship?",
+   "sector": "sports",
+   "event": "epl-2027-champion-20260701200428749"
+  },
+  {
+   "id": 83,
+   "name": "Will Toronto Raptors win the 2027 NBA Finals?",
+   "sector": "sports",
+   "event": "nba-2027-champion"
+  },
+  {
+   "id": 84,
+   "name": "Will Chelsea win the 2026-27 English Premier League (EPL) Championship?",
+   "sector": "sports",
+   "event": "epl-2027-champion-20260701200428749"
+  },
+  {
+   "id": 85,
+   "name": "Will Jean-Luc Mélenchon win the 2027 French presidential election?",
+   "sector": "world",
+   "event": "next-french-presidential-election"
+  },
+  {
+   "id": 87,
+   "name": "Will the Baltimore Ravens win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 89,
+   "name": "Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election?",
+   "sector": "politics",
+   "event": "presidential-election-winner-2028"
+  },
+  {
+   "id": 90,
+   "name": "Will the New England Patriots win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 91,
+   "name": "Will an independent win the Nebraska Senate race in 2026?",
+   "sector": "politics",
+   "event": "nebraska-senate-election-winner"
+  },
+  {
+   "id": 93,
+   "name": "Will Liverpool win the 2026-27 English Premier League (EPL) Championship?",
+   "sector": "sports",
+   "event": "epl-2027-champion-20260701200428749"
+  },
+  {
+   "id": 96,
+   "name": "Will the Democrats win the Iowa Senate race in 2026?",
+   "sector": "politics",
+   "event": "iowa-senate-election-winner"
+  },
+  {
+   "id": 97,
+   "name": "Will Kamala Harris win the 2028 Democratic presidential nomination?",
+   "sector": "politics",
+   "event": "democratic-presidential-nominee-2028"
+  },
+  {
+   "id": 98,
+   "name": "Will Anthropic IPO by November 30, 2026?",
+   "sector": "tech",
+   "event": "anthropic-ipo-by"
+  },
+  {
+   "id": 99,
+   "name": "Netanyahu out by end of 2026?",
+   "sector": "world",
+   "event": "netanyahu-out-before-2027"
+  },
+  {
+   "id": 101,
+   "name": "Russia-Ukraine peace talks by October 31, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-peace-talks-byptptpt-20260609012540716"
+  },
+  {
+   "id": 102,
+   "name": "US-Iran Final Nuclear Deal by December 31, 2026?",
+   "sector": "world",
+   "event": "us-iran-final-nuclear-deal-by-20260621201254412"
+  },
+  {
+   "id": 104,
+   "name": "Will Minnesota Timberwolves win the 2027 NBA Finals?",
+   "sector": "sports",
+   "event": "nba-2027-champion"
+  },
+  {
+   "id": 105,
+   "name": "Will the Democrats win the Vermont governor race in 2026?",
+   "sector": "politics",
+   "event": "vermont-governor-winner-2026"
+  },
+  {
+   "id": 106,
+   "name": "Will Bitcoin dip to $50,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 108,
+   "name": "Variational FDV above $500M one day after launch?",
+   "sector": "other",
+   "event": "variational-fdv-above-one-day-after-launch"
+  },
+  {
+   "id": 109,
+   "name": "Will Bitcoin reach $100,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 110,
+   "name": "Strait of Hormuz traffic returns to normal by December 31?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-december-31"
+  },
+  {
+   "id": 111,
+   "name": "Will the Democrats win the Minnesota Senate race in 2026?",
+   "sector": "politics",
+   "event": "minnesota-senate-election-winner"
+  },
+  {
+   "id": 112,
+   "name": "Will Bitcoin dip to $70,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 113,
+   "name": "Will Gavin Newsom win the 2028 Democratic presidential nomination?",
+   "sector": "politics",
+   "event": "democratic-presidential-nominee-2028"
+  },
+  {
+   "id": 114,
+   "name": "Will NVIDIA be the largest company in the world by market cap on December 31?",
+   "sector": "tech",
+   "event": "largest-company-end-of-december-2026"
+  },
+  {
+   "id": 115,
+   "name": "Gemini 4.0 released by October 31, 2026?",
+   "sector": "tech",
+   "event": "gemini-4pt0-released-by-june-30-2026"
+  },
+  {
+   "id": 118,
+   "name": "Will Pete Buttigieg win the 2028 Democratic presidential nomination?",
+   "sector": "politics",
+   "event": "democratic-presidential-nominee-2028"
+  },
+  {
+   "id": 119,
+   "name": "Trump out as President before 2027?",
+   "sector": "politics",
+   "event": "trump-out-as-president-before-2027"
+  },
+  {
+   "id": 120,
+   "name": "Will Google have the best AI model at the end of October 2026?",
+   "sector": "tech",
+   "event": "which-company-has-the-best-ai-model-end-of-october"
+  },
+  {
+   "id": 121,
+   "name": "Will Édouard Philippe win the 2027 French presidential election?",
+   "sector": "world",
+   "event": "next-french-presidential-election"
+  },
+  {
+   "id": 124,
+   "name": "Will OpenAI have the best AI model at the end of December 2026?",
+   "sector": "tech",
+   "event": "which-company-has-best-ai-model-end-of-2026"
+  },
+  {
+   "id": 126,
+   "name": "Will Bayern Munich be the 2026-27 Bundesliga champion?",
+   "sector": "sports",
+   "event": "bundesliga-2027-champion-20260708164840303"
+  },
+  {
+   "id": 127,
+   "name": "Will Meta have the best AI model at the end of December 2026?",
+   "sector": "tech",
+   "event": "which-company-has-best-ai-model-end-of-2026"
+  },
+  {
+   "id": 131,
+   "name": "Will the Tampa Bay Rays win the 2026 World Series?",
+   "sector": "sports",
+   "event": "mlb-world-series-champion-2026"
+  },
+  {
+   "id": 132,
+   "name": "Will the Fed increase interest rates by 25 bps after the October 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-october-20260617190323537"
+  },
+  {
+   "id": 135,
+   "name": "Will François Hollande win the 2027 French presidential election?",
+   "sector": "world",
+   "event": "next-french-presidential-election"
+  },
+  {
+   "id": 138,
+   "name": "Russia x Ukraine ceasefire agreement by December 31, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-ceasefire-agreement-by"
+  },
+  {
+   "id": 139,
+   "name": "Will the Denver Broncos win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 140,
+   "name": "Will the ECB announce no change at the October 2026 meeting?",
+   "sector": "econ",
+   "event": "ecb-interest-rates-october-2026-20260723225848778"
+  },
+  {
+   "id": 141,
+   "name": "Will OpenAI’s market cap be $1.5T or greater at market close on IPO day by December 31, 2027?",
+   "sector": "tech",
+   "event": "openai-ipo-closing-market-cap-554"
+  },
+  {
+   "id": 143,
+   "name": "Will Jon Ossoff win the 2028 US Presidential Election?",
+   "sector": "politics",
+   "event": "presidential-election-winner-2028"
+  },
+  {
+   "id": 144,
+   "name": "Will Josh Shapiro win the 2028 Democratic presidential nomination?",
+   "sector": "politics",
+   "event": "democratic-presidential-nominee-2028"
+  },
+  {
+   "id": 145,
+   "name": "Will Trump meet with Kim Jong Un in 2026?",
+   "sector": "politics",
+   "event": "who-will-trump-meet-with-in-2026"
+  },
+  {
+   "id": 148,
+   "name": "Will J.D. Vance win the 2028 Republican presidential nomination?",
+   "sector": "politics",
+   "event": "republican-presidential-nominee-2028"
+  },
+  {
+   "id": 149,
+   "name": "Will no Fed rate cuts happen in 2026?",
+   "sector": "econ",
+   "event": "how-many-fed-rate-cuts-in-2026"
+  },
+  {
+   "id": 150,
+   "name": "Will Bitcoin dip to $65,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 151,
+   "name": "Will Russia and Ukraine hold any diplomatic meeting by October 31, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-any-diplomatic-meeting-byptptpt-20260819"
+  },
+  {
+   "id": 152,
+   "name": "Will Marco Rubio win the 2028 Republican presidential nomination?",
+   "sector": "politics",
+   "event": "republican-presidential-nominee-2028"
+  },
+  {
+   "id": 154,
+   "name": "Mojtaba Khamenei seen in public by December 31?",
+   "sector": "other",
+   "event": "mojtaba-khamenei-public-appearance-by"
+  },
+  {
+   "id": 155,
+   "name": "Israel x Iran ceasefire continues through November 30?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 158,
+   "name": "Will the Democratic Party win the TX-35 House seat?",
+   "sector": "politics",
+   "event": "tx-35-house-election-winner"
+  },
+  {
+   "id": 159,
+   "name": "Will Anthropic have the best AI model at the end of October 2026?",
+   "sector": "tech",
+   "event": "which-company-has-the-best-ai-model-end-of-october"
+  },
+  {
+   "id": 160,
+   "name": "Houthis enter Aden by October 31, 2026?",
+   "sector": "other",
+   "event": "houthis-enter-aden-byptptpt"
+  },
+  {
+   "id": 161,
+   "name": "Will Miami Heat win the 2027 NBA Finals?",
+   "sector": "sports",
+   "event": "nba-2027-champion"
+  },
+  {
+   "id": 163,
+   "name": "Will Avengers: Doomsday be the top grossing movie of 2026?",
+   "sector": "culture",
+   "event": "highest-grossing-movie-in-2026"
+  },
+  {
+   "id": 164,
+   "name": "Will the next Google Gemini Pro model be released by October 31, 2026?",
+   "sector": "tech",
+   "event": "next-google-gemini-pro-model-released-byptptpt"
+  },
+  {
+   "id": 166,
+   "name": "Will the Chicago White Sox win the 2026 World Series?",
+   "sector": "sports",
+   "event": "mlb-world-series-champion-2026"
+  },
+  {
+   "id": 167,
+   "name": "Will Trump and Putin meet next in China?",
+   "sector": "world",
+   "event": "where-will-trump-and-putin-meet-next-678"
+  },
+  {
+   "id": 168,
+   "name": "Will the Cleveland Guardians win the 2026 World Series?",
+   "sector": "sports",
+   "event": "mlb-world-series-champion-2026"
+  },
+  {
+   "id": 169,
+   "name": "Will AI solve 0 more Millennium Prize Problems in 2026?",
+   "sector": "tech",
+   "event": "how-many-more-millennium-prize-problems-will-ai-solve-in-2026"
+  },
+  {
+   "id": 170,
+   "name": "Will Barcelona win the 2026-27 LALIGA Championship?",
+   "sector": "sports",
+   "event": "laliga-2027-champion-20260701200737375"
+  },
+  {
+   "id": 173,
+   "name": "Will Gavin Newsom win the 2028 US Presidential Election?",
+   "sector": "politics",
+   "event": "presidential-election-winner-2028"
+  },
+  {
+   "id": 175,
+   "name": "Will Bitcoin reach $110,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 176,
+   "name": "Will the 5-year Treasury yield hit 5.10% before 2027?",
+   "sector": "econ",
+   "event": "how-high-will-5-year-treasury-yield-go-before-2027"
+  },
+  {
+   "id": 178,
+   "name": "Will the Democrats win the Kansas Senate race in 2026?",
+   "sector": "politics",
+   "event": "kansas-senate-election-winner"
+  },
+  {
+   "id": 181,
+   "name": "Will OpenAI announce another Millennium Prize solution by December 31, 2026?",
+   "sector": "tech",
+   "event": "openai-announces-another-millennium-prize-solution-by"
+  },
+  {
+   "id": 183,
+   "name": "Will Iliana Iotova win the next Bulgarian presidential election?",
+   "sector": "politics",
+   "event": "bulgaria-presidential-election"
+  },
+  {
+   "id": 184,
+   "name": "Will Steve Hilton win the California Governor Election in 2026?",
+   "sector": "politics",
+   "event": "california-governor-election-2026"
+  },
+  {
+   "id": 186,
+   "name": "Will the Kansas City Chiefs win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 187,
+   "name": "Will the Buffalo Bills win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 188,
+   "name": "Will Bitcoin dip to $60,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 189,
+   "name": "Will the Fed Hike–Pause–Pause in the next three decisions (Sep–Oct–Dec)?",
+   "sector": "econ",
+   "event": "fed-decisions-sepdec"
+  },
+  {
+   "id": 190,
+   "name": "Miguel Díaz-Canel out as leader of Cuba by December 31?",
+   "sector": "other",
+   "event": "miguel-daz-canel-out-as-leader-of-cuba-by-june-30"
+  },
+  {
+   "id": 191,
+   "name": "Will Lionel Messi finish in the top 3 of the 2026 Ballon d'Or?",
+   "sector": "other",
+   "event": "ballon-dor-top-3-finish-2026"
+  },
+  {
+   "id": 192,
+   "name": "Will the Los Angeles Rams win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 193,
+   "name": "Will AI solve 1 more Millennium Prize Problem in 2026?",
+   "sector": "tech",
+   "event": "how-many-more-millennium-prize-problems-will-ai-solve-in-2026"
+  },
+  {
+   "id": 197,
+   "name": "Will Avengers: Doomsday have the best domestic opening weekend in 2026?",
+   "sector": "culture",
+   "event": "which-movie-has-biggest-opening-weekend-in-2026"
+  },
+  {
+   "id": 198,
+   "name": "Will none of these coins hit a $1B FDV?",
+   "sector": "tech",
+   "event": "first-to-hit-1b-fdv-ansem-cashcat-ai-or-net-20260902214135"
+  },
+  {
+   "id": 199,
+   "name": "Russia-Ukraine peace talks by November 30, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-peace-talks-byptptpt-20260609012540716"
+  },
+  {
+   "id": 200,
+   "name": "Will Oklahoma City Thunder win the 2027 NBA Finals?",
+   "sector": "sports",
+   "event": "nba-2027-champion"
+  },
+  {
+   "id": 201,
+   "name": "Will the Cincinnati Bengals win the 2027 NFL league championship?",
+   "sector": "sports",
+   "event": "pro-football-2027-champion-20260729185915366"
+  },
+  {
+   "id": 204,
+   "name": "Will Anthropic IPO by November 15, 2026?",
+   "sector": "tech",
+   "event": "anthropic-ipo-by"
+  },
+  {
+   "id": 205,
+   "name": "Will Xavier Becerra win the California Governor Election in 2026?",
+   "sector": "politics",
+   "event": "california-governor-election-2026"
+  },
+  {
+   "id": 207,
+   "name": "Russia-Ukraine peace talks by December 31, 2026?",
+   "sector": "world",
+   "event": "russia-x-ukraine-peace-talks-byptptpt-20260609012540716"
+  },
+  {
+   "id": 209,
+   "name": "Will there be no change in Fed interest rates after the January 2027 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-january-20260729233815502"
+  },
+  {
+   "id": 210,
+   "name": "Will the Washington Capitals be named the 2026-27 NHL Stanley Cup Champion?",
+   "sector": "sports",
+   "event": "nhl-2027-champion-20260612185656162"
+  },
+  {
+   "id": 211,
+   "name": "Will Google have the best AI model at the end of December 2026?",
+   "sector": "tech",
+   "event": "which-company-has-best-ai-model-end-of-2026"
+  },
+  {
+   "id": 212,
+   "name": "Will New York Knicks win the 2027 NBA Finals?",
+   "sector": "sports",
+   "event": "nba-2027-champion"
+  },
+  {
+   "id": 213,
+   "name": "Predict.fun FDV above $500M one day after launch?",
+   "sector": "other",
+   "event": "predictfun-fdv-above-one-day-after-launch"
+  },
+  {
+   "id": 214,
+   "name": "Will the Milwaukee Brewers win the 2026 World Series?",
+   "sector": "sports",
+   "event": "mlb-world-series-champion-2026"
+  },
+  {
+   "id": 215,
+   "name": "Kharg Island no longer under Iranian control by December 31?",
+   "sector": "world",
+   "event": "kharg-island-no-longer-under-iranian-control-by-march-31"
+  },
+  {
+   "id": 216,
+   "name": "Will the Democrats win the Texas governor race in 2026?",
+   "sector": "politics",
+   "event": "texas-governor-winner-2026"
+  },
+  {
+   "id": 217,
+   "name": "Will the Republicans win the Texas governor race in 2026?",
+   "sector": "politics",
+   "event": "texas-governor-winner-2026"
+  },
+  {
+   "id": 218,
+   "name": "Will the Republicans win the Maine Senate race in 2026?",
+   "sector": "politics",
+   "event": "maine-senate-election-winner"
+  },
+  {
+   "id": 219,
+   "name": "Will Apple be the largest company in the world by market cap on December 31?",
+   "sector": "tech",
+   "event": "largest-company-end-of-december-2026"
+  },
+  {
+   "id": 220,
+   "name": "Will Extended launch a token by December 31 2026?",
+   "sector": "crypto",
+   "event": "will-extended-launch-a-token-by"
+  },
+  {
+   "id": 221,
+   "name": "Next Astra Model (6.1+) released by October 31, 2026?",
+   "sector": "tech",
+   "event": "gpt-astra-6pt1-released-byptptpt"
+  },
+  {
+   "id": 223,
+   "name": "Israel withdraws from Lebanon by December 31, 2026?",
+   "sector": "world",
+   "event": "israel-withdraws-from-lebanon-by"
+  },
+  {
+   "id": 225,
+   "name": "Will Monaco win the 2026-27 Ligue 1 Championship?",
+   "sector": "sports",
+   "event": "ligue-1-2027-champion-20260701201053335"
+  },
+  {
+   "id": 226,
+   "name": "Will Como win the 2026-27 Serie A Championship?",
+   "sector": "sports",
+   "event": "serie-a-2027-champion-20260701200118390"
+  },
+  {
+   "id": 228,
+   "name": "Will the Republicans win the Ohio Senate race in 2026?",
+   "sector": "politics",
+   "event": "ohio-senate-election-winner"
+  },
+  {
+   "id": 230,
+   "name": "Will Elon Musk post 1000+ tweets in October 2026?",
+   "sector": "other",
+   "event": "elon-musk-of-tweets-october-2026"
+  },
+  {
+   "id": 231,
+   "name": "Will Bitcoin reach $90,000 by December 31, 2026?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-before-2027"
+  },
+  {
+   "id": 232,
+   "name": "Will Mary Peltola win the Alaska Senate race in 2026?",
+   "sector": "politics",
+   "event": "alaska-senate-election-winner"
+  },
+  {
+   "id": 234,
+   "name": "Iran leadership change by June 30, 2027?",
+   "sector": "world",
+   "event": "iran-leadership-change-by"
+  },
+  {
+   "id": 237,
+   "name": "Iran full airspace closure by December 31?",
+   "sector": "world",
+   "event": "iran-full-airspace-closure-byptptpt-20260625195253028"
+  },
+  {
+   "id": 238,
+   "name": "Will the Democrats win the Wisconsin governor race in 2026?",
+   "sector": "politics",
+   "event": "wisconsin-governor-winner-2026"
+  },
+  {
+   "id": 239,
+   "name": "Will Mark Sutcliffe win the 2026 Ottawa mayoral election?",
+   "sector": "politics",
+   "event": "ottawa-mayoral-election-winner"
+  },
+  {
+   "id": 240,
+   "name": "Will Argentina win the 2026 FIFA World Cup?",
+   "sector": "sports",
+   "event": "world-cup-winner"
+  },
+  {
+   "id": 241,
+   "name": "Will Spain win the 2026 FIFA World Cup?",
+   "sector": "sports",
+   "event": "world-cup-winner"
+  },
+  {
+   "id": 242,
+   "name": "Will France win the 2026 FIFA World Cup?",
+   "sector": "world",
+   "event": "world-cup-winner"
+  },
+  {
+   "id": 243,
+   "name": "Will England win the 2026 FIFA World Cup?",
+   "sector": "sports",
+   "event": "world-cup-winner"
+  },
+  {
+   "id": 244,
+   "name": "Will there be no change in Fed interest rates after the September 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-september-762"
+  },
+  {
+   "id": 245,
+   "name": "Will the Fed decrease interest rates by 25 bps after the September 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-september-762"
+  },
+  {
+   "id": 246,
+   "name": "Will the Fed increase interest rates by 25 bps after the September 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-september-762"
+  },
+  {
+   "id": 247,
+   "name": "Will there be no change in Fed interest rates after the July 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-july-181"
+  },
+  {
+   "id": 248,
+   "name": "Will the Fed increase interest rates by 50+ bps after the September 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-september-762"
+  },
+  {
+   "id": 249,
+   "name": "Will the Fed decrease interest rates by 25 bps after the July 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-july-181"
+  },
+  {
+   "id": 250,
+   "name": "Will the Fed increase interest rates by 50+ bps after the July 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-july-181"
+  },
+  {
+   "id": 252,
+   "name": "Will the Fed increase interest rates by 25 bps after the July 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-july-181"
+  },
+  {
+   "id": 253,
+   "name": "Will United Russia (ER) gain the most seats in the next Russian parliamentary election?",
+   "sector": "world",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  },
+  {
+   "id": 254,
+   "name": "Strait of Hormuz traffic returns to normal by July 31?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-july-31"
+  },
+  {
+   "id": 255,
+   "name": "Will the Fed decrease interest rates by 50+ bps after the July 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-july-181"
+  },
+  {
+   "id": 256,
+   "name": "Will Spain win on 2026-07-19?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19"
+  },
+  {
+   "id": 257,
+   "name": "Will the Fed decrease interest rates by 50+ bps after the September 2026 meeting?",
+   "sector": "econ",
+   "event": "fed-decision-in-september-762"
+  },
+  {
+   "id": 258,
+   "name": "Strait of Hormuz traffic returns to normal by August 31?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320"
+  },
+  {
+   "id": 259,
+   "name": "Will Argentina win on 2026-07-19?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19"
+  },
+  {
+   "id": 260,
+   "name": "Will Renan Santos win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 261,
+   "name": "Exact Score: Spain 2 - 3 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 262,
+   "name": "Will Tarcisio de Freitas win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 264,
+   "name": "Will Volodymyr Zelenskyy be the next leader out before 2027?",
+   "sector": "world",
+   "event": "next-leader-out-of-power-before-2027-no-orban"
+  },
+  {
+   "id": 265,
+   "name": "Strait of Hormuz traffic returns to normal by September 30?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440"
+  },
+  {
+   "id": 266,
+   "name": "Will Arvid Lindblad be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 267,
+   "name": "Will Jesus Christ return before GTA VI?",
+   "sector": "culture",
+   "event": "what-will-happen-before-gta-vi"
+  },
+  {
+   "id": 268,
+   "name": "Will Arsenal FC win on 2026-08-31?",
+   "sector": "other",
+   "event": "epl-ast-ars-2026-08-31"
+  },
+  {
+   "id": 269,
+   "name": "Will Lionel Messi be the top goalscorer at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-boot-winner"
+  },
+  {
+   "id": 270,
+   "name": "Will Eduardo Bolsonaro win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 271,
+   "name": "Will Michelle Bolsonaro win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 273,
+   "name": "Will Esteban Ocon be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 274,
+   "name": "Will Isack Hadjar be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 275,
+   "name": "Will Geraldo Alckmin win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 276,
+   "name": "Will Mahmoud Abbas be the next leader out before 2027?",
+   "sector": "other",
+   "event": "next-leader-out-of-power-before-2027-no-orban"
+  },
+  {
+   "id": 277,
+   "name": "US x Iran Effective Ceasefire by July 31?",
+   "sector": "world",
+   "event": "us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042"
+  },
+  {
+   "id": 278,
+   "name": "Exact Score: Spain 3 - 3 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 279,
+   "name": "Will Nico Hülkenberg be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 280,
+   "name": "Will Kylian Mbappe be the top goalscorer at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-boot-winner"
+  },
+  {
+   "id": 283,
+   "name": "Will Ronaldo Caiado win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 284,
+   "name": "Will Fernando Haddad win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 285,
+   "name": "Will Romeu Zema win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 286,
+   "name": "Will Jair Bolsonaro win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 287,
+   "name": "Strait of Hormuz traffic returns to normal by August 15?",
+   "sector": "world",
+   "event": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320"
+  },
+  {
+   "id": 290,
+   "name": "Dota 2: Nigma Galaxy vs Team Falcons (BO3) - The International Playoffs",
+   "sector": "sports",
+   "event": "dota2-ngx-flc-2026-08-20"
+  },
+  {
+   "id": 292,
+   "name": "Will Chelsea FC win on 2026-09-18?",
+   "sector": "other",
+   "event": "epl-bre-che-2026-09-18"
+  },
+  {
+   "id": 293,
+   "name": "Will Oscar Piastri be the 2026 F1 Drivers' Champion?",
+   "sector": "sports",
+   "event": "2026-f1-drivers-champion"
+  },
+  {
+   "id": 295,
+   "name": "Kharg Island no longer under Iranian control by July 31?",
+   "sector": "world",
+   "event": "kharg-island-no-longer-under-iranian-control-by-march-31"
+  },
+  {
+   "id": 296,
+   "name": "Will Chelsea FC win on 2026-08-30?",
+   "sector": "other",
+   "event": "epl-che-bri-2026-08-30"
+  },
+  {
+   "id": 297,
+   "name": "Will New People (NL) gain the most seats in the next Russian parliamentary election?",
+   "sector": "world",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  },
+  {
+   "id": 298,
+   "name": "Kharg Island no longer under Iranian control by August 31?",
+   "sector": "world",
+   "event": "kharg-island-no-longer-under-iranian-control-by-march-31"
+  },
+  {
+   "id": 299,
+   "name": "Will Mikel Oyarzabal be the top goalscorer at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-boot-winner"
+  },
+  {
+   "id": 300,
+   "name": "Will Camilo Santana win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 301,
+   "name": "US announces end of Iranian blockade by September 30, 2026?",
+   "sector": "world",
+   "event": "us-announces-end-of-iranian-blockade-byptptpt-20260713152715080"
+  },
+  {
+   "id": 302,
+   "name": "Will the Liberal Democratic Party of Russia (LDPR) gain the most seats in the next Russian parliamentary election?",
+   "sector": "world",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  },
+  {
+   "id": 303,
+   "name": "Will LeBron James play for the Golden State Warriors in 2026-27?",
+   "sector": "econ",
+   "event": "nba-lebron-james-next-team"
+  },
+  {
+   "id": 304,
+   "name": "Will LeBron James play for the Miami Heat in 2026-27?",
+   "sector": "sports",
+   "event": "nba-lebron-james-next-team"
+  },
+  {
+   "id": 305,
+   "name": "Will Augusto Cury win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 306,
+   "name": "Will Arsenal FC win on 2026-09-12?",
+   "sector": "other",
+   "event": "epl-sun-ars-2026-09-12"
+  },
+  {
+   "id": 308,
+   "name": "Will Real Madrid CF win on 2026-08-26?",
+   "sector": "other",
+   "event": "lal-rea-rso-2026-08-26"
+  },
+  {
+   "id": 310,
+   "name": "Will Brighton \u0026 Hove Albion FC win on 2026-09-13?",
+   "sector": "other",
+   "event": "epl-cov-bri-2026-09-13"
+  },
+  {
+   "id": 311,
+   "name": "Exact Score: Spain 3 - 2 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 312,
+   "name": "Exact Score: Spain 1 - 0 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 313,
+   "name": "US announces end of Iranian blockade by August 31, 2026?",
+   "sector": "world",
+   "event": "us-announces-end-of-iranian-blockade-byptptpt-20260713152715080"
+  },
+  {
+   "id": 314,
+   "name": "Will Vladimir Putin be the next leader out before 2027?",
+   "sector": "world",
+   "event": "next-leader-out-of-power-before-2027-no-orban"
+  },
+  {
+   "id": 315,
+   "name": "Will bitcoin hit $1m before GTA VI?",
+   "sector": "crypto",
+   "event": "what-will-happen-before-gta-vi"
+  },
+  {
+   "id": 316,
+   "name": "Will Sébastien Lecornu be the next leader out before 2027?",
+   "sector": "other",
+   "event": "next-leader-out-of-power-before-2027-no-orban"
+  },
+  {
+   "id": 317,
+   "name": "US-Iran Final Nuclear Deal by August 31, 2026?",
+   "sector": "world",
+   "event": "us-iran-final-nuclear-deal-by-20260621201254412"
+  },
+  {
+   "id": 320,
+   "name": "Dota 2: TEAM VISION vs BoomBoys (BO3) - The International Playoffs",
+   "sector": "sports",
+   "event": "dota2-vsn2-boombo-2026-08-20"
+  },
+  {
+   "id": 321,
+   "name": "Will Arsenal FC win on 2026-09-09?",
+   "sector": "other",
+   "event": "ucl-nap-ars-2026-09-09"
+  },
+  {
+   "id": 322,
+   "name": "Will Brentford FC win on 2026-08-22?",
+   "sector": "other",
+   "event": "epl-bre-tot-2026-08-22"
+  },
+  {
+   "id": 323,
+   "name": "Spread: Spain (-1.5)",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-more-markets"
+  },
+  {
+   "id": 324,
+   "name": "US x Iran Effective Ceasefire by July 24?",
+   "sector": "world",
+   "event": "us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042"
+  },
+  {
+   "id": 325,
+   "name": "Bab el-Mandeb Strait effectively closed by September 30?",
+   "sector": "world",
+   "event": "bab-el-mandeb-strait-effectively-closed-by"
+  },
+  {
+   "id": 326,
+   "name": "Will Harry Kane be the top goalscorer at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-boot-winner"
+  },
+  {
+   "id": 327,
+   "name": "Will Benjamin Netanyahu be the next leader out before 2027?",
+   "sector": "world",
+   "event": "next-leader-out-of-power-before-2027-no-orban"
+  },
+  {
+   "id": 328,
+   "name": "Will Manchester City FC win on 2026-08-28?",
+   "sector": "other",
+   "event": "epl-cry-mac-2026-08-28"
+  },
+  {
+   "id": 330,
+   "name": "Will LeBron James play for the Cleveland Cavaliers in 2026-27?",
+   "sector": "sports",
+   "event": "nba-lebron-james-next-team"
+  },
+  {
+   "id": 332,
+   "name": "Will Chelsea FC win on 2026-08-24?",
+   "sector": "other",
+   "event": "epl-ful-che-2026-08-24"
+  },
+  {
+   "id": 333,
+   "name": "Will Tereza Cristina win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 334,
+   "name": "LoL: Anyone's Legend vs Invictus Gaming (BO5) - LPL Playoffs",
+   "sector": "sports",
+   "event": "lol-al-ig1-2026-09-12"
+  },
+  {
+   "id": 336,
+   "name": "Will A Just Russia – For Truth (SRZP) gain the most seats in the next Russian parliamentary election?",
+   "sector": "world",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  },
+  {
+   "id": 337,
+   "name": "Will Pablo Marçal win the 2026 Brazilian presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election"
+  },
+  {
+   "id": 338,
+   "name": "US announces halt in Iran offensive operations by July 31?",
+   "sector": "world",
+   "event": "us-announces-halt-in-iran-offensive-operations-byptptpt-20260718015003096"
+  },
+  {
+   "id": 339,
+   "name": "Exact Score: Spain 2 - 2 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 340,
+   "name": "Will FC Barcelona win on 2026-08-27?",
+   "sector": "other",
+   "event": "lal-bar-bil-2026-08-27"
+  },
+  {
+   "id": 343,
+   "name": "Will the Communist Party of the Russian Federation (KPRF) gain the most seats in the next Russian parliamentary election?",
+   "sector": "econ",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  },
+  {
+   "id": 344,
+   "name": "Will LeBron James play for the Philadelphia 76ers in 2026-27?",
+   "sector": "sports",
+   "event": "nba-lebron-james-next-team"
+  },
+  {
+   "id": 345,
+   "name": "Will Williams be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 347,
+   "name": "Will Cadillac be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 349,
+   "name": "Will Count Binface win the Clacton by-election?",
+   "sector": "politics",
+   "event": "clacton-by-election-winner-20260707143521303"
+  },
+  {
+   "id": 350,
+   "name": "Will Real Madrid CF win on 2026-09-15?",
+   "sector": "other",
+   "event": "lal-elc-rea-2026-09-15"
+  },
+  {
+   "id": 351,
+   "name": "Exact Score: Spain 2 - 1 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 353,
+   "name": "Will NVIDIA be the largest company in the world by market cap on July 31?",
+   "sector": "tech",
+   "event": "largest-company-end-of-july-20260624192302727"
+  },
+  {
+   "id": 354,
+   "name": "Will Jude Bellingham be the top goalscorer at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-boot-winner"
+  },
+  {
+   "id": 356,
+   "name": "Israel closes its airspace by September 30?",
+   "sector": "world",
+   "event": "israel-closes-its-airspace-by"
+  },
+  {
+   "id": 357,
+   "name": "Will Manchester City FC win on 2026-09-20?",
+   "sector": "other",
+   "event": "epl-mac-sun-2026-09-20"
+  },
+  {
+   "id": 359,
+   "name": "US Open ATP: Karen Khachanov vs Learner Tien",
+   "sector": "other",
+   "event": "atp-khachan-tien-2026-09-07"
+  },
+  {
+   "id": 360,
+   "name": "Exact Score: Spain 1 - 3 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 362,
+   "name": "Will Lula win the most votes in the first round of the 2026 Brazil presidential election?",
+   "sector": "politics",
+   "event": "brazil-presidential-election-first-round-winner"
+  },
+  {
+   "id": 363,
+   "name": "Israel x Iran ceasefire continues through July 31?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 365,
+   "name": "US Open ATP: Arthur Gea vs Botic van de Zandschulp",
+   "sector": "other",
+   "event": "atp-gea-zandsch-2026-09-07"
+  },
+  {
+   "id": 367,
+   "name": "Will Alpine be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 368,
+   "name": "Israel x Iran ceasefire continues through September 30?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 369,
+   "name": "Israel x Iran ceasefire continues through August 31?",
+   "sector": "world",
+   "event": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "id": 370,
+   "name": "Will Haas be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 371,
+   "name": "Exact Score: Spain 1 - 2 Argentina?",
+   "sector": "other",
+   "event": "fifwc-esp-arg-2026-07-19-exact-score"
+  },
+  {
+   "id": 372,
+   "name": "Will Aston Martin be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 373,
+   "name": "US announces end of Iranian blockade by August 15, 2026?",
+   "sector": "world",
+   "event": "us-announces-end-of-iranian-blockade-byptptpt-20260713152715080"
+  },
+  {
+   "id": 374,
+   "name": "Will Iran announce withdrawal from MOU negotiations by July 31?",
+   "sector": "world",
+   "event": "iran-announces-withdrawal-from-mou-negotiations-byptptpt-20260622191732319"
+  },
+  {
+   "id": 375,
+   "name": "Israel closes its airspace by July 31?",
+   "sector": "world",
+   "event": "israel-closes-its-airspace-by"
+  },
+  {
+   "id": 376,
+   "name": "Will Audi be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 377,
+   "name": "Will Racing Bulls be the 2026 F1 Constructors' Champion?",
+   "sector": "sports",
+   "event": "f1-constructors-champion"
+  },
+  {
+   "id": 378,
+   "name": "Will Rodri win the Golden Ball at the 2026 FIFA World Cup?",
+   "sector": "econ",
+   "event": "world-cup-golden-ball-winner-20260603194031758"
+  },
+  {
+   "id": 380,
+   "name": "Will Bitcoin reach $67,500 in July?",
+   "sector": "crypto",
+   "event": "what-price-will-bitcoin-hit-in-july-2026"
+  },
+  {
+   "id": 381,
+   "name": "Will Rodina gain the most seats in the next Russian parliamentary election?",
+   "sector": "world",
+   "event": "which-party-will-gain-most-seats-in-russian-parliamentary-election"
+  }
+ ],
+ "links": [
+  {
+   "From": 155,
+   "To": 356,
+   "branch": 0.48,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 209,
+   "To": 246,
+   "branch": 0.44,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 189,
+   "To": 244,
+   "branch": 0.421,
+   "lag": 1190,
+   "sameEvent": false
+  },
+  {
+   "From": 50,
+   "To": 90,
+   "branch": 0.396,
+   "lag": 1022,
+   "sameEvent": false
+  },
+  {
+   "From": 193,
+   "To": 169,
+   "branch": 0.356,
+   "lag": 1129,
+   "sameEvent": true
+  },
+  {
+   "From": 169,
+   "To": 193,
+   "branch": 0.351,
+   "lag": 890,
+   "sameEvent": true
+  },
+  {
+   "From": 155,
+   "To": 368,
+   "branch": 0.338,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 351,
+   "branch": 0.332,
+   "lag": 116,
+   "sameEvent": true
+  },
+  {
+   "From": 226,
+   "To": 84,
+   "branch": 0.323,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 267,
+   "To": 315,
+   "branch": 0.319,
+   "lag": 1137,
+   "sameEvent": true
+  },
+  {
+   "From": 184,
+   "To": 205,
+   "branch": 0.315,
+   "lag": 1155,
+   "sameEvent": true
+  },
+  {
+   "From": 343,
+   "To": 302,
+   "branch": 0.308,
+   "lag": 874,
+   "sameEvent": true
+  },
+  {
+   "From": 314,
+   "To": 327,
+   "branch": 0.302,
+   "lag": 885,
+   "sameEvent": true
+  },
+  {
+   "From": 57,
+   "To": 36,
+   "branch": 0.298,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 357,
+   "To": 292,
+   "branch": 0.28,
+   "lag": 826,
+   "sameEvent": false
+  },
+  {
+   "From": 225,
+   "To": 38,
+   "branch": 0.278,
+   "lag": 230,
+   "sameEvent": true
+  },
+  {
+   "From": 169,
+   "To": 181,
+   "branch": 0.271,
+   "lag": 1160,
+   "sameEvent": false
+  },
+  {
+   "From": 270,
+   "To": 262,
+   "branch": 0.27,
+   "lag": 1058,
+   "sameEvent": true
+  },
+  {
+   "From": 375,
+   "To": 254,
+   "branch": 0.263,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 376,
+   "To": 345,
+   "branch": 0.253,
+   "lag": 1181,
+   "sameEvent": true
+  },
+  {
+   "From": 290,
+   "To": 320,
+   "branch": 0.247,
+   "lag": 1142,
+   "sameEvent": false
+  },
+  {
+   "From": 314,
+   "To": 264,
+   "branch": 0.242,
+   "lag": 392,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 259,
+   "branch": 0.236,
+   "lag": 1071,
+   "sameEvent": false
+  },
+  {
+   "From": 315,
+   "To": 267,
+   "branch": 0.234,
+   "lag": 1113,
+   "sameEvent": true
+  },
+  {
+   "From": 120,
+   "To": 159,
+   "branch": 0.234,
+   "lag": 410,
+   "sameEvent": true
+  },
+  {
+   "From": 226,
+   "To": 22,
+   "branch": 0.23,
+   "lag": 1182,
+   "sameEvent": false
+  },
+  {
+   "From": 210,
+   "To": 226,
+   "branch": 0.226,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 57,
+   "To": 25,
+   "branch": 0.219,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 199,
+   "To": 101,
+   "branch": 0.217,
+   "lag": 961,
+   "sameEvent": true
+  },
+  {
+   "From": 150,
+   "To": 112,
+   "branch": 0.216,
+   "lag": 1023,
+   "sameEvent": true
+  },
+  {
+   "From": 36,
+   "To": 57,
+   "branch": 0.216,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 345,
+   "To": 376,
+   "branch": 0.212,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 191,
+   "To": 163,
+   "branch": 0.206,
+   "lag": 1193,
+   "sameEvent": false
+  },
+  {
+   "From": 10,
+   "To": 18,
+   "branch": 0.202,
+   "lag": 627,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 333,
+   "branch": 0.201,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 376,
+   "To": 377,
+   "branch": 0.2,
+   "lag": 1186,
+   "sameEvent": true
+  },
+  {
+   "From": 369,
+   "To": 258,
+   "branch": 0.2,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 217,
+   "To": 216,
+   "branch": 0.194,
+   "lag": 91,
+   "sameEvent": true
+  },
+  {
+   "From": 210,
+   "To": 84,
+   "branch": 0.193,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 359,
+   "To": 365,
+   "branch": 0.192,
+   "lag": 1035,
+   "sameEvent": false
+  },
+  {
+   "From": 295,
+   "To": 298,
+   "branch": 0.191,
+   "lag": 1023,
+   "sameEvent": true
+  },
+  {
+   "From": 211,
+   "To": 127,
+   "branch": 0.191,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 160,
+   "To": 29,
+   "branch": 0.191,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 249,
+   "To": 250,
+   "branch": 0.188,
+   "lag": 74,
+   "sameEvent": true
+  },
+  {
+   "From": 216,
+   "To": 217,
+   "branch": 0.186,
+   "lag": 439,
+   "sameEvent": true
+  },
+  {
+   "From": 205,
+   "To": 184,
+   "branch": 0.185,
+   "lag": 1002,
+   "sameEvent": true
+  },
+  {
+   "From": 204,
+   "To": 98,
+   "branch": 0.184,
+   "lag": 1124,
+   "sameEvent": true
+  },
+  {
+   "From": 39,
+   "To": 17,
+   "branch": 0.18,
+   "lag": 955,
+   "sameEvent": true
+  },
+  {
+   "From": 175,
+   "To": 53,
+   "branch": 0.174,
+   "lag": 750,
+   "sameEvent": true
+  },
+  {
+   "From": 82,
+   "To": 78,
+   "branch": 0.174,
+   "lag": 556,
+   "sameEvent": true
+  },
+  {
+   "From": 256,
+   "To": 259,
+   "branch": 0.172,
+   "lag": 659,
+   "sameEvent": true
+  },
+  {
+   "From": 362,
+   "To": 305,
+   "branch": 0.171,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 330,
+   "To": 303,
+   "branch": 0.169,
+   "lag": 880,
+   "sameEvent": true
+  },
+  {
+   "From": 101,
+   "To": 199,
+   "branch": 0.168,
+   "lag": 1126,
+   "sameEvent": true
+  },
+  {
+   "From": 5,
+   "To": 21,
+   "branch": 0.168,
+   "lag": 853,
+   "sameEvent": true
+  },
+  {
+   "From": 302,
+   "To": 343,
+   "branch": 0.163,
+   "lag": 495,
+   "sameEvent": true
+  },
+  {
+   "From": 36,
+   "To": 25,
+   "branch": 0.163,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 246,
+   "To": 244,
+   "branch": 0.163,
+   "lag": 614,
+   "sameEvent": true
+  },
+  {
+   "From": 11,
+   "To": 368,
+   "branch": 0.163,
+   "lag": 900,
+   "sameEvent": true
+  },
+  {
+   "From": 187,
+   "To": 87,
+   "branch": 0.162,
+   "lag": 42,
+   "sameEvent": true
+  },
+  {
+   "From": 212,
+   "To": 161,
+   "branch": 0.158,
+   "lag": 889,
+   "sameEvent": true
+  },
+  {
+   "From": 27,
+   "To": 2,
+   "branch": 0.158,
+   "lag": 1114,
+   "sameEvent": false
+  },
+  {
+   "From": 112,
+   "To": 150,
+   "branch": 0.157,
+   "lag": 614,
+   "sameEvent": true
+  },
+  {
+   "From": 371,
+   "To": 261,
+   "branch": 0.155,
+   "lag": 1184,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 286,
+   "branch": 0.154,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 285,
+   "branch": 0.154,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 79,
+   "To": 201,
+   "branch": 0.153,
+   "lag": 60,
+   "sameEvent": true
+  },
+  {
+   "From": 140,
+   "To": 244,
+   "branch": 0.153,
+   "lag": 1142,
+   "sameEvent": false
+  },
+  {
+   "From": 49,
+   "To": 96,
+   "branch": 0.152,
+   "lag": 67,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 271,
+   "branch": 0.152,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 64,
+   "To": 31,
+   "branch": 0.152,
+   "lag": 655,
+   "sameEvent": true
+  },
+  {
+   "From": 296,
+   "To": 268,
+   "branch": 0.151,
+   "lag": 449,
+   "sameEvent": false
+  },
+  {
+   "From": 5,
+   "To": 301,
+   "branch": 0.151,
+   "lag": 875,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 275,
+   "branch": 0.15,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 347,
+   "To": 370,
+   "branch": 0.15,
+   "lag": 1111,
+   "sameEvent": true
+  },
+  {
+   "From": 181,
+   "To": 21,
+   "branch": 0.149,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 131,
+   "To": 214,
+   "branch": 0.148,
+   "lag": 898,
+   "sameEvent": true
+  },
+  {
+   "From": 79,
+   "To": 90,
+   "branch": 0.147,
+   "lag": 21,
+   "sameEvent": true
+  },
+  {
+   "From": 34,
+   "To": 45,
+   "branch": 0.146,
+   "lag": 312,
+   "sameEvent": true
+  },
+  {
+   "From": 151,
+   "To": 10,
+   "branch": 0.146,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 66,
+   "To": 22,
+   "branch": 0.146,
+   "lag": 104,
+   "sameEvent": true
+  },
+  {
+   "From": 50,
+   "To": 187,
+   "branch": 0.143,
+   "lag": 1013,
+   "sameEvent": false
+  },
+  {
+   "From": 292,
+   "To": 357,
+   "branch": 0.142,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 212,
+   "To": 83,
+   "branch": 0.141,
+   "lag": 665,
+   "sameEvent": true
+  },
+  {
+   "From": 38,
+   "To": 225,
+   "branch": 0.14,
+   "lag": 34,
+   "sameEvent": true
+  },
+  {
+   "From": 204,
+   "To": 350,
+   "branch": 0.14,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 181,
+   "To": 169,
+   "branch": 0.14,
+   "lag": 1075,
+   "sameEvent": false
+  },
+  {
+   "From": 312,
+   "To": 261,
+   "branch": 0.137,
+   "lag": 510,
+   "sameEvent": true
+  },
+  {
+   "From": 317,
+   "To": 258,
+   "branch": 0.135,
+   "lag": 1150,
+   "sameEvent": false
+  },
+  {
+   "From": 297,
+   "To": 253,
+   "branch": 0.135,
+   "lag": 14,
+   "sameEvent": true
+  },
+  {
+   "From": 306,
+   "To": 310,
+   "branch": 0.135,
+   "lag": 1016,
+   "sameEvent": false
+  },
+  {
+   "From": 127,
+   "To": 211,
+   "branch": 0.134,
+   "lag": 219,
+   "sameEvent": true
+  },
+  {
+   "From": 3,
+   "To": 7,
+   "branch": 0.134,
+   "lag": 108,
+   "sameEvent": true
+  },
+  {
+   "From": 201,
+   "To": 79,
+   "branch": 0.132,
+   "lag": 77,
+   "sameEvent": true
+  },
+  {
+   "From": 31,
+   "To": 64,
+   "branch": 0.132,
+   "lag": 350,
+   "sameEvent": true
+  },
+  {
+   "From": 143,
+   "To": 89,
+   "branch": 0.131,
+   "lag": 1080,
+   "sameEvent": true
+  },
+  {
+   "From": 339,
+   "To": 351,
+   "branch": 0.13,
+   "lag": 677,
+   "sameEvent": true
+  },
+  {
+   "From": 322,
+   "To": 332,
+   "branch": 0.129,
+   "lag": 1153,
+   "sameEvent": false
+  },
+  {
+   "From": 101,
+   "To": 10,
+   "branch": 0.129,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 53,
+   "To": 175,
+   "branch": 0.128,
+   "lag": 810,
+   "sameEvent": true
+  },
+  {
+   "From": 175,
+   "To": 109,
+   "branch": 0.128,
+   "lag": 870,
+   "sameEvent": true
+  },
+  {
+   "From": 212,
+   "To": 104,
+   "branch": 0.128,
+   "lag": 682,
+   "sameEvent": true
+  },
+  {
+   "From": 39,
+   "To": 325,
+   "branch": 0.127,
+   "lag": 418,
+   "sameEvent": true
+  },
+  {
+   "From": 93,
+   "To": 78,
+   "branch": 0.127,
+   "lag": 30,
+   "sameEvent": true
+  },
+  {
+   "From": 370,
+   "To": 376,
+   "branch": 0.127,
+   "lag": 1160,
+   "sameEvent": true
+  },
+  {
+   "From": 96,
+   "To": 49,
+   "branch": 0.127,
+   "lag": 25,
+   "sameEvent": true
+  },
+  {
+   "From": 83,
+   "To": 104,
+   "branch": 0.125,
+   "lag": 763,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 283,
+   "branch": 0.125,
+   "lag": 15,
+   "sameEvent": true
+  },
+  {
+   "From": 132,
+   "To": 9,
+   "branch": 0.125,
+   "lag": 14,
+   "sameEvent": true
+  },
+  {
+   "From": 370,
+   "To": 345,
+   "branch": 0.124,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 330,
+   "To": 304,
+   "branch": 0.123,
+   "lag": 564,
+   "sameEvent": true
+  },
+  {
+   "From": 249,
+   "To": 255,
+   "branch": 0.123,
+   "lag": 12,
+   "sameEvent": true
+  },
+  {
+   "From": 286,
+   "To": 283,
+   "branch": 0.123,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 7,
+   "To": 3,
+   "branch": 0.122,
+   "lag": 50,
+   "sameEvent": true
+  },
+  {
+   "From": 106,
+   "To": 19,
+   "branch": 0.121,
+   "lag": 700,
+   "sameEvent": true
+  },
+  {
+   "From": 274,
+   "To": 376,
+   "branch": 0.119,
+   "lag": 982,
+   "sameEvent": false
+  },
+  {
+   "From": 161,
+   "To": 104,
+   "branch": 0.119,
+   "lag": 552,
+   "sameEvent": true
+  },
+  {
+   "From": 321,
+   "To": 306,
+   "branch": 0.118,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 82,
+   "To": 93,
+   "branch": 0.117,
+   "lag": 293,
+   "sameEvent": true
+  },
+  {
+   "From": 376,
+   "To": 370,
+   "branch": 0.117,
+   "lag": 1194,
+   "sameEvent": true
+  },
+  {
+   "From": 280,
+   "To": 269,
+   "branch": 0.117,
+   "lag": 186,
+   "sameEvent": true
+  },
+  {
+   "From": 200,
+   "To": 212,
+   "branch": 0.116,
+   "lag": 158,
+   "sameEvent": true
+  },
+  {
+   "From": 345,
+   "To": 370,
+   "branch": 0.115,
+   "lag": 1165,
+   "sameEvent": true
+  },
+  {
+   "From": 93,
+   "To": 84,
+   "branch": 0.115,
+   "lag": 23,
+   "sameEvent": true
+  },
+  {
+   "From": 19,
+   "To": 106,
+   "branch": 0.115,
+   "lag": 398,
+   "sameEvent": true
+  },
+  {
+   "From": 51,
+   "To": 90,
+   "branch": 0.115,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 67,
+   "To": 183,
+   "branch": 0.115,
+   "lag": 461,
+   "sameEvent": true
+  },
+  {
+   "From": 159,
+   "To": 5,
+   "branch": 0.114,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 159,
+   "To": 120,
+   "branch": 0.114,
+   "lag": 352,
+   "sameEvent": true
+  },
+  {
+   "From": 378,
+   "To": 303,
+   "branch": 0.114,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 279,
+   "To": 293,
+   "branch": 0.113,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 118,
+   "To": 97,
+   "branch": 0.113,
+   "lag": 757,
+   "sameEvent": true
+  },
+  {
+   "From": 212,
+   "To": 200,
+   "branch": 0.113,
+   "lag": 676,
+   "sameEvent": true
+  },
+  {
+   "From": 143,
+   "To": 97,
+   "branch": 0.113,
+   "lag": 1199,
+   "sameEvent": false
+  },
+  {
+   "From": 249,
+   "To": 252,
+   "branch": 0.112,
+   "lag": 49,
+   "sameEvent": true
+  },
+  {
+   "From": 347,
+   "To": 376,
+   "branch": 0.111,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 372,
+   "branch": 0.111,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 78,
+   "To": 82,
+   "branch": 0.11,
+   "lag": 224,
+   "sameEvent": true
+  },
+  {
+   "From": 30,
+   "To": 368,
+   "branch": 0.11,
+   "lag": 1099,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 311,
+   "branch": 0.11,
+   "lag": 822,
+   "sameEvent": true
+  },
+  {
+   "From": 11,
+   "To": 30,
+   "branch": 0.109,
+   "lag": 759,
+   "sameEvent": true
+  },
+  {
+   "From": 370,
+   "To": 367,
+   "branch": 0.109,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 377,
+   "To": 372,
+   "branch": 0.109,
+   "lag": 1149,
+   "sameEvent": true
+  },
+  {
+   "From": 160,
+   "To": 101,
+   "branch": 0.109,
+   "lag": 1136,
+   "sameEvent": false
+  },
+  {
+   "From": 131,
+   "To": 166,
+   "branch": 0.109,
+   "lag": 746,
+   "sameEvent": true
+  },
+  {
+   "From": 330,
+   "To": 344,
+   "branch": 0.109,
+   "lag": 657,
+   "sameEvent": true
+  },
+  {
+   "From": 347,
+   "To": 345,
+   "branch": 0.108,
+   "lag": 1139,
+   "sameEvent": true
+  },
+  {
+   "From": 93,
+   "To": 82,
+   "branch": 0.108,
+   "lag": 64,
+   "sameEvent": true
+  },
+  {
+   "From": 241,
+   "To": 240,
+   "branch": 0.108,
+   "lag": 420,
+   "sameEvent": true
+  },
+  {
+   "From": 35,
+   "To": 8,
+   "branch": 0.108,
+   "lag": 297,
+   "sameEvent": true
+  },
+  {
+   "From": 262,
+   "To": 284,
+   "branch": 0.107,
+   "lag": 1110,
+   "sameEvent": true
+  },
+  {
+   "From": 328,
+   "To": 296,
+   "branch": 0.107,
+   "lag": 869,
+   "sameEvent": false
+  },
+  {
+   "From": 244,
+   "To": 246,
+   "branch": 0.107,
+   "lag": 717,
+   "sameEvent": true
+  },
+  {
+   "From": 201,
+   "To": 187,
+   "branch": 0.107,
+   "lag": 174,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 376,
+   "branch": 0.107,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 161,
+   "To": 212,
+   "branch": 0.106,
+   "lag": 662,
+   "sameEvent": true
+  },
+  {
+   "From": 339,
+   "To": 311,
+   "branch": 0.106,
+   "lag": 1169,
+   "sameEvent": true
+  },
+  {
+   "From": 187,
+   "To": 192,
+   "branch": 0.106,
+   "lag": 37,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 284,
+   "branch": 0.106,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 79,
+   "To": 87,
+   "branch": 0.106,
+   "lag": 35,
+   "sameEvent": true
+  },
+  {
+   "From": 51,
+   "To": 79,
+   "branch": 0.105,
+   "lag": 70,
+   "sameEvent": true
+  },
+  {
+   "From": 120,
+   "To": 211,
+   "branch": 0.104,
+   "lag": 755,
+   "sameEvent": false
+  },
+  {
+   "From": 51,
+   "To": 192,
+   "branch": 0.104,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 168,
+   "To": 166,
+   "branch": 0.104,
+   "lag": 723,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 275,
+   "branch": 0.104,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 79,
+   "To": 51,
+   "branch": 0.103,
+   "lag": 53,
+   "sameEvent": true
+  },
+  {
+   "From": 301,
+   "To": 5,
+   "branch": 0.102,
+   "lag": 663,
+   "sameEvent": true
+  },
+  {
+   "From": 87,
+   "To": 187,
+   "branch": 0.102,
+   "lag": 84,
+   "sameEvent": true
+  },
+  {
+   "From": 347,
+   "To": 367,
+   "branch": 0.102,
+   "lag": 1128,
+   "sameEvent": true
+  },
+  {
+   "From": 219,
+   "To": 114,
+   "branch": 0.102,
+   "lag": 406,
+   "sameEvent": true
+  },
+  {
+   "From": 363,
+   "To": 375,
+   "branch": 0.102,
+   "lag": 1138,
+   "sameEvent": false
+  },
+  {
+   "From": 98,
+   "To": 204,
+   "branch": 0.101,
+   "lag": 871,
+   "sameEvent": true
+  },
+  {
+   "From": 51,
+   "To": 201,
+   "branch": 0.1,
+   "lag": 113,
+   "sameEvent": true
+  },
+  {
+   "From": 21,
+   "To": 301,
+   "branch": 0.1,
+   "lag": 991,
+   "sameEvent": true
+  },
+  {
+   "From": 231,
+   "To": 109,
+   "branch": 0.099,
+   "lag": 524,
+   "sameEvent": true
+  },
+  {
+   "From": 354,
+   "To": 240,
+   "branch": 0.099,
+   "lag": 120,
+   "sameEvent": false
+  },
+  {
+   "From": 304,
+   "To": 330,
+   "branch": 0.099,
+   "lag": 521,
+   "sameEvent": true
+  },
+  {
+   "From": 221,
+   "To": 164,
+   "branch": 0.099,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 78,
+   "To": 93,
+   "branch": 0.099,
+   "lag": 207,
+   "sameEvent": true
+  },
+  {
+   "From": 104,
+   "To": 83,
+   "branch": 0.098,
+   "lag": 702,
+   "sameEvent": true
+  },
+  {
+   "From": 104,
+   "To": 161,
+   "branch": 0.097,
+   "lag": 569,
+   "sameEvent": true
+  },
+  {
+   "From": 360,
+   "To": 259,
+   "branch": 0.097,
+   "lag": 1191,
+   "sameEvent": false
+  },
+  {
+   "From": 360,
+   "To": 311,
+   "branch": 0.097,
+   "lag": 1197,
+   "sameEvent": true
+  },
+  {
+   "From": 283,
+   "To": 285,
+   "branch": 0.097,
+   "lag": 18,
+   "sameEvent": true
+  },
+  {
+   "From": 320,
+   "To": 290,
+   "branch": 0.096,
+   "lag": 764,
+   "sameEvent": false
+  },
+  {
+   "From": 24,
+   "To": 173,
+   "branch": 0.096,
+   "lag": 92,
+   "sameEvent": true
+  },
+  {
+   "From": 313,
+   "To": 258,
+   "branch": 0.096,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 150,
+   "To": 188,
+   "branch": 0.096,
+   "lag": 83,
+   "sameEvent": true
+  },
+  {
+   "From": 279,
+   "To": 266,
+   "branch": 0.096,
+   "lag": 1017,
+   "sameEvent": true
+  },
+  {
+   "From": 204,
+   "To": 41,
+   "branch": 0.096,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 256,
+   "To": 261,
+   "branch": 0.095,
+   "lag": 1190,
+   "sameEvent": false
+  },
+  {
+   "From": 193,
+   "To": 181,
+   "branch": 0.095,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 354,
+   "To": 326,
+   "branch": 0.095,
+   "lag": 101,
+   "sameEvent": true
+  },
+  {
+   "From": 211,
+   "To": 124,
+   "branch": 0.095,
+   "lag": 220,
+   "sameEvent": true
+  },
+  {
+   "From": 97,
+   "To": 118,
+   "branch": 0.095,
+   "lag": 1000,
+   "sameEvent": true
+  },
+  {
+   "From": 199,
+   "To": 56,
+   "branch": 0.094,
+   "lag": 1172,
+   "sameEvent": false
+  },
+  {
+   "From": 51,
+   "To": 139,
+   "branch": 0.094,
+   "lag": 28,
+   "sameEvent": true
+  },
+  {
+   "From": 353,
+   "To": 380,
+   "branch": 0.094,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 151,
+   "To": 18,
+   "branch": 0.093,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 324,
+   "To": 277,
+   "branch": 0.093,
+   "lag": 753,
+   "sameEvent": true
+  },
+  {
+   "From": 79,
+   "To": 187,
+   "branch": 0.092,
+   "lag": 24,
+   "sameEvent": true
+  },
+  {
+   "From": 90,
+   "To": 79,
+   "branch": 0.092,
+   "lag": 68,
+   "sameEvent": true
+  },
+  {
+   "From": 274,
+   "To": 372,
+   "branch": 0.092,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 166,
+   "To": 168,
+   "branch": 0.092,
+   "lag": 850,
+   "sameEvent": true
+  },
+  {
+   "From": 111,
+   "To": 31,
+   "branch": 0.092,
+   "lag": 1004,
+   "sameEvent": false
+  },
+  {
+   "From": 273,
+   "To": 293,
+   "branch": 0.092,
+   "lag": 1059,
+   "sameEvent": true
+  },
+  {
+   "From": 304,
+   "To": 303,
+   "branch": 0.092,
+   "lag": 755,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 339,
+   "branch": 0.091,
+   "lag": 423,
+   "sameEvent": true
+  },
+  {
+   "From": 262,
+   "To": 333,
+   "branch": 0.091,
+   "lag": 1139,
+   "sameEvent": true
+  },
+  {
+   "From": 284,
+   "To": 333,
+   "branch": 0.091,
+   "lag": 1086,
+   "sameEvent": true
+  },
+  {
+   "From": 121,
+   "To": 85,
+   "branch": 0.091,
+   "lag": 253,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 347,
+   "branch": 0.091,
+   "lag": 1170,
+   "sameEvent": true
+  },
+  {
+   "From": 21,
+   "To": 5,
+   "branch": 0.09,
+   "lag": 834,
+   "sameEvent": true
+  },
+  {
+   "From": 28,
+   "To": 106,
+   "branch": 0.09,
+   "lag": 1110,
+   "sameEvent": false
+  },
+  {
+   "From": 189,
+   "To": 9,
+   "branch": 0.09,
+   "lag": 1051,
+   "sameEvent": false
+  },
+  {
+   "From": 324,
+   "To": 374,
+   "branch": 0.09,
+   "lag": 1192,
+   "sameEvent": false
+  },
+  {
+   "From": 50,
+   "To": 192,
+   "branch": 0.089,
+   "lag": 284,
+   "sameEvent": false
+  },
+  {
+   "From": 6,
+   "To": 13,
+   "branch": 0.089,
+   "lag": 494,
+   "sameEvent": true
+  },
+  {
+   "From": 109,
+   "To": 175,
+   "branch": 0.089,
+   "lag": 554,
+   "sameEvent": true
+  },
+  {
+   "From": 87,
+   "To": 186,
+   "branch": 0.089,
+   "lag": 43,
+   "sameEvent": true
+  },
+  {
+   "From": 78,
+   "To": 84,
+   "branch": 0.089,
+   "lag": 48,
+   "sameEvent": true
+  },
+  {
+   "From": 109,
+   "To": 231,
+   "branch": 0.089,
+   "lag": 461,
+   "sameEvent": true
+  },
+  {
+   "From": 270,
+   "To": 333,
+   "branch": 0.088,
+   "lag": 1113,
+   "sameEvent": true
+  },
+  {
+   "From": 354,
+   "To": 280,
+   "branch": 0.088,
+   "lag": 81,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 260,
+   "branch": 0.088,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 297,
+   "To": 302,
+   "branch": 0.088,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 101,
+   "To": 56,
+   "branch": 0.088,
+   "lag": 922,
+   "sameEvent": false
+  },
+  {
+   "From": 45,
+   "To": 34,
+   "branch": 0.088,
+   "lag": 157,
+   "sameEvent": true
+  },
+  {
+   "From": 286,
+   "To": 285,
+   "branch": 0.088,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 249,
+   "To": 247,
+   "branch": 0.087,
+   "lag": 16,
+   "sameEvent": true
+  },
+  {
+   "From": 51,
+   "To": 186,
+   "branch": 0.086,
+   "lag": 19,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 370,
+   "branch": 0.086,
+   "lag": 892,
+   "sameEvent": true
+  },
+  {
+   "From": 314,
+   "To": 72,
+   "branch": 0.086,
+   "lag": 735,
+   "sameEvent": false
+  },
+  {
+   "From": 301,
+   "To": 21,
+   "branch": 0.086,
+   "lag": 940,
+   "sameEvent": true
+  },
+  {
+   "From": 168,
+   "To": 131,
+   "branch": 0.086,
+   "lag": 841,
+   "sameEvent": true
+  },
+  {
+   "From": 187,
+   "To": 186,
+   "branch": 0.085,
+   "lag": 56,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 283,
+   "branch": 0.085,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 345,
+   "To": 377,
+   "branch": 0.085,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 75,
+   "To": 35,
+   "branch": 0.085,
+   "lag": 765,
+   "sameEvent": true
+  },
+  {
+   "From": 143,
+   "To": 144,
+   "branch": 0.085,
+   "lag": 1149,
+   "sameEvent": false
+  },
+  {
+   "From": 286,
+   "To": 271,
+   "branch": 0.085,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 351,
+   "To": 259,
+   "branch": 0.085,
+   "lag": 744,
+   "sameEvent": false
+  },
+  {
+   "From": 79,
+   "To": 139,
+   "branch": 0.085,
+   "lag": 22,
+   "sameEvent": true
+  },
+  {
+   "From": 226,
+   "To": 210,
+   "branch": 0.084,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 283,
+   "To": 286,
+   "branch": 0.084,
+   "lag": 29,
+   "sameEvent": true
+  },
+  {
+   "From": 42,
+   "To": 106,
+   "branch": 0.084,
+   "lag": 402,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 377,
+   "branch": 0.084,
+   "lag": 1180,
+   "sameEvent": true
+  },
+  {
+   "From": 24,
+   "To": 48,
+   "branch": 0.084,
+   "lag": 485,
+   "sameEvent": true
+  },
+  {
+   "From": 204,
+   "To": 63,
+   "branch": 0.084,
+   "lag": 983,
+   "sameEvent": true
+  },
+  {
+   "From": 273,
+   "To": 60,
+   "branch": 0.083,
+   "lag": 1173,
+   "sameEvent": true
+  },
+  {
+   "From": 368,
+   "To": 11,
+   "branch": 0.083,
+   "lag": 827,
+   "sameEvent": true
+  },
+  {
+   "From": 262,
+   "To": 270,
+   "branch": 0.083,
+   "lag": 874,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 256,
+   "branch": 0.082,
+   "lag": 1197,
+   "sameEvent": false
+  },
+  {
+   "From": 347,
+   "To": 377,
+   "branch": 0.082,
+   "lag": 1133,
+   "sameEvent": true
+  },
+  {
+   "From": 193,
+   "To": 159,
+   "branch": 0.082,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 188,
+   "To": 19,
+   "branch": 0.081,
+   "lag": 77,
+   "sameEvent": true
+  },
+  {
+   "From": 250,
+   "To": 249,
+   "branch": 0.081,
+   "lag": 342,
+   "sameEvent": true
+  },
+  {
+   "From": 299,
+   "To": 354,
+   "branch": 0.081,
+   "lag": 246,
+   "sameEvent": true
+  },
+  {
+   "From": 7,
+   "To": 12,
+   "branch": 0.081,
+   "lag": 344,
+   "sameEvent": true
+  },
+  {
+   "From": 188,
+   "To": 231,
+   "branch": 0.081,
+   "lag": 1082,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 285,
+   "branch": 0.08,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 40,
+   "To": 81,
+   "branch": 0.08,
+   "lag": 364,
+   "sameEvent": true
+  },
+  {
+   "From": 271,
+   "To": 333,
+   "branch": 0.08,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 183,
+   "To": 67,
+   "branch": 0.079,
+   "lag": 245,
+   "sameEvent": true
+  },
+  {
+   "From": 363,
+   "To": 277,
+   "branch": 0.079,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 274,
+   "To": 345,
+   "branch": 0.079,
+   "lag": 1039,
+   "sameEvent": false
+  },
+  {
+   "From": 380,
+   "To": 353,
+   "branch": 0.078,
+   "lag": 1065,
+   "sameEvent": false
+  },
+  {
+   "From": 118,
+   "To": 144,
+   "branch": 0.077,
+   "lag": 70,
+   "sameEvent": true
+  },
+  {
+   "From": 9,
+   "To": 132,
+   "branch": 0.077,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 297,
+   "To": 343,
+   "branch": 0.077,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 255,
+   "To": 249,
+   "branch": 0.077,
+   "lag": 29,
+   "sameEvent": true
+  },
+  {
+   "From": 155,
+   "To": 30,
+   "branch": 0.077,
+   "lag": 400,
+   "sameEvent": true
+  },
+  {
+   "From": 140,
+   "To": 246,
+   "branch": 0.077,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 51,
+   "To": 187,
+   "branch": 0.076,
+   "lag": 535,
+   "sameEvent": true
+  },
+  {
+   "From": 247,
+   "To": 252,
+   "branch": 0.076,
+   "lag": 738,
+   "sameEvent": true
+  },
+  {
+   "From": 259,
+   "To": 256,
+   "branch": 0.076,
+   "lag": 235,
+   "sameEvent": true
+  },
+  {
+   "From": 240,
+   "To": 241,
+   "branch": 0.076,
+   "lag": 473,
+   "sameEvent": true
+  },
+  {
+   "From": 221,
+   "To": 160,
+   "branch": 0.076,
+   "lag": 1122,
+   "sameEvent": false
+  },
+  {
+   "From": 32,
+   "To": 70,
+   "branch": 0.076,
+   "lag": 617,
+   "sameEvent": true
+  },
+  {
+   "From": 62,
+   "To": 110,
+   "branch": 0.076,
+   "lag": 161,
+   "sameEvent": false
+  },
+  {
+   "From": 13,
+   "To": 6,
+   "branch": 0.075,
+   "lag": 241,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 286,
+   "branch": 0.075,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 131,
+   "To": 168,
+   "branch": 0.075,
+   "lag": 377,
+   "sameEvent": true
+  },
+  {
+   "From": 252,
+   "To": 247,
+   "branch": 0.075,
+   "lag": 360,
+   "sameEvent": true
+  },
+  {
+   "From": 53,
+   "To": 188,
+   "branch": 0.075,
+   "lag": 1199,
+   "sameEvent": true
+  },
+  {
+   "From": 53,
+   "To": 109,
+   "branch": 0.075,
+   "lag": 920,
+   "sameEvent": true
+  },
+  {
+   "From": 112,
+   "To": 231,
+   "branch": 0.074,
+   "lag": 863,
+   "sameEvent": true
+  },
+  {
+   "From": 345,
+   "To": 372,
+   "branch": 0.074,
+   "lag": 926,
+   "sameEvent": true
+  },
+  {
+   "From": 127,
+   "To": 124,
+   "branch": 0.074,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 242,
+   "To": 241,
+   "branch": 0.074,
+   "lag": 136,
+   "sameEvent": true
+  },
+  {
+   "From": 83,
+   "To": 212,
+   "branch": 0.074,
+   "lag": 870,
+   "sameEvent": true
+  },
+  {
+   "From": 187,
+   "To": 51,
+   "branch": 0.074,
+   "lag": 56,
+   "sameEvent": true
+  },
+  {
+   "From": 34,
+   "To": 23,
+   "branch": 0.073,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 304,
+   "To": 344,
+   "branch": 0.073,
+   "lag": 640,
+   "sameEvent": true
+  },
+  {
+   "From": 324,
+   "To": 363,
+   "branch": 0.073,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 369,
+   "To": 298,
+   "branch": 0.073,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 334,
+   "To": 306,
+   "branch": 0.073,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 53,
+   "To": 231,
+   "branch": 0.073,
+   "lag": 1014,
+   "sameEvent": true
+  },
+  {
+   "From": 201,
+   "To": 51,
+   "branch": 0.073,
+   "lag": 46,
+   "sameEvent": true
+  },
+  {
+   "From": 114,
+   "To": 219,
+   "branch": 0.072,
+   "lag": 598,
+   "sameEvent": true
+  },
+  {
+   "From": 243,
+   "To": 240,
+   "branch": 0.072,
+   "lag": 138,
+   "sameEvent": true
+  },
+  {
+   "From": 283,
+   "To": 260,
+   "branch": 0.072,
+   "lag": 44,
+   "sameEvent": true
+  },
+  {
+   "From": 345,
+   "To": 347,
+   "branch": 0.072,
+   "lag": 1157,
+   "sameEvent": true
+  },
+  {
+   "From": 106,
+   "To": 42,
+   "branch": 0.072,
+   "lag": 74,
+   "sameEvent": true
+  },
+  {
+   "From": 250,
+   "To": 252,
+   "branch": 0.072,
+   "lag": 81,
+   "sameEvent": true
+  },
+  {
+   "From": 22,
+   "To": 226,
+   "branch": 0.072,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 269,
+   "To": 280,
+   "branch": 0.072,
+   "lag": 121,
+   "sameEvent": true
+  },
+  {
+   "From": 370,
+   "To": 347,
+   "branch": 0.071,
+   "lag": 1189,
+   "sameEvent": true
+  },
+  {
+   "From": 347,
+   "To": 293,
+   "branch": 0.071,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 176,
+   "To": 188,
+   "branch": 0.071,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 187,
+   "To": 139,
+   "branch": 0.071,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 201,
+   "To": 139,
+   "branch": 0.07,
+   "lag": 71,
+   "sameEvent": true
+  },
+  {
+   "From": 371,
+   "To": 360,
+   "branch": 0.07,
+   "lag": 696,
+   "sameEvent": true
+  },
+  {
+   "From": 39,
+   "To": 62,
+   "branch": 0.07,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 215,
+   "To": 21,
+   "branch": 0.07,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 187,
+   "To": 79,
+   "branch": 0.07,
+   "lag": 35,
+   "sameEvent": true
+  },
+  {
+   "From": 22,
+   "To": 87,
+   "branch": 0.07,
+   "lag": 1189,
+   "sameEvent": false
+  },
+  {
+   "From": 97,
+   "To": 143,
+   "branch": 0.07,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 89,
+   "To": 143,
+   "branch": 0.069,
+   "lag": 706,
+   "sameEvent": true
+  },
+  {
+   "From": 368,
+   "To": 356,
+   "branch": 0.069,
+   "lag": 1188,
+   "sameEvent": false
+  },
+  {
+   "From": 255,
+   "To": 250,
+   "branch": 0.069,
+   "lag": 452,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 345,
+   "branch": 0.069,
+   "lag": 1151,
+   "sameEvent": true
+  },
+  {
+   "From": 124,
+   "To": 211,
+   "branch": 0.069,
+   "lag": 150,
+   "sameEvent": true
+  },
+  {
+   "From": 98,
+   "To": 62,
+   "branch": 0.068,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 29,
+   "To": 56,
+   "branch": 0.068,
+   "lag": 1177,
+   "sameEvent": false
+  },
+  {
+   "From": 376,
+   "To": 372,
+   "branch": 0.068,
+   "lag": 1077,
+   "sameEvent": true
+  },
+  {
+   "From": 376,
+   "To": 347,
+   "branch": 0.068,
+   "lag": 1189,
+   "sameEvent": true
+  },
+  {
+   "From": 339,
+   "To": 259,
+   "branch": 0.068,
+   "lag": 842,
+   "sameEvent": false
+  },
+  {
+   "From": 131,
+   "To": 58,
+   "branch": 0.068,
+   "lag": 306,
+   "sameEvent": true
+  },
+  {
+   "From": 302,
+   "To": 297,
+   "branch": 0.068,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 1,
+   "To": 3,
+   "branch": 0.067,
+   "lag": 1022,
+   "sameEvent": false
+  },
+  {
+   "From": 120,
+   "To": 124,
+   "branch": 0.067,
+   "lag": 776,
+   "sameEvent": false
+  },
+  {
+   "From": 98,
+   "To": 199,
+   "branch": 0.067,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 109,
+   "To": 19,
+   "branch": 0.067,
+   "lag": 1097,
+   "sameEvent": true
+  },
+  {
+   "From": 83,
+   "To": 161,
+   "branch": 0.067,
+   "lag": 434,
+   "sameEvent": true
+  },
+  {
+   "From": 353,
+   "To": 254,
+   "branch": 0.067,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 18,
+   "To": 10,
+   "branch": 0.066,
+   "lag": 830,
+   "sameEvent": true
+  },
+  {
+   "From": 13,
+   "To": 70,
+   "branch": 0.066,
+   "lag": 981,
+   "sameEvent": false
+  },
+  {
+   "From": 259,
+   "To": 351,
+   "branch": 0.066,
+   "lag": 890,
+   "sameEvent": false
+  },
+  {
+   "From": 24,
+   "To": 113,
+   "branch": 0.066,
+   "lag": 588,
+   "sameEvent": false
+  },
+  {
+   "From": 270,
+   "To": 68,
+   "branch": 0.066,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 188,
+   "To": 109,
+   "branch": 0.066,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 155,
+   "To": 62,
+   "branch": 0.066,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 67,
+   "To": 23,
+   "branch": 0.066,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 270,
+   "To": 284,
+   "branch": 0.065,
+   "lag": 933,
+   "sameEvent": true
+  },
+  {
+   "From": 118,
+   "To": 143,
+   "branch": 0.065,
+   "lag": 933,
+   "sameEvent": false
+  },
+  {
+   "From": 28,
+   "To": 42,
+   "branch": 0.065,
+   "lag": 754,
+   "sameEvent": false
+  },
+  {
+   "From": 284,
+   "To": 300,
+   "branch": 0.065,
+   "lag": 626,
+   "sameEvent": true
+  },
+  {
+   "From": 82,
+   "To": 84,
+   "branch": 0.065,
+   "lag": 32,
+   "sameEvent": true
+  },
+  {
+   "From": 298,
+   "To": 313,
+   "branch": 0.065,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 231,
+   "To": 42,
+   "branch": 0.064,
+   "lag": 1105,
+   "sameEvent": true
+  },
+  {
+   "From": 87,
+   "To": 201,
+   "branch": 0.064,
+   "lag": 333,
+   "sameEvent": true
+  },
+  {
+   "From": 166,
+   "To": 131,
+   "branch": 0.064,
+   "lag": 790,
+   "sameEvent": true
+  },
+  {
+   "From": 178,
+   "To": 228,
+   "branch": 0.064,
+   "lag": 1101,
+   "sameEvent": false
+  },
+  {
+   "From": 85,
+   "To": 121,
+   "branch": 0.064,
+   "lag": 896,
+   "sameEvent": true
+  },
+  {
+   "From": 8,
+   "To": 35,
+   "branch": 0.064,
+   "lag": 580,
+   "sameEvent": true
+  },
+  {
+   "From": 176,
+   "To": 150,
+   "branch": 0.064,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 308,
+   "To": 340,
+   "branch": 0.063,
+   "lag": 877,
+   "sameEvent": false
+  },
+  {
+   "From": 187,
+   "To": 90,
+   "branch": 0.063,
+   "lag": 20,
+   "sameEvent": true
+  },
+  {
+   "From": 248,
+   "To": 246,
+   "branch": 0.063,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 51,
+   "To": 87,
+   "branch": 0.063,
+   "lag": 58,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 60,
+   "branch": 0.063,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 198,
+   "To": 159,
+   "branch": 0.063,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 79,
+   "To": 186,
+   "branch": 0.063,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 44,
+   "To": 120,
+   "branch": 0.062,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 201,
+   "To": 90,
+   "branch": 0.062,
+   "lag": 14,
+   "sameEvent": true
+  },
+  {
+   "From": 300,
+   "To": 260,
+   "branch": 0.062,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 178,
+   "To": 238,
+   "branch": 0.062,
+   "lag": 726,
+   "sameEvent": false
+  },
+  {
+   "From": 144,
+   "To": 118,
+   "branch": 0.062,
+   "lag": 149,
+   "sameEvent": true
+  },
+  {
+   "From": 270,
+   "To": 275,
+   "branch": 0.061,
+   "lag": 1147,
+   "sameEvent": true
+  },
+  {
+   "From": 89,
+   "To": 173,
+   "branch": 0.061,
+   "lag": 67,
+   "sameEvent": true
+  },
+  {
+   "From": 221,
+   "To": 44,
+   "branch": 0.061,
+   "lag": 756,
+   "sameEvent": false
+  },
+  {
+   "From": 328,
+   "To": 268,
+   "branch": 0.061,
+   "lag": 786,
+   "sameEvent": false
+  },
+  {
+   "From": 197,
+   "To": 163,
+   "branch": 0.061,
+   "lag": 1118,
+   "sameEvent": false
+  },
+  {
+   "From": 175,
+   "To": 19,
+   "branch": 0.06,
+   "lag": 1191,
+   "sameEvent": true
+  },
+  {
+   "From": 256,
+   "To": 339,
+   "branch": 0.06,
+   "lag": 1197,
+   "sameEvent": false
+  },
+  {
+   "From": 13,
+   "To": 12,
+   "branch": 0.06,
+   "lag": 1100,
+   "sameEvent": false
+  },
+  {
+   "From": 126,
+   "To": 38,
+   "branch": 0.06,
+   "lag": 543,
+   "sameEvent": false
+  },
+  {
+   "From": 28,
+   "To": 19,
+   "branch": 0.059,
+   "lag": 365,
+   "sameEvent": false
+  },
+  {
+   "From": 144,
+   "To": 97,
+   "branch": 0.059,
+   "lag": 459,
+   "sameEvent": true
+  },
+  {
+   "From": 49,
+   "To": 6,
+   "branch": 0.059,
+   "lag": 604,
+   "sameEvent": false
+  },
+  {
+   "From": 160,
+   "To": 221,
+   "branch": 0.059,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 371,
+   "To": 351,
+   "branch": 0.059,
+   "lag": 60,
+   "sameEvent": true
+  },
+  {
+   "From": 101,
+   "To": 207,
+   "branch": 0.059,
+   "lag": 520,
+   "sameEvent": true
+  },
+  {
+   "From": 10,
+   "To": 253,
+   "branch": 0.058,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 70,
+   "To": 32,
+   "branch": 0.058,
+   "lag": 119,
+   "sameEvent": true
+  },
+  {
+   "From": 187,
+   "To": 201,
+   "branch": 0.058,
+   "lag": 17,
+   "sameEvent": true
+  },
+  {
+   "From": 135,
+   "To": 68,
+   "branch": 0.057,
+   "lag": 1171,
+   "sameEvent": true
+  },
+  {
+   "From": 127,
+   "To": 21,
+   "branch": 0.057,
+   "lag": 1184,
+   "sameEvent": false
+  },
+  {
+   "From": 115,
+   "To": 190,
+   "branch": 0.057,
+   "lag": 1056,
+   "sameEvent": false
+  },
+  {
+   "From": 151,
+   "To": 56,
+   "branch": 0.057,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 204,
+   "To": 141,
+   "branch": 0.057,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 297,
+   "To": 336,
+   "branch": 0.057,
+   "lag": 12,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 371,
+   "branch": 0.056,
+   "lag": 133,
+   "sameEvent": true
+  },
+  {
+   "From": 240,
+   "To": 269,
+   "branch": 0.056,
+   "lag": 975,
+   "sameEvent": false
+  },
+  {
+   "From": 30,
+   "To": 11,
+   "branch": 0.056,
+   "lag": 1009,
+   "sameEvent": true
+  },
+  {
+   "From": 43,
+   "To": 99,
+   "branch": 0.056,
+   "lag": 1192,
+   "sameEvent": false
+  },
+  {
+   "From": 370,
+   "To": 377,
+   "branch": 0.056,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 232,
+   "To": 6,
+   "branch": 0.056,
+   "lag": 970,
+   "sameEvent": false
+  },
+  {
+   "From": 340,
+   "To": 328,
+   "branch": 0.056,
+   "lag": 971,
+   "sameEvent": false
+  },
+  {
+   "From": 286,
+   "To": 260,
+   "branch": 0.056,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 299,
+   "To": 269,
+   "branch": 0.056,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 333,
+   "To": 275,
+   "branch": 0.055,
+   "lag": 951,
+   "sameEvent": true
+  },
+  {
+   "From": 344,
+   "To": 303,
+   "branch": 0.055,
+   "lag": 483,
+   "sameEvent": true
+  },
+  {
+   "From": 278,
+   "To": 261,
+   "branch": 0.055,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 368,
+   "To": 30,
+   "branch": 0.055,
+   "lag": 940,
+   "sameEvent": true
+  },
+  {
+   "From": 90,
+   "To": 51,
+   "branch": 0.055,
+   "lag": 103,
+   "sameEvent": true
+  },
+  {
+   "From": 173,
+   "To": 24,
+   "branch": 0.055,
+   "lag": 726,
+   "sameEvent": true
+  },
+  {
+   "From": 284,
+   "To": 275,
+   "branch": 0.055,
+   "lag": 730,
+   "sameEvent": true
+  },
+  {
+   "From": 375,
+   "To": 75,
+   "branch": 0.055,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 192,
+   "To": 187,
+   "branch": 0.054,
+   "lag": 133,
+   "sameEvent": true
+  },
+  {
+   "From": 257,
+   "To": 245,
+   "branch": 0.054,
+   "lag": 738,
+   "sameEvent": true
+  },
+  {
+   "From": 159,
+   "To": 124,
+   "branch": 0.054,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 246,
+   "To": 245,
+   "branch": 0.054,
+   "lag": 920,
+   "sameEvent": true
+  },
+  {
+   "From": 242,
+   "To": 243,
+   "branch": 0.054,
+   "lag": 400,
+   "sameEvent": true
+  },
+  {
+   "From": 248,
+   "To": 245,
+   "branch": 0.054,
+   "lag": 589,
+   "sameEvent": true
+  },
+  {
+   "From": 373,
+   "To": 287,
+   "branch": 0.054,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 19,
+   "To": 42,
+   "branch": 0.054,
+   "lag": 639,
+   "sameEvent": true
+  },
+  {
+   "From": 151,
+   "To": 138,
+   "branch": 0.054,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 327,
+   "To": 314,
+   "branch": 0.054,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 199,
+   "To": 151,
+   "branch": 0.054,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 175,
+   "To": 231,
+   "branch": 0.053,
+   "lag": 1013,
+   "sameEvent": true
+  },
+  {
+   "From": 176,
+   "To": 231,
+   "branch": 0.053,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 232,
+   "To": 31,
+   "branch": 0.053,
+   "lag": 903,
+   "sameEvent": false
+  },
+  {
+   "From": 90,
+   "To": 201,
+   "branch": 0.053,
+   "lag": 39,
+   "sameEvent": true
+  },
+  {
+   "From": 337,
+   "To": 286,
+   "branch": 0.053,
+   "lag": 387,
+   "sameEvent": true
+  },
+  {
+   "From": 6,
+   "To": 49,
+   "branch": 0.053,
+   "lag": 1062,
+   "sameEvent": false
+  },
+  {
+   "From": 178,
+   "To": 64,
+   "branch": 0.053,
+   "lag": 1049,
+   "sameEvent": false
+  },
+  {
+   "From": 198,
+   "To": 108,
+   "branch": 0.053,
+   "lag": 983,
+   "sameEvent": false
+  },
+  {
+   "From": 22,
+   "To": 84,
+   "branch": 0.053,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 110,
+   "To": 265,
+   "branch": 0.053,
+   "lag": 835,
+   "sameEvent": false
+  },
+  {
+   "From": 186,
+   "To": 87,
+   "branch": 0.052,
+   "lag": 67,
+   "sameEvent": true
+  },
+  {
+   "From": 89,
+   "To": 118,
+   "branch": 0.052,
+   "lag": 987,
+   "sameEvent": false
+  },
+  {
+   "From": 139,
+   "To": 87,
+   "branch": 0.052,
+   "lag": 52,
+   "sameEvent": true
+  },
+  {
+   "From": 23,
+   "To": 68,
+   "branch": 0.052,
+   "lag": 816,
+   "sameEvent": true
+  },
+  {
+   "From": 375,
+   "To": 353,
+   "branch": 0.052,
+   "lag": 1197,
+   "sameEvent": false
+  },
+  {
+   "From": 166,
+   "To": 214,
+   "branch": 0.052,
+   "lag": 614,
+   "sameEvent": true
+  },
+  {
+   "From": 314,
+   "To": 276,
+   "branch": 0.052,
+   "lag": 279,
+   "sameEvent": true
+  },
+  {
+   "From": 248,
+   "To": 244,
+   "branch": 0.052,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 98,
+   "To": 159,
+   "branch": 0.052,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 365,
+   "To": 359,
+   "branch": 0.052,
+   "lag": 120,
+   "sameEvent": false
+  },
+  {
+   "From": 257,
+   "To": 248,
+   "branch": 0.052,
+   "lag": 46,
+   "sameEvent": true
+  },
+  {
+   "From": 22,
+   "To": 139,
+   "branch": 0.052,
+   "lag": 1181,
+   "sameEvent": false
+  },
+  {
+   "From": 20,
+   "To": 14,
+   "branch": 0.051,
+   "lag": 290,
+   "sameEvent": true
+  },
+  {
+   "From": 343,
+   "To": 297,
+   "branch": 0.051,
+   "lag": 13,
+   "sameEvent": true
+  },
+  {
+   "From": 302,
+   "To": 253,
+   "branch": 0.051,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 310,
+   "To": 306,
+   "branch": 0.051,
+   "lag": 1062,
+   "sameEvent": false
+  },
+  {
+   "From": 255,
+   "To": 247,
+   "branch": 0.051,
+   "lag": 102,
+   "sameEvent": true
+  },
+  {
+   "From": 362,
+   "To": 285,
+   "branch": 0.051,
+   "lag": 995,
+   "sameEvent": false
+  },
+  {
+   "From": 126,
+   "To": 66,
+   "branch": 0.051,
+   "lag": 872,
+   "sameEvent": false
+  },
+  {
+   "From": 173,
+   "To": 113,
+   "branch": 0.051,
+   "lag": 619,
+   "sameEvent": false
+  },
+  {
+   "From": 143,
+   "To": 118,
+   "branch": 0.05,
+   "lag": 947,
+   "sameEvent": false
+  },
+  {
+   "From": 83,
+   "To": 200,
+   "branch": 0.05,
+   "lag": 679,
+   "sameEvent": true
+  },
+  {
+   "From": 89,
+   "To": 97,
+   "branch": 0.05,
+   "lag": 970,
+   "sameEvent": false
+  },
+  {
+   "From": 351,
+   "To": 339,
+   "branch": 0.05,
+   "lag": 96,
+   "sameEvent": true
+  },
+  {
+   "From": 297,
+   "To": 381,
+   "branch": 0.05,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 121,
+   "To": 68,
+   "branch": 0.05,
+   "lag": 101,
+   "sameEvent": true
+  },
+  {
+   "From": 35,
+   "To": 75,
+   "branch": 0.05,
+   "lag": 121,
+   "sameEvent": true
+  },
+  {
+   "From": 230,
+   "To": 159,
+   "branch": 0.049,
+   "lag": 1123,
+   "sameEvent": false
+  },
+  {
+   "From": 287,
+   "To": 258,
+   "branch": 0.049,
+   "lag": 1104,
+   "sameEvent": true
+  },
+  {
+   "From": 23,
+   "To": 135,
+   "branch": 0.049,
+   "lag": 819,
+   "sameEvent": true
+  },
+  {
+   "From": 97,
+   "To": 144,
+   "branch": 0.049,
+   "lag": 917,
+   "sameEvent": true
+  },
+  {
+   "From": 256,
+   "To": 311,
+   "branch": 0.049,
+   "lag": 1174,
+   "sameEvent": false
+  },
+  {
+   "From": 339,
+   "To": 278,
+   "branch": 0.048,
+   "lag": 164,
+   "sameEvent": true
+  },
+  {
+   "From": 188,
+   "To": 106,
+   "branch": 0.048,
+   "lag": 1029,
+   "sameEvent": true
+  },
+  {
+   "From": 295,
+   "To": 247,
+   "branch": 0.048,
+   "lag": 1006,
+   "sameEvent": false
+  },
+  {
+   "From": 150,
+   "To": 175,
+   "branch": 0.048,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 351,
+   "To": 311,
+   "branch": 0.048,
+   "lag": 613,
+   "sameEvent": true
+  },
+  {
+   "From": 212,
+   "To": 90,
+   "branch": 0.048,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 200,
+   "To": 83,
+   "branch": 0.048,
+   "lag": 833,
+   "sameEvent": true
+  },
+  {
+   "From": 186,
+   "To": 192,
+   "branch": 0.048,
+   "lag": 18,
+   "sameEvent": true
+  },
+  {
+   "From": 267,
+   "To": 149,
+   "branch": 0.048,
+   "lag": 1092,
+   "sameEvent": false
+  },
+  {
+   "From": 56,
+   "To": 138,
+   "branch": 0.048,
+   "lag": 209,
+   "sameEvent": true
+  },
+  {
+   "From": 53,
+   "To": 19,
+   "branch": 0.047,
+   "lag": 440,
+   "sameEvent": true
+  },
+  {
+   "From": 181,
+   "To": 124,
+   "branch": 0.047,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 98,
+   "To": 63,
+   "branch": 0.047,
+   "lag": 981,
+   "sameEvent": true
+  },
+  {
+   "From": 277,
+   "To": 363,
+   "branch": 0.047,
+   "lag": 983,
+   "sameEvent": false
+  },
+  {
+   "From": 79,
+   "To": 192,
+   "branch": 0.047,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 268,
+   "To": 82,
+   "branch": 0.046,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 360,
+   "To": 278,
+   "branch": 0.046,
+   "lag": 870,
+   "sameEvent": true
+  },
+  {
+   "From": 250,
+   "To": 247,
+   "branch": 0.046,
+   "lag": 421,
+   "sameEvent": true
+  },
+  {
+   "From": 23,
+   "To": 285,
+   "branch": 0.046,
+   "lag": 1194,
+   "sameEvent": false
+  },
+  {
+   "From": 161,
+   "To": 83,
+   "branch": 0.046,
+   "lag": 39,
+   "sameEvent": true
+  },
+  {
+   "From": 298,
+   "To": 369,
+   "branch": 0.046,
+   "lag": 1166,
+   "sameEvent": false
+  },
+  {
+   "From": 326,
+   "To": 354,
+   "branch": 0.046,
+   "lag": 21,
+   "sameEvent": true
+  },
+  {
+   "From": 201,
+   "To": 186,
+   "branch": 0.046,
+   "lag": 72,
+   "sameEvent": true
+  },
+  {
+   "From": 160,
+   "To": 5,
+   "branch": 0.046,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 350,
+   "To": 204,
+   "branch": 0.046,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 324,
+   "To": 338,
+   "branch": 0.045,
+   "lag": 1106,
+   "sameEvent": false
+  },
+  {
+   "From": 243,
+   "To": 354,
+   "branch": 0.045,
+   "lag": 897,
+   "sameEvent": false
+  },
+  {
+   "From": 266,
+   "To": 279,
+   "branch": 0.045,
+   "lag": 1080,
+   "sameEvent": true
+  },
+  {
+   "From": 97,
+   "To": 89,
+   "branch": 0.045,
+   "lag": 1075,
+   "sameEvent": false
+  },
+  {
+   "From": 199,
+   "To": 10,
+   "branch": 0.045,
+   "lag": 895,
+   "sameEvent": false
+  },
+  {
+   "From": 124,
+   "To": 127,
+   "branch": 0.045,
+   "lag": 26,
+   "sameEvent": true
+  },
+  {
+   "From": 186,
+   "To": 187,
+   "branch": 0.045,
+   "lag": 61,
+   "sameEvent": true
+  },
+  {
+   "From": 135,
+   "To": 283,
+   "branch": 0.045,
+   "lag": 819,
+   "sameEvent": false
+  },
+  {
+   "From": 34,
+   "To": 135,
+   "branch": 0.045,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 226,
+   "To": 201,
+   "branch": 0.045,
+   "lag": 1195,
+   "sameEvent": false
+  },
+  {
+   "From": 164,
+   "To": 115,
+   "branch": 0.045,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 247,
+   "To": 250,
+   "branch": 0.045,
+   "lag": 989,
+   "sameEvent": true
+  },
+  {
+   "From": 243,
+   "To": 326,
+   "branch": 0.044,
+   "lag": 925,
+   "sameEvent": false
+  },
+  {
+   "From": 344,
+   "To": 304,
+   "branch": 0.044,
+   "lag": 409,
+   "sameEvent": true
+  },
+  {
+   "From": 256,
+   "To": 360,
+   "branch": 0.044,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 200,
+   "To": 104,
+   "branch": 0.044,
+   "lag": 695,
+   "sameEvent": true
+  },
+  {
+   "From": 170,
+   "To": 78,
+   "branch": 0.044,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 75,
+   "To": 8,
+   "branch": 0.044,
+   "lag": 79,
+   "sameEvent": true
+  },
+  {
+   "From": 186,
+   "To": 90,
+   "branch": 0.044,
+   "lag": 12,
+   "sameEvent": true
+  },
+  {
+   "From": 221,
+   "To": 159,
+   "branch": 0.044,
+   "lag": 1041,
+   "sameEvent": false
+  },
+  {
+   "From": 186,
+   "To": 79,
+   "branch": 0.044,
+   "lag": 55,
+   "sameEvent": true
+  },
+  {
+   "From": 24,
+   "To": 349,
+   "branch": 0.044,
+   "lag": 1195,
+   "sameEvent": false
+  },
+  {
+   "From": 97,
+   "To": 113,
+   "branch": 0.043,
+   "lag": 801,
+   "sameEvent": true
+  },
+  {
+   "From": 61,
+   "To": 77,
+   "branch": 0.043,
+   "lag": 1039,
+   "sameEvent": false
+  },
+  {
+   "From": 301,
+   "To": 265,
+   "branch": 0.043,
+   "lag": 1197,
+   "sameEvent": false
+  },
+  {
+   "From": 98,
+   "To": 55,
+   "branch": 0.043,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 81,
+   "To": 40,
+   "branch": 0.043,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 246,
+   "To": 248,
+   "branch": 0.043,
+   "lag": 491,
+   "sameEvent": true
+  },
+  {
+   "From": 248,
+   "To": 257,
+   "branch": 0.043,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 173,
+   "To": 89,
+   "branch": 0.043,
+   "lag": 158,
+   "sameEvent": true
+  },
+  {
+   "From": 164,
+   "To": 120,
+   "branch": 0.043,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 145,
+   "To": 167,
+   "branch": 0.043,
+   "lag": 1128,
+   "sameEvent": false
+  },
+  {
+   "From": 215,
+   "To": 5,
+   "branch": 0.043,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 253,
+   "To": 297,
+   "branch": 0.043,
+   "lag": 198,
+   "sameEvent": true
+  },
+  {
+   "From": 325,
+   "To": 17,
+   "branch": 0.043,
+   "lag": 556,
+   "sameEvent": true
+  },
+  {
+   "From": 24,
+   "To": 148,
+   "branch": 0.043,
+   "lag": 871,
+   "sameEvent": false
+  },
+  {
+   "From": 232,
+   "To": 13,
+   "branch": 0.043,
+   "lag": 576,
+   "sameEvent": false
+  },
+  {
+   "From": 87,
+   "To": 51,
+   "branch": 0.042,
+   "lag": 99,
+   "sameEvent": true
+  },
+  {
+   "From": 279,
+   "To": 370,
+   "branch": 0.042,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 376,
+   "To": 274,
+   "branch": 0.042,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 347,
+   "To": 60,
+   "branch": 0.042,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 12,
+   "To": 7,
+   "branch": 0.042,
+   "lag": 28,
+   "sameEvent": true
+  },
+  {
+   "From": 303,
+   "To": 344,
+   "branch": 0.042,
+   "lag": 409,
+   "sameEvent": true
+  },
+  {
+   "From": 321,
+   "To": 82,
+   "branch": 0.041,
+   "lag": 1094,
+   "sameEvent": false
+  },
+  {
+   "From": 317,
+   "To": 313,
+   "branch": 0.041,
+   "lag": 1131,
+   "sameEvent": false
+  },
+  {
+   "From": 269,
+   "To": 240,
+   "branch": 0.041,
+   "lag": 155,
+   "sameEvent": false
+  },
+  {
+   "From": 3,
+   "To": 1,
+   "branch": 0.041,
+   "lag": 567,
+   "sameEvent": false
+  },
+  {
+   "From": 232,
+   "To": 64,
+   "branch": 0.041,
+   "lag": 724,
+   "sameEvent": false
+  },
+  {
+   "From": 118,
+   "To": 89,
+   "branch": 0.041,
+   "lag": 1199,
+   "sameEvent": false
+  },
+  {
+   "From": 175,
+   "To": 106,
+   "branch": 0.041,
+   "lag": 1112,
+   "sameEvent": true
+  },
+  {
+   "From": 376,
+   "To": 367,
+   "branch": 0.041,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 109,
+   "To": 53,
+   "branch": 0.041,
+   "lag": 751,
+   "sameEvent": true
+  },
+  {
+   "From": 259,
+   "To": 339,
+   "branch": 0.041,
+   "lag": 1153,
+   "sameEvent": false
+  },
+  {
+   "From": 151,
+   "To": 199,
+   "branch": 0.04,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 221,
+   "To": 120,
+   "branch": 0.04,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 339,
+   "To": 261,
+   "branch": 0.04,
+   "lag": 237,
+   "sameEvent": true
+  },
+  {
+   "From": 370,
+   "To": 60,
+   "branch": 0.04,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 1,
+   "To": 4,
+   "branch": 0.04,
+   "lag": 156,
+   "sameEvent": true
+  },
+  {
+   "From": 90,
+   "To": 192,
+   "branch": 0.04,
+   "lag": 46,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 293,
+   "branch": 0.04,
+   "lag": 1109,
+   "sameEvent": false
+  },
+  {
+   "From": 139,
+   "To": 51,
+   "branch": 0.04,
+   "lag": 52,
+   "sameEvent": true
+  },
+  {
+   "From": 43,
+   "To": 119,
+   "branch": 0.04,
+   "lag": 1020,
+   "sameEvent": false
+  },
+  {
+   "From": 283,
+   "To": 271,
+   "branch": 0.04,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 232,
+   "To": 218,
+   "branch": 0.04,
+   "lag": 811,
+   "sameEvent": false
+  },
+  {
+   "From": 343,
+   "To": 336,
+   "branch": 0.04,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 363,
+   "To": 353,
+   "branch": 0.04,
+   "lag": 1178,
+   "sameEvent": false
+  },
+  {
+   "From": 302,
+   "To": 336,
+   "branch": 0.039,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 284,
+   "To": 262,
+   "branch": 0.039,
+   "lag": 642,
+   "sameEvent": true
+  },
+  {
+   "From": 360,
+   "To": 261,
+   "branch": 0.039,
+   "lag": 121,
+   "sameEvent": true
+  },
+  {
+   "From": 89,
+   "To": 148,
+   "branch": 0.039,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 314,
+   "To": 16,
+   "branch": 0.039,
+   "lag": 1160,
+   "sameEvent": false
+  },
+  {
+   "From": 363,
+   "To": 369,
+   "branch": 0.039,
+   "lag": 438,
+   "sameEvent": true
+  },
+  {
+   "From": 287,
+   "To": 373,
+   "branch": 0.039,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 198,
+   "To": 120,
+   "branch": 0.039,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 323,
+   "To": 351,
+   "branch": 0.039,
+   "lag": 732,
+   "sameEvent": false
+  },
+  {
+   "From": 270,
+   "To": 271,
+   "branch": 0.039,
+   "lag": 1154,
+   "sameEvent": true
+  },
+  {
+   "From": 173,
+   "To": 48,
+   "branch": 0.039,
+   "lag": 85,
+   "sameEvent": true
+  },
+  {
+   "From": 87,
+   "To": 192,
+   "branch": 0.038,
+   "lag": 87,
+   "sameEvent": true
+  },
+  {
+   "From": 266,
+   "To": 376,
+   "branch": 0.038,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 24,
+   "To": 152,
+   "branch": 0.038,
+   "lag": 671,
+   "sameEvent": false
+  },
+  {
+   "From": 231,
+   "To": 188,
+   "branch": 0.038,
+   "lag": 792,
+   "sameEvent": true
+  },
+  {
+   "From": 144,
+   "To": 143,
+   "branch": 0.038,
+   "lag": 1064,
+   "sameEvent": false
+  },
+  {
+   "From": 22,
+   "To": 66,
+   "branch": 0.038,
+   "lag": 55,
+   "sameEvent": true
+  },
+  {
+   "From": 170,
+   "To": 93,
+   "branch": 0.038,
+   "lag": 893,
+   "sameEvent": false
+  },
+  {
+   "From": 22,
+   "To": 187,
+   "branch": 0.038,
+   "lag": 1191,
+   "sameEvent": false
+  },
+  {
+   "From": 298,
+   "To": 373,
+   "branch": 0.038,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 343,
+   "To": 253,
+   "branch": 0.038,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 305,
+   "To": 337,
+   "branch": 0.038,
+   "lag": 1000,
+   "sameEvent": true
+  },
+  {
+   "From": 91,
+   "To": 228,
+   "branch": 0.038,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 201,
+   "To": 87,
+   "branch": 0.038,
+   "lag": 38,
+   "sameEvent": true
+  },
+  {
+   "From": 105,
+   "To": 111,
+   "branch": 0.038,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 259,
+   "To": 278,
+   "branch": 0.037,
+   "lag": 1019,
+   "sameEvent": false
+  },
+  {
+   "From": 221,
+   "To": 115,
+   "branch": 0.037,
+   "lag": 1195,
+   "sameEvent": false
+  },
+  {
+   "From": 44,
+   "To": 164,
+   "branch": 0.037,
+   "lag": 1199,
+   "sameEvent": false
+  },
+  {
+   "From": 340,
+   "To": 308,
+   "branch": 0.037,
+   "lag": 121,
+   "sameEvent": false
+  },
+  {
+   "From": 369,
+   "To": 317,
+   "branch": 0.037,
+   "lag": 1192,
+   "sameEvent": false
+  },
+  {
+   "From": 377,
+   "To": 293,
+   "branch": 0.037,
+   "lag": 1062,
+   "sameEvent": false
+  },
+  {
+   "From": 154,
+   "To": 72,
+   "branch": 0.037,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 271,
+   "To": 300,
+   "branch": 0.037,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 49,
+   "To": 13,
+   "branch": 0.037,
+   "lag": 104,
+   "sameEvent": false
+  },
+  {
+   "From": 338,
+   "To": 277,
+   "branch": 0.037,
+   "lag": 813,
+   "sameEvent": false
+  },
+  {
+   "From": 152,
+   "To": 24,
+   "branch": 0.037,
+   "lag": 211,
+   "sameEvent": false
+  },
+  {
+   "From": 3,
+   "To": 12,
+   "branch": 0.037,
+   "lag": 379,
+   "sameEvent": true
+  },
+  {
+   "From": 164,
+   "To": 159,
+   "branch": 0.036,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 239,
+   "To": 143,
+   "branch": 0.036,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 371,
+   "To": 323,
+   "branch": 0.036,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 353,
+   "To": 375,
+   "branch": 0.036,
+   "lag": 1199,
+   "sameEvent": false
+  },
+  {
+   "From": 90,
+   "To": 187,
+   "branch": 0.036,
+   "lag": 104,
+   "sameEvent": true
+  },
+  {
+   "From": 168,
+   "To": 214,
+   "branch": 0.036,
+   "lag": 118,
+   "sameEvent": true
+  },
+  {
+   "From": 225,
+   "To": 93,
+   "branch": 0.036,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 42,
+   "To": 19,
+   "branch": 0.036,
+   "lag": 617,
+   "sameEvent": true
+  },
+  {
+   "From": 105,
+   "To": 184,
+   "branch": 0.036,
+   "lag": 231,
+   "sameEvent": false
+  },
+  {
+   "From": 299,
+   "To": 280,
+   "branch": 0.036,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 337,
+   "To": 285,
+   "branch": 0.036,
+   "lag": 294,
+   "sameEvent": true
+  },
+  {
+   "From": 1,
+   "To": 32,
+   "branch": 0.036,
+   "lag": 443,
+   "sameEvent": false
+  },
+  {
+   "From": 111,
+   "To": 232,
+   "branch": 0.036,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 299,
+   "To": 326,
+   "branch": 0.036,
+   "lag": 11,
+   "sameEvent": true
+  },
+  {
+   "From": 193,
+   "To": 149,
+   "branch": 0.036,
+   "lag": 45,
+   "sameEvent": false
+  },
+  {
+   "From": 68,
+   "To": 121,
+   "branch": 0.035,
+   "lag": 58,
+   "sameEvent": true
+  },
+  {
+   "From": 11,
+   "To": 29,
+   "branch": 0.035,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 150,
+   "To": 109,
+   "branch": 0.035,
+   "lag": 773,
+   "sameEvent": true
+  },
+  {
+   "From": 198,
+   "To": 211,
+   "branch": 0.035,
+   "lag": 1171,
+   "sameEvent": false
+  },
+  {
+   "From": 23,
+   "To": 286,
+   "branch": 0.035,
+   "lag": 1175,
+   "sameEvent": false
+  },
+  {
+   "From": 218,
+   "To": 13,
+   "branch": 0.035,
+   "lag": 107,
+   "sameEvent": false
+  },
+  {
+   "From": 262,
+   "To": 275,
+   "branch": 0.035,
+   "lag": 899,
+   "sameEvent": true
+  },
+  {
+   "From": 49,
+   "To": 31,
+   "branch": 0.035,
+   "lag": 774,
+   "sameEvent": false
+  },
+  {
+   "From": 32,
+   "To": 1,
+   "branch": 0.035,
+   "lag": 955,
+   "sameEvent": false
+  },
+  {
+   "From": 244,
+   "To": 245,
+   "branch": 0.035,
+   "lag": 897,
+   "sameEvent": true
+  },
+  {
+   "From": 151,
+   "To": 101,
+   "branch": 0.035,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 357,
+   "To": 78,
+   "branch": 0.035,
+   "lag": 10,
+   "sameEvent": false
+  },
+  {
+   "From": 30,
+   "To": 237,
+   "branch": 0.035,
+   "lag": 1110,
+   "sameEvent": false
+  },
+  {
+   "From": 158,
+   "To": 4,
+   "branch": 0.035,
+   "lag": 308,
+   "sameEvent": false
+  },
+  {
+   "From": 292,
+   "To": 310,
+   "branch": 0.035,
+   "lag": 120,
+   "sameEvent": false
+  },
+  {
+   "From": 9,
+   "To": 246,
+   "branch": 0.035,
+   "lag": 854,
+   "sameEvent": false
+  },
+  {
+   "From": 234,
+   "To": 2,
+   "branch": 0.035,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 199,
+   "To": 207,
+   "branch": 0.035,
+   "lag": 96,
+   "sameEvent": true
+  },
+  {
+   "From": 120,
+   "To": 127,
+   "branch": 0.035,
+   "lag": 765,
+   "sameEvent": false
+  },
+  {
+   "From": 220,
+   "To": 77,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 22,
+   "To": 79,
+   "branch": 0.034,
+   "lag": 1030,
+   "sameEvent": false
+  },
+  {
+   "From": 275,
+   "To": 333,
+   "branch": 0.034,
+   "lag": 476,
+   "sameEvent": true
+  },
+  {
+   "From": 112,
+   "To": 188,
+   "branch": 0.034,
+   "lag": 364,
+   "sameEvent": true
+  },
+  {
+   "From": 338,
+   "To": 373,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 181,
+   "To": 193,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 250,
+   "To": 255,
+   "branch": 0.034,
+   "lag": 200,
+   "sameEvent": true
+  },
+  {
+   "From": 256,
+   "To": 278,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 363,
+   "To": 374,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 84,
+   "To": 78,
+   "branch": 0.034,
+   "lag": 466,
+   "sameEvent": true
+  },
+  {
+   "From": 143,
+   "To": 24,
+   "branch": 0.034,
+   "lag": 799,
+   "sameEvent": true
+  },
+  {
+   "From": 223,
+   "To": 8,
+   "branch": 0.034,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 36,
+   "To": 87,
+   "branch": 0.034,
+   "lag": 1198,
+   "sameEvent": false
+  },
+  {
+   "From": 104,
+   "To": 212,
+   "branch": 0.034,
+   "lag": 480,
+   "sameEvent": true
+  },
+  {
+   "From": 14,
+   "To": 20,
+   "branch": 0.034,
+   "lag": 267,
+   "sameEvent": true
+  },
+  {
+   "From": 371,
+   "To": 256,
+   "branch": 0.033,
+   "lag": 1021,
+   "sameEvent": false
+  },
+  {
+   "From": 113,
+   "To": 24,
+   "branch": 0.033,
+   "lag": 333,
+   "sameEvent": false
+  },
+  {
+   "From": 148,
+   "To": 152,
+   "branch": 0.033,
+   "lag": 323,
+   "sameEvent": true
+  },
+  {
+   "From": 6,
+   "To": 3,
+   "branch": 0.033,
+   "lag": 1022,
+   "sameEvent": false
+  },
+  {
+   "From": 264,
+   "To": 314,
+   "branch": 0.033,
+   "lag": 438,
+   "sameEvent": true
+  },
+  {
+   "From": 175,
+   "To": 188,
+   "branch": 0.033,
+   "lag": 1006,
+   "sameEvent": true
+  },
+  {
+   "From": 50,
+   "To": 139,
+   "branch": 0.033,
+   "lag": 116,
+   "sameEvent": false
+  },
+  {
+   "From": 339,
+   "To": 371,
+   "branch": 0.033,
+   "lag": 36,
+   "sameEvent": true
+  },
+  {
+   "From": 302,
+   "To": 381,
+   "branch": 0.033,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 85,
+   "To": 68,
+   "branch": 0.033,
+   "lag": 95,
+   "sameEvent": true
+  },
+  {
+   "From": 204,
+   "To": 159,
+   "branch": 0.033,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 57,
+   "To": 87,
+   "branch": 0.033,
+   "lag": 1198,
+   "sameEvent": false
+  },
+  {
+   "From": 120,
+   "To": 230,
+   "branch": 0.033,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 316,
+   "To": 314,
+   "branch": 0.033,
+   "lag": 1200,
+   "sameEvent": true
+  },
+  {
+   "From": 367,
+   "To": 273,
+   "branch": 0.032,
+   "lag": 1154,
+   "sameEvent": false
+  },
+  {
+   "From": 52,
+   "To": 8,
+   "branch": 0.032,
+   "lag": 1059,
+   "sameEvent": false
+  },
+  {
+   "From": 31,
+   "To": 238,
+   "branch": 0.032,
+   "lag": 963,
+   "sameEvent": false
+  },
+  {
+   "From": 104,
+   "To": 200,
+   "branch": 0.032,
+   "lag": 529,
+   "sameEvent": true
+  },
+  {
+   "From": 209,
+   "To": 248,
+   "branch": 0.032,
+   "lag": 1199,
+   "sameEvent": false
+  },
+  {
+   "From": 102,
+   "To": 317,
+   "branch": 0.032,
+   "lag": 1030,
+   "sameEvent": true
+  },
+  {
+   "From": 178,
+   "To": 91,
+   "branch": 0.032,
+   "lag": 120,
+   "sameEvent": false
+  },
+  {
+   "From": 143,
+   "To": 152,
+   "branch": 0.032,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 238,
+   "To": 31,
+   "branch": 0.032,
+   "lag": 925,
+   "sameEvent": false
+  },
+  {
+   "From": 115,
+   "To": 221,
+   "branch": 0.031,
+   "lag": 1018,
+   "sameEvent": false
+  },
+  {
+   "From": 332,
+   "To": 308,
+   "branch": 0.031,
+   "lag": 1168,
+   "sameEvent": false
+  },
+  {
+   "From": 343,
+   "To": 381,
+   "branch": 0.031,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 200,
+   "To": 161,
+   "branch": 0.031,
+   "lag": 114,
+   "sameEvent": true
+  },
+  {
+   "From": 337,
+   "To": 283,
+   "branch": 0.031,
+   "lag": 35,
+   "sameEvent": true
+  },
+  {
+   "From": 321,
+   "To": 310,
+   "branch": 0.031,
+   "lag": 1200,
+   "sameEvent": false
+  },
+  {
+   "From": 214,
+   "To": 131,
+   "branch": 0.031,
+   "lag": 606,
+   "sameEvent": true
+  },
+  {
+   "From": 140,
+   "To": 9,
+   "branch": 0.031,
+   "lag": 1185,
+   "sameEvent": false
+  },
+  {
+   "From": 62,
+   "To": 265,
+   "branch": 0.031,
+   "lag": 267,
+   "sameEvent": false
+  },
+  {
+   "From": 280,
+   "To": 241,
+   "branch": 0.03,
+   "lag": 123,
+   "sameEvent": false
+  },
+  {
+   "From": 332,
+   "To": 322,
+   "branch": 0.03,
+   "lag": 1158,
+   "sameEvent": false
+  },
+  {
+   "From": 58,
+   "To": 214,
+   "branch": 0.03,
+   "lag": 50,
+   "sameEvent": true
+  },
+  {
+   "From": 48,
+   "To": 24,
+   "branch": 0.03,
+   "lag": 56,
+   "sameEvent": true
+  },
+  {
+   "From": 312,
+   "To": 278,
+   "branch": 0.03,
+   "lag": 10,
+   "sameEvent": true
+  },
+  {
+   "From": 213,
+   "To": 61,
+   "branch": 0.03,
+   "lag": 579,
+   "sameEvent": false
+  },
+  {
+   "From": 357,
+   "To": 310,
+   "branch": 0.03,
+   "lag": 120,
+   "sameEvent": false
+  }
+ ]
+}
