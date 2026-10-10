@@ -1,0 +1,765 @@
+# Polymarket: per market, trading activity and price from its trade log
+Activity: US x Iran ceasefire continues through October 31? | - | world-activity/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Price: US x Iran ceasefire continues through October 31? | - | world-price/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Activity: Will the Republican Party control the House after the 2026 Midterm elections? | - | politics-activity/which-party-will-win-the-house-in-2026 | which party will win the house in 2026
+Price: Will the Republican Party control the House after the 2026 Midterm elections? | - | politics-price/which-party-will-win-the-house-in-2026 | which party will win the house in 2026
+Activity: Will the U.S. invade Iran before 2027? | - | world-activity/will-the-us-invade-iran-before-2027 | will the us invade iran before 2027
+Price: Will the U.S. invade Iran before 2027? | - | world-price/will-the-us-invade-iran-before-2027 | will the us invade iran before 2027
+Activity: 2026 Balance of Power: R Senate, R House | - | politics-activity/balance-of-power-2026-midterms | balance of power 2026 midterms
+Price: 2026 Balance of Power: R Senate, R House | - | politics-price/balance-of-power-2026-midterms | balance of power 2026 midterms
+Activity: Will the Democratic Party control the House after the 2026 Midterm elections? | - | politics-activity/which-party-will-win-the-house-in-2026 | which party will win the house in 2026
+Price: Will the Democratic Party control the House after the 2026 Midterm elections? | - | politics-price/which-party-will-win-the-house-in-2026 | which party will win the house in 2026
+Activity: US announces end of Iranian blockade by October 31, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by October 31, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will the Republicans win the Texas Senate race in 2026? | - | politics-activity/texas-senate-election-winner | texas senate election winner
+Price: Will the Republicans win the Texas Senate race in 2026? | - | politics-price/texas-senate-election-winner | texas senate election winner
+Activity: 2026 Balance of Power: R Senate, D House | - | politics-activity/balance-of-power-2026-midterms | balance of power 2026 midterms
+Price: 2026 Balance of Power: R Senate, D House | - | politics-price/balance-of-power-2026-midterms | balance of power 2026 midterms
+Activity: Will Benjamin Netanyahu be the next Prime Minister of Israel? | - | world-activity/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Price: Will Benjamin Netanyahu be the next Prime Minister of Israel? | - | world-price/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Activity: Will there be no change in Fed interest rates after the October 2026 meeting? | - | econ-activity/fed-decision-in-october-20260617190323537 | fed decision in october 20260617190323537
+Price: Will there be no change in Fed interest rates after the October 2026 meeting? | - | econ-price/fed-decision-in-october-20260617190323537 | fed decision in october 20260617190323537
+Activity: NATO x Russia military clash by October 31, 2026? | - | world-activity/nato-x-russia-military-clash-in-2025 | nato x russia military clash in 2025
+Price: NATO x Russia military clash by October 31, 2026? | - | world-price/nato-x-russia-military-clash-in-2025 | nato x russia military clash in 2025
+Activity: Israel x Iran ceasefire continues through October 31? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through October 31? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: 2026 Balance of Power: D Senate, D House | - | politics-activity/balance-of-power-2026-midterms | balance of power 2026 midterms
+Price: 2026 Balance of Power: D Senate, D House | - | politics-price/balance-of-power-2026-midterms | balance of power 2026 midterms
+Activity: Will the Democrats win the Texas Senate race in 2026? | - | politics-activity/texas-senate-election-winner | texas senate election winner
+Price: Will the Democrats win the Texas Senate race in 2026? | - | politics-price/texas-senate-election-winner | texas senate election winner
+Activity: Will Harry Kane win the 2026 Ballon d'Or? | - | sports-activity/ballon-dor-winner-2026 | ballon dor winner 2026
+Price: Will Harry Kane win the 2026 Ballon d'Or? | - | sports-price/ballon-dor-winner-2026 | ballon dor winner 2026
+Activity: Israel accuses Iran/proxies of plane stabbing incident by Oct 31? | - | world-activity/israel-accuses-iranproxies-of-plane-stabbing-incident-by-oct-31 | israel accuses iranproxies of plane stabbing incident by oct 31
+Price: Israel accuses Iran/proxies of plane stabbing incident by Oct 31? | - | world-price/israel-accuses-iranproxies-of-plane-stabbing-incident-by-oct-31 | israel accuses iranproxies of plane stabbing incident by oct 31
+Activity: Will the US confirm that aliens exist before 2027? | - | culture-activity/will-the-us-confirm-that-aliens-exist-before-2027 | will the us confirm that aliens exist before 2027
+Price: Will the US confirm that aliens exist before 2027? | - | culture-price/will-the-us-confirm-that-aliens-exist-before-2027 | will the us confirm that aliens exist before 2027
+Activity: Bab el-Mandeb Strait effectively closed by December 31? | - | world-activity/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Price: Bab el-Mandeb Strait effectively closed by December 31? | - | world-price/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Activity: NATO x Russia military clash by December 31, 2026? | - | world-activity/nato-x-russia-military-clash-in-2025 | nato x russia military clash in 2025
+Price: NATO x Russia military clash by December 31, 2026? | - | world-price/nato-x-russia-military-clash-in-2025 | nato x russia military clash in 2025
+Activity: Will Bitcoin dip to $55,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $55,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will Lamine Yamal win the 2026 Ballon d'Or? | - | sports-activity/ballon-dor-winner-2026 | ballon dor winner 2026
+Price: Will Lamine Yamal win the 2026 Ballon d'Or? | - | sports-price/ballon-dor-winner-2026 | ballon dor winner 2026
+Activity: US announces end of Iranian blockade by December 31, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by December 31, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will Liverpool win the 2026-27 UEFA Champions League Championship? | - | sports-activity/uefa-champions-league-2027-champion-20260701202025549 | uefa champions league 2027 champion 20260701202025549
+Price: Will Liverpool win the 2026-27 UEFA Champions League Championship? | - | sports-price/uefa-champions-league-2027-champion-20260701202025549 | uefa champions league 2027 champion 20260701202025549
+Activity: Will David Lisnard win the 2027 French presidential election? | - | world-activity/next-french-presidential-election | next french presidential election
+Price: Will David Lisnard win the 2027 French presidential election? | - | world-price/next-french-presidential-election | next french presidential election
+Activity: Will Marco Rubio win the 2028 US Presidential Election? | - | politics-activity/presidential-election-winner-2028 | presidential election winner 2028
+Price: Will Marco Rubio win the 2028 US Presidential Election? | - | politics-price/presidential-election-winner-2028 | presidential election winner 2028
+Activity: Will MOUZ Win the ESL Pro League Season 24? | - | other-activity/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Price: Will MOUZ Win the ESL Pro League Season 24? | - | other-price/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Activity: Zelenskyy out as Ukraine president by end of 2026? | - | world-activity/zelenskyy-out-as-ukraine-president-before-2027 | zelenskyy out as ukraine president before 2027
+Price: Zelenskyy out as Ukraine president by end of 2026? | - | world-price/zelenskyy-out-as-ukraine-president-before-2027 | zelenskyy out as ukraine president before 2027
+Activity: Will the Iranian regime fall before 2027? | - | world-activity/will-the-iranian-regime-fall-by-the-end-of-2026 | will the iranian regime fall by the end of 2026
+Price: Will the Iranian regime fall before 2027? | - | world-price/will-the-iranian-regime-fall-by-the-end-of-2026 | will the iranian regime fall by the end of 2026
+Activity: Will Ethereum dip to $1,000 by December 31, 2026? | - | crypto-activity/what-price-will-ethereum-hit-before-2027 | what price will ethereum hit before 2027
+Price: Will Ethereum dip to $1,000 by December 31, 2026? | - | crypto-price/what-price-will-ethereum-hit-before-2027 | what price will ethereum hit before 2027
+Activity: Iran-Oman Hormuz Agreement by October 31? | - | world-activity/iran-oman-hormuz-management-agreement-byptptpt-20260804222725871 | iran oman hormuz management agreement byptptpt 20260804222725871
+Price: Iran-Oman Hormuz Agreement by October 31? | - | world-price/iran-oman-hormuz-management-agreement-byptptpt-20260804222725871 | iran oman hormuz management agreement byptptpt 20260804222725871
+Activity: Israel x Iran ceasefire continues through December 31? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through December 31? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: Will the Democrats win the Michigan Senate race in 2026? | - | politics-activity/michigan-senate-election-winner | michigan senate election winner
+Price: Will the Democrats win the Michigan Senate race in 2026? | - | politics-price/michigan-senate-election-winner | michigan senate election winner
+Activity: Will the Republican Party control the Senate after the 2026 Midterm elections? | - | politics-activity/which-party-will-win-the-senate-in-2026 | which party will win the senate in 2026
+Price: Will the Republican Party control the Senate after the 2026 Midterm elections? | - | politics-price/which-party-will-win-the-senate-in-2026 | which party will win the senate in 2026
+Activity: Will Ukraine recapture Crimean territory by December 31, 2026? | - | world-activity/will-ukraine-recapture-crimean-territory-by-june-30-2026 | will ukraine recapture crimean territory by june 30 2026
+Price: Will Ukraine recapture Crimean territory by December 31, 2026? | - | world-price/will-ukraine-recapture-crimean-territory-by-june-30-2026 | will ukraine recapture crimean territory by june 30 2026
+Activity: Will Puma Shen win the next Taipei Mayor election? | - | politics-activity/taipei-mayor-election-winner-20260813125857100 | taipei mayor election winner 20260813125857100
+Price: Will Puma Shen win the next Taipei Mayor election? | - | politics-price/taipei-mayor-election-winner-20260813125857100 | taipei mayor election winner 20260813125857100
+Activity: Will Gadi Eizenkot be the next Prime Minister of Israel? | - | world-activity/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Price: Will Gadi Eizenkot be the next Prime Minister of Israel? | - | world-price/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Activity: Will Vitality Win the ESL Pro League Season 24? | - | other-activity/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Price: Will Vitality Win the ESL Pro League Season 24? | - | other-price/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Activity: US x Iran ceasefire continues through November 15? | - | world-activity/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Price: US x Iran ceasefire continues through November 15? | - | world-price/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Activity: Will Paris Saint-Germain win the 2026-27 Ligue 1 Championship? | - | sports-activity/ligue-1-2027-champion-20260701201053335 | ligue 1 2027 champion 20260701201053335
+Price: Will Paris Saint-Germain win the 2026-27 Ligue 1 Championship? | - | sports-price/ligue-1-2027-champion-20260701201053335 | ligue 1 2027 champion 20260701201053335
+Activity: Bab el-Mandeb Strait effectively closed by October 31? | - | world-activity/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Price: Bab el-Mandeb Strait effectively closed by October 31? | - | world-price/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Activity: Will Pedro Sánchez be the next Prime Minister of Spain? | - | world-activity/next-prime-minister-of-spain-20260625005215443 | next prime minister of spain 20260625005215443
+Price: Will Pedro Sánchez be the next Prime Minister of Spain? | - | world-price/next-prime-minister-of-spain-20260625005215443 | next prime minister of spain 20260625005215443
+Activity: Will Anthropic's valuation hit (HIGH) $4.0T by December 31? | - | tech-activity/will-anthropics-valuation-hit-by-december-31 | will anthropics valuation hit by december 31
+Price: Will Anthropic's valuation hit (HIGH) $4.0T by December 31? | - | tech-price/will-anthropics-valuation-hit-by-december-31 | will anthropics valuation hit by december 31
+Activity: Will Bitcoin dip to $45,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $45,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Modi out by December 31, 2026? | - | other-activity/modi-out-before-2027 | modi out before 2027
+Price: Modi out by December 31, 2026? | - | other-price/modi-out-before-2027 | modi out before 2027
+Activity: Next Fable Model (5.2+) released by October 31, 2026? | - | tech-activity/next-fable-model-5pt2-released-byptptpt | next fable model 5pt2 released byptptpt
+Price: Next Fable Model (5.2+) released by October 31, 2026? | - | tech-price/next-fable-model-5pt2-released-byptptpt | next fable model 5pt2 released byptptpt
+Activity: Will Chiang Wan-an win the next Taipei Mayor election? | - | politics-activity/taipei-mayor-election-winner-20260813125857100 | taipei mayor election winner 20260813125857100
+Price: Will Chiang Wan-an win the next Taipei Mayor election? | - | politics-price/taipei-mayor-election-winner-20260813125857100 | taipei mayor election winner 20260813125857100
+Activity: Will WTI Crude Oil (WTI) hit (HIGH) $100 in October? | - | econ-activity/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Price: Will WTI Crude Oil (WTI) hit (HIGH) $100 in October? | - | econ-price/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Activity: Pedro Sánchez out as PM of Spain by December 31, 2026? | - | other-activity/pedro-snchez-out-as-pm-of-spain-by | pedro snchez out as pm of spain by
+Price: Pedro Sánchez out as PM of Spain by December 31, 2026? | - | other-price/pedro-snchez-out-as-pm-of-spain-by | pedro snchez out as pm of spain by
+Activity: Will JD Vance win the 2028 US Presidential Election? | - | politics-activity/presidential-election-winner-2028 | presidential election winner 2028
+Price: Will JD Vance win the 2028 US Presidential Election? | - | politics-price/presidential-election-winner-2028 | presidential election winner 2028
+Activity: Will the Republicans win the Iowa Senate race in 2026? | - | politics-activity/iowa-senate-election-winner | iowa senate election winner
+Price: Will the Republicans win the Iowa Senate race in 2026? | - | politics-price/iowa-senate-election-winner | iowa senate election winner
+Activity: Will Dallas Cowboys win the 2026 NFC East? | - | sports-activity/pro-football-nfc-east-champion | pro football nfc east champion
+Price: Will Dallas Cowboys win the 2026 NFC East? | - | sports-price/pro-football-nfc-east-champion | pro football nfc east champion
+Activity: Will the San Francisco 49ers win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the San Francisco 49ers win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will Aleksandar Vučić be the next Prime Minister of Serbia? | - | world-activity/next-prime-minister-of-serbia-20260629223938642 | next prime minister of serbia 20260629223938642
+Price: Will Aleksandar Vučić be the next Prime Minister of Serbia? | - | world-price/next-prime-minister-of-serbia-20260629223938642 | next prime minister of serbia 20260629223938642
+Activity: Will Bitcoin reach $120,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin reach $120,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will WTI Crude Oil (WTI) hit (LOW) $80 in October? | - | econ-activity/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Price: Will WTI Crude Oil (WTI) hit (LOW) $80 in October? | - | econ-price/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Activity: Will Anthropic's market cap be between $2.0T and $2.25T at market close on IPO day? | - | tech-activity/anthropic-ipo-closing-market-cap-higher-strikes | anthropic ipo closing market cap higher strikes
+Price: Will Anthropic's market cap be between $2.0T and $2.25T at market close on IPO day? | - | tech-price/anthropic-ipo-closing-market-cap-higher-strikes | anthropic ipo closing market cap higher strikes
+Activity: Russia x Ukraine ceasefire agreement by October 31, 2026? | - | world-activity/russia-x-ukraine-ceasefire-agreement-by | russia x ukraine ceasefire agreement by
+Price: Russia x Ukraine ceasefire agreement by October 31, 2026? | - | world-price/russia-x-ukraine-ceasefire-agreement-by | russia x ukraine ceasefire agreement by
+Activity: Will Spirit Win the ESL Pro League Season 24? | - | other-activity/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Price: Will Spirit Win the ESL Pro League Season 24? | - | other-price/esl-pro-league-season-24-winner-1788882991655 | esl pro league season 24 winner 1788882991655
+Activity: Will the Los Angeles Dodgers win the 2026 World Series? | - | sports-activity/mlb-world-series-champion-2026 | mlb world series champion 2026
+Price: Will the Los Angeles Dodgers win the 2026 World Series? | - | sports-price/mlb-world-series-champion-2026 | mlb world series champion 2026
+Activity: Will WTI Crude Oil (WTI) hit (HIGH) $95 in October? | - | econ-activity/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Price: Will WTI Crude Oil (WTI) hit (HIGH) $95 in October? | - | econ-price/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Activity: Will Kimi Antonelli be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Kimi Antonelli be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will Predict.fun launch a token by December 31, 2026? | - | crypto-activity/will-predictfun-launch-a-token-by | will predictfun launch a token by
+Price: Will Predict.fun launch a token by December 31, 2026? | - | crypto-price/will-predictfun-launch-a-token-by | will predictfun launch a token by
+Activity: Strait of Hormuz traffic returns to normal by November 30? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-november-30-20260810151158765 | strait of hormuz traffic returns to normal by november 30 20260810151158765
+Price: Strait of Hormuz traffic returns to normal by November 30? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-november-30-20260810151158765 | strait of hormuz traffic returns to normal by november 30 20260810151158765
+Activity: Will Anthropic IPO by December 31, 2026? | - | tech-activity/anthropic-ipo-by | anthropic ipo by
+Price: Will Anthropic IPO by December 31, 2026? | - | tech-price/anthropic-ipo-by | anthropic ipo by
+Activity: Will the Republicans win the Michigan Senate race in 2026? | - | politics-activity/michigan-senate-election-winner | michigan senate election winner
+Price: Will the Republicans win the Michigan Senate race in 2026? | - | politics-price/michigan-senate-election-winner | michigan senate election winner
+Activity: Will WTI Crude Oil (WTI) hit (LOW) $85 in October? | - | econ-activity/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Price: Will WTI Crude Oil (WTI) hit (LOW) $85 in October? | - | econ-price/what-price-will-wti-hit-in-october-2026 | what price will wti hit in october 2026
+Activity: Will Bayern Munich win the 2026-27 UEFA Champions League Championship? | - | sports-activity/uefa-champions-league-2027-champion-20260701202025549 | uefa champions league 2027 champion 20260701202025549
+Price: Will Bayern Munich win the 2026-27 UEFA Champions League Championship? | - | sports-price/uefa-champions-league-2027-champion-20260701202025549 | uefa champions league 2027 champion 20260701202025549
+Activity: Will Аndrey Gyurov win the next Bulgarian presidential election? | - | politics-activity/bulgaria-presidential-election | bulgaria presidential election
+Price: Will Аndrey Gyurov win the next Bulgarian presidential election? | - | politics-price/bulgaria-presidential-election | bulgaria presidential election
+Activity: Will Marine Le Pen win the 2027 French presidential election? | - | world-activity/next-french-presidential-election | next french presidential election
+Price: Will Marine Le Pen win the 2027 French presidential election? | - | world-price/next-french-presidential-election | next french presidential election
+Activity: Will Ilija Srdanović be the next prime minister of Serbia? | - | world-activity/next-prime-minister-of-serbia-20260629223938642 | next prime minister of serbia 20260629223938642
+Price: Will Ilija Srdanović be the next prime minister of Serbia? | - | world-price/next-prime-minister-of-serbia-20260629223938642 | next prime minister of serbia 20260629223938642
+Activity: Will the Democratic Party control the Senate after the 2026 Midterm elections? | - | politics-activity/which-party-will-win-the-senate-in-2026 | which party will win the senate in 2026
+Price: Will the Democratic Party control the Senate after the 2026 Midterm elections? | - | politics-price/which-party-will-win-the-senate-in-2026 | which party will win the senate in 2026
+Activity: Will Aleksandar Vučić – United Serbia win the most seats in the 2026 Serbian parliamentary election? | - | politics-activity/serbia-parliamentary-election-winner-2026 | serbia parliamentary election winner 2026
+Price: Will Aleksandar Vučić – United Serbia win the most seats in the 2026 Serbian parliamentary election? | - | politics-price/serbia-parliamentary-election-winner-2026 | serbia parliamentary election winner 2026
+Activity: Will Mojtaba Khamenei be head of state in Iran end of 2026? | - | world-activity/iran-leader-end-of-2026 | iran leader end of 2026
+Price: Will Mojtaba Khamenei be head of state in Iran end of 2026? | - | world-price/iran-leader-end-of-2026 | iran leader end of 2026
+Activity: Perim Island no longer under Houthi control by December 31? | - | other-activity/perim-island-no-longer-under-houthi-control-by-20260916 | perim island no longer under houthi control by 20260916
+Price: Perim Island no longer under Houthi control by December 31? | - | other-price/perim-island-no-longer-under-houthi-control-by-20260916 | perim island no longer under houthi control by 20260916
+Activity: US x Iran ceasefire continues through November 30? | - | world-activity/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Price: US x Iran ceasefire continues through November 30? | - | world-price/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Activity: Will Naftali Bennett be the next Prime Minister of Israel? | - | world-activity/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Price: Will Naftali Bennett be the next Prime Minister of Israel? | - | world-price/who-will-be-the-next-prime-minister-of-israel-after-the-next-election | who will be the next prime minister of israel after the next election
+Activity: US x Iran ceasefire continues through December 31? | - | world-activity/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Price: US x Iran ceasefire continues through December 31? | - | world-price/us-iran-ceasefire-continues-throughptptpt | us iran ceasefire continues throughptptpt
+Activity: Iran leadership change by December 31? | - | world-activity/iran-leadership-change-by | iran leadership change by
+Price: Iran leadership change by December 31? | - | world-price/iran-leadership-change-by | iran leadership change by
+Activity: Will Manchester City win the 2026-27 English Premier League (EPL) Championship? | - | sports-activity/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Price: Will Manchester City win the 2026-27 English Premier League (EPL) Championship? | - | sports-price/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Activity: Will the Jacksonville Jaguars win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Jacksonville Jaguars win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will Luca Niculescu be the next Prime Minister of Romania? | - | world-activity/next-prime-minister-of-romania-732 | next prime minister of romania 732
+Price: Will Luca Niculescu be the next Prime Minister of Romania? | - | world-price/next-prime-minister-of-romania-732 | next prime minister of romania 732
+Activity: Will Alberto Núñez Feijóo be the next Prime Minister of Spain? | - | world-activity/next-prime-minister-of-spain-20260625005215443 | next prime minister of spain 20260625005215443
+Price: Will Alberto Núñez Feijóo be the next Prime Minister of Spain? | - | world-price/next-prime-minister-of-spain-20260625005215443 | next prime minister of spain 20260625005215443
+Activity: Will Arsenal win the 2026-27 English Premier League (EPL) Championship? | - | sports-activity/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Price: Will Arsenal win the 2026-27 English Premier League (EPL) Championship? | - | sports-price/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Activity: Will Toronto Raptors win the 2027 NBA Finals? | - | sports-activity/nba-2027-champion | nba 2027 champion
+Price: Will Toronto Raptors win the 2027 NBA Finals? | - | sports-price/nba-2027-champion | nba 2027 champion
+Activity: Will Chelsea win the 2026-27 English Premier League (EPL) Championship? | - | sports-activity/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Price: Will Chelsea win the 2026-27 English Premier League (EPL) Championship? | - | sports-price/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Activity: Will Jean-Luc Mélenchon win the 2027 French presidential election? | - | world-activity/next-french-presidential-election | next french presidential election
+Price: Will Jean-Luc Mélenchon win the 2027 French presidential election? | - | world-price/next-french-presidential-election | next french presidential election
+Activity: Will Bitcoin dip to $77,500 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin dip to $77,500 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Will the Baltimore Ravens win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Baltimore Ravens win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Perim Island no longer under Houthi control by October 31? | - | other-activity/perim-island-no-longer-under-houthi-control-by-20260916 | perim island no longer under houthi control by 20260916
+Price: Perim Island no longer under Houthi control by October 31? | - | other-price/perim-island-no-longer-under-houthi-control-by-20260916 | perim island no longer under houthi control by 20260916
+Activity: Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election? | - | politics-activity/presidential-election-winner-2028 | presidential election winner 2028
+Price: Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election? | - | politics-price/presidential-election-winner-2028 | presidential election winner 2028
+Activity: Will the New England Patriots win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the New England Patriots win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will an independent win the Nebraska Senate race in 2026? | - | politics-activity/nebraska-senate-election-winner | nebraska senate election winner
+Price: Will an independent win the Nebraska Senate race in 2026? | - | politics-price/nebraska-senate-election-winner | nebraska senate election winner
+Activity: Will Satoshi move any Bitcoin in 2026? | - | crypto-activity/will-satoshi-move-any-bitcoin-in-2026 | will satoshi move any bitcoin in 2026
+Price: Will Satoshi move any Bitcoin in 2026? | - | crypto-price/will-satoshi-move-any-bitcoin-in-2026 | will satoshi move any bitcoin in 2026
+Activity: Will Liverpool win the 2026-27 English Premier League (EPL) Championship? | - | sports-activity/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Price: Will Liverpool win the 2026-27 English Premier League (EPL) Championship? | - | sports-price/epl-2027-champion-20260701200428749 | epl 2027 champion 20260701200428749
+Activity: Iran full airspace closure by October 31, 2026? | - | world-activity/iran-full-airspace-closure-byptptpt-20260625195253028 | iran full airspace closure byptptpt 20260625195253028
+Price: Iran full airspace closure by October 31, 2026? | - | world-price/iran-full-airspace-closure-byptptpt-20260625195253028 | iran full airspace closure byptptpt 20260625195253028
+Activity: Will Flávio Bolsonaro win the second round of the 2026 Brazilian presidential election by 4–8%? | - | politics-activity/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Price: Will Flávio Bolsonaro win the second round of the 2026 Brazilian presidential election by 4–8%? | - | politics-price/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Activity: Will the Democrats win the Iowa Senate race in 2026? | - | politics-activity/iowa-senate-election-winner | iowa senate election winner
+Price: Will the Democrats win the Iowa Senate race in 2026? | - | politics-price/iowa-senate-election-winner | iowa senate election winner
+Activity: Will Kamala Harris win the 2028 Democratic presidential nomination? | - | politics-activity/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Price: Will Kamala Harris win the 2028 Democratic presidential nomination? | - | politics-price/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Activity: Will Anthropic IPO by November 30, 2026? | - | tech-activity/anthropic-ipo-by | anthropic ipo by
+Price: Will Anthropic IPO by November 30, 2026? | - | tech-price/anthropic-ipo-by | anthropic ipo by
+Activity: Netanyahu out by end of 2026? | - | world-activity/netanyahu-out-before-2027 | netanyahu out before 2027
+Price: Netanyahu out by end of 2026? | - | world-price/netanyahu-out-before-2027 | netanyahu out before 2027
+Activity: Will Anthropic announce bankruptcy by December 31, 2027? | - | tech-activity/anthropic-announces-bankruptcy-by | anthropic announces bankruptcy by
+Price: Will Anthropic announce bankruptcy by December 31, 2027? | - | tech-price/anthropic-announces-bankruptcy-by | anthropic announces bankruptcy by
+Activity: Russia-Ukraine peace talks by October 31, 2026? | - | world-activity/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Price: Russia-Ukraine peace talks by October 31, 2026? | - | world-price/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Activity: US-Iran Final Nuclear Deal by December 31, 2026? | - | world-activity/us-iran-final-nuclear-deal-by-20260621201254412 | us iran final nuclear deal by 20260621201254412
+Price: US-Iran Final Nuclear Deal by December 31, 2026? | - | world-price/us-iran-final-nuclear-deal-by-20260621201254412 | us iran final nuclear deal by 20260621201254412
+Activity: Will Flávio Bolsonaro win the second round of the 2026 Brazilian presidential election by less than 4%? | - | politics-activity/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Price: Will Flávio Bolsonaro win the second round of the 2026 Brazilian presidential election by less than 4%? | - | politics-price/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Activity: Will Minnesota Timberwolves win the 2027 NBA Finals? | - | sports-activity/nba-2027-champion | nba 2027 champion
+Price: Will Minnesota Timberwolves win the 2027 NBA Finals? | - | sports-price/nba-2027-champion | nba 2027 champion
+Activity: Will the Democrats win the Vermont governor race in 2026? | - | politics-activity/vermont-governor-winner-2026 | vermont governor winner 2026
+Price: Will the Democrats win the Vermont governor race in 2026? | - | politics-price/vermont-governor-winner-2026 | vermont governor winner 2026
+Activity: Will Bitcoin dip to $50,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $50,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will Likud win 30-34 seats in the 2026 Israeli legislative election? | - | world-activity/israel-election-likud-of-seats | israel election likud of seats
+Price: Will Likud win 30-34 seats in the 2026 Israeli legislative election? | - | world-price/israel-election-likud-of-seats | israel election likud of seats
+Activity: Variational FDV above $500M one day after launch? | - | other-activity/variational-fdv-above-one-day-after-launch | variational fdv above one day after launch
+Price: Variational FDV above $500M one day after launch? | - | other-price/variational-fdv-above-one-day-after-launch | variational fdv above one day after launch
+Activity: Will Bitcoin reach $100,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin reach $100,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Strait of Hormuz traffic returns to normal by December 31? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-december-31 | strait of hormuz traffic returns to normal by december 31
+Price: Strait of Hormuz traffic returns to normal by December 31? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-december-31 | strait of hormuz traffic returns to normal by december 31
+Activity: Will the Democrats win the Minnesota Senate race in 2026? | - | politics-activity/minnesota-senate-election-winner | minnesota senate election winner
+Price: Will the Democrats win the Minnesota Senate race in 2026? | - | politics-price/minnesota-senate-election-winner | minnesota senate election winner
+Activity: Will Bitcoin dip to $70,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $70,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will Gavin Newsom win the 2028 Democratic presidential nomination? | - | politics-activity/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Price: Will Gavin Newsom win the 2028 Democratic presidential nomination? | - | politics-price/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Activity: Will NVIDIA be the largest company in the world by market cap on December 31? | - | tech-activity/largest-company-end-of-december-2026 | largest company end of december 2026
+Price: Will NVIDIA be the largest company in the world by market cap on December 31? | - | tech-price/largest-company-end-of-december-2026 | largest company end of december 2026
+Activity: Gemini 4.0 released by October 31, 2026? | - | tech-activity/gemini-4pt0-released-by-june-30-2026 | gemini 4pt0 released by june 30 2026
+Price: Gemini 4.0 released by October 31, 2026? | - | tech-price/gemini-4pt0-released-by-june-30-2026 | gemini 4pt0 released by june 30 2026
+Activity: Will Anthropic have the best AI model at the end of November 2026? | - | tech-activity/which-company-has-the-best-ai-model-end-of-november | which company has the best ai model end of november
+Price: Will Anthropic have the best AI model at the end of November 2026? | - | tech-price/which-company-has-the-best-ai-model-end-of-november | which company has the best ai model end of november
+Activity: Will Bitcoin reach $95,000 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin reach $95,000 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Will Pete Buttigieg win the 2028 Democratic presidential nomination? | - | politics-activity/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Price: Will Pete Buttigieg win the 2028 Democratic presidential nomination? | - | politics-price/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Activity: Trump out as President before 2027? | - | politics-activity/trump-out-as-president-before-2027 | trump out as president before 2027
+Price: Trump out as President before 2027? | - | politics-price/trump-out-as-president-before-2027 | trump out as president before 2027
+Activity: Will Google have the best AI model at the end of October 2026? | - | tech-activity/which-company-has-the-best-ai-model-end-of-october | which company has the best ai model end of october
+Price: Will Google have the best AI model at the end of October 2026? | - | tech-price/which-company-has-the-best-ai-model-end-of-october | which company has the best ai model end of october
+Activity: Will Édouard Philippe win the 2027 French presidential election? | - | world-activity/next-french-presidential-election | next french presidential election
+Price: Will Édouard Philippe win the 2027 French presidential election? | - | world-price/next-french-presidential-election | next french presidential election
+Activity: Will Dune: Messiah get the most Oscar nominations at the 99th Academy Awards? | - | culture-activity/which-film-will-get-the-most-oscar-nominations-at-the-99th-academy-awards | which film will get the most oscar nominations at the 99th academy awards
+Price: Will Dune: Messiah get the most Oscar nominations at the 99th Academy Awards? | - | culture-price/which-film-will-get-the-most-oscar-nominations-at-the-99th-academy-awards | which film will get the most oscar nominations at the 99th academy awards
+Activity: Ink FDV above $100M one day after launch? | - | other-activity/ink-fdv-above-one-day-after-launch | ink fdv above one day after launch
+Price: Ink FDV above $100M one day after launch? | - | other-price/ink-fdv-above-one-day-after-launch | ink fdv above one day after launch
+Activity: Will OpenAI have the best AI model at the end of December 2026? | - | tech-activity/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Price: Will OpenAI have the best AI model at the end of December 2026? | - | tech-price/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Activity: US recession by end of 2026? | - | econ-activity/us-recession-by-end-of-2026 | us recession by end of 2026
+Price: US recession by end of 2026? | - | econ-price/us-recession-by-end-of-2026 | us recession by end of 2026
+Activity: Will Bayern Munich be the 2026-27 Bundesliga champion? | - | sports-activity/bundesliga-2027-champion-20260708164840303 | bundesliga 2027 champion 20260708164840303
+Price: Will Bayern Munich be the 2026-27 Bundesliga champion? | - | sports-price/bundesliga-2027-champion-20260708164840303 | bundesliga 2027 champion 20260708164840303
+Activity: Will Meta have the best AI model at the end of December 2026? | - | tech-activity/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Price: Will Meta have the best AI model at the end of December 2026? | - | tech-price/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Activity: Will María Corina Machado enter Venezuela by December 31? | - | world-activity/will-mara-corina-machado-enter-venezuela-by-january-31 | will mara corina machado enter venezuela by january 31
+Price: Will María Corina Machado enter Venezuela by December 31? | - | world-price/will-mara-corina-machado-enter-venezuela-by-january-31 | will mara corina machado enter venezuela by january 31
+Activity: Will the Republican Party win the NY-21 House seat? | - | politics-activity/ny-21-house-election-winner | ny 21 house election winner
+Price: Will the Republican Party win the NY-21 House seat? | - | politics-price/ny-21-house-election-winner | ny 21 house election winner
+Activity: Will Nicolás Maduro be the leader of Venezuela end of 2026? | - | world-activity/venezuela-leader-end-of-2026 | venezuela leader end of 2026
+Price: Will Nicolás Maduro be the leader of Venezuela end of 2026? | - | world-price/venezuela-leader-end-of-2026 | venezuela leader end of 2026
+Activity: Will the Tampa Bay Rays win the 2026 World Series? | - | sports-activity/mlb-world-series-champion-2026 | mlb world series champion 2026
+Price: Will the Tampa Bay Rays win the 2026 World Series? | - | sports-price/mlb-world-series-champion-2026 | mlb world series champion 2026
+Activity: Will the Fed increase interest rates by 25 bps after the October 2026 meeting? | - | econ-activity/fed-decision-in-october-20260617190323537 | fed decision in october 20260617190323537
+Price: Will the Fed increase interest rates by 25 bps after the October 2026 meeting? | - | econ-price/fed-decision-in-october-20260617190323537 | fed decision in october 20260617190323537
+Activity: Will the total domestic gross for Resident Evil be less than 150m by October 31? | - | other-activity/resident-evil-total-domestic-gross-by-october-31 | resident evil total domestic gross by october 31
+Price: Will the total domestic gross for Resident Evil be less than 150m by October 31? | - | other-price/resident-evil-total-domestic-gross-by-october-31 | resident evil total domestic gross by october 31
+Activity: Will Bitcoin reach $87,500 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin reach $87,500 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Will François Hollande win the 2027 French presidential election? | - | world-activity/next-french-presidential-election | next french presidential election
+Price: Will François Hollande win the 2027 French presidential election? | - | world-price/next-french-presidential-election | next french presidential election
+Activity: Will Bitcoin reach $90,000 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin reach $90,000 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Another Fed rate hike in 2026? | - | econ-activity/another-fed-rate-hike-in-2026 | another fed rate hike in 2026
+Price: Another Fed rate hike in 2026? | - | econ-price/another-fed-rate-hike-in-2026 | another fed rate hike in 2026
+Activity: Russia x Ukraine ceasefire agreement by December 31, 2026? | - | world-activity/russia-x-ukraine-ceasefire-agreement-by | russia x ukraine ceasefire agreement by
+Price: Russia x Ukraine ceasefire agreement by December 31, 2026? | - | world-price/russia-x-ukraine-ceasefire-agreement-by | russia x ukraine ceasefire agreement by
+Activity: Will the Denver Broncos win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Denver Broncos win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will the ECB announce no change at the October 2026 meeting? | - | econ-activity/ecb-interest-rates-october-2026-20260723225848778 | ecb interest rates october 2026 20260723225848778
+Price: Will the ECB announce no change at the October 2026 meeting? | - | econ-price/ecb-interest-rates-october-2026-20260723225848778 | ecb interest rates october 2026 20260723225848778
+Activity: Will OpenAI’s market cap be $1.5T or greater at market close on IPO day by December 31, 2027? | - | tech-activity/openai-ipo-closing-market-cap-554 | openai ipo closing market cap 554
+Price: Will OpenAI’s market cap be $1.5T or greater at market close on IPO day by December 31, 2027? | - | tech-price/openai-ipo-closing-market-cap-554 | openai ipo closing market cap 554
+Activity: US announces end of Iranian blockade by November 30, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by November 30, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will Jon Ossoff win the 2028 US Presidential Election? | - | politics-activity/presidential-election-winner-2028 | presidential election winner 2028
+Price: Will Jon Ossoff win the 2028 US Presidential Election? | - | politics-price/presidential-election-winner-2028 | presidential election winner 2028
+Activity: Will Josh Shapiro win the 2028 Democratic presidential nomination? | - | politics-activity/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Price: Will Josh Shapiro win the 2028 Democratic presidential nomination? | - | politics-price/democratic-presidential-nominee-2028 | democratic presidential nominee 2028
+Activity: Will Trump meet with Kim Jong Un in 2026? | - | politics-activity/who-will-trump-meet-with-in-2026 | who will trump meet with in 2026
+Price: Will Trump meet with Kim Jong Un in 2026? | - | politics-price/who-will-trump-meet-with-in-2026 | who will trump meet with in 2026
+Activity: Billionaire one-time wealth tax passes in California election 2026? | - | politics-activity/billionaire-one-time-wealth-tax-passes-in-california-election-2026 | billionaire one time wealth tax passes in california election 2026
+Price: Billionaire one-time wealth tax passes in California election 2026? | - | politics-price/billionaire-one-time-wealth-tax-passes-in-california-election-2026 | billionaire one time wealth tax passes in california election 2026
+Activity: Will Luiz Inácio Lula da Silva win the second round of the 2026 Brazilian presidential election by less than 4%? | - | politics-activity/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Price: Will Luiz Inácio Lula da Silva win the second round of the 2026 Brazilian presidential election by less than 4%? | - | politics-price/brazil-presidential-election-second-round-margin-of-victory | brazil presidential election second round margin of victory
+Activity: Will J.D. Vance win the 2028 Republican presidential nomination? | - | politics-activity/republican-presidential-nominee-2028 | republican presidential nominee 2028
+Price: Will J.D. Vance win the 2028 Republican presidential nomination? | - | politics-price/republican-presidential-nominee-2028 | republican presidential nominee 2028
+Activity: Will no Fed rate cuts happen in 2026? | - | econ-activity/how-many-fed-rate-cuts-in-2026 | how many fed rate cuts in 2026
+Price: Will no Fed rate cuts happen in 2026? | - | econ-price/how-many-fed-rate-cuts-in-2026 | how many fed rate cuts in 2026
+Activity: Will Bitcoin dip to $65,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $65,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will Russia and Ukraine hold any diplomatic meeting by October 31, 2026? | - | world-activity/russia-x-ukraine-any-diplomatic-meeting-byptptpt-20260819 | russia x ukraine any diplomatic meeting byptptpt 20260819
+Price: Will Russia and Ukraine hold any diplomatic meeting by October 31, 2026? | - | world-price/russia-x-ukraine-any-diplomatic-meeting-byptptpt-20260819 | russia x ukraine any diplomatic meeting byptptpt 20260819
+Activity: Will Marco Rubio win the 2028 Republican presidential nomination? | - | politics-activity/republican-presidential-nominee-2028 | republican presidential nominee 2028
+Price: Will Marco Rubio win the 2028 Republican presidential nomination? | - | politics-price/republican-presidential-nominee-2028 | republican presidential nominee 2028
+Activity: Will there be no next Google Gemini Pro model release by October 31, 2026? | - | tech-activity/next-gemini-pro-model-released-onptptpt-20260922131618444 | next gemini pro model released onptptpt 20260922131618444
+Price: Will there be no next Google Gemini Pro model release by October 31, 2026? | - | tech-price/next-gemini-pro-model-released-onptptpt-20260922131618444 | next gemini pro model released onptptpt 20260922131618444
+Activity: Mojtaba Khamenei seen in public by December 31? | - | other-activity/mojtaba-khamenei-public-appearance-by | mojtaba khamenei public appearance by
+Price: Mojtaba Khamenei seen in public by December 31? | - | other-price/mojtaba-khamenei-public-appearance-by | mojtaba khamenei public appearance by
+Activity: Israel x Iran ceasefire continues through November 30? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through November 30? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: Will Bitcoin dip to $72,500 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin dip to $72,500 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Any of the Cornell 7 charged with a felony sex crime? | - | other-activity/any-of-the-cornell-7-charged-with-a-felony-sex-crime | any of the cornell 7 charged with a felony sex crime
+Price: Any of the Cornell 7 charged with a felony sex crime? | - | other-price/any-of-the-cornell-7-charged-with-a-felony-sex-crime | any of the cornell 7 charged with a felony sex crime
+Activity: Will the Democratic Party win the TX-35 House seat? | - | politics-activity/tx-35-house-election-winner | tx 35 house election winner
+Price: Will the Democratic Party win the TX-35 House seat? | - | politics-price/tx-35-house-election-winner | tx 35 house election winner
+Activity: Will Anthropic have the best AI model at the end of October 2026? | - | tech-activity/which-company-has-the-best-ai-model-end-of-october | which company has the best ai model end of october
+Price: Will Anthropic have the best AI model at the end of October 2026? | - | tech-price/which-company-has-the-best-ai-model-end-of-october | which company has the best ai model end of october
+Activity: Houthis enter Aden by October 31, 2026? | - | other-activity/houthis-enter-aden-byptptpt | houthis enter aden byptptpt
+Price: Houthis enter Aden by October 31, 2026? | - | other-price/houthis-enter-aden-byptptpt | houthis enter aden byptptpt
+Activity: Will Miami Heat win the 2027 NBA Finals? | - | sports-activity/nba-2027-champion | nba 2027 champion
+Price: Will Miami Heat win the 2027 NBA Finals? | - | sports-price/nba-2027-champion | nba 2027 champion
+Activity: Will Samuel Alito announce his retirement by December 31, 2026? | - | other-activity/will-samuel-alito-announce-his-retirement-by | will samuel alito announce his retirement by
+Price: Will Samuel Alito announce his retirement by December 31, 2026? | - | other-price/will-samuel-alito-announce-his-retirement-by | will samuel alito announce his retirement by
+Activity: Will Avengers: Doomsday be the top grossing movie of 2026? | - | culture-activity/highest-grossing-movie-in-2026 | highest grossing movie in 2026
+Price: Will Avengers: Doomsday be the top grossing movie of 2026? | - | culture-price/highest-grossing-movie-in-2026 | highest grossing movie in 2026
+Activity: Will the next Google Gemini Pro model be released by October 31, 2026? | - | tech-activity/next-google-gemini-pro-model-released-byptptpt | next google gemini pro model released byptptpt
+Price: Will the next Google Gemini Pro model be released by October 31, 2026? | - | tech-price/next-google-gemini-pro-model-released-byptptpt | next google gemini pro model released byptptpt
+Activity: Ukraine signs peace deal with Russia before 2027? | - | world-activity/ukraine-signs-peace-deal-with-russia-before-2027 | ukraine signs peace deal with russia before 2027
+Price: Ukraine signs peace deal with Russia before 2027? | - | world-price/ukraine-signs-peace-deal-with-russia-before-2027 | ukraine signs peace deal with russia before 2027
+Activity: Will the Chicago White Sox win the 2026 World Series? | - | sports-activity/mlb-world-series-champion-2026 | mlb world series champion 2026
+Price: Will the Chicago White Sox win the 2026 World Series? | - | sports-price/mlb-world-series-champion-2026 | mlb world series champion 2026
+Activity: Will Trump and Putin meet next in China? | - | world-activity/where-will-trump-and-putin-meet-next-678 | where will trump and putin meet next 678
+Price: Will Trump and Putin meet next in China? | - | world-price/where-will-trump-and-putin-meet-next-678 | where will trump and putin meet next 678
+Activity: Will the Cleveland Guardians win the 2026 World Series? | - | sports-activity/mlb-world-series-champion-2026 | mlb world series champion 2026
+Price: Will the Cleveland Guardians win the 2026 World Series? | - | sports-price/mlb-world-series-champion-2026 | mlb world series champion 2026
+Activity: Will AI solve 0 more Millennium Prize Problems in 2026? | - | tech-activity/how-many-more-millennium-prize-problems-will-ai-solve-in-2026 | how many more millennium prize problems will ai solve in 2026
+Price: Will AI solve 0 more Millennium Prize Problems in 2026? | - | tech-price/how-many-more-millennium-prize-problems-will-ai-solve-in-2026 | how many more millennium prize problems will ai solve in 2026
+Activity: Will Barcelona win the 2026-27 LALIGA Championship? | - | sports-activity/laliga-2027-champion-20260701200737375 | laliga 2027 champion 20260701200737375
+Price: Will Barcelona win the 2026-27 LALIGA Championship? | - | sports-price/laliga-2027-champion-20260701200737375 | laliga 2027 champion 20260701200737375
+Activity: Will Golden State Valkyries win the 2026 WNBA Finals? | - | econ-activity/wnba-2026-champion-464 | wnba 2026 champion 464
+Price: Will Golden State Valkyries win the 2026 WNBA Finals? | - | econ-price/wnba-2026-champion-464 | wnba 2026 champion 464
+Activity: Alexandre de Moraes out as Brazil Supreme Court Justice? | - | politics-activity/alexandre-de-moraes-out-as-brazil-supreme-court-justice | alexandre de moraes out as brazil supreme court justice
+Price: Alexandre de Moraes out as Brazil Supreme Court Justice? | - | politics-price/alexandre-de-moraes-out-as-brazil-supreme-court-justice | alexandre de moraes out as brazil supreme court justice
+Activity: Will Gavin Newsom win the 2028 US Presidential Election? | - | politics-activity/presidential-election-winner-2028 | presidential election winner 2028
+Price: Will Gavin Newsom win the 2028 US Presidential Election? | - | politics-price/presidential-election-winner-2028 | presidential election winner 2028
+Activity: Clarity Act (H.R.3633) signed into law in 2026? | - | politics-activity/clarity-act-signed-into-law-in-2026 | clarity act signed into law in 2026
+Price: Clarity Act (H.R.3633) signed into law in 2026? | - | politics-price/clarity-act-signed-into-law-in-2026 | clarity act signed into law in 2026
+Activity: Will Bitcoin reach $110,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin reach $110,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will the 5-year Treasury yield hit 5.10% before 2027? | - | econ-activity/how-high-will-5-year-treasury-yield-go-before-2027 | how high will 5 year treasury yield go before 2027
+Price: Will the 5-year Treasury yield hit 5.10% before 2027? | - | econ-price/how-high-will-5-year-treasury-yield-go-before-2027 | how high will 5 year treasury yield go before 2027
+Activity: Will Base launch a token by December 31, 2026? | - | crypto-activity/will-base-launch-a-token-in-2025-341 | will base launch a token in 2025 341
+Price: Will Base launch a token by December 31, 2026? | - | crypto-price/will-base-launch-a-token-in-2025-341 | will base launch a token in 2025 341
+Activity: Will the Democrats win the Kansas Senate race in 2026? | - | politics-activity/kansas-senate-election-winner | kansas senate election winner
+Price: Will the Democrats win the Kansas Senate race in 2026? | - | politics-price/kansas-senate-election-winner | kansas senate election winner
+Activity: Predict.fun FDV above $1B one day after launch? | - | other-activity/predictfun-fdv-above-one-day-after-launch | predictfun fdv above one day after launch
+Price: Predict.fun FDV above $1B one day after launch? | - | other-price/predictfun-fdv-above-one-day-after-launch | predictfun fdv above one day after launch
+Activity: Kimberly Guilfoyle out as U.S. Ambassador to Greece by December 31? | - | other-activity/kimberly-guilfoyle-out-as-us-ambassador-to-greece-by | kimberly guilfoyle out as us ambassador to greece by
+Price: Kimberly Guilfoyle out as U.S. Ambassador to Greece by December 31? | - | other-price/kimberly-guilfoyle-out-as-us-ambassador-to-greece-by | kimberly guilfoyle out as us ambassador to greece by
+Activity: Will OpenAI announce another Millennium Prize solution by December 31, 2026? | - | tech-activity/openai-announces-another-millennium-prize-solution-by | openai announces another millennium prize solution by
+Price: Will OpenAI announce another Millennium Prize solution by December 31, 2026? | - | tech-price/openai-announces-another-millennium-prize-solution-by | openai announces another millennium prize solution by
+Activity:  Iran agrees to end enrichment of uranium by December 31? | - | world-activity/iran-agrees-to-end-enrichment-of-uranium-by-december-31 | iran agrees to end enrichment of uranium by december 31
+Price:  Iran agrees to end enrichment of uranium by December 31? | - | world-price/iran-agrees-to-end-enrichment-of-uranium-by-december-31 | iran agrees to end enrichment of uranium by december 31
+Activity: Will Iliana Iotova win the next Bulgarian presidential election? | - | politics-activity/bulgaria-presidential-election | bulgaria presidential election
+Price: Will Iliana Iotova win the next Bulgarian presidential election? | - | politics-price/bulgaria-presidential-election | bulgaria presidential election
+Activity: Will Steve Hilton win the California Governor Election in 2026? | - | politics-activity/california-governor-election-2026 | california governor election 2026
+Price: Will Steve Hilton win the California Governor Election in 2026? | - | politics-price/california-governor-election-2026 | california governor election 2026
+Activity: Will Google have the best AI model at the end of November 2026? | - | tech-activity/which-company-has-the-best-ai-model-end-of-november | which company has the best ai model end of november
+Price: Will Google have the best AI model at the end of November 2026? | - | tech-price/which-company-has-the-best-ai-model-end-of-november | which company has the best ai model end of november
+Activity: Will the Kansas City Chiefs win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Kansas City Chiefs win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will the Buffalo Bills win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Buffalo Bills win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will Bitcoin dip to $60,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin dip to $60,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will the Fed Hike–Pause–Pause in the next three decisions (Sep–Oct–Dec)? | - | econ-activity/fed-decisions-sepdec | fed decisions sepdec
+Price: Will the Fed Hike–Pause–Pause in the next three decisions (Sep–Oct–Dec)? | - | econ-price/fed-decisions-sepdec | fed decisions sepdec
+Activity: Miguel Díaz-Canel out as leader of Cuba by December 31? | - | other-activity/miguel-daz-canel-out-as-leader-of-cuba-by-june-30 | miguel daz canel out as leader of cuba by june 30
+Price: Miguel Díaz-Canel out as leader of Cuba by December 31? | - | other-price/miguel-daz-canel-out-as-leader-of-cuba-by-june-30 | miguel daz canel out as leader of cuba by june 30
+Activity: Will Lionel Messi finish in the top 3 of the 2026 Ballon d'Or? | - | other-activity/ballon-dor-top-3-finish-2026 | ballon dor top 3 finish 2026
+Price: Will Lionel Messi finish in the top 3 of the 2026 Ballon d'Or? | - | other-price/ballon-dor-top-3-finish-2026 | ballon dor top 3 finish 2026
+Activity: Will the Los Angeles Rams win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Los Angeles Rams win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will AI solve 1 more Millennium Prize Problem in 2026? | - | tech-activity/how-many-more-millennium-prize-problems-will-ai-solve-in-2026 | how many more millennium prize problems will ai solve in 2026
+Price: Will AI solve 1 more Millennium Prize Problem in 2026? | - | tech-price/how-many-more-millennium-prize-problems-will-ai-solve-in-2026 | how many more millennium prize problems will ai solve in 2026
+Activity: US strike on Cuba by December 31? | - | world-activity/us-strike-on-cuba-by | us strike on cuba by
+Price: US strike on Cuba by December 31? | - | world-price/us-strike-on-cuba-by | us strike on cuba by
+Activity: Will Apple release a touchscreen MacBook in 2026? | - | tech-activity/will-apple-release-a-touchscreen-macbook-in-2026 | will apple release a touchscreen macbook in 2026
+Price: Will Apple release a touchscreen MacBook in 2026? | - | tech-price/will-apple-release-a-touchscreen-macbook-in-2026 | will apple release a touchscreen macbook in 2026
+Activity: Will Bitcoin dip to $75,000 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin dip to $75,000 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Will Avengers: Doomsday have the best domestic opening weekend in 2026? | - | culture-activity/which-movie-has-biggest-opening-weekend-in-2026 | which movie has biggest opening weekend in 2026
+Price: Will Avengers: Doomsday have the best domestic opening weekend in 2026? | - | culture-price/which-movie-has-biggest-opening-weekend-in-2026 | which movie has biggest opening weekend in 2026
+Activity: Will none of these coins hit a $1B FDV? | - | tech-activity/first-to-hit-1b-fdv-ansem-cashcat-ai-or-net-20260902214135 | first to hit 1b fdv ansem cashcat ai or net 20260902214135
+Price: Will none of these coins hit a $1B FDV? | - | tech-price/first-to-hit-1b-fdv-ansem-cashcat-ai-or-net-20260902214135 | first to hit 1b fdv ansem cashcat ai or net 20260902214135
+Activity: Russia-Ukraine peace talks by November 30, 2026? | - | world-activity/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Price: Russia-Ukraine peace talks by November 30, 2026? | - | world-price/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Activity: Will Oklahoma City Thunder win the 2027 NBA Finals? | - | sports-activity/nba-2027-champion | nba 2027 champion
+Price: Will Oklahoma City Thunder win the 2027 NBA Finals? | - | sports-price/nba-2027-champion | nba 2027 champion
+Activity: Will the Cincinnati Bengals win the 2027 NFL league championship? | - | sports-activity/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Price: Will the Cincinnati Bengals win the 2027 NFL league championship? | - | sports-price/pro-football-2027-champion-20260729185915366 | pro football 2027 champion 20260729185915366
+Activity: Will T1 win Worlds 2026? | - | other-activity/worlds-2026-winner | worlds 2026 winner
+Price: Will T1 win Worlds 2026? | - | other-price/worlds-2026-winner | worlds 2026 winner
+Activity: Will Bitcoin dip to $80,000 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin dip to $80,000 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Will Anthropic IPO by November 15, 2026? | - | tech-activity/anthropic-ipo-by | anthropic ipo by
+Price: Will Anthropic IPO by November 15, 2026? | - | tech-price/anthropic-ipo-by | anthropic ipo by
+Activity: Will Xavier Becerra win the California Governor Election in 2026? | - | politics-activity/california-governor-election-2026 | california governor election 2026
+Price: Will Xavier Becerra win the California Governor Election in 2026? | - | politics-price/california-governor-election-2026 | california governor election 2026
+Activity: Will Jonathan Kreiss-Tomkins win the 2026 Alaska governor election? | - | politics-activity/alaska-governor-election-winner | alaska governor election winner
+Price: Will Jonathan Kreiss-Tomkins win the 2026 Alaska governor election? | - | politics-price/alaska-governor-election-winner | alaska governor election winner
+Activity: Russia-Ukraine peace talks by December 31, 2026? | - | world-activity/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Price: Russia-Ukraine peace talks by December 31, 2026? | - | world-price/russia-x-ukraine-peace-talks-byptptpt-20260609012540716 | russia x ukraine peace talks byptptpt 20260609012540716
+Activity: Next US-Iran senior diplomatic meeting by December 31, 2026? | - | world-activity/next-us-iran-senior-diplomatic-meeting-byptptpt | next us iran senior diplomatic meeting byptptpt
+Price: Next US-Iran senior diplomatic meeting by December 31, 2026? | - | world-price/next-us-iran-senior-diplomatic-meeting-byptptpt | next us iran senior diplomatic meeting byptptpt
+Activity: Will there be no change in Fed interest rates after the January 2027 meeting? | - | econ-activity/fed-decision-in-january-20260729233815502 | fed decision in january 20260729233815502
+Price: Will there be no change in Fed interest rates after the January 2027 meeting? | - | econ-price/fed-decision-in-january-20260729233815502 | fed decision in january 20260729233815502
+Activity: Will the Washington Capitals be named the 2026-27 NHL Stanley Cup Champion? | - | sports-activity/nhl-2027-champion-20260612185656162 | nhl 2027 champion 20260612185656162
+Price: Will the Washington Capitals be named the 2026-27 NHL Stanley Cup Champion? | - | sports-price/nhl-2027-champion-20260612185656162 | nhl 2027 champion 20260612185656162
+Activity: Will Google have the best AI model at the end of December 2026? | - | tech-activity/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Price: Will Google have the best AI model at the end of December 2026? | - | tech-price/which-company-has-best-ai-model-end-of-2026 | which company has best ai model end of 2026
+Activity: Will New York Knicks win the 2027 NBA Finals? | - | sports-activity/nba-2027-champion | nba 2027 champion
+Price: Will New York Knicks win the 2027 NBA Finals? | - | sports-price/nba-2027-champion | nba 2027 champion
+Activity: Predict.fun FDV above $500M one day after launch? | - | other-activity/predictfun-fdv-above-one-day-after-launch | predictfun fdv above one day after launch
+Price: Predict.fun FDV above $500M one day after launch? | - | other-price/predictfun-fdv-above-one-day-after-launch | predictfun fdv above one day after launch
+Activity: Will the Milwaukee Brewers win the 2026 World Series? | - | sports-activity/mlb-world-series-champion-2026 | mlb world series champion 2026
+Price: Will the Milwaukee Brewers win the 2026 World Series? | - | sports-price/mlb-world-series-champion-2026 | mlb world series champion 2026
+Activity: Kharg Island no longer under Iranian control by December 31? | - | world-activity/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Price: Kharg Island no longer under Iranian control by December 31? | - | world-price/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Activity: Will the Democrats win the Texas governor race in 2026? | - | politics-activity/texas-governor-winner-2026 | texas governor winner 2026
+Price: Will the Democrats win the Texas governor race in 2026? | - | politics-price/texas-governor-winner-2026 | texas governor winner 2026
+Activity: Will the Republicans win the Texas governor race in 2026? | - | politics-activity/texas-governor-winner-2026 | texas governor winner 2026
+Price: Will the Republicans win the Texas governor race in 2026? | - | politics-price/texas-governor-winner-2026 | texas governor winner 2026
+Activity: Will the Republicans win the Maine Senate race in 2026? | - | politics-activity/maine-senate-election-winner | maine senate election winner
+Price: Will the Republicans win the Maine Senate race in 2026? | - | politics-price/maine-senate-election-winner | maine senate election winner
+Activity: Will Apple be the largest company in the world by market cap on December 31? | - | tech-activity/largest-company-end-of-december-2026 | largest company end of december 2026
+Price: Will Apple be the largest company in the world by market cap on December 31? | - | tech-price/largest-company-end-of-december-2026 | largest company end of december 2026
+Activity: Will Extended launch a token by December 31 2026? | - | crypto-activity/will-extended-launch-a-token-by | will extended launch a token by
+Price: Will Extended launch a token by December 31 2026? | - | crypto-price/will-extended-launch-a-token-by | will extended launch a token by
+Activity: Next Astra Model (6.1+) released by October 31, 2026? | - | tech-activity/gpt-astra-6pt1-released-byptptpt | gpt astra 6pt1 released byptptpt
+Price: Next Astra Model (6.1+) released by October 31, 2026? | - | tech-price/gpt-astra-6pt1-released-byptptpt | gpt astra 6pt1 released byptptpt
+Activity: Will Saudi airspace be closed by October 31? | - | other-activity/saudi-airspace-closed-byptptpt | saudi airspace closed byptptpt
+Price: Will Saudi airspace be closed by October 31? | - | other-price/saudi-airspace-closed-byptptpt | saudi airspace closed byptptpt
+Activity: Israel withdraws from Lebanon by December 31, 2026? | - | world-activity/israel-withdraws-from-lebanon-by | israel withdraws from lebanon by
+Price: Israel withdraws from Lebanon by December 31, 2026? | - | world-price/israel-withdraws-from-lebanon-by | israel withdraws from lebanon by
+Activity: Will Mike Lee vote "Yea" on the Clarity Act? | - | politics-activity/which-senators-will-vote-for-the-clarity-act-20260729190926658 | which senators will vote for the clarity act 20260729190926658
+Price: Will Mike Lee vote "Yea" on the Clarity Act? | - | politics-price/which-senators-will-vote-for-the-clarity-act-20260729190926658 | which senators will vote for the clarity act 20260729190926658
+Activity: Will Monaco win the 2026-27 Ligue 1 Championship? | - | sports-activity/ligue-1-2027-champion-20260701201053335 | ligue 1 2027 champion 20260701201053335
+Price: Will Monaco win the 2026-27 Ligue 1 Championship? | - | sports-price/ligue-1-2027-champion-20260701201053335 | ligue 1 2027 champion 20260701201053335
+Activity: Will Como win the 2026-27 Serie A Championship? | - | sports-activity/serie-a-2027-champion-20260701200118390 | serie a 2027 champion 20260701200118390
+Price: Will Como win the 2026-27 Serie A Championship? | - | sports-price/serie-a-2027-champion-20260701200118390 | serie a 2027 champion 20260701200118390
+Activity: Will NVIDIA be the largest company in the world by market cap on October 31, 2026? | - | tech-activity/largest-company-end-of-october-2026 | largest company end of october 2026
+Price: Will NVIDIA be the largest company in the world by market cap on October 31, 2026? | - | tech-price/largest-company-end-of-october-2026 | largest company end of october 2026
+Activity: Will the Republicans win the Ohio Senate race in 2026? | - | politics-activity/ohio-senate-election-winner | ohio senate election winner
+Price: Will the Republicans win the Ohio Senate race in 2026? | - | politics-price/ohio-senate-election-winner | ohio senate election winner
+Activity: Will Reza Pahlavi enter Iran by December 31? | - | world-activity/will-reza-pahlavi-enter-iran-by-june-30 | will reza pahlavi enter iran by june 30
+Price: Will Reza Pahlavi enter Iran by December 31? | - | world-price/will-reza-pahlavi-enter-iran-by-june-30 | will reza pahlavi enter iran by june 30
+Activity: Will Elon Musk post 1000+ tweets in October 2026? | - | other-activity/elon-musk-of-tweets-october-2026 | elon musk of tweets october 2026
+Price: Will Elon Musk post 1000+ tweets in October 2026? | - | other-price/elon-musk-of-tweets-october-2026 | elon musk of tweets october 2026
+Activity: Will Bitcoin reach $90,000 by December 31, 2026? | - | crypto-activity/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Price: Will Bitcoin reach $90,000 by December 31, 2026? | - | crypto-price/what-price-will-bitcoin-hit-before-2027 | what price will bitcoin hit before 2027
+Activity: Will Mary Peltola win the Alaska Senate race in 2026? | - | politics-activity/alaska-senate-election-winner | alaska senate election winner
+Price: Will Mary Peltola win the Alaska Senate race in 2026? | - | politics-price/alaska-senate-election-winner | alaska senate election winner
+Activity: Will Bitcoin reach $92,500 in October? | - | crypto-activity/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Price: Will Bitcoin reach $92,500 in October? | - | crypto-price/what-price-will-bitcoin-hit-in-october-2026 | what price will bitcoin hit in october 2026
+Activity: Iran leadership change by June 30, 2027? | - | world-activity/iran-leadership-change-by | iran leadership change by
+Price: Iran leadership change by June 30, 2027? | - | world-price/iran-leadership-change-by | iran leadership change by
+Activity: Gianni Infantino out as FIFA President by December 31? | - | politics-activity/gianni-infantino-out-as-fifa-president-by-december-31-20260706195547871 | gianni infantino out as fifa president by december 31 20260706195547871
+Price: Gianni Infantino out as FIFA President by December 31? | - | politics-price/gianni-infantino-out-as-fifa-president-by-december-31-20260706195547871 | gianni infantino out as fifa president by december 31 20260706195547871
+Activity: US announces end of Iranian blockade by March 31, 2027? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by March 31, 2027? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Iran full airspace closure by December 31? | - | world-activity/iran-full-airspace-closure-byptptpt-20260625195253028 | iran full airspace closure byptptpt 20260625195253028
+Price: Iran full airspace closure by December 31? | - | world-price/iran-full-airspace-closure-byptptpt-20260625195253028 | iran full airspace closure byptptpt 20260625195253028
+Activity: Will the Democrats win the Wisconsin governor race in 2026? | - | politics-activity/wisconsin-governor-winner-2026 | wisconsin governor winner 2026
+Price: Will the Democrats win the Wisconsin governor race in 2026? | - | politics-price/wisconsin-governor-winner-2026 | wisconsin governor winner 2026
+Activity: Will Mark Sutcliffe win the 2026 Ottawa mayoral election? | - | politics-activity/ottawa-mayoral-election-winner | ottawa mayoral election winner
+Price: Will Mark Sutcliffe win the 2026 Ottawa mayoral election? | - | politics-price/ottawa-mayoral-election-winner | ottawa mayoral election winner
+Activity: Will Argentina win the 2026 FIFA World Cup? | - | sports-activity/world-cup-winner | world cup winner
+Price: Will Argentina win the 2026 FIFA World Cup? | - | sports-price/world-cup-winner | world cup winner
+Activity: Will Spain win the 2026 FIFA World Cup? | - | sports-activity/world-cup-winner | world cup winner
+Price: Will Spain win the 2026 FIFA World Cup? | - | sports-price/world-cup-winner | world cup winner
+Activity: Will France win the 2026 FIFA World Cup? | - | world-activity/world-cup-winner | world cup winner
+Price: Will France win the 2026 FIFA World Cup? | - | world-price/world-cup-winner | world cup winner
+Activity: Will England win the 2026 FIFA World Cup? | - | sports-activity/world-cup-winner | world cup winner
+Price: Will England win the 2026 FIFA World Cup? | - | sports-price/world-cup-winner | world cup winner
+Activity: Will there be no change in Fed interest rates after the September 2026 meeting? | - | econ-activity/fed-decision-in-september-762 | fed decision in september 762
+Price: Will there be no change in Fed interest rates after the September 2026 meeting? | - | econ-price/fed-decision-in-september-762 | fed decision in september 762
+Activity: Will the Fed decrease interest rates by 25 bps after the September 2026 meeting? | - | econ-activity/fed-decision-in-september-762 | fed decision in september 762
+Price: Will the Fed decrease interest rates by 25 bps after the September 2026 meeting? | - | econ-price/fed-decision-in-september-762 | fed decision in september 762
+Activity: Will the Fed increase interest rates by 25 bps after the September 2026 meeting? | - | econ-activity/fed-decision-in-september-762 | fed decision in september 762
+Price: Will the Fed increase interest rates by 25 bps after the September 2026 meeting? | - | econ-price/fed-decision-in-september-762 | fed decision in september 762
+Activity: Will there be no change in Fed interest rates after the July 2026 meeting? | - | econ-activity/fed-decision-in-july-181 | fed decision in july 181
+Price: Will there be no change in Fed interest rates after the July 2026 meeting? | - | econ-price/fed-decision-in-july-181 | fed decision in july 181
+Activity: Will the Fed increase interest rates by 50+ bps after the September 2026 meeting? | - | econ-activity/fed-decision-in-september-762 | fed decision in september 762
+Price: Will the Fed increase interest rates by 50+ bps after the September 2026 meeting? | - | econ-price/fed-decision-in-september-762 | fed decision in september 762
+Activity: Will the Fed decrease interest rates by 25 bps after the July 2026 meeting? | - | econ-activity/fed-decision-in-july-181 | fed decision in july 181
+Price: Will the Fed decrease interest rates by 25 bps after the July 2026 meeting? | - | econ-price/fed-decision-in-july-181 | fed decision in july 181
+Activity: Will the Fed increase interest rates by 50+ bps after the July 2026 meeting? | - | econ-activity/fed-decision-in-july-181 | fed decision in july 181
+Price: Will the Fed increase interest rates by 50+ bps after the July 2026 meeting? | - | econ-price/fed-decision-in-july-181 | fed decision in july 181
+Activity: Will Trump be in the WC Champions Photo? | - | politics-activity/will-trump-be-in-the-wc-champions-photo-20260608152527021 | will trump be in the wc champions photo 20260608152527021
+Price: Will Trump be in the WC Champions Photo? | - | politics-price/will-trump-be-in-the-wc-champions-photo-20260608152527021 | will trump be in the wc champions photo 20260608152527021
+Activity: Will the Fed increase interest rates by 25 bps after the July 2026 meeting? | - | econ-activity/fed-decision-in-july-181 | fed decision in july 181
+Price: Will the Fed increase interest rates by 25 bps after the July 2026 meeting? | - | econ-price/fed-decision-in-july-181 | fed decision in july 181
+Activity: Will United Russia (ER) gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will United Russia (ER) gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Strait of Hormuz traffic returns to normal by July 31? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-july-31 | strait of hormuz traffic returns to normal by july 31
+Price: Strait of Hormuz traffic returns to normal by July 31? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-july-31 | strait of hormuz traffic returns to normal by july 31
+Activity: Will the Fed decrease interest rates by 50+ bps after the July 2026 meeting? | - | econ-activity/fed-decision-in-july-181 | fed decision in july 181
+Price: Will the Fed decrease interest rates by 50+ bps after the July 2026 meeting? | - | econ-price/fed-decision-in-july-181 | fed decision in july 181
+Activity: Will Spain win on 2026-07-19? | - | other-activity/fifwc-esp-arg-2026-07-19 | fifwc esp arg 2026 07 19
+Price: Will Spain win on 2026-07-19? | - | other-price/fifwc-esp-arg-2026-07-19 | fifwc esp arg 2026 07 19
+Activity: Will the Fed decrease interest rates by 50+ bps after the September 2026 meeting? | - | econ-activity/fed-decision-in-september-762 | fed decision in september 762
+Price: Will the Fed decrease interest rates by 50+ bps after the September 2026 meeting? | - | econ-price/fed-decision-in-september-762 | fed decision in september 762
+Activity: Strait of Hormuz traffic returns to normal by August 31? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320 | strait of hormuz traffic returns to normal by august 31 20260702154212320
+Price: Strait of Hormuz traffic returns to normal by August 31? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320 | strait of hormuz traffic returns to normal by august 31 20260702154212320
+Activity: Will Argentina win on 2026-07-19? | - | other-activity/fifwc-esp-arg-2026-07-19 | fifwc esp arg 2026 07 19
+Price: Will Argentina win on 2026-07-19? | - | other-price/fifwc-esp-arg-2026-07-19 | fifwc esp arg 2026 07 19
+Activity: Will Renan Santos win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Renan Santos win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Exact Score: Spain 2 - 3 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 2 - 3 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Will Tarcisio de Freitas win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Tarcisio de Freitas win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Norway win on 2026-09-24? | - | other-activity/unl-nor-den-2026-09-24 | unl nor den 2026 09 24
+Price: Will Norway win on 2026-09-24? | - | other-price/unl-nor-den-2026-09-24 | unl nor den 2026 09 24
+Activity: Will Volodymyr Zelenskyy be the next leader out before 2027? | - | world-activity/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Price: Will Volodymyr Zelenskyy be the next leader out before 2027? | - | world-price/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Activity: Strait of Hormuz traffic returns to normal by September 30? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440 | strait of hormuz traffic returns to normal by september 30 20260702154339440
+Price: Strait of Hormuz traffic returns to normal by September 30? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440 | strait of hormuz traffic returns to normal by september 30 20260702154339440
+Activity: Will Arvid Lindblad be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Arvid Lindblad be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will Jesus Christ return before GTA VI? | - | culture-activity/what-will-happen-before-gta-vi | what will happen before gta vi
+Price: Will Jesus Christ return before GTA VI? | - | culture-price/what-will-happen-before-gta-vi | what will happen before gta vi
+Activity: Will Arsenal FC win on 2026-08-31? | - | other-activity/epl-ast-ars-2026-08-31 | epl ast ars 2026 08 31
+Price: Will Arsenal FC win on 2026-08-31? | - | other-price/epl-ast-ars-2026-08-31 | epl ast ars 2026 08 31
+Activity: Will Lionel Messi be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Lionel Messi be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Will Eduardo Bolsonaro win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Eduardo Bolsonaro win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Michelle Bolsonaro win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Michelle Bolsonaro win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Fed rate hike in 2026? | - | econ-activity/fed-rate-hike-in-2026 | fed rate hike in 2026
+Price: Fed rate hike in 2026? | - | econ-price/fed-rate-hike-in-2026 | fed rate hike in 2026
+Activity: Will Esteban Ocon be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Esteban Ocon be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will Isack Hadjar be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Isack Hadjar be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will Geraldo Alckmin win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Geraldo Alckmin win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Mahmoud Abbas be the next leader out before 2027? | - | other-activity/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Price: Will Mahmoud Abbas be the next leader out before 2027? | - | other-price/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Activity: US x Iran Effective Ceasefire by July 31? | - | world-activity/us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042 | us x iran effective ceasfire byptptpt 2 week pause 20260715194822042
+Price: US x Iran Effective Ceasefire by July 31? | - | world-price/us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042 | us x iran effective ceasfire byptptpt 2 week pause 20260715194822042
+Activity: Exact Score: Spain 3 - 3 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 3 - 3 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Will Nico Hülkenberg be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Nico Hülkenberg be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will Kylian Mbappe be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Kylian Mbappe be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Will Donald Trump win the Nobel Peace Prize in 2026? | - | politics-activity/nobel-peace-prize-winner-2026-139 | nobel peace prize winner 2026 139
+Price: Will Donald Trump win the Nobel Peace Prize in 2026? | - | politics-price/nobel-peace-prize-winner-2026-139 | nobel peace prize winner 2026 139
+Activity: Will Spain win on 2026-10-06? | - | other-activity/unl-hrv-esp-2026-10-06 | unl hrv esp 2026 10 06
+Price: Will Spain win on 2026-10-06? | - | other-price/unl-hrv-esp-2026-10-06 | unl hrv esp 2026 10 06
+Activity: Will Ronaldo Caiado win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Ronaldo Caiado win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Fernando Haddad win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Fernando Haddad win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Romeu Zema win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Romeu Zema win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Jair Bolsonaro win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Jair Bolsonaro win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Strait of Hormuz traffic returns to normal by August 15? | - | world-activity/strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320 | strait of hormuz traffic returns to normal by august 31 20260702154212320
+Price: Strait of Hormuz traffic returns to normal by August 15? | - | world-price/strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320 | strait of hormuz traffic returns to normal by august 31 20260702154212320
+Activity: Will the US confirm that aliens exist by September 30? | - | culture-activity/will-the-us-confirm-that-aliens-exist-before-2027 | will the us confirm that aliens exist before 2027
+Price: Will the US confirm that aliens exist by September 30? | - | culture-price/will-the-us-confirm-that-aliens-exist-before-2027 | will the us confirm that aliens exist before 2027
+Activity: US Open ATP: Ben Shelton vs Carlos Alcaraz | - | other-activity/atp-shelton-alcaraz-2026-09-08 | atp shelton alcaraz 2026 09 08
+Price: US Open ATP: Ben Shelton vs Carlos Alcaraz | - | other-price/atp-shelton-alcaraz-2026-09-08 | atp shelton alcaraz 2026 09 08
+Activity: Dota 2: Nigma Galaxy vs Team Falcons (BO3) - The International Playoffs | - | sports-activity/dota2-ngx-flc-2026-08-20 | dota2 ngx flc 2026 08 20
+Price: Dota 2: Nigma Galaxy vs Team Falcons (BO3) - The International Playoffs | - | sports-price/dota2-ngx-flc-2026-08-20 | dota2 ngx flc 2026 08 20
+Activity: US Open ATP: Frances Tiafoe vs Alex Michelsen | - | world-activity/atp-tiafoe-michels-2026-09-08 | atp tiafoe michels 2026 09 08
+Price: US Open ATP: Frances Tiafoe vs Alex Michelsen | - | world-price/atp-tiafoe-michels-2026-09-08 | atp tiafoe michels 2026 09 08
+Activity: Will Chelsea FC win on 2026-09-18? | - | other-activity/epl-bre-che-2026-09-18 | epl bre che 2026 09 18
+Price: Will Chelsea FC win on 2026-09-18? | - | other-price/epl-bre-che-2026-09-18 | epl bre che 2026 09 18
+Activity: Will Oscar Piastri be the 2026 F1 Drivers' Champion? | - | sports-activity/2026-f1-drivers-champion | 2026 f1 drivers champion
+Price: Will Oscar Piastri be the 2026 F1 Drivers' Champion? | - | sports-price/2026-f1-drivers-champion | 2026 f1 drivers champion
+Activity: Will James Fishback be the Republican nominee for Florida Governor? | - | politics-activity/republican-nominee-for-florida-governor | republican nominee for florida governor
+Price: Will James Fishback be the Republican nominee for Florida Governor? | - | politics-price/republican-nominee-for-florida-governor | republican nominee for florida governor
+Activity: Kharg Island no longer under Iranian control by July 31? | - | world-activity/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Price: Kharg Island no longer under Iranian control by July 31? | - | world-price/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Activity: Will Chelsea FC win on 2026-08-30? | - | other-activity/epl-che-bri-2026-08-30 | epl che bri 2026 08 30
+Price: Will Chelsea FC win on 2026-08-30? | - | other-price/epl-che-bri-2026-08-30 | epl che bri 2026 08 30
+Activity: Will New People (NL) gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will New People (NL) gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Kharg Island no longer under Iranian control by August 31? | - | world-activity/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Price: Kharg Island no longer under Iranian control by August 31? | - | world-price/kharg-island-no-longer-under-iranian-control-by-march-31 | kharg island no longer under iranian control by march 31
+Activity: Will Mikel Oyarzabal be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Mikel Oyarzabal be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Will Camilo Santana win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Camilo Santana win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: US announces end of Iranian blockade by September 30, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by September 30, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will the Liberal Democratic Party of Russia (LDPR) gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will the Liberal Democratic Party of Russia (LDPR) gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Will LeBron James play for the Golden State Warriors in 2026-27? | - | econ-activity/nba-lebron-james-next-team | nba lebron james next team
+Price: Will LeBron James play for the Golden State Warriors in 2026-27? | - | econ-price/nba-lebron-james-next-team | nba lebron james next team
+Activity: Will LeBron James play for the Miami Heat in 2026-27? | - | sports-activity/nba-lebron-james-next-team | nba lebron james next team
+Price: Will LeBron James play for the Miami Heat in 2026-27? | - | sports-price/nba-lebron-james-next-team | nba lebron james next team
+Activity: Will Augusto Cury win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Augusto Cury win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: Will Arsenal FC win on 2026-09-12? | - | other-activity/epl-sun-ars-2026-09-12 | epl sun ars 2026 09 12
+Price: Will Arsenal FC win on 2026-09-12? | - | other-price/epl-sun-ars-2026-09-12 | epl sun ars 2026 09 12
+Activity: Cincinnati Open: Iga Swiatek vs Elena Rybakina | - | other-activity/wta-swiatek-rybakin-2026-08-20 | wta swiatek rybakin 2026 08 20
+Price: Cincinnati Open: Iga Swiatek vs Elena Rybakina | - | other-price/wta-swiatek-rybakin-2026-08-20 | wta swiatek rybakin 2026 08 20
+Activity: Will Real Madrid CF win on 2026-08-26? | - | other-activity/lal-rea-rso-2026-08-26 | lal rea rso 2026 08 26
+Price: Will Real Madrid CF win on 2026-08-26? | - | other-price/lal-rea-rso-2026-08-26 | lal rea rso 2026 08 26
+Activity: Will Portugal win on 2026-10-01? | - | other-activity/unl-den-prt-2026-10-01 | unl den prt 2026 10 01
+Price: Will Portugal win on 2026-10-01? | - | other-price/unl-den-prt-2026-10-01 | unl den prt 2026 10 01
+Activity: Will Brighton & Hove Albion FC win on 2026-09-13? | - | other-activity/epl-cov-bri-2026-09-13 | epl cov bri 2026 09 13
+Price: Will Brighton & Hove Albion FC win on 2026-09-13? | - | other-price/epl-cov-bri-2026-09-13 | epl cov bri 2026 09 13
+Activity: Exact Score: Spain 3 - 2 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 3 - 2 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Exact Score: Spain 1 - 0 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 1 - 0 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: US announces end of Iranian blockade by August 31, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by August 31, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will Vladimir Putin be the next leader out before 2027? | - | world-activity/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Price: Will Vladimir Putin be the next leader out before 2027? | - | world-price/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Activity: Will bitcoin hit $1m before GTA VI? | - | crypto-activity/what-will-happen-before-gta-vi | what will happen before gta vi
+Price: Will bitcoin hit $1m before GTA VI? | - | crypto-price/what-will-happen-before-gta-vi | what will happen before gta vi
+Activity: Will Sébastien Lecornu be the next leader out before 2027? | - | other-activity/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Price: Will Sébastien Lecornu be the next leader out before 2027? | - | other-price/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Activity: US-Iran Final Nuclear Deal by August 31, 2026? | - | world-activity/us-iran-final-nuclear-deal-by-20260621201254412 | us iran final nuclear deal by 20260621201254412
+Price: US-Iran Final Nuclear Deal by August 31, 2026? | - | world-price/us-iran-final-nuclear-deal-by-20260621201254412 | us iran final nuclear deal by 20260621201254412
+Activity: Will France win on 2026-09-28? | - | world-activity/unl-bel-fra-2026-09-28 | unl bel fra 2026 09 28
+Price: Will France win on 2026-09-28? | - | world-price/unl-bel-fra-2026-09-28 | unl bel fra 2026 09 28
+Activity: US Open ATP: Karen Khachanov vs Alexander Blockx | - | other-activity/atp-khachan-blockx-2026-09-09 | atp khachan blockx 2026 09 09
+Price: US Open ATP: Karen Khachanov vs Alexander Blockx | - | other-price/atp-khachan-blockx-2026-09-09 | atp khachan blockx 2026 09 09
+Activity: Dota 2: TEAM VISION vs BoomBoys (BO3) - The International Playoffs | - | sports-activity/dota2-vsn2-boombo-2026-08-20 | dota2 vsn2 boombo 2026 08 20
+Price: Dota 2: TEAM VISION vs BoomBoys (BO3) - The International Playoffs | - | sports-price/dota2-vsn2-boombo-2026-08-20 | dota2 vsn2 boombo 2026 08 20
+Activity: Will Arsenal FC win on 2026-09-09? | - | other-activity/ucl-nap-ars-2026-09-09 | ucl nap ars 2026 09 09
+Price: Will Arsenal FC win on 2026-09-09? | - | other-price/ucl-nap-ars-2026-09-09 | ucl nap ars 2026 09 09
+Activity: Will Brentford FC win on 2026-08-22? | - | other-activity/epl-bre-tot-2026-08-22 | epl bre tot 2026 08 22
+Price: Will Brentford FC win on 2026-08-22? | - | other-price/epl-bre-tot-2026-08-22 | epl bre tot 2026 08 22
+Activity: Spread: Spain (-1.5) | - | other-activity/fifwc-esp-arg-2026-07-19-more-markets | fifwc esp arg 2026 07 19 more markets
+Price: Spread: Spain (-1.5) | - | other-price/fifwc-esp-arg-2026-07-19-more-markets | fifwc esp arg 2026 07 19 more markets
+Activity: US x Iran Effective Ceasefire by July 24? | - | world-activity/us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042 | us x iran effective ceasfire byptptpt 2 week pause 20260715194822042
+Price: US x Iran Effective Ceasefire by July 24? | - | world-price/us-x-iran-effective-ceasfire-byptptpt-2-week-pause-20260715194822042 | us x iran effective ceasfire byptptpt 2 week pause 20260715194822042
+Activity: Bab el-Mandeb Strait effectively closed by September 30? | - | world-activity/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Price: Bab el-Mandeb Strait effectively closed by September 30? | - | world-price/bab-el-mandeb-strait-effectively-closed-by | bab el mandeb strait effectively closed by
+Activity: Will Harry Kane be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Harry Kane be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Will Benjamin Netanyahu be the next leader out before 2027? | - | world-activity/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Price: Will Benjamin Netanyahu be the next leader out before 2027? | - | world-price/next-leader-out-of-power-before-2027-no-orban | next leader out of power before 2027 no orban
+Activity: Will Manchester City FC win on 2026-08-28? | - | other-activity/epl-cry-mac-2026-08-28 | epl cry mac 2026 08 28
+Price: Will Manchester City FC win on 2026-08-28? | - | other-price/epl-cry-mac-2026-08-28 | epl cry mac 2026 08 28
+Activity: US Open ATP: Alexander Zverev vs Karen Khachanov | - | other-activity/atp-zverev-khachan-2026-09-11 | atp zverev khachan 2026 09 11
+Price: US Open ATP: Alexander Zverev vs Karen Khachanov | - | other-price/atp-zverev-khachan-2026-09-11 | atp zverev khachan 2026 09 11
+Activity: Will LeBron James play for the Cleveland Cavaliers in 2026-27? | - | sports-activity/nba-lebron-james-next-team | nba lebron james next team
+Price: Will LeBron James play for the Cleveland Cavaliers in 2026-27? | - | sports-price/nba-lebron-james-next-team | nba lebron james next team
+Activity: Will Ousmane Dembele be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Ousmane Dembele be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Will Chelsea FC win on 2026-08-24? | - | other-activity/epl-ful-che-2026-08-24 | epl ful che 2026 08 24
+Price: Will Chelsea FC win on 2026-08-24? | - | other-price/epl-ful-che-2026-08-24 | epl ful che 2026 08 24
+Activity: Will Tereza Cristina win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Tereza Cristina win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: LoL: Anyone's Legend vs Invictus Gaming (BO5) - LPL Playoffs | - | sports-activity/lol-al-ig1-2026-09-12 | lol al ig1 2026 09 12
+Price: LoL: Anyone's Legend vs Invictus Gaming (BO5) - LPL Playoffs | - | sports-price/lol-al-ig1-2026-09-12 | lol al ig1 2026 09 12
+Activity: Counter-Strike: Team Falcons vs Spirit (BO3) - ESL Pro League Playoffs | - | sports-activity/cs2-fal2-ts7-2026-10-09 | cs2 fal2 ts7 2026 10 09
+Price: Counter-Strike: Team Falcons vs Spirit (BO3) - ESL Pro League Playoffs | - | sports-price/cs2-fal2-ts7-2026-10-09 | cs2 fal2 ts7 2026 10 09
+Activity: Will A Just Russia – For Truth (SRZP) gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will A Just Russia – For Truth (SRZP) gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Will Pablo Marçal win the 2026 Brazilian presidential election? | - | politics-activity/brazil-presidential-election | brazil presidential election
+Price: Will Pablo Marçal win the 2026 Brazilian presidential election? | - | politics-price/brazil-presidential-election | brazil presidential election
+Activity: US announces halt in Iran offensive operations by July 31? | - | world-activity/us-announces-halt-in-iran-offensive-operations-byptptpt-20260718015003096 | us announces halt in iran offensive operations byptptpt 20260718015003096
+Price: US announces halt in Iran offensive operations by July 31? | - | world-price/us-announces-halt-in-iran-offensive-operations-byptptpt-20260718015003096 | us announces halt in iran offensive operations byptptpt 20260718015003096
+Activity: Exact Score: Spain 2 - 2 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 2 - 2 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Will FC Barcelona win on 2026-08-27? | - | other-activity/lal-bar-bil-2026-08-27 | lal bar bil 2026 08 27
+Price: Will FC Barcelona win on 2026-08-27? | - | other-price/lal-bar-bil-2026-08-27 | lal bar bil 2026 08 27
+Activity: Will Spain win on 2026-09-26? | - | other-activity/unl-eng-esp-2026-09-26 | unl eng esp 2026 09 26
+Price: Will Spain win on 2026-09-26? | - | other-price/unl-eng-esp-2026-09-26 | unl eng esp 2026 09 26
+Activity: LoL: Top Esports vs LGD Gaming (BO5) - LPL Playoffs | - | sports-activity/lol-tes-lgd-2026-08-29 | lol tes lgd 2026 08 29
+Price: LoL: Top Esports vs LGD Gaming (BO5) - LPL Playoffs | - | sports-price/lol-tes-lgd-2026-08-29 | lol tes lgd 2026 08 29
+Activity: Will the Communist Party of the Russian Federation (KPRF) gain the most seats in the next Russian parliamentary election? | - | econ-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will the Communist Party of the Russian Federation (KPRF) gain the most seats in the next Russian parliamentary election? | - | econ-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Will LeBron James play for the Philadelphia 76ers in 2026-27? | - | sports-activity/nba-lebron-james-next-team | nba lebron james next team
+Price: Will LeBron James play for the Philadelphia 76ers in 2026-27? | - | sports-price/nba-lebron-james-next-team | nba lebron james next team
+Activity: Will Williams be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Williams be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: Cincinnati Open: Tommy Paul vs Flavio Cobolli | - | other-activity/atp-paul-cobolli-2026-08-21 | atp paul cobolli 2026 08 21
+Price: Cincinnati Open: Tommy Paul vs Flavio Cobolli | - | other-price/atp-paul-cobolli-2026-08-21 | atp paul cobolli 2026 08 21
+Activity: Will Cadillac be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Cadillac be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: US Open WTA: Mirra Andreeva vs Coco Gauff | - | other-activity/wta-andreev-gauff-2026-09-08 | wta andreev gauff 2026 09 08
+Price: US Open WTA: Mirra Andreeva vs Coco Gauff | - | other-price/wta-andreev-gauff-2026-09-08 | wta andreev gauff 2026 09 08
+Activity: Will Count Binface win the Clacton by-election? | - | politics-activity/clacton-by-election-winner-20260707143521303 | clacton by election winner 20260707143521303
+Price: Will Count Binface win the Clacton by-election? | - | politics-price/clacton-by-election-winner-20260707143521303 | clacton by election winner 20260707143521303
+Activity: Will Real Madrid CF win on 2026-09-15? | - | other-activity/lal-elc-rea-2026-09-15 | lal elc rea 2026 09 15
+Price: Will Real Madrid CF win on 2026-09-15? | - | other-price/lal-elc-rea-2026-09-15 | lal elc rea 2026 09 15
+Activity: Exact Score: Spain 2 - 1 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 2 - 1 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: US Open ATP: Alexander Zverev vs Ben Shelton | - | other-activity/atp-zverev-shelton-2026-09-13 | atp zverev shelton 2026 09 13
+Price: US Open ATP: Alexander Zverev vs Ben Shelton | - | other-price/atp-zverev-shelton-2026-09-13 | atp zverev shelton 2026 09 13
+Activity: Will NVIDIA be the largest company in the world by market cap on July 31? | - | tech-activity/largest-company-end-of-july-20260624192302727 | largest company end of july 20260624192302727
+Price: Will NVIDIA be the largest company in the world by market cap on July 31? | - | tech-price/largest-company-end-of-july-20260624192302727 | largest company end of july 20260624192302727
+Activity: Will Jude Bellingham be the top goalscorer at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-boot-winner | world cup golden boot winner
+Price: Will Jude Bellingham be the top goalscorer at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-boot-winner | world cup golden boot winner
+Activity: Cincinnati Open: Taylor Fritz vs Brandon Nakashima | - | other-activity/atp-fritz-nakashi-2026-08-21 | atp fritz nakashi 2026 08 21
+Price: Cincinnati Open: Taylor Fritz vs Brandon Nakashima | - | other-price/atp-fritz-nakashi-2026-08-21 | atp fritz nakashi 2026 08 21
+Activity: Israel closes its airspace by September 30? | - | world-activity/israel-closes-its-airspace-by | israel closes its airspace by
+Price: Israel closes its airspace by September 30? | - | world-price/israel-closes-its-airspace-by | israel closes its airspace by
+Activity: Will Manchester City FC win on 2026-09-20? | - | other-activity/epl-mac-sun-2026-09-20 | epl mac sun 2026 09 20
+Price: Will Manchester City FC win on 2026-09-20? | - | other-price/epl-mac-sun-2026-09-20 | epl mac sun 2026 09 20
+Activity: National Bank Open: Rafael Jodar vs Arthur Fils | - | other-activity/atp-jodar-fils-2026-08-11 | atp jodar fils 2026 08 11
+Price: National Bank Open: Rafael Jodar vs Arthur Fils | - | other-price/atp-jodar-fils-2026-08-11 | atp jodar fils 2026 08 11
+Activity: US Open ATP: Karen Khachanov vs Learner Tien | - | other-activity/atp-khachan-tien-2026-09-07 | atp khachan tien 2026 09 07
+Price: US Open ATP: Karen Khachanov vs Learner Tien | - | other-price/atp-khachan-tien-2026-09-07 | atp khachan tien 2026 09 07
+Activity: Exact Score: Spain 1 - 3 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 1 - 3 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Will Yabloko gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will Yabloko gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Activity: Will Lula win the most votes in the first round of the 2026 Brazil presidential election? | - | politics-activity/brazil-presidential-election-first-round-winner | brazil presidential election first round winner
+Price: Will Lula win the most votes in the first round of the 2026 Brazil presidential election? | - | politics-price/brazil-presidential-election-first-round-winner | brazil presidential election first round winner
+Activity: Israel x Iran ceasefire continues through July 31? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through July 31? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: Will Club Atlético de Madrid win on 2026-08-19? | - | other-activity/lal-mad-mala-2026-08-19 | lal mad mala 2026 08 19
+Price: Will Club Atlético de Madrid win on 2026-08-19? | - | other-price/lal-mad-mala-2026-08-19 | lal mad mala 2026 08 19
+Activity: US Open ATP: Arthur Gea vs Botic van de Zandschulp | - | other-activity/atp-gea-zandsch-2026-09-07 | atp gea zandsch 2026 09 07
+Price: US Open ATP: Arthur Gea vs Botic van de Zandschulp | - | other-price/atp-gea-zandsch-2026-09-07 | atp gea zandsch 2026 09 07
+Activity: US Open ATP: Francisco Cerundolo vs Alexander Blockx | - | other-activity/atp-cerundo-blockx-2026-09-06 | atp cerundo blockx 2026 09 06
+Price: US Open ATP: Francisco Cerundolo vs Alexander Blockx | - | other-price/atp-cerundo-blockx-2026-09-06 | atp cerundo blockx 2026 09 06
+Activity: Will Alpine be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Alpine be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: Israel x Iran ceasefire continues through September 30? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through September 30? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: Israel x Iran ceasefire continues through August 31? | - | world-activity/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Price: Israel x Iran ceasefire continues through August 31? | - | world-price/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963 | israel x iran ceasefire continues throughptptpt 20260716224448963
+Activity: Will Haas be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Haas be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: Exact Score: Spain 1 - 2 Argentina? | - | other-activity/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Price: Exact Score: Spain 1 - 2 Argentina? | - | other-price/fifwc-esp-arg-2026-07-19-exact-score | fifwc esp arg 2026 07 19 exact score
+Activity: Will Aston Martin be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Aston Martin be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: US announces end of Iranian blockade by August 15, 2026? | - | world-activity/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Price: US announces end of Iranian blockade by August 15, 2026? | - | world-price/us-announces-end-of-iranian-blockade-byptptpt-20260713152715080 | us announces end of iranian blockade byptptpt 20260713152715080
+Activity: Will Iran announce withdrawal from MOU negotiations by July 31? | - | world-activity/iran-announces-withdrawal-from-mou-negotiations-byptptpt-20260622191732319 | iran announces withdrawal from mou negotiations byptptpt 20260622191732319
+Price: Will Iran announce withdrawal from MOU negotiations by July 31? | - | world-price/iran-announces-withdrawal-from-mou-negotiations-byptptpt-20260622191732319 | iran announces withdrawal from mou negotiations byptptpt 20260622191732319
+Activity: Israel closes its airspace by July 31? | - | world-activity/israel-closes-its-airspace-by | israel closes its airspace by
+Price: Israel closes its airspace by July 31? | - | world-price/israel-closes-its-airspace-by | israel closes its airspace by
+Activity: Will Audi be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Audi be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: Will Racing Bulls be the 2026 F1 Constructors' Champion? | - | sports-activity/f1-constructors-champion | f1 constructors champion
+Price: Will Racing Bulls be the 2026 F1 Constructors' Champion? | - | sports-price/f1-constructors-champion | f1 constructors champion
+Activity: Will Rodri win the Golden Ball at the 2026 FIFA World Cup? | - | econ-activity/world-cup-golden-ball-winner-20260603194031758 | world cup golden ball winner 20260603194031758
+Price: Will Rodri win the Golden Ball at the 2026 FIFA World Cup? | - | econ-price/world-cup-golden-ball-winner-20260603194031758 | world cup golden ball winner 20260603194031758
+Activity: LoL: Hanwha Life Esports vs Gen.G (BO3) - LCK Round 3-4 Legend Group | - | other-activity/lol-hle1-gen-2026-08-05 | lol hle1 gen 2026 08 05
+Price: LoL: Hanwha Life Esports vs Gen.G (BO3) - LCK Round 3-4 Legend Group | - | other-price/lol-hle1-gen-2026-08-05 | lol hle1 gen 2026 08 05
+Activity: Will Bitcoin reach $67,500 in July? | - | crypto-activity/what-price-will-bitcoin-hit-in-july-2026 | what price will bitcoin hit in july 2026
+Price: Will Bitcoin reach $67,500 in July? | - | crypto-price/what-price-will-bitcoin-hit-in-july-2026 | what price will bitcoin hit in july 2026
+Activity: Will Rodina gain the most seats in the next Russian parliamentary election? | - | world-activity/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election
+Price: Will Rodina gain the most seats in the next Russian parliamentary election? | - | world-price/which-party-will-gain-most-seats-in-russian-parliamentary-election | which party will gain most seats in russian parliamentary election

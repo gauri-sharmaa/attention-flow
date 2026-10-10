@@ -1,0 +1,40 @@
+prices    382 markets · 2381 candidate pairs · 3 periods of 30 days · 99 shuffles per pair
+  period 1  Jul 12–Aug 11  tested  202 · p≤5%  73 (chance ≈ 10) · p≤1%  64 (chance ≈ 2) · 35 same-event · 58 with a lead (median 10.0m)
+  period 2  Aug 11–Sep 10  tested  225 · p≤5%  75 (chance ≈ 11) · p≤1%  55 (chance ≈ 2) · 40 same-event · 53 with a lead (median 10.0m)
+  period 3  Sep 10–Oct 10  tested  521 · p≤5% 173 (chance ≈ 26) · p≤1% 121 (chance ≈ 5) · 73 same-event · 112 with a lead (median 2.0m)
+
+stability (pairs with a significant lead in one period, checked in the next)
+  period 1 → 2  13 leads · same leader next period 6 (46%) · and still significant 6 (46%)
+  period 2 → 3  29 leads · same leader next period 13 (45%) · and still significant 11 (38%)
+
+leads that hold in at least two periods: 17
+  3 periods   30.0m ahead  US announces end of Iranian blockade by December 31, 2026?
+                          → US announces end of Iranian blockade by October 31, 2026?
+  3 periods    5.0m ahead  US announces end of Iranian blockade by December 31, 2026?
+                          → US announces end of Iranian blockade by September 30, 2026?
+  3 periods     30s ahead  NATO x Russia military clash by October 31, 2026?
+                          → NATO x Russia military clash by December 31, 2026?
+  2 periods    2.0m ahead  Will Bitcoin reach $100,000 by December 31, 2026?
+                          → Will Bitcoin reach $110,000 by December 31, 2026?
+  2 periods     10s ahead  Will Аndrey Gyurov win the next Bulgarian presidential electio…
+                          → Will Iliana Iotova win the next Bulgarian presidential election?
+  2 periods    2.0m ahead  Will Bitcoin reach $100,000 by December 31, 2026?
+                          → Will Bitcoin reach $90,000 by December 31, 2026?
+  2 periods     30s ahead  Will Bitcoin reach $90,000 by December 31, 2026?
+                          → Will Bitcoin dip to $70,000 by December 31, 2026?
+  2 periods   10.0m ahead  Strait of Hormuz traffic returns to normal by September 30?
+                          → Strait of Hormuz traffic returns to normal by December 31?
+  2 periods    5.0m ahead  Will Bitcoin dip to $55,000 by December 31, 2026?
+                          → Will Bitcoin reach $90,000 by December 31, 2026?
+  2 periods     10s ahead  US announces end of Iranian blockade by September 30, 2026?
+                          → US announces end of Iranian blockade by October 31, 2026?
+  2 periods   10.0m ahead  Will Bitcoin dip to $55,000 by December 31, 2026?
+                          → Will Bitcoin dip to $50,000 by December 31, 2026?
+  2 periods    5.0m ahead  Russia-Ukraine peace talks by November 30, 2026?
+                          → Russia-Ukraine peace talks by October 31, 2026?
+  2 periods   10.0m ahead  Bab el-Mandeb Strait effectively closed by December 31?
+                          → Bab el-Mandeb Strait effectively closed by September 30?
+  2 periods   30.0m ahead  Will Bitcoin dip to $70,000 by December 31, 2026?
+                          → Will Bitcoin dip to $60,000 by December 31, 2026?
+  2 periods   60.0m ahead  Israel x Iran ceasefire continues through December 31?
+                          → Iran full airspace closure by December 31?

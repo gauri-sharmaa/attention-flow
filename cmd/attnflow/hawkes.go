@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"math"
@@ -30,6 +31,7 @@ func cmdHawkes(args []string) error {
 	iters := fs.Int("iters", 400, "EM iterations")
 	placebos := fs.Int("placebos", 3, "placebo runs with each stream shifted by a random whole number of days")
 	season := fs.Bool("season", true, "model the shared hour-of-week activity cycle in the background rate")
+	jsonOut := fs.String("json", "", "write the fitted cross-market links and scores here (for the demo page)")
 	folds := fs.Int("folds", 0, "walk-forward: split the span into folds+1 periods, fit on each and score the next")
 	moves := fs.Float64("moves", 0, "if > 0: test whether trading activity predicts price moves of at least this size (e.g. 0.02)")
 	fs.Parse(args)
@@ -125,6 +127,11 @@ func cmdHawkes(args []string) error {
 		fmt.Printf("placebo   timing destroyed (each stream shifted by a random whole 1-20 days, keeping time of day): %s nats/event\n", strings.Join(pg, " · "))
 	}
 
+	if *jsonOut != "" {
+		if err := writeLinks(*jsonOut, streams, full, gain, pg); err != nil {
+			return err
+		}
+	}
 	// Sibling outcomes of one event (e.g. "returns to normal" / "does not")
 	// are expected to trade together; links between different events are the
 	// interesting ones, so report them separately.
@@ -163,6 +170,45 @@ func clip(s string, n int) string {
 		return s
 	}
 	return s[:n-1] + "…"
+}
+
+// writeLinks saves the fitted network for the demo page: one node per market
+// with a link, every cross-market link with its strength and lag.
+func writeLinks(path string, streams []stream, m *hawkes.Model, gain float64, placebo []string) error {
+	type node struct {
+		ID     int    `json:"id"`
+		Name   string `json:"name"`
+		Sector string `json:"sector"`
+		Event  string `json:"event"`
+	}
+	type link struct {
+		From, To int
+		Branch   float64 `json:"branch"`
+		Lag      float64 `json:"lag"`
+		Same     bool    `json:"sameEvent"`
+	}
+	var out struct {
+		Gain    float64  `json:"gain"`
+		Placebo []string `json:"placebo"`
+		Nodes   []node   `json:"nodes"`
+		Links   []link   `json:"links"`
+	}
+	out.Gain, out.Placebo = gain, placebo
+	used := map[int]bool{}
+	for _, e := range m.Edges(0.03) {
+		out.Links = append(out.Links, link{e.From, e.To, math.Round(e.Branch*1000) / 1000, math.Round(e.MeanLag), streams[e.From].event == streams[e.To].event})
+		used[e.From], used[e.To] = true, true
+	}
+	for i, s := range streams {
+		if used[i] {
+			out.Nodes = append(out.Nodes, node{i, s.name, s.sector, s.event})
+		}
+	}
+	b, err := json.MarshalIndent(out, "", " ")
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, b, 0o644)
 }
 
 func dayStr(t float64) string { return time.Unix(int64(t), 0).UTC().Format("Jan 2") }

@@ -1,0 +1,255 @@
+<title>Attention Flow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; the network is the hero, then one compact block per test. */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #141a24; --muted: #5d6675; --line: #dfe4ec;
+  --accent: #3d5afe; --good: #0f8a5f; --bad: #c4412b;
+  --s-world: #3d5afe; --s-politics: #c4412b; --s-econ: #0f8a5f; --s-crypto: #e08a00;
+  --s-tech: #8e44ad; --s-sports: #0097a7; --s-culture: #d81b60; --s-other: #7a8291;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1117; --surface: #161b24; --ink: #e8ebf1; --muted: #8e97a6; --line: #262d39;
+    --accent: #7c8cff; --good: #34c48b; --bad: #ff6b55;
+    --s-world: #7c8cff; --s-politics: #ff6b55; --s-econ: #34c48b; --s-crypto: #ffb340;
+    --s-tech: #c08cff; --s-sports: #4dd0e1; --s-culture: #f06292; --s-other: #9aa3b2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1117; --surface: #161b24; --ink: #e8ebf1; --muted: #8e97a6; --line: #262d39;
+  --accent: #7c8cff; --good: #34c48b; --bad: #ff6b55;
+  --s-world: #7c8cff; --s-politics: #ff6b55; --s-econ: #34c48b; --s-crypto: #ffb340;
+  --s-tech: #c08cff; --s-sports: #4dd0e1; --s-culture: #f06292; --s-other: #9aa3b2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body); margin: 0; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 44px 64px; display: grid; gap: 48px; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.04; }
+h2 { font-size: 22px; }
+p { margin: 0; max-width: 64ch; }
+.lede { font-size: 18px; color: var(--muted); margin-top: 10px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+section { display: grid; gap: 14px; }
+.panel { background: var(--surface); border-radius: 14px; padding: 18px; min-width: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+#net { width: 100%; height: 460px; display: block; cursor: grab; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+.tip { min-height: 44px; font-size: 14px; }
+.tip b { font-weight: 500; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 9px 8px; border-top: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 12px; border-top: 0; }
+td.n, th.n { text-align: right; font-family: var(--mono); white-space: nowrap; }
+.pill { font: 500 11px var(--mono); padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.yes { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); }
+.no { background: color-mix(in srgb, var(--bad) 13%, transparent); color: var(--bad); }
+.scroll { overflow-x: auto; }
+.lead { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.lead:first-child { border-top: 0; padding-top: 0; }
+.lead .num { color: var(--accent); font-weight: 500; }
+.lead .to { color: var(--muted); grid-column: 2; }
+svg text { font-family: var(--mono); }
+footer { color: var(--muted); font-size: 13px; }
+footer .num { user-select: all; }
+@media (max-width: 640px) { #net { height: 360px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Gauri Sharma · Go · Hawkes processes · 1.67M real trades</div>
+    <h1 style="margin-top:10px">Attention Flow</h1>
+    <p class="lede">Which prediction markets set each other off, measured on every Polymarket trade over 90 days.</p>
+  </header>
+
+  <section>
+    <div class="eyebrow">The network</div>
+    <h2>When one market gets busy, these follow</h2>
+    <p class="muted" id="netCaption"></p>
+    <div class="panel">
+      <canvas id="net" aria-label="Network of Polymarket markets; arrows point from a market to the markets its trading sets off."></canvas>
+      <div class="legend" id="legend"></div>
+      <div class="tip" id="tip">Hover a market to see what it sets off.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Scorecard</div>
+    <h2>Fit on one month, scored on the next</h2>
+    <p class="muted">Each test is fit on one 30-day period and scored on the following one it never saw. The placebo shifts streams by whole days, which keeps each market's rhythm and destroys real timing. A result counts when it beats zero and the placebo.</p>
+    <div class="panel scroll"><table id="score"></table></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Who reprices first</div>
+    <h2>The liquid contract leads</h2>
+    <p class="muted" id="leadCaption"></p>
+    <div class="panel" id="leads"></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Paper trading</div>
+    <h2>Real, but too small to trade</h2>
+    <p class="muted">Trade the direction of recent order flow, $100 per trade, settings chosen on one month and frozen for the next. Fills at the next real trade, plus the spread.</p>
+    <div class="panel"><svg id="bt" viewBox="0 0 760 200" width="100%" role="img" aria-label="Average return per trade: signal with costs, signal without costs, random side with costs."></svg></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Outside buzz</div>
+    <h2>News and Reddit don't lead the markets</h2>
+    <p class="muted" id="esCaption"></p>
+    <div class="panel"><svg id="es" viewBox="0 0 760 230" width="100%" role="img" aria-label="Market trading around news and Reddit surges, compared with random times."></svg></div>
+  </section>
+
+  <footer>Code and full scorecards: <span class="num">github.com/gauri-sharmaa/attention-flow</span></footer>
+</div>
+
+<script>
+const DATA = /*DATA*/null;
+(() => {
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, a, p, t) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; p.appendChild(e); return e; };
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const lag = (s) => s < 90 ? Math.round(s) + "s" : (s / 60).toFixed(s < 600 ? 1 : 0) + " min";
+  const sectors = ["world", "politics", "econ", "crypto", "tech", "sports", "culture", "other"];
+  const label = { world: "World", politics: "US politics", econ: "Economy & Fed", crypto: "Crypto", tech: "Tech & AI", sports: "Sports", culture: "Culture", other: "Other" };
+  const color = (s) => css("--s-" + (sectors.includes(s) ? s : "other"));
+
+  // ---- network ----
+  const net = DATA.net;
+  const nodes = new Map(net.nodes.map((n) => [n.id, { ...n, x: 0, y: 0 }]));
+  const links = net.links.filter((l) => nodes.has(l.From) && nodes.has(l.To));
+  document.getElementById("netCaption").textContent =
+    `${nodes.size} markets, ${links.length} links. An arrow means trading in one market raises trading in the other, on average ${lag(links.reduce((a, l) => a + l.lag * l.branch, 0) / links.reduce((a, l) => a + l.branch, 0))} later. Thicker arrows are stronger.`;
+  const lg = document.getElementById("legend");
+  const present = new Set([...nodes.values()].map((n) => n.sector));
+  lg.innerHTML = sectors.filter((s) => present.has(s)).map((s) => `<span><i style="background:${color(s)}"></i>${label[s]}</span>`).join("");
+  const canvas = document.getElementById("net"), ctx = canvas.getContext("2d");
+  let hover = null, laid = false;
+  function layout() {
+    const W = canvas.clientWidth, H = canvas.clientHeight, arr = [...nodes.values()];
+    const k = Math.sqrt((W * H) / arr.length) * 0.5, k2 = k * k;
+    const nsec = sectors.length;
+    arr.forEach((n, i) => { const a = (sectors.indexOf(n.sector) / nsec) * 2 * Math.PI; n.x = W / 2 + Math.cos(a) * W * 0.28 + (i % 7) * 3; n.y = H / 2 + Math.sin(a) * H * 0.3 + (i % 5) * 3; });
+    let temp = W / 10;
+    for (let it = 0; it < 350; it++) {
+      for (const n of arr) { n.fx = 0; n.fy = 0; }
+      for (let i = 0; i < arr.length; i++) for (let j = i + 1; j < arr.length; j++) {
+        const a = arr[i], b = arr[j], dx = a.x - b.x, dy = a.y - b.y, d2 = Math.max(dx * dx + dy * dy, 1), f = k2 / d2;
+        a.fx += dx * f; a.fy += dy * f; b.fx -= dx * f; b.fy -= dy * f;
+      }
+      for (const l of links) {
+        const a = nodes.get(l.From), b = nodes.get(l.To), dx = b.x - a.x, dy = b.y - a.y, d = Math.max(Math.hypot(dx, dy), 1), f = d / k;
+        a.fx += dx * f; a.fy += dy * f; b.fx -= dx * f; b.fy -= dy * f;
+      }
+      for (const n of arr) {
+        n.fx += (W / 2 - n.x) * 0.02; n.fy += (H / 2 - n.y) * 0.02;
+        const m = Math.hypot(n.fx, n.fy) || 1, s = Math.min(m, temp);
+        n.x = Math.max(12, Math.min(W - 12, n.x + (n.fx / m) * s));
+        n.y = Math.max(12, Math.min(H - 12, n.y + (n.fy / m) * s));
+      }
+      temp *= 0.985;
+    }
+    laid = true;
+  }
+  function draw() {
+    const dpr = window.devicePixelRatio || 1, W = canvas.clientWidth, H = canvas.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!laid) layout();
+    ctx.clearRect(0, 0, W, H);
+    const line = css("--line"), muted = css("--muted"), ink = css("--ink");
+    for (const l of links) {
+      const a = nodes.get(l.From), b = nodes.get(l.To);
+      const lit = hover && (hover.id === l.From || hover.id === l.To);
+      ctx.strokeStyle = lit ? color(a.sector) : line;
+      ctx.globalAlpha = hover && !lit ? 0.35 : 1;
+      ctx.lineWidth = Math.min(4, 0.6 + l.branch * 8) * (lit ? 1.4 : 1);
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, ex = b.x - (dx / d) * 6, ey = b.y - (dy / d) * 6;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(ex, ey); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(ex, ey);
+      ctx.lineTo(ex - (dx / d) * 6 - (dy / d) * 3.5, ey - (dy / d) * 6 + (dx / d) * 3.5);
+      ctx.lineTo(ex - (dx / d) * 6 + (dy / d) * 3.5, ey - (dy / d) * 6 - (dx / d) * 3.5);
+      ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    for (const n of nodes.values()) {
+      ctx.beginPath(); ctx.arc(n.x, n.y, hover === n ? 6 : 4, 0, 7); ctx.fillStyle = color(n.sector); ctx.fill();
+    }
+    if (hover) { ctx.fillStyle = ink; ctx.font = "12px IBM Plex Sans, sans-serif"; }
+  }
+  canvas.addEventListener("mousemove", (ev) => {
+    const r = canvas.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
+    let best = null, bd = 144;
+    for (const n of nodes.values()) { const d = (n.x - x) ** 2 + (n.y - y) ** 2; if (d < bd) { bd = d; best = n; } }
+    if (best !== hover) {
+      hover = best; draw();
+      const tip = document.getElementById("tip");
+      if (!hover) { tip.textContent = "Hover a market to see what it sets off."; return; }
+      const outs = links.filter((l) => l.From === hover.id).sort((a, b) => b.branch - a.branch).slice(0, 3);
+      tip.innerHTML = `<b>${esc(hover.name)}</b>` + (outs.length ? "<br>sets off: " + outs.map((l) => `${esc(nodes.get(l.To).name)} <span class="num muted">(${lag(l.lag)})</span>`).join(" · ") : "");
+    }
+  });
+  canvas.addEventListener("mouseleave", () => { hover = null; draw(); document.getElementById("tip").textContent = "Hover a market to see what it sets off."; });
+
+  // ---- scorecard ----
+  const sc = document.getElementById("score");
+  sc.innerHTML = `<thead><tr><th>Question</th><th class="n">Month 2</th><th class="n">Month 3</th><th class="n">Placebo</th><th>Answer</th></tr></thead><tbody>` +
+    DATA.score.map((r) => `<tr><td>${esc(r.q)}<div class="muted" style="font-size:12px">${esc(r.how)}</div></td><td class="n">${r.f1}</td><td class="n">${r.f2}</td><td class="n">${r.pl}</td><td><span class="pill ${r.ok ? "yes" : "no"}">${esc(r.a)}</span></td></tr>`).join("") + "</tbody>";
+
+  // ---- leads ----
+  document.getElementById("leadCaption").textContent = DATA.leadCaption;
+  document.getElementById("leads").innerHTML = DATA.leads.map((l) => `<div class="lead"><span class="num">${esc(l.lag)}</span><span>${esc(l.from)}</span><span class="to">→ ${esc(l.to)}</span></div>`).join("");
+
+  // ---- paper trading bars ----
+  function bars() {
+    const s = document.getElementById("bt"); s.innerHTML = "";
+    const rows = DATA.bt, L = 230, R = 700, lo = Math.min(...rows.map((r) => r.v), 0) * 1.15, hi = Math.max(...rows.map((r) => r.v), 0) * 1.6 + 0.5;
+    const x = (v) => L + ((v - lo) / (hi - lo)) * (R - L);
+    el("line", { x1: x(0), x2: x(0), y1: 10, y2: 180, stroke: css("--muted"), "stroke-width": 1 }, s);
+    rows.forEach((r, i) => {
+      const y = 22 + i * 54;
+      el("text", { x: 0, y: y + 14, "font-size": 13, fill: css("--ink") }, s, r.label);
+      el("text", { x: 0, y: y + 32, "font-size": 11, fill: css("--muted") }, s, r.sub);
+      const a = x(Math.min(0, r.v)), b = x(Math.max(0, r.v));
+      el("rect", { x: a, y, width: Math.max(b - a, 1), height: 26, rx: 4, fill: r.v >= 0 ? css("--good") : css("--bad"), opacity: r.dim ? 0.45 : 0.9 }, s);
+      el("text", { x: r.v >= 0 ? b + 6 : a - 6, y: y + 18, "text-anchor": r.v >= 0 ? "start" : "end", "font-size": 13, fill: css("--ink") }, s, (r.v > 0 ? "+" : "") + r.v.toFixed(1) + "%");
+    });
+  }
+
+  // ---- event study ----
+  function es() {
+    const s = document.getElementById("es"); s.innerHTML = "";
+    document.getElementById("esCaption").textContent = DATA.esCaption;
+    const L = 56, R = 740, T = 14, B = 190;
+    const all = DATA.es.surge.concat(DATA.es.placebo), lo = Math.min(...all) - 0.02, hi = Math.max(...all) + 0.02;
+    const n = DATA.es.surge.length, x = (i) => L + (i / (n - 1)) * (R - L), y = (v) => B - ((v - lo) / (hi - lo)) * (B - T);
+    for (const v of [lo + 0.01, (lo + hi) / 2, hi - 0.01]) {
+      el("line", { x1: L, x2: R, y1: y(v), y2: y(v), stroke: css("--line") }, s);
+      el("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: css("--muted") }, s, (v >= 0 ? "+" : "") + (v * 100).toFixed(0) + "%");
+    }
+    const mid = x((n - 1) / 2);
+    el("line", { x1: mid, x2: mid, y1: T, y2: B, stroke: css("--ink"), "stroke-dasharray": "3 3" }, s);
+    el("text", { x: mid + 6, y: T + 10, "font-size": 11, fill: css("--ink") }, s, "surge");
+    [["placebo", css("--muted"), "random times"], ["surge", css("--accent"), "news / Reddit / HN surges"]].forEach(([k, c, name], j) => {
+      el("polyline", { points: DATA.es[k].map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" "), fill: "none", stroke: c, "stroke-width": 2 }, s);
+      el("text", { x: R, y: (j ? y(DATA.es[k][n - 1]) - 8 : y(DATA.es[k][n - 1]) + 16), "text-anchor": "end", "font-size": 12, fill: c }, s, name);
+    });
+    [["−2h", 0], ["−1h", (n - 1) / 4], ["+1h", 3 * (n - 1) / 4], ["+2h", n - 1]].forEach(([t, i]) => el("text", { x: x(i), y: B + 20, "text-anchor": "middle", "font-size": 11, fill: css("--muted") }, s, t));
+  }
+
+  const all = () => { draw(); bars(); es(); };
+  all();
+  addEventListener("resize", () => { laid = false; draw(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", all);
+  new MutationObserver(all).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>

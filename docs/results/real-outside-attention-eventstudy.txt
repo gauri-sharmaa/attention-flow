@@ -1,0 +1,6 @@
+surges    1743 (news 1203 · reddit 474 · hn 66) across names that appear in market questions · 5987 surge-market pairs
+          trading vs the same clock time on other days, log ratio (0 = normal; +0.10 ≈ 10% busier)
+surges    hour before -0.039 [-0.049, -0.029] · hour after -0.046 [-0.057, -0.035]
+          by 10 min, −2h … +2h: -0.05 -0.05 -0.05 -0.05 -0.05 -0.04 -0.05 -0.04 -0.04 -0.04 -0.04 -0.03 | -0.04 -0.04 -0.04 -0.05 -0.05 -0.05 -0.04 -0.04 -0.04 -0.06 -0.03 -0.06 
+placebo   hour before -0.066 [-0.072, -0.059] · hour after -0.065 [-0.071, -0.057]
+          by 10 min, −2h … +2h: -0.07 -0.06 -0.07 -0.07 -0.07 -0.06 -0.07 -0.06 -0.07 -0.06 -0.07 -0.07 | -0.07 -0.07 -0.06 -0.07 -0.06 -0.06 -0.07 -0.06 -0.06 -0.07 -0.06 -0.06 
