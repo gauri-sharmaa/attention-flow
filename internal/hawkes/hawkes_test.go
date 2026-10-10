@@ -108,3 +108,23 @@ func TestWeightsEqualCopies(t *testing.T) {
 		t.Errorf("copies: %.6f over %d events, weights: %.6f over %d", a, na, b, nb)
 	}
 }
+
+// Live intensities must match the batch log-likelihood's intensities.
+func TestLiveMatchesBatch(t *testing.T) {
+	tr := truth()
+	evs := tr.Simulate(86400, rand.New(rand.NewPCG(9, 10)))
+	l := tr.NewLive()
+	for _, e := range evs[:len(evs)-1] {
+		l.Add(e)
+	}
+	last := evs[len(evs)-1]
+	// Batch: log-likelihood of only the last event equals log λ minus the
+	// compensator over a vanishing window, i.e. ≈ log λ.
+	ll, _ := tr.LogLikDims(evs, last.T, last.T+1e-9, nil)
+	if got := math.Log(l.Rate(last.Dim, last.T)); math.Abs(got-ll) > 1e-6 {
+		t.Errorf("live log-rate %.6f, batch %.6f", got, ll)
+	}
+	if e := l.Expected(0, last.T, 600); e <= tr.Background(0, last.T)*600-1e-9 {
+		t.Errorf("expected count %.3f below background", e)
+	}
+}

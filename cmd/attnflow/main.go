@@ -3,7 +3,8 @@
 //	attnflow sim     -out data/sim            simulate a stream with a known answer key
 //	attnflow replay  -events E -truth T       replay a stream and print the scorecard
 //	attnflow fetch   -out data/wiki           download Wikipedia pageviews (needs network)
-//	attnflow serve   -events E                live dashboard, replaying E in real time
+//	attnflow serve                            live Polymarket dashboard at localhost:8080 (no keys needed)
+//	attnflow serve -sim                       replay the simulator instead
 //	attnflow export  -events E -out site      static dashboard (no server) for hosting
 //	attnflow markets -out data/poly           Polymarket prices for markets about each topic
 //	attnflow bluesky -out data/bsky           record live Bluesky mentions per minute
@@ -19,10 +20,13 @@ package main
 
 import (
 	"context"
+	"log"
+
 	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
+	"github.com/gauri-sharmaa/attention-flow/internal/live"
 	"io"
 	"os"
 	"os/signal"
@@ -267,14 +271,28 @@ func cmdFetch(args []string) error {
 
 func cmdServe(args []string) error {
 	fs := flag.NewFlagSet("serve", flag.ExitOnError)
-	uni := fs.String("universe", "data/universe.txt", "universe file")
-	text := fs.String("text", "", "optional entity descriptions")
-	events := fs.String("events", "data/sim/events.csv", "events CSV to replay")
-	bar := fs.Int64("bar", 60, "bar width in seconds")
-	speed := fs.Float64("speed", 20, "bars per second to replay")
 	addr := fs.String("addr", ":8080", "listen address")
-	label := fs.String("label", "simulated", "data label shown in the UI")
+	n := fs.Int("markets", 200, "how many of the busiest Polymarket markets to follow")
+	hours := fs.Int("hours", 48, "hours of trade history the model is fitted on")
+	sim := fs.Bool("sim", false, "replay the simulator instead of live Polymarket")
+	uni := fs.String("universe", "data/universe.txt", "universe file (-sim)")
+	text := fs.String("text", "", "optional entity descriptions (-sim)")
+	events := fs.String("events", "data/sim/events.csv", "events CSV to replay (-sim)")
+	bar := fs.Int64("bar", 60, "bar width in seconds (-sim)")
+	speed := fs.Float64("speed", 20, "bars per second to replay (-sim)")
+	label := fs.String("label", "simulated", "data label shown in the UI (-sim)")
 	fs.Parse(args)
+	if !*sim {
+		cfg := live.DefaultConfig()
+		cfg.Markets, cfg.History = *n, time.Duration(*hours)*time.Hour
+		eng := live.New(cfg)
+		go func() {
+			if err := eng.Run(); err != nil {
+				log.Fatal(err)
+			}
+		}()
+		return server.ServeLive(*addr, eng)
+	}
 	u, err := loadUniverse(*uni, *text)
 	if err != nil {
 		return err
@@ -354,8 +372,9 @@ func cmdPolyTrades(args []string) error {
 	days := fs.Int("days", 30, "days of history")
 	bar := fs.Int64("bar", 300, "bar width in seconds")
 	workers := fs.Int("workers", 6, "parallel downloads")
+	bars := fs.Bool("bars", true, "also write bar series (events.csv) for the streaming engine")
 	fs.Parse(args)
-	return source.FetchMarketTrades(*out, *n, *closed, *days, *bar, *workers)
+	return source.FetchMarketTrades(*out, *n, *closed, *days, *bar, *workers, *bars)
 }
 
 func cmdOutside(args []string) error {

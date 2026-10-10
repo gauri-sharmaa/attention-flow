@@ -426,3 +426,78 @@ func (m *Model) Edges(minBranch float64) []Edge {
 	sort.Slice(out, func(a, b int) bool { return out[a].Branch > out[b].Branch })
 	return out
 }
+
+// Live tracks a fitted model's intensities as events stream in, for
+// real-time use: how excited each stream is right now, and how many events
+// it should produce over the next few minutes given what has happened.
+type Live struct {
+	M  *Model
+	st *state
+}
+
+// NewLive starts tracking with no history.
+func (m *Model) NewLive() *Live { return &Live{M: m, st: newState(m.D, len(m.Betas))} }
+
+// Add folds in one event. Events must arrive in time order; events sharing a
+// timestamp do not excite each other.
+func (l *Live) Add(e Event) {
+	l.st.flush(e.T, l.M.Betas)
+	l.st.defer_(e)
+}
+
+// Background is stream i's rate at time t without any excitation.
+func (m *Model) Background(i int, t float64) float64 { return m.Mu[i] * m.season(t) }
+
+// Rate is stream i's intensity at time t given all events before t.
+func (l *Live) Rate(i int, t float64) float64 {
+	l.st.flush(t, l.M.Betas)
+	lam := l.M.Background(i, t)
+	for p, j := range l.M.Parents[i] {
+		r := l.st.at(j, t, l.M.Betas)
+		for k, b := range l.M.Betas {
+			lam += l.M.Alpha[i][p][k] * b * r[k]
+		}
+	}
+	return lam
+}
+
+// Expected is the expected number of stream-i events in (t, t+tau] from the
+// background plus the decaying excitation of events already seen (it ignores
+// excitation by events that have not happened yet, so it is a lower bound).
+func (l *Live) Expected(i int, t, tau float64) float64 {
+	l.st.flush(t, l.M.Betas)
+	n := l.M.Background(i, t) * tau
+	for p, j := range l.M.Parents[i] {
+		r := l.st.at(j, t, l.M.Betas)
+		for k, b := range l.M.Betas {
+			n += l.M.Alpha[i][p][k] * r[k] * (1 - math.Exp(-b*tau))
+		}
+	}
+	return n
+}
+
+// Contributions returns, for stream i at time t, the excitation each parent
+// stream is currently adding to its rate (parents with nothing to add are
+// left out), largest first.
+func (l *Live) Contributions(i int, t float64) []Contribution {
+	l.st.flush(t, l.M.Betas)
+	var out []Contribution
+	for p, j := range l.M.Parents[i] {
+		r := l.st.at(j, t, l.M.Betas)
+		c := 0.0
+		for k, b := range l.M.Betas {
+			c += l.M.Alpha[i][p][k] * b * r[k]
+		}
+		if c > 0 {
+			out = append(out, Contribution{From: j, Rate: c})
+		}
+	}
+	sort.Slice(out, func(a, b int) bool { return out[a].Rate > out[b].Rate })
+	return out
+}
+
+// Contribution is one parent's current share of a stream's rate.
+type Contribution struct {
+	From int
+	Rate float64
+}

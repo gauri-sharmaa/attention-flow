@@ -1,0 +1,68 @@
+:root {
+  --bg: #f3f5f8; --card: #ffffff; --ink: #141a24; --muted: #5d6675; --faint: #e3e7ee;
+  --accent: #3d5afe; --up: #0f8a5f; --down: #c4412b;
+  --s-world: #3d5afe; --s-politics: #c4412b; --s-econ: #0f8a5f; --s-crypto: #e08a00;
+  --s-tech: #8e44ad; --s-sports: #0097a7; --s-culture: #d81b60; --s-other: #7a8291;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1117; --card: #161b24; --ink: #e8ebf1; --muted: #8e97a6; --faint: #262d39;
+    --accent: #7c8cff; --up: #34c48b; --down: #ff6b55;
+    --s-world: #7c8cff; --s-politics: #ff6b55; --s-econ: #34c48b; --s-crypto: #ffb340;
+    --s-tech: #c08cff; --s-sports: #4dd0e1; --s-culture: #f06292; --s-other: #9aa3b2;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; }
+[hidden] { display: none !important; }
+header { display: flex; align-items: center; gap: 14px; padding: 14px 20px; flex-wrap: wrap; }
+.brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
+.brand span { color: var(--accent); margin-left: 1px; }
+.live { font: 600 11px var(--mono); letter-spacing: .06em; padding: 3px 9px; border-radius: 99px; background: var(--faint); }
+.live i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--down); margin-right: 6px; animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .live i { animation: none; } }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.spacer { flex: 1; }
+.loading { max-width: 520px; margin: 12vh auto; padding: 0 20px; display: grid; gap: 12px; }
+.loading h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
+.loading p { margin: 0; }
+.bar { height: 6px; background: var(--faint); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s; }
+main { display: grid; gap: 14px; padding: 0 20px 20px; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  grid-template-areas: "hot tape" "net net"; }
+#hot-card { grid-area: hot; } #tape-card { grid-area: tape; } #net-card { grid-area: net; }
+.card { background: var(--card); border-radius: 14px; padding: 16px 18px; min-width: 0; position: relative; }
+h2 { font-size: 13px; font-weight: 600; margin: 0 0 12px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.hint { font-weight: 400; color: var(--muted); font-size: 12px; }
+.cols, #hot li .row { display: grid; grid-template-columns: minmax(0, 1fr) 56px 64px 112px; gap: 10px; align-items: center; }
+.cols { font-size: 11px; color: var(--muted); padding-bottom: 6px; }
+.cols span:nth-child(n+2) { text-align: right; }
+ol { list-style: none; margin: 0; padding: 0; }
+#hot li { padding: 8px 0; border-top: 1px solid var(--faint); }
+.q { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+.num { text-align: right; font-family: var(--mono); font-size: 13px; white-space: nowrap; }
+.odds b { font-weight: 600; color: var(--accent); }
+.why { font-size: 12px; color: var(--muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.empty { color: var(--muted); padding: 10px 0; }
+#tape { max-height: 420px; overflow: hidden; }
+#tape li { display: grid; grid-template-columns: 34px minmax(0, 1fr) 52px 56px; gap: 8px; padding: 5px 0; border-top: 1px solid var(--faint); font-size: 12px; align-items: center; }
+#tape .q { font-weight: 500; }
+#tape li.empty { display: block; }
+#tape li.new { animation: flash 1.2s; }
+@keyframes flash { from { background: color-mix(in srgb, var(--accent) 14%, transparent); } }
+.up { color: var(--up); } .down { color: var(--down); }
+canvas#net { width: 100%; height: 420px; display: block; }
+.tip { font-size: 13px; min-height: 38px; color: var(--muted); }
+.tip b { color: var(--ink); font-weight: 500; }
+@media (max-width: 900px) {
+  main { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hot" "net" "tape"; padding: 0 12px 16px; }
+  header { padding: 12px; }
+  .cols, #hot li .row { grid-template-columns: minmax(0, 1fr) 48px 52px 76px; row-gap: 2px; }
+  #hot li .q { grid-column: 1 / -1; white-space: normal; }
+  canvas#net { height: 340px; }
+}

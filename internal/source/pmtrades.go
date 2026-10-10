@@ -108,7 +108,7 @@ func cachedTrades(dir string, client *http.Client, conditionID string, from int6
 //   - price: last traded YES price in the bar, as odds p/(1-p).
 //
 // Activity is attention to the market itself; price is what it believes.
-func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, workers int) error {
+func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, workers int, bars bool) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return err
 	}
@@ -256,7 +256,7 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 		lines = append(lines,
 			fmt.Sprintf("Activity: %s | - | %s-activity/%s | %s", q, sec, eslug, tags),
 			fmt.Sprintf("Price: %s | - | %s-price/%s | %s", q, sec, eslug, tags))
-		for b := 0; b < nBars; b++ {
+		for b := 0; bars && b < nBars; b++ {
 			ts := from + int64(b)*barSeconds
 			all = append(all, core.Event{TS: ts, Entity: int32(actID), Value: float64(count[b] + 1)})
 			if !math.IsNaN(last[b]) {
@@ -272,12 +272,15 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 	if err := os.WriteFile(filepath.Join(outDir, "universe.txt"), []byte(uni), 0o644); err != nil {
 		return err
 	}
+	fmt.Fprintf(os.Stderr, "%d markets kept, %d trades, %d bars\n", len(lines)/2, total, nBars)
+	if !bars {
+		return nil // event-time tools only need ticks.csv
+	}
 	sort.SliceStable(all, func(i, j int) bool { return all[i].TS < all[j].TS })
 	f, err := os.Create(filepath.Join(outDir, "events.csv"))
 	if err != nil {
 		return err
 	}
 	defer f.Close()
-	fmt.Fprintf(os.Stderr, "%d markets kept, %d trades, %d bars\n", len(lines)/2, total, nBars)
 	return core.WriteEvents(f, all)
 }

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attention Flow · Live</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Ccircle cx=%274%27 cy=%278%27 r=%273%27 fill=%27%233d5afe%27/%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%273%27 fill=%27%23e08a00%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">attention<span>flow</span></div>
+  <span class="live"><i></i>LIVE · Polymarket</span>
+  <span id="clock" class="muted"></span>
+  <div class="spacer"></div>
+  <span id="status" class="muted"></span>
+</header>
+
+<div id="loading" class="loading">
+  <h1>Warming up</h1>
+  <p id="loadText">Finding the busiest Polymarket markets…</p>
+  <div class="bar"><i id="loadBar"></i></div>
+  <p class="muted small">It loads the last two days of trades and fits the model before going live. This takes a minute or two.</p>
+</div>
+
+<main id="main" hidden>
+  <section class="card" id="hot-card">
+    <h2>Heating up <span class="hint" id="hotHint"></span></h2>
+    <div class="cols"><span></span><span>price</span><span>busier</span><span>move odds</span></div>
+    <ol id="hot"></ol>
+  </section>
+
+  <section class="card" id="tape-card">
+    <h2>Trades <span class="hint">live, in the markets it follows</span></h2>
+    <ol id="tape"></ol>
+  </section>
+
+  <section class="card" id="net-card">
+    <h2>What sets off what <span class="hint" id="netHint"></span></h2>
+    <canvas id="net"></canvas>
+    <div id="tip" class="tip">Hover or tap a market.</div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

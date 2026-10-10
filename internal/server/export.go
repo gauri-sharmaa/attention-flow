@@ -26,6 +26,9 @@ func Export(u *core.Universe, evs []core.Event, e *engine.Engine, dir, label str
 	}
 	sub, _ := fs.Sub(webFS, "web")
 	err := fs.WalkDir(sub, ".", func(p string, d fs.DirEntry, err error) error {
+		if err == nil && d.IsDir() && p == "live" {
+			return fs.SkipDir // the live dashboard needs a server
+		}
 		if err != nil || d.IsDir() {
 			return err
 		}
