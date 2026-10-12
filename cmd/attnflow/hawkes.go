@@ -32,6 +32,7 @@ func cmdHawkes(args []string) error {
 	placebos := fs.Int("placebos", 3, "placebo runs with each stream shifted by a random whole number of days")
 	season := fs.Bool("season", true, "model the shared hour-of-week activity cycle in the background rate")
 	jsonOut := fs.String("json", "", "write the fitted cross-market links and scores here (for the demo page)")
+	jobs := fs.Int("jobs", 2, "walk-forward folds to fit at once")
 	folds := fs.Int("folds", 0, "walk-forward: split the span into folds+1 periods, fit on each and score the next")
 	moves := fs.Float64("moves", 0, "if > 0: test whether trading activity predicts price moves of at least this size (e.g. 0.02)")
 	fs.Parse(args)
@@ -41,7 +42,7 @@ func cmdHawkes(args []string) error {
 		return err
 	}
 	if *moves > 0 {
-		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos, *folds)
+		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos, *folds, *jobs)
 	}
 	cand := marketCandidates(streams, *k)
 	nMarkets := len(streams)
@@ -94,9 +95,10 @@ func cmdHawkes(args []string) error {
 		// Walk forward: split the span into folds+1 equal periods; fit on one,
 		// score the next with no refitting, then roll forward.
 		step := (t1 - t0) / float64(*folds+1)
-		rng := rand.New(rand.NewPCG(41, 42))
 		fmt.Printf("walk-forward  %d folds of %.0f days each (fit on one period, score the next)\n", *folds, step/86400)
-		for f := 1; f <= *folds; f++ {
+		inOrder(*folds, *jobs, func(f int) string {
+			f++
+			rng := rand.New(rand.NewPCG(41, uint64(f)))
 			a, b, c := t0+float64(f-1)*step, t0+float64(f)*step, t0+float64(f+1)*step
 			_, full, g, n := runWin(evs, a, b, c)
 			_, _, pg, _ := runWin(shiftStreams(evs, d, t0, t1, rng), a, b, c)
@@ -106,9 +108,9 @@ func cmdHawkes(args []string) error {
 					nl++
 				}
 			}
-			fmt.Printf("  fold %d  test %s–%s  %6d events  gain %+.4f  placebo %+.4f  cross-event links %d\n",
+			return fmt.Sprintf("  fold %d  test %s–%s  %6d events  gain %+.4f  placebo %+.4f  cross-event links %d\n",
 				f, dayStr(b), dayStr(c), n, g, pg, nl)
-		}
+		})
 		return nil
 	}
 	if candNoLink != nil {
@@ -476,7 +478,7 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 // (measured from the last move, so a trade bouncing between bid and ask does
 // not count). Both models see identical events; the full model also lets each
 // market's activity, and its candidates' activity, excite its moves.
-func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos, folds int) error {
+func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos, folds, jobs int) error {
 	nM := len(streams)
 	mv, err := priceMoves(dir, nM, size)
 	if err != nil {
@@ -522,14 +524,15 @@ func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k
 	gain := func(evs []hawkes.Event) (float64, int, *hawkes.Model) { return gainW(evs, t0, split, t1) }
 	if folds > 0 {
 		step := (t1 - t0) / float64(folds+1)
-		rng := rand.New(rand.NewPCG(33, 34))
 		fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets · walk-forward %d folds of %.0f days\n", len(mv), size*100, nM, folds, step/86400)
-		for f := 1; f <= folds; f++ {
+		inOrder(folds, jobs, func(f int) string {
+			f++
+			rng := rand.New(rand.NewPCG(33, uint64(f)))
 			a, b, c := t0+float64(f-1)*step, t0+float64(f)*step, t0+float64(f+1)*step
 			g, n, _ := gainW(evs, a, b, c)
 			pg, _, _ := gainW(shiftRange(evs, d, 0, nM, t0, t1, rng), a, b, c)
-			fmt.Printf("  fold %d  test %s–%s  %6d moves  gain %+.4f  placebo %+.4f\n", f, dayStr(b), dayStr(c), n, g, pg)
-		}
+			return fmt.Sprintf("  fold %d  test %s–%s  %6d moves  gain %+.4f  placebo %+.4f\n", f, dayStr(b), dayStr(c), n, g, pg)
+		})
 		return nil
 	}
 	fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets, next to %d trades\n", len(mv), size*100, nM, len(act))
@@ -664,5 +667,28 @@ func linkExtra(markets, extra []stream, cand [][]int) {
 				add(n+xi, n+yi)
 			}
 		}
+	}
+}
+
+// inOrder runs work(0..n-1) on up to `jobs` goroutines and prints each
+// result as soon as it and every earlier one are done, so output stays in
+// order while folds fit in parallel.
+func inOrder(n, jobs int, work func(i int) string) {
+	out := make([]chan string, n)
+	for i := range out {
+		out[i] = make(chan string, 1)
+	}
+	sem := make(chan struct{}, max(jobs, 1))
+	go func() {
+		for i := 0; i < n; i++ {
+			sem <- struct{}{}
+			go func(i int) {
+				defer func() { <-sem }()
+				out[i] <- work(i)
+			}(i)
+		}
+	}()
+	for i := 0; i < n; i++ {
+		fmt.Print(<-out[i])
 	}
 }
