@@ -11,8 +11,8 @@ import (
 func TestBook(t *testing.T) {
 	b := newBook()
 	b.apply(source.BookUpdate{Snapshot: true,
-		Bids: []source.Level{{0.40, 100}, {0.39, 50}, {0.30, 999}},
-		Asks: []source.Level{{0.42, 20}, {0.43, 30}}})
+		Bids: []source.Level{{Price: 0.40, Size: 100}, {Price: 0.39, Size: 50}, {Price: 0.30, Size: 999}},
+		Asks: []source.Level{{Price: 0.42, Size: 20}, {Price: 0.43, Size: 30}}})
 	if m, ok := b.mid(); !ok || math.Abs(m-0.41) > 1e-9 {
 		t.Fatalf("mid = %v %v, want 0.41", m, ok)
 	}
@@ -20,7 +20,7 @@ func TestBook(t *testing.T) {
 	if im := b.imbalance(0.01 + 1e-9); math.Abs(im-80.0/120) > 1e-9 {
 		t.Fatalf("imbalance = %v", im)
 	}
-	b.apply(source.BookUpdate{Bids: []source.Level{{0.40, 0}}}) // level removed
+	b.apply(source.BookUpdate{Bids: []source.Level{{Price: 0.40, Size: 0}}}) // level removed
 	if bid, _, _ := b.top(); bid != 0.39 {
 		t.Fatalf("best bid after removal = %v", bid)
 	}
