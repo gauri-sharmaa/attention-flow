@@ -53,6 +53,13 @@ td.n, th.n { text-align: right; font-family: var(--mono); white-space: nowrap; }
 .yes { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); }
 .no { background: color-mix(in srgb, var(--bad) 13%, transparent); color: var(--bad); }
 .scroll { overflow-x: auto; }
+.mixed { background: color-mix(in srgb, var(--muted) 18%, transparent); color: var(--ink); }
+.strip { display: flex; gap: 3px; padding-top: 3px; }
+.strip i { width: 14px; height: 14px; border-radius: 3px; background: var(--line); }
+.strip i.ok { background: var(--good); }
+.strip i.bad { background: color-mix(in srgb, var(--bad) 55%, transparent); }
+.strip-key { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 10px; flex-wrap: wrap; }
+.strip-key i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
 .lead { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
 .lead:first-child { border-top: 0; padding-top: 0; }
 .lead .num { color: var(--accent); font-weight: 500; }
@@ -60,14 +67,21 @@ td.n, th.n { text-align: right; font-family: var(--mono); white-space: nowrap; }
 svg text { font-family: var(--mono); }
 footer { color: var(--muted); font-size: 13px; }
 footer .num { user-select: all; }
-@media (max-width: 640px) { #net { height: 360px; } }
+@media (max-width: 640px) {
+  #net { height: 360px; }
+  #score thead { display: none; }
+  #score tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+  #score td { border: 0; padding: 0; }
+  #score td:first-child, #score td:last-child { grid-column: 1 / -1; }
+  .strip { gap: 2px; } .strip i { width: 11px; height: 11px; }
+}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Gauri Sharma · Go · Hawkes processes · 1.67M real trades</div>
+    <div class="eyebrow">Gauri Sharma · Go · Hawkes processes · 24M real trades</div>
     <h1 style="margin-top:10px">Attention Flow</h1>
-    <p class="lede">Which prediction markets set each other off, measured on every Polymarket trade over 90 days.</p>
+    <p class="lede">Which prediction markets set each other off, measured on every Polymarket trade for a year.</p>
   </header>
 
   <section>
@@ -84,8 +98,9 @@ footer .num { user-select: all; }
   <section>
     <div class="eyebrow">Scorecard</div>
     <h2>Fit on one month, scored on the next</h2>
-    <p class="muted">Each test is fit on one 30-day period and scored on the following one it never saw. The placebo shifts streams by whole days, which keeps each market's rhythm and destroys real timing. A result counts when it beats zero and the placebo.</p>
-    <div class="panel scroll"><table id="score"></table></div>
+    <p class="muted" id="scoreCaption"></p>
+    <div class="panel scroll"><table id="score"></table>
+      <div class="strip-key"><span><i style="background:var(--good)"></i>passes that month</span><span><i style="background:color-mix(in srgb, var(--bad) 55%, transparent)"></i>doesn't</span><span>oldest month on the left · hover a square for the number</span></div></div>
   </section>
 
   <section>
@@ -129,7 +144,7 @@ const DATA = /*DATA*/null;
   const nodes = new Map(net.nodes.map((n) => [n.id, { ...n, x: 0, y: 0 }]));
   const links = net.links.filter((l) => nodes.has(l.From) && nodes.has(l.To));
   document.getElementById("netCaption").textContent =
-    `${nodes.size} markets, ${links.length} links. An arrow means trading in one market raises trading in the other, on average ${lag(links.reduce((a, l) => a + l.lag * l.branch, 0) / links.reduce((a, l) => a + l.branch, 0))} later. Thicker arrows are stronger.`;
+    `${nodes.size} markets, ${links.length} links. An arrow means trading in one market raises trading in the other, on average ${lag(links.reduce((a, l) => a + l.lag * l.branch, 0) / links.reduce((a, l) => a + l.branch, 0))} later. Thicker arrows are stronger. Fitted on Jul–Oct 2026.`;
   const lg = document.getElementById("legend");
   const present = new Set([...nodes.values()].map((n) => n.sector));
   lg.innerHTML = sectors.filter((s) => present.has(s)).map((s) => `<span><i style="background:${color(s)}"></i>${label[s]}</span>`).join("");
@@ -224,8 +239,12 @@ const DATA = /*DATA*/null;
 
   // ---- scorecard ----
   const sc = document.getElementById("score");
-  sc.innerHTML = `<thead><tr><th>Question</th><th class="n">Month 2</th><th class="n">Month 3</th><th class="n">Placebo</th><th>Answer</th></tr></thead><tbody>` +
-    DATA.score.map((r) => `<tr><td>${esc(r.q)}<div class="muted" style="font-size:12px">${esc(r.how)}</div></td><td class="n">${r.f1}</td><td class="n">${r.f2}</td><td class="n">${r.pl}</td><td><span class="pill ${r.ok ? "yes" : "no"}">${esc(r.a)}</span></td></tr>`).join("") + "</tbody>";
+  document.getElementById("scoreCaption").textContent = DATA.scoreCaption;
+  sc.innerHTML = `<thead><tr><th>Question</th><th>Each test month</th><th class="n">Passed</th><th>Answer</th></tr></thead><tbody>` +
+    DATA.score.map((r) => `<tr><td>${esc(r.q)}<div class="muted" style="font-size:12px">${esc(r.how)}</div></td>
+      <td><div class="strip">${r.cells.map((c) => `<i class="${c.ok ? "ok" : "bad"}" title="${esc(c.t)}"></i>`).join("")}</div></td>
+      <td class="n">${r.cells.length ? r.cells.filter((c) => c.ok).length + " / " + r.cells.length : "–"}</td>
+      <td><span class="pill ${r.tone}">${esc(r.a)}</span></td></tr>`).join("") + "</tbody>";
 
   // ---- leads ----
   document.getElementById("leadCaption").textContent = DATA.leadCaption;
