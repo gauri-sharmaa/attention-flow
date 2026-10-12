@@ -26,7 +26,7 @@
   }
 
   function hot(s) {
-    $("hotHint").textContent = `trading faster than normal for this hour · odds of a ${Math.round(s.horizon / 60)}-minute 2¢ price move`;
+    $("hotHint").textContent = `odds of a 2¢ price move in the next ${Math.round(s.horizon / 60)} minutes, vs a normal moment · busier = trading pace vs its usual`;
     $("hot").innerHTML = s.hot.length ? s.hot.map((h) => {
       const m = s.markets[h.m];
       const why = h.drivers.length ? "set off by " + h.drivers.map((d) => esc(s.markets[d].q)).join(" · ") : `${h.recent} trades in the last 5 min`;
@@ -36,7 +36,7 @@
         <span class="num">×${h.heat > 99 ? "99+" : h.heat.toFixed(1)}</span>
         <span class="num odds"><b>${Math.round(h.pmove * 100)}%</b> <span class="muted">vs ${Math.round(h.pnorm * 100)}%</span></span>
       </div><div class="why">${why}</div></li>`;
-    }).join("") : `<li class="empty">Nothing unusual right now. Markets show up here when trading picks up faster than normal for the hour.</li>`;
+    }).join("") : `<li class="empty">Every market is at its normal odds right now.</li>`;
   }
 
   function tape(s) {

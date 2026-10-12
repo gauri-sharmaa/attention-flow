@@ -26,7 +26,7 @@ type MarketV struct {
 	Recent int     `json:"r"` // activity events in the last 5 minutes
 }
 
-// HotRow is a market whose trading is running hot right now.
+// HotRow is a market the model gives raised odds of a price move right now.
 type HotRow struct {
 	Market  int     `json:"m"`
 	Heat    float64 `json:"heat"`  // current trading rate / normal rate for this hour
@@ -86,13 +86,13 @@ func (e *Engine) Snapshot() *Snapshot {
 				row.Drivers = append(row.Drivers, c.From)
 			}
 		}
-		if heat > 2 && row.Recent >= 3 && row.PMove > row.PNormal {
+		if row.PMove >= row.PNormal+0.01 { // at least a point above normal
 			s.Hot = append(s.Hot, row)
 		}
 	}
 	sort.Slice(s.Hot, func(a, b int) bool { return s.Hot[a].PMove-s.Hot[a].PNormal > s.Hot[b].PMove-s.Hot[b].PNormal })
-	if len(s.Hot) > 12 {
-		s.Hot = s.Hot[:12]
+	if len(s.Hot) > 10 {
+		s.Hot = s.Hot[:10]
 	}
 	for _, ed := range e.cross.M.Edges(0.05) {
 		if e.markets[ed.From].Event != e.markets[ed.To].Event {

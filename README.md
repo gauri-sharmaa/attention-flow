@@ -4,7 +4,7 @@ A live view of where traders' attention is going on [Polymarket](https://polymar
 
 It follows the busiest markets trade by trade and keeps two models fitted on the last two days:
 
-- **Heating up:** markets trading faster than normal for the hour, with the odds of a 2¢ price move in the next 10 minutes. This is the finding that held up out of sample on months of real trades (see [Real data](#real-data)).
+- **Most likely to move:** the markets the model gives the best odds of a 2¢ price move in the next 10 minutes, compared with a normal moment, and which related markets are driving it. This is the finding that held up out of sample on months of real trades (see [Real data](#real-data)).
 - **What sets off what:** which markets' trading kicks off trading in other markets, and how fast.
 
 ## Try it
@@ -20,6 +20,8 @@ go run ./cmd/attnflow serve
 Open http://localhost:8080. It spends a minute or two loading recent trades and fitting, then goes live. `-markets 60 -hours 12` warms up faster, and `-addr :9000` changes the port.
 
 ![live dashboard](docs/live.png)
+
+**[Watch the 2-minute demo](docs/demo.mp4)**: how it works, what each panel means, and what the research found.
 
 Methods follow Bacry, Mastromatteo & Muzy, [Hawkes processes in finance](https://arxiv.org/abs/1502.04592); Xu, Farajtabar & Zha, [Learning Granger causality for Hawkes processes](http://proceedings.mlr.press/v48/xuc16.pdf); and Hoffmann, Rosenbaum & Yoshida, [Estimation of the lead-lag parameter from non-synchronous data](https://arxiv.org/abs/1303.4871).
 
