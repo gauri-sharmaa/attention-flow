@@ -1,0 +1,59 @@
+paper     1205 markets · 24079063 trades · 12 periods of 30 days · $100 per trade · cost 1¢ per side
+          signal: net dollars buying YES vs NO over the last `window`, in std units of that market's own flow
+
+  period 2  Nov 11–Dec 11  chosen on the previous period: window 30.0m, z ≥ 4, hold 30.0m (in-sample $-17495)
+    out of sample           1745 trades · win  6.4% · avg -10.72% per trade (t = -20.2) · total $-18699
+    same, no costs          1778 trades · win 32.2% · avg  +0.73% per trade (t = +2.8) · total $+1291
+    placebo: random side    1986 trades · win  4.3% · avg -21.57% per trade (t = -32.4) · total $-42830
+
+  period 3  Dec 11–Jan 11  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-17300)
+    out of sample           1550 trades · win  8.9% · avg -10.11% per trade (t = -19.7) · total $-15677
+    same, no costs          1581 trades · win 37.4% · avg  -0.28% per trade (t = -1.1) · total $-447
+    placebo: random side    1751 trades · win  7.7% · avg -19.33% per trade (t = -23.5) · total $-33855
+
+  period 4  Jan 11–Feb 10  chosen on the previous period: window 30.0m, z ≥ 4, hold 30.0m (in-sample $-15434)
+    out of sample           2285 trades · win  5.2% · avg -10.53% per trade (t = -26.6) · total $-24053
+    same, no costs          2370 trades · win 36.5% · avg  +0.51% per trade (t = +3.9) · total $+1218
+    placebo: random side    2599 trades · win  3.7% · avg -20.22% per trade (t = -37.4) · total $-52556
+
+  period 5  Feb 10–Mar 13  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-21252)
+    out of sample           2439 trades · win  6.7% · avg -11.89% per trade (t = -27.8) · total $-28990
+    same, no costs          2537 trades · win 43.3% · avg  +0.88% per trade (t = +5.2) · total $+2237
+    placebo: random side    2739 trades · win  4.9% · avg -20.86% per trade (t = -35.8) · total $-57132
+
+  period 6  Mar 13–Apr 12  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-28990)
+    out of sample           2641 trades · win 10.0% · avg -11.07% per trade (t = -26.3) · total $-29231
+    same, no costs          2640 trades · win 45.2% · avg  +0.99% per trade (t = +5.2) · total $+2612
+    placebo: random side    2902 trades · win  7.1% · avg -19.08% per trade (t = -36.7) · total $-55357
+
+  period 7  Apr 12–May 13  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-29231)
+    out of sample           2152 trades · win  8.6% · avg -14.94% per trade (t = -24.1) · total $-32160
+    same, no costs          2078 trades · win 40.6% · avg  +0.73% per trade (t = +1.8) · total $+1519
+    placebo: random side    2314 trades · win  7.0% · avg -20.23% per trade (t = -28.8) · total $-46809
+
+  period 8  May 13–Jun 12  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-32160)
+    out of sample           2471 trades · win  7.9% · avg -11.40% per trade (t = -21.5) · total $-28170
+    same, no costs          2444 trades · win 36.5% · avg  +0.96% per trade (t = +2.8) · total $+2357
+    placebo: random side    2642 trades · win  6.7% · avg -16.82% per trade (t = -29.8) · total $-44432
+
+  period 9  Jun 12–Jul 12  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-28170)
+    out of sample           2052 trades · win  6.7% · avg -10.38% per trade (t = -24.4) · total $-21292
+    same, no costs          2066 trades · win 41.1% · avg  +0.46% per trade (t = +2.5) · total $+941
+    placebo: random side    2194 trades · win  5.3% · avg -15.58% per trade (t = -28.8) · total $-34175
+
+  period 10  Jul 12–Aug 12  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-21292)
+    out of sample            928 trades · win 10.9% · avg  -7.45% per trade (t = -14.2) · total $-6916
+    same, no costs           945 trades · win 42.3% · avg  +0.81% per trade (t = +2.4) · total $+763
+    placebo: random side     967 trades · win  9.3% · avg -11.75% per trade (t = -16.9) · total $-11363
+
+  period 11  Aug 12–Sep 11  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-6916)
+    out of sample            776 trades · win 10.4% · avg  -9.16% per trade (t = -14.0) · total $-7111
+    same, no costs           772 trades · win 39.9% · avg  +0.59% per trade (t = +2.0) · total $+459
+    placebo: random side     806 trades · win  7.2% · avg -13.46% per trade (t = -17.1) · total $-10846
+
+  period 12  Sep 11–Oct 12  chosen on the previous period: window 30.0m, z ≥ 4, hold 240.0m (in-sample $-7111)
+    out of sample           1079 trades · win 12.2% · avg  -6.29% per trade (t = -16.0) · total $-6788
+    same, no costs          1086 trades · win 42.3% · avg  +0.56% per trade (t = +2.0) · total $+605
+    placebo: random side    1092 trades · win  8.7% · avg  -9.49% per trade (t = -17.4) · total $-10363
+
+all test periods           20118 trades · win  8.1% · avg -10.89% per trade (t = -70.5) · total $-219087

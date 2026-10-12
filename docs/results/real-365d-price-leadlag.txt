@@ -1,0 +1,58 @@
+prices    1205 markets · 9106 candidate pairs · 12 periods of 30 days · 99 shuffles per pair
+  period 1  Oct 12–Nov 11  tested  197 · p≤5%  73 (chance ≈ 10) · p≤1%  45 (chance ≈ 2) · 31 same-event · 35 with a lead (median 20.0m)
+  period 2  Nov 11–Dec 11  tested  162 · p≤5%  56 (chance ≈ 8) · p≤1%  44 (chance ≈ 2) · 39 same-event · 32 with a lead (median 2.0m)
+  period 3  Dec 11–Jan 11  tested  181 · p≤5%  46 (chance ≈ 9) · p≤1%  32 (chance ≈ 2) · 20 same-event · 26 with a lead (median 2.0m)
+  period 4  Jan 11–Feb 10  tested  296 · p≤5%  72 (chance ≈ 15) · p≤1%  50 (chance ≈ 3) · 32 same-event · 39 with a lead (median 2.0m)
+  period 5  Feb 10–Mar 13  tested  210 · p≤5%  71 (chance ≈ 10) · p≤1%  44 (chance ≈ 2) · 33 same-event · 39 with a lead (median 2.0m)
+  period 6  Mar 13–Apr 12  tested  275 · p≤5%  87 (chance ≈ 14) · p≤1%  65 (chance ≈ 3) · 43 same-event · 57 with a lead (median 5.0m)
+  period 7  Apr 12–May 13  tested  199 · p≤5%  57 (chance ≈ 10) · p≤1%  39 (chance ≈ 2) · 22 same-event · 34 with a lead (median 20.0m)
+  period 8  May 13–Jun 12  tested  162 · p≤5%  70 (chance ≈ 8) · p≤1%  56 (chance ≈ 2) · 33 same-event · 49 with a lead (median 60s)
+  period 9  Jun 12–Jul 12  tested  127 · p≤5%  41 (chance ≈ 6) · p≤1%  31 (chance ≈ 1) · 11 same-event · 28 with a lead (median 5.0m)
+  period 10  Jul 12–Aug 12  tested   68 · p≤5%  37 (chance ≈ 3) · p≤1%  30 (chance ≈ 1) · 16 same-event · 25 with a lead (median 10.0m)
+  period 11  Aug 12–Sep 11  tested  136 · p≤5%  36 (chance ≈ 7) · p≤1%  27 (chance ≈ 1) · 16 same-event · 25 with a lead (median 5.0m)
+  period 12  Sep 11–Oct 12  tested  389 · p≤5% 154 (chance ≈ 19) · p≤1% 113 (chance ≈ 4) · 70 same-event · 102 with a lead (median 5.0m)
+
+stability (pairs with a significant lead in one period, checked in the next)
+  period 1 → 2  10 leads · same leader next period 3 (30%) · and still significant 1 (10%)
+  period 2 → 3  9 leads · same leader next period 2 (22%) · and still significant 1 (11%)
+  period 3 → 4  10 leads · same leader next period 2 (20%) · and still significant 0 (0%)
+  period 4 → 5  12 leads · same leader next period 3 (25%) · and still significant 3 (25%)
+  period 5 → 6  21 leads · same leader next period 14 (67%) · and still significant 11 (52%)
+  period 6 → 7  27 leads · same leader next period 13 (48%) · and still significant 2 (7%)
+  period 7 → 8  9 leads · same leader next period 5 (56%) · and still significant 4 (44%)
+  period 8 → 9  16 leads · same leader next period 10 (62%) · and still significant 5 (31%)
+  period 9 → 10  9 leads · same leader next period 4 (44%) · and still significant 3 (33%)
+  period 10 → 11  7 leads · same leader next period 7 (100%) · and still significant 6 (86%)
+  period 11 → 12  22 leads · same leader next period 9 (41%) · and still significant 9 (41%)
+
+leads that hold in at least two periods: 61
+  5 periods     10s ahead  Will OpenAI IPO by December 31 2026?
+                          → Will OpenAI not IPO by December 31, 2026?
+  4 periods   30.0m ahead  Predict.fun FDV above $400M one day after launch?
+                          → Predict.fun FDV above $500M one day after launch?
+  4 periods     30s ahead  Will Manchester City win the 2025–26 English Premier League?
+                          → Will Arsenal win the 2025–26 English Premier League?
+  4 periods   10.0m ahead  Predict.fun FDV above $500M one day after launch?
+                          → Predict.fun FDV above $600M one day after launch?
+  3 periods     10s ahead  Will Trump and Putin not meet?
+                          → Trump meets with Putin by December 31?
+  3 periods   30.0m ahead  US announces end of Iranian blockade by December 31, 2026?
+                          → US announces end of Iranian blockade by October 31, 2026?
+  3 periods   30.0m ahead  Variational FDV above $1B one day after launch?
+                          → Variational FDV above $800M one day after launch?
+  3 periods   60.0m ahead  Will 1 Fed rate hike happen in 2026?
+                          → Fed rate hike in 2026?
+  3 periods    5.0m ahead  US announces end of Iranian blockade by December 31, 2026?
+                          → US announces end of Iranian blockade by September 30, 2026?
+  3 periods   10.0m ahead  Predict.fun FDV above $400M one day after launch?
+                          → Predict.fun FDV above $300M one day after launch?
+  3 periods    5.0m ahead  OpenAI IPO before 2027?
+                          → Will OpenAI not IPO by December 31, 2026?
+  3 periods     30s ahead  NATO x Russia military clash by October 31, 2026?
+                          → NATO x Russia military clash by December 31, 2026?
+  2 periods     10s ahead  Will Аndrey Gyurov win the next Bulgarian presidential electio…
+                          → Will Iliana Iotova win the next Bulgarian presidential election?
+  2 periods     30s ahead  Will Bitcoin reach $90,000 by December 31, 2026?
+                          → Will Bitcoin dip to $70,000 by December 31, 2026?
+  2 periods   20.0m ahead  Will Bitcoin dip to $60,000 in March?
+                          → Will Bitcoin dip to $55,000 in March?
