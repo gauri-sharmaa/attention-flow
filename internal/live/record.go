@@ -298,11 +298,20 @@ func (r *recorder) summary(now float64, open int) TrackV {
 	if len(r.done) > 0 {
 		v.Since = int64(r.done[0].t)
 	}
-	for _, w := range []struct {
+	// A window is shown once the record is older than it (until then it
+	// would just repeat the shorter one); the first is always shown.
+	age := 0.0
+	if len(r.done) > 0 {
+		age = now - r.horizon - r.done[0].t
+	}
+	for k, w := range []struct {
 		label string
 		span  float64
 	}{{"last hour", 3600}, {"last 24 hours", 86400}, {"all time", math.Inf(1)}} {
-		v.Windows = append(v.Windows, r.window(w.label, now-r.horizon-w.span))
+		prev := []float64{0, 3600, 86400}[k]
+		if k == 0 || age > prev {
+			v.Windows = append(v.Windows, r.window(w.label, now-r.horizon-w.span))
+		}
 	}
 	v.Calib = make([]CalibV, len(calibEdges)-1)
 	for i := range v.Calib {
@@ -329,7 +338,7 @@ func (r *recorder) summary(now float64, open int) TrackV {
 	}
 	// The early warning: over the last six hours (enough predictions to
 	// tell), is the model doing worse than quoting the normal rate?
-	if w := r.window("", now-r.horizon-6*3600); w.N >= 1000 && w.Skill < 0 {
+	if w := r.window("", now-r.horizon-6*3600); age >= 6*3600 && w.N >= 1000 && w.Skill < 0 {
 		v.Alert = fmt.Sprintf("Over the last 6 hours the move odds did worse than each market's normal rate (skill %+.1f%%). The pattern may have stopped working.", 100*w.Skill)
 	}
 	d := DirV{Open: open, Ready: r.learner.n >= 100}

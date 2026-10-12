@@ -56,7 +56,7 @@
   // ---- track record ----
   const pct = (x, d = 0) => (x * 100).toFixed(d) + "%";
   function track(s) {
-    const T = s.track, all = T.windows[2], el = (id) => $(id);
+    const T = s.track, all = T.windows[T.windows.length - 1], el = (id) => $(id);
     el("trackAlert").hidden = !T.alert; el("trackAlert").textContent = T.alert || "";
     if (!all.n) {
       const due = Math.max(0, Math.ceil((s.horizon - (s.now - s.status.fittedAt)) / 60));
@@ -71,14 +71,14 @@
       : `<div class="tile"><span class="k">${w.label}</span><span class="v">–</span><span class="s">no checked predictions yet</span></div>`).join("");
     calib(T.calib);
     const D = T.dir;
-    el("dir").innerHTML = `<div><span class="k muted">Which way next? (order book)</span></div>` + (D.n ? `
+    el("dir").innerHTML = `<div><span class="k muted">Which way next? (order book)</span></div>` + (D.n >= 20 ? `
       <div class="big">${pct(D.acc, 1)}</div>
       <div class="muted">of ${D.n.toLocaleString()} calls on the next 2¢ midpoint move were right${D.ready ? "" : " (still learning: the first 100 calls train it)"}</div>
       <div class="bar2"><span>order book</span><i style="width:${D.acc * 100}%"></i><span>${pct(D.acc)}</span></div>
       <div class="bar2"><span>same as last</span><i class="dim" style="width:${D.accLast * 100}%"></i><span>${pct(D.accLast)}</span></div>
       <div class="bar2"><span>coin flip</span><i class="dim" style="width:50%"></i><span>50%</span></div>
       <div class="muted small">Every call is made before its outcome and only learned from afterwards. ${D.open} calls open.</div>`
-      : `<div class="muted">No direction calls settled yet. Each market gets a call once a minute; it settles when the midpoint next moves 2¢. ${D.open} open now.</div>`);
+      : `<div class="muted">${D.n ? `${D.n} of 20 calls settled so far` : "No direction calls settled yet"}: accuracy shows after 20. Each market gets a call once a minute; it settles when the midpoint next moves 2¢. ${D.open} open now.</div>`);
   }
   function calib(cs) {
     const svg = $("calib"), NS = "http://www.w3.org/2000/svg", L = 34, R = 290, T = 10, B = 190, max = 0.6;
@@ -94,7 +94,7 @@
     mk("text", { x: x(0.45), y: y(0.5) - 4, "text-anchor": "end" }, "perfect");
     mk("text", { x: (L + R) / 2, y: B + 28, "text-anchor": "middle" }, "said");
     mk("text", { x: 10, y: (T + B) / 2, transform: `rotate(-90 10 ${(T + B) / 2})`, "text-anchor": "middle" }, "happened");
-    const pts = cs.filter((c) => c.n > 0);
+    const pts = cs.filter((c) => c.n >= 10); // fewer than 10 checks is noise
     if (pts.length > 1) mk("polyline", { points: pts.map((c) => `${x(c.meanP)},${y(c.rate)}`).join(" "), fill: "none", stroke: css("--accent"), "stroke-width": 2 });
     const big = Math.max(1, ...pts.map((c) => c.n));
     for (const c of pts) {
