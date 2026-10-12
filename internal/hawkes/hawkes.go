@@ -201,15 +201,28 @@ func (m *Model) LogLik(evs []Event, from, to float64) (float64, int) {
 // LogLikDims is LogLik restricted to the streams with only[i] true (nil = all).
 // All streams still act as history; only the selected ones are scored.
 func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64, int) {
-	ll, n := 0.0, 0
-	K := len(m.Betas)
-	st := newState(m.D, K)
+	ll, n := m.LogLikPerDim(evs, from, to)
+	tot, cnt := 0.0, 0
+	for i := range ll {
+		if only == nil || only[i] {
+			tot += ll[i]
+			cnt += n[i]
+		}
+	}
+	return tot, cnt
+}
+
+// LogLikPerDim returns each stream's held-out log-likelihood over [from, to)
+// and its event count, so one pass can be summed over any group of streams.
+func (m *Model) LogLikPerDim(evs []Event, from, to float64) ([]float64, []int) {
+	ll, n := make([]float64, m.D), make([]int, m.D)
+	st := newState(m.D, len(m.Betas))
 	for _, e := range evs {
 		if e.T >= to {
 			break
 		}
 		st.flush(e.T, m.Betas)
-		if e.T >= from && (only == nil || only[e.Dim]) {
+		if e.T >= from {
 			lam := m.Mu[e.Dim] * m.season(e.T)
 			for p, j := range m.Parents[e.Dim] {
 				r := st.at(j, e.T, m.Betas)
@@ -217,8 +230,8 @@ func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64,
 					lam += m.Alpha[e.Dim][p][k] * b * r[k]
 				}
 			}
-			ll += e.weight() * math.Log(math.Max(lam, 1e-300))
-			n += int(e.weight())
+			ll[e.Dim] += e.weight() * math.Log(math.Max(lam, 1e-300))
+			n[e.Dim] += int(e.weight())
 		}
 		st.defer_(e)
 	}
@@ -226,13 +239,10 @@ func (m *Model) LogLikDims(evs []Event, from, to float64, only []bool) (float64,
 	mass := m.kernelMass(evs, from, to)
 	bm := m.bgMass(from, to)
 	for i := 0; i < m.D; i++ {
-		if only != nil && !only[i] {
-			continue
-		}
-		ll -= m.Mu[i] * bm
+		ll[i] -= m.Mu[i] * bm
 		for p, j := range m.Parents[i] {
 			for k := range m.Betas {
-				ll -= m.Alpha[i][p][k] * mass[j][k]
+				ll[i] -= m.Alpha[i][p][k] * mass[j][k]
 			}
 		}
 	}

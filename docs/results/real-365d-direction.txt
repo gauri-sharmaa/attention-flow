@@ -1,0 +1,276 @@
+# Direction of the next 2¢ move, a year of trades. Three runs: raw trade prices, and prices averaged over the last 5 and 20 trades.
+# Raw prices: mostly bid-ask bounce (77% reversal). Averaged prices: apparent momentum, much of it the average catching up (lag).
+# In every run, order flow adds almost nothing beyond the direction of the last move.
+
+######## smooth 1: attnflow direction -dir data/pmt365 -smooth 1
+direction 412903 price moves of ≥ 2¢ across 1205 markets · 49.7% up · 12 periods of 30 days · price = mean of last 1 trades
+          next move goes the same way as the one before it 23.3% of the time (above 50% = momentum, below = reversal)
+          features: net buying (5 min, 30 min, 2 h), trade-count imbalance, previous move, price level, time since last move
+          scores out of sample: accuracy and log-loss (lower is better); 'sure' = model ≥ 60% either way
+
+  period  2  Nov 11–Dec 11   40392 moves  49.6% up
+    base rate   accuracy  50.4%  log-loss 0.6931
+    last move   accuracy  81.4%  log-loss 0.4808
+    order flow  accuracy  81.4%  log-loss 0.4787
+    sure calls  100.0% of moves, right  81.4% of the time
+
+  period  3  Dec 11–Jan 11   42487 moves  50.0% up
+    base rate   accuracy  50.0%  log-loss 0.6932
+    last move   accuracy  81.6%  log-loss 0.4769
+    order flow  accuracy  81.6%  log-loss 0.4757
+    sure calls  100.0% of moves, right  81.6% of the time
+
+  period  4  Jan 11–Feb 10   50241 moves  49.7% up
+    base rate   accuracy  50.3%  log-loss 0.6931
+    last move   accuracy  79.2%  log-loss 0.5126
+    order flow  accuracy  79.2%  log-loss 0.5113
+    sure calls  100.0% of moves, right  79.2% of the time
+
+  period  5  Feb 10–Mar 13   37287 moves  50.0% up
+    base rate   accuracy  50.0%  log-loss 0.6932
+    last move   accuracy  77.9%  log-loss 0.5286
+    order flow  accuracy  77.9%  log-loss 0.5270
+    sure calls  100.0% of moves, right  77.9% of the time
+
+  period  6  Mar 13–Apr 12   46208 moves  49.4% up
+    base rate   accuracy  49.4%  log-loss 0.6932
+    last move   accuracy  76.2%  log-loss 0.5500
+    order flow  accuracy  76.2%  log-loss 0.5460
+    sure calls  100.0% of moves, right  76.2% of the time
+
+  period  7  Apr 12–May 13   40269 moves  49.8% up
+    base rate   accuracy  50.2%  log-loss 0.6932
+    last move   accuracy  75.5%  log-loss 0.5573
+    order flow  accuracy  75.5%  log-loss 0.5532
+    sure calls  100.0% of moves, right  75.5% of the time
+
+  period  8  May 13–Jun 12   44629 moves  49.6% up
+    base rate   accuracy  50.4%  log-loss 0.6931
+    last move   accuracy  73.3%  log-loss 0.5808
+    order flow  accuracy  73.3%  log-loss 0.5795
+    sure calls  100.0% of moves, right  73.3% of the time
+
+  period  9  Jun 12–Jul 12   21939 moves  49.7% up
+    base rate   accuracy  50.3%  log-loss 0.6931
+    last move   accuracy  72.4%  log-loss 0.5888
+    order flow  accuracy  72.4%  log-loss 0.5851
+    sure calls  100.0% of moves, right  72.4% of the time
+
+  period 10  Jul 12–Aug 12   12653 moves  49.6% up
+    base rate   accuracy  50.4%  log-loss 0.6931
+    last move   accuracy  70.4%  log-loss 0.6087
+    order flow  accuracy  70.4%  log-loss 0.6014
+    sure calls  100.0% of moves, right  70.4% of the time
+
+  period 11  Aug 12–Sep 11   12977 moves  50.3% up
+    base rate   accuracy  49.7%  log-loss 0.6932
+    last move   accuracy  66.0%  log-loss 0.6454
+    order flow  accuracy  66.0%  log-loss 0.6433
+    sure calls  100.0% of moves, right  66.0% of the time
+
+  period 12  Sep 11–Oct 12   21511 moves  49.7% up
+    base rate   accuracy  49.7%  log-loss 0.6932
+    last move   accuracy  63.8%  log-loss 0.6557
+    order flow  accuracy  63.8%  log-loss 0.6513
+    sure calls  94.6% of moves, right  63.8% of the time
+
+all test periods  370593 moves
+  base rate   accuracy  50.1%  log-loss 0.6932
+  last move   accuracy  76.0%  log-loss 0.5451
+  order flow  accuracy  76.0%  log-loss 0.5425
+  sure calls  99.7% of moves, right  76.1% of the time
+  order flow beats last move on log-loss in 11 of 11 periods
+
+by group (all test periods; accuracy: last move → order flow)
+  topic: world            160992 moves   77.2% →  77.2%  log-loss 0.5332 → 0.5297  sure 99.7% of moves at  77.2%
+  topic: politics          33768 moves   75.4% →  75.4%  log-loss 0.5533 → 0.5502  sure 99.4% of moves at  75.5%
+  topic: econ              36603 moves   74.8% →  74.8%  log-loss 0.5565 → 0.5527  sure 99.7% of moves at  74.9%
+  topic: crypto            46160 moves   74.7% →  74.7%  log-loss 0.5643 → 0.5621  sure 99.9% of moves at  74.7%
+  topic: tech              15402 moves   72.7% →  72.7%  log-loss 0.5735 → 0.5695  sure 99.1% of moves at  72.8%
+  topic: sports            19593 moves   76.0% →  76.0%  log-loss 0.5461 → 0.5463  sure 99.7% of moves at  76.1%
+  topic: culture            5830 moves   79.0% →  79.0%  log-loss 0.5062 → 0.5060  sure 99.6% of moves at  79.1%
+  topic: other             52245 moves   75.6% →  75.6%  log-loss 0.5474 → 0.5472  sure 99.7% of moves at  75.7%
+  short-lived (<30d)      107795 moves   74.3% →  74.3%  log-loss 0.5683 → 0.5671  sure 99.8% of moves at  74.3%
+  long-running            262798 moves   76.8% →  76.8%  log-loss 0.5356 → 0.5324  sure 99.6% of moves at  76.8%
+
+######## smooth 5: attnflow direction -dir data/pmt365 -smooth 5
+direction 133666 price moves of ≥ 2¢ across 1205 markets · 49.4% up · 12 periods of 30 days · price = mean of last 5 trades
+          next move goes the same way as the one before it 57.8% of the time (above 50% = momentum, below = reversal)
+          features: net buying (5 min, 30 min, 2 h), trade-count imbalance, previous move, price level, time since last move
+          scores out of sample: accuracy and log-loss (lower is better); 'sure' = model ≥ 60% either way
+
+  period  2  Nov 11–Dec 11   10541 moves  49.4% up
+    base rate   accuracy  50.6%  log-loss 0.6931
+    last move   accuracy  55.4%  log-loss 0.6873
+    order flow  accuracy  55.6%  log-loss 0.6867
+    sure calls   5.4% of moves, right  55.2% of the time
+
+  period  3  Dec 11–Jan 11   11313 moves  50.4% up
+    base rate   accuracy  49.6%  log-loss 0.6933
+    last move   accuracy  56.0%  log-loss 0.6861
+    order flow  accuracy  55.7%  log-loss 0.6862
+    sure calls   5.8% of moves, right  56.3% of the time
+
+  period  4  Jan 11–Feb 10   14410 moves  48.7% up
+    base rate   accuracy  48.7%  log-loss 0.6934
+    last move   accuracy  56.4%  log-loss 0.6851
+    order flow  accuracy  56.6%  log-loss 0.6840
+    sure calls  10.5% of moves, right  56.9% of the time
+
+  period  5  Feb 10–Mar 13   11334 moves  50.5% up
+    base rate   accuracy  49.5%  log-loss 0.6937
+    last move   accuracy  54.9%  log-loss 0.6893
+    order flow  accuracy  55.0%  log-loss 0.6876
+    sure calls  13.1% of moves, right  59.9% of the time
+
+  period  6  Mar 13–Apr 12   15749 moves  48.5% up
+    base rate   accuracy  48.5%  log-loss 0.6935
+    last move   accuracy  56.3%  log-loss 0.6858
+    order flow  accuracy  56.0%  log-loss 0.6838
+    sure calls   4.6% of moves, right  54.8% of the time
+
+  period  7  Apr 12–May 13   13936 moves  49.0% up
+    base rate   accuracy  51.0%  log-loss 0.6930
+    last move   accuracy  58.2%  log-loss 0.6804
+    order flow  accuracy  58.3%  log-loss 0.6778
+    sure calls  17.3% of moves, right  62.8% of the time
+
+  period  8  May 13–Jun 12   16390 moves  49.0% up
+    base rate   accuracy  51.0%  log-loss 0.6929
+    last move   accuracy  57.9%  log-loss 0.6803
+    order flow  accuracy  58.1%  log-loss 0.6788
+    sure calls  30.1% of moves, right  61.4% of the time
+
+  period  9  Jun 12–Jul 12    8451 moves  50.2% up
+    base rate   accuracy  49.8%  log-loss 0.6934
+    last move   accuracy  60.0%  log-loss 0.6741
+    order flow  accuracy  59.7%  log-loss 0.6716
+    sure calls  31.8% of moves, right  64.5% of the time
+
+  period 10  Jul 12–Aug 12    5251 moves  49.2% up
+    base rate   accuracy  49.2%  log-loss 0.6932
+    last move   accuracy  60.6%  log-loss 0.6705
+    order flow  accuracy  60.4%  log-loss 0.6675
+    sure calls  59.9% of moves, right  63.3% of the time
+
+  period 11  Aug 12–Sep 11    5930 moves  51.0% up
+    base rate   accuracy  49.0%  log-loss 0.6936
+    last move   accuracy  63.5%  log-loss 0.6585
+    order flow  accuracy  63.4%  log-loss 0.6551
+    sure calls  62.2% of moves, right  66.4% of the time
+
+  period 12  Sep 11–Oct 12   10209 moves  49.4% up
+    base rate   accuracy  49.4%  log-loss 0.6936
+    last move   accuracy  64.2%  log-loss 0.6526
+    order flow  accuracy  64.3%  log-loss 0.6472
+    sure calls  77.9% of moves, right  66.8% of the time
+
+all test periods  123514 moves
+  base rate   accuracy  49.7%  log-loss 0.6933
+  last move   accuracy  58.0%  log-loss 0.6794
+  order flow  accuracy  57.9%  log-loss 0.6773
+  sure calls  24.1% of moves, right  63.4% of the time
+  order flow beats last move on log-loss in 10 of 11 periods
+
+by group (all test periods; accuracy: last move → order flow)
+  topic: world             50507 moves   57.0% →  57.1%  log-loss 0.6836 → 0.6816  sure 24.7% of moves at  61.2%
+  topic: politics          11938 moves   57.4% →  57.4%  log-loss 0.6825 → 0.6806  sure 26.6% of moves at  61.0%
+  topic: econ              12940 moves   56.9% →  57.1%  log-loss 0.6810 → 0.6792  sure 24.1% of moves at  62.9%
+  topic: crypto            15169 moves   58.4% →  58.0%  log-loss 0.6778 → 0.6760  sure 17.4% of moves at  65.5%
+  topic: tech               5842 moves   62.9% →  62.9%  log-loss 0.6593 → 0.6525  sure 39.3% of moves at  70.8%
+  topic: sports             7233 moves   55.4% →  55.2%  log-loss 0.6865 → 0.6873  sure 23.0% of moves at  58.8%
+  topic: culture            1986 moves   55.6% →  55.2%  log-loss 0.6835 → 0.6813  sure 19.4% of moves at  67.0%
+  topic: other             17899 moves   61.1% →  61.0%  log-loss 0.6687 → 0.6667  sure 22.4% of moves at  68.0%
+  short-lived (<30d)       37707 moves   59.7% →  59.6%  log-loss 0.6746 → 0.6727  sure 17.8% of moves at  65.5%
+  long-running             85807 moves   57.2% →  57.2%  log-loss 0.6815 → 0.6794  sure 26.9% of moves at  62.7%
+
+######## smooth 20: attnflow direction -dir data/pmt365 -smooth 20
+direction 86873 price moves of ≥ 2¢ across 1205 markets · 49.3% up · 12 periods of 30 days · price = mean of last 20 trades
+          next move goes the same way as the one before it 70.0% of the time (above 50% = momentum, below = reversal)
+          features: net buying (5 min, 30 min, 2 h), trade-count imbalance, previous move, price level, time since last move
+          scores out of sample: accuracy and log-loss (lower is better); 'sure' = model ≥ 60% either way
+
+  period  2  Nov 11–Dec 11    6355 moves  48.7% up
+    base rate   accuracy  51.3%  log-loss 0.6928
+    last move   accuracy  69.5%  log-loss 0.6152
+    order flow  accuracy  69.5%  log-loss 0.6093
+    sure calls  96.1% of moves, right  69.8% of the time
+
+  period  3  Dec 11–Jan 11    6805 moves  51.5% up
+    base rate   accuracy  48.5%  log-loss 0.6942
+    last move   accuracy  70.1%  log-loss 0.6106
+    order flow  accuracy  70.1%  log-loss 0.6072
+    sure calls  93.0% of moves, right  70.7% of the time
+
+  period  4  Jan 11–Feb 10    9284 moves  48.2% up
+    base rate   accuracy  48.2%  log-loss 0.6947
+    last move   accuracy  69.6%  log-loss 0.6150
+    order flow  accuracy  69.6%  log-loss 0.6133
+    sure calls  95.1% of moves, right  70.0% of the time
+
+  period  5  Feb 10–Mar 13    7142 moves  51.2% up
+    base rate   accuracy  48.8%  log-loss 0.6947
+    last move   accuracy  65.6%  log-loss 0.6483
+    order flow  accuracy  65.6%  log-loss 0.6448
+    sure calls  98.0% of moves, right  65.6% of the time
+
+  period  6  Mar 13–Apr 12   10500 moves  47.8% up
+    base rate   accuracy  47.8%  log-loss 0.6945
+    last move   accuracy  68.1%  log-loss 0.6285
+    order flow  accuracy  68.1%  log-loss 0.6214
+    sure calls  86.2% of moves, right  69.5% of the time
+
+  period  7  Apr 12–May 13    9313 moves  49.1% up
+    base rate   accuracy  50.9%  log-loss 0.6934
+    last move   accuracy  69.6%  log-loss 0.6148
+    order flow  accuracy  69.5%  log-loss 0.6126
+    sure calls  84.7% of moves, right  70.7% of the time
+
+  period  8  May 13–Jun 12   11208 moves  48.8% up
+    base rate   accuracy  51.2%  log-loss 0.6929
+    last move   accuracy  69.9%  log-loss 0.6113
+    order flow  accuracy  69.9%  log-loss 0.6081
+    sure calls  99.0% of moves, right  70.1% of the time
+
+  period  9  Jun 12–Jul 12    5813 moves  50.1% up
+    base rate   accuracy  49.9%  log-loss 0.6935
+    last move   accuracy  70.5%  log-loss 0.6064
+    order flow  accuracy  70.5%  log-loss 0.6029
+    sure calls  95.9% of moves, right  70.6% of the time
+
+  period 10  Jul 12–Aug 12    3681 moves  49.1% up
+    base rate   accuracy  49.1%  log-loss 0.6932
+    last move   accuracy  72.7%  log-loss 0.5877
+    order flow  accuracy  72.7%  log-loss 0.5825
+    sure calls  97.7% of moves, right  73.0% of the time
+
+  period 11  Aug 12–Sep 11    3987 moves  52.1% up
+    base rate   accuracy  47.9%  log-loss 0.6941
+    last move   accuracy  74.1%  log-loss 0.5728
+    order flow  accuracy  74.1%  log-loss 0.5692
+    sure calls  97.4% of moves, right  74.6% of the time
+
+  period 12  Sep 11–Oct 12    6555 moves  49.3% up
+    base rate   accuracy  49.3%  log-loss 0.6947
+    last move   accuracy  74.8%  log-loss 0.5659
+    order flow  accuracy  74.8%  log-loss 0.5589
+    sure calls  98.8% of moves, right  75.0% of the time
+
+all test periods  80643 moves
+  base rate   accuracy  49.4%  log-loss 0.6939
+  last move   accuracy  70.0%  log-loss 0.6109
+  order flow  accuracy  70.0%  log-loss 0.6068
+  sure calls  94.0% of moves, right  70.5% of the time
+  order flow beats last move on log-loss in 11 of 11 periods
+
+by group (all test periods; accuracy: last move → order flow)
+  topic: world             33249 moves   68.7% →  68.7%  log-loss 0.6222 → 0.6171  sure 94.3% of moves at  69.3%
+  topic: politics           7513 moves   70.0% →  70.0%  log-loss 0.6121 → 0.6102  sure 91.2% of moves at  70.5%
+  topic: econ               8684 moves   68.9% →  69.0%  log-loss 0.6201 → 0.6158  sure 95.6% of moves at  69.4%
+  topic: crypto             9765 moves   70.0% →  70.0%  log-loss 0.6090 → 0.6033  sure 94.5% of moves at  70.7%
+  topic: tech               3478 moves   74.5% →  74.5%  log-loss 0.5699 → 0.5615  sure 92.8% of moves at  75.5%
+  topic: sports             4931 moves   67.8% →  67.8%  log-loss 0.6292 → 0.6295  sure 94.2% of moves at  68.0%
+  topic: culture            1162 moves   69.4% →  69.4%  log-loss 0.6151 → 0.6123  sure 92.4% of moves at  70.5%
+  topic: other             11861 moves   74.0% →  74.0%  log-loss 0.5770 → 0.5751  sure 93.9% of moves at  74.4%
+  short-lived (<30d)       25303 moves   71.7% →  71.7%  log-loss 0.5965 → 0.5918  sure 95.4% of moves at  72.3%
+  long-running             55340 moves   69.2% →  69.2%  log-loss 0.6174 → 0.6136  sure 93.4% of moves at  69.7%

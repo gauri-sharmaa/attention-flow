@@ -525,14 +525,73 @@ func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k
 	if folds > 0 {
 		step := (t1 - t0) / float64(folds+1)
 		fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets · walk-forward %d folds of %.0f days\n", len(mv), size*100, nM, folds, step/86400)
+		groups := marketGroups(streams, act)
+		// Per fold: gain and placebo for every group, from the same four fits.
+		type gres struct {
+			g, p float64
+			n    int
+		}
+		res := make([][]gres, folds)
+		perDim := func(evs []hawkes.Event, a, b, c float64) ([]float64, []int) {
+			f, bm := fitW(evs, full, a, b), fitW(evs, base, a, b)
+			lf, n := f.LogLikPerDim(evs, b, c)
+			lb, _ := bm.LogLikPerDim(evs, b, c)
+			for i := range lf {
+				lf[i] -= lb[i]
+			}
+			return lf, n
+		}
+		sum := func(d []float64, n []int, ms []int) (float64, int) {
+			t, c := 0.0, 0
+			for _, m := range ms {
+				t += d[nM+m]
+				c += n[nM+m]
+			}
+			return t / float64(max(c, 1)), c
+		}
 		inOrder(folds, jobs, func(f int) string {
-			f++
-			rng := rand.New(rand.NewPCG(33, uint64(f)))
-			a, b, c := t0+float64(f-1)*step, t0+float64(f)*step, t0+float64(f+1)*step
-			g, n, _ := gainW(evs, a, b, c)
-			pg, _, _ := gainW(shiftRange(evs, d, 0, nM, t0, t1, rng), a, b, c)
-			return fmt.Sprintf("  fold %d  test %s–%s  %6d moves  gain %+.4f  placebo %+.4f\n", f, dayStr(b), dayStr(c), n, g, pg)
+			rng := rand.New(rand.NewPCG(33, uint64(f+1)))
+			a, b, c := t0+float64(f)*step, t0+float64(f+1)*step, t0+float64(f+2)*step
+			d, n := perDim(evs, a, b, c)
+			pd, _ := perDim(shiftRange(evs, 2*nM, 0, nM, t0, t1, rng), a, b, c)
+			all := make([]int, nM)
+			for i := range all {
+				all[i] = i
+			}
+			g, cnt := sum(d, n, all)
+			pg, _ := sum(pd, n, all)
+			out := fmt.Sprintf("  fold %d  test %s–%s  %6d moves  gain %+.4f  placebo %+.4f\n", f+1, dayStr(b), dayStr(c), cnt, g, pg)
+			res[f] = make([]gres, len(groups))
+			for gi, gr := range groups {
+				gg, gc := sum(d, n, gr.markets)
+				gp, _ := sum(pd, n, gr.markets)
+				res[f][gi] = gres{gg, gp, gc}
+				out += fmt.Sprintf("      %-22s %6d moves  gain %+.4f  placebo %+.4f\n", gr.name, gc, gg, gp)
+			}
+			return out
 		})
+		fmt.Printf("\nby group   months passing (gain > 0 and > placebo, groups with ≥ 200 moves that month) · mean gain\n")
+		for gi, gr := range groups {
+			pass, tested, tot, nn := 0, 0, 0.0, 0
+			strip := ""
+			for f := range res {
+				r := res[f][gi]
+				switch {
+				case r.n < 200:
+					strip += "·"
+				case r.g > 0 && r.g > r.p:
+					strip += "+"
+					pass++
+					tested++
+				default:
+					strip += "-"
+					tested++
+				}
+				tot += r.g * float64(r.n)
+				nn += r.n
+			}
+			fmt.Printf("  %-22s %s  %2d / %-2d  mean %+.4f  (%d markets, %d moves)\n", gr.name, strip, pass, tested, tot/float64(max(nn, 1)), len(gr.markets), nn)
+		}
 		return nil
 	}
 	fmt.Printf("moves     %d price moves of ≥ %.0f¢ across %d markets, next to %d trades\n", len(mv), size*100, nM, len(act))
@@ -691,4 +750,43 @@ func inOrder(n, jobs int, work func(i int) string) {
 	for i := 0; i < n; i++ {
 		fmt.Print(<-out[i])
 	}
+}
+
+type marketGroup struct {
+	name    string
+	markets []int
+}
+
+// marketGroups splits markets by topic and by how long they traded in the
+// data: short-lived (under 30 days between first and last trade, e.g. a
+// match or a weekly price) versus long-running.
+func marketGroups(streams []stream, act []hawkes.Event) []marketGroup {
+	nM := len(streams)
+	first, last := make([]float64, nM), make([]float64, nM)
+	for i := range first {
+		first[i] = math.Inf(1)
+	}
+	for _, e := range act {
+		if e.Dim < nM {
+			first[e.Dim] = math.Min(first[e.Dim], e.T)
+			last[e.Dim] = math.Max(last[e.Dim], e.T)
+		}
+	}
+	bySec := map[string][]int{}
+	var short, long []int
+	for i, s := range streams {
+		bySec[s.sector] = append(bySec[s.sector], i)
+		if last[i]-first[i] < 30*86400 {
+			short = append(short, i)
+		} else {
+			long = append(long, i)
+		}
+	}
+	var gs []marketGroup
+	for _, sec := range []string{"world", "politics", "econ", "crypto", "tech", "sports", "culture", "other"} {
+		if len(bySec[sec]) > 0 {
+			gs = append(gs, marketGroup{"topic: " + sec, bySec[sec]})
+		}
+	}
+	return append(gs, marketGroup{"short-lived (<30d)", short}, marketGroup{"long-running", long})
 }

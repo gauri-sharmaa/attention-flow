@@ -77,6 +77,8 @@ func main() {
 		err = cmdLeadLag(os.Args[2:])
 	case "backtest":
 		err = cmdBacktest(os.Args[2:])
+	case "direction":
+		err = cmdDirection(os.Args[2:])
 	case "eventstudy":
 		err = cmdEventStudy(os.Args[2:])
 	case "outside":
@@ -93,7 +95,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|eventstudy|outside|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|direction|eventstudy|outside|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
