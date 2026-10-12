@@ -1,0 +1,13 @@
+events    19794561 across 1205 streams · 365.0 days · 18212 candidate links · train 70% / test 30%
+walk-forward  11 folds of 30 days each (fit on one period, score the next)
+  fold 1  test Nov 11–Dec 11  1217193 events  gain +0.0423  placebo -0.0421  cross-event links 224
+  fold 2  test Dec 11–Jan 11  1382437 events  gain +0.0516  placebo +0.0010  cross-event links 215
+  fold 3  test Jan 11–Feb 10  2212963 events  gain -0.0126  placebo -0.0077  cross-event links 311
+  fold 4  test Feb 10–Mar 13  2206369 events  gain +0.0067  placebo -0.0025  cross-event links 275
+  fold 5  test Mar 13–Apr 12  3587308 events  gain -0.0009  placebo -0.0085  cross-event links 349
+  fold 6  test Apr 12–May 13  2441306 events  gain -0.0123  placebo -0.0116  cross-event links 353
+  fold 7  test May 13–Jun 12  2290372 events  gain -0.0008  placebo +0.0065  cross-event links 493
+  fold 8  test Jun 12–Jul 12  1814182 events  gain -0.0876  placebo -0.0292  cross-event links 780
+  fold 9  test Jul 12–Aug 12  515214 events  gain +0.1172  placebo +0.0563  cross-event links 584
+  fold 10  test Aug 12–Sep 11  315018 events  gain +0.0360  placebo +0.0079  cross-event links 198
+  fold 11  test Sep 11–Oct 12  302405 events  gain +0.0311  placebo -0.0026  cross-event links 272
