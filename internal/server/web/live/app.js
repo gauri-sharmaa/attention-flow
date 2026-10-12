@@ -21,7 +21,7 @@
       return false;
     }
     $("loading").hidden = true; $("main").hidden = false;
-    $("status").textContent = `${st.markets} markets · ${st.liveTrades.toLocaleString()} live trades · model refit ${ago(st.fittedAt, s.now)} ago` + (st.error ? " · feed retrying" : "");
+    $("status").textContent = `${st.markets} markets · ${st.liveTrades.toLocaleString()} live trades (${st.liveMoves} 2¢ moves) · model refit ${ago(st.fittedAt, s.now)} ago` + (st.error ? " · feed retrying" : "");
     return true;
   }
 

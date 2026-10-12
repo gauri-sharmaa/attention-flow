@@ -86,6 +86,7 @@ type Status struct {
 	Markets    int     `json:"markets"`
 	Trades     int     `json:"trades"`
 	LiveTrades int     `json:"liveTrades"`
+	LiveMoves  int     `json:"liveMoves"`
 	FittedAt   int64   `json:"fittedAt"`
 	FitSeconds float64 `json:"fitSeconds"`
 	Window     string  `json:"window"`
@@ -245,6 +246,10 @@ func (e *Engine) ingest(t source.Trade, live bool) {
 	} else if math.Abs(t.YesPrice-m.ref) >= e.cfg.MoveSize-1e-9 {
 		m.ref = t.YesPrice
 		add = append(add, hawkes.Event{T: ts, Dim: n + m.idx})
+		m.moves = append(m.moves, ts)
+		if live {
+			e.status.LiveMoves++
+		}
 	}
 	for _, ev := range add {
 		e.events = append(e.events, ev)

@@ -78,3 +78,17 @@ func TestRecorderReloads(t *testing.T) {
 		t.Fatalf("reloaded: done %d dir %d learner %d errs %d", len(r2.done), len(r2.dirDone), r2.learner.n, r2.loadErrs)
 	}
 }
+
+// A 2¢ trade-price move must land in the market's move history, which is
+// what the track record checks predictions against.
+func TestIngestRecordsMoves(t *testing.T) {
+	e := New(Config{MoveSize: 0.02, Horizon: 600})
+	m := &market{LiveMarket: source.LiveMarket{ConditionID: "c"}, ref: -1, bk: newBook(), midRef: -1}
+	e.markets, e.byID = []*market{m}, map[string]*market{"c": m}
+	for i, p := range []float64{0.50, 0.51, 0.53, 0.52} { // 0.50 → 0.53 is the only 2¢ move
+		e.ingest(source.Trade{T: int64(100 + i), ConditionID: "c", YesPrice: p}, true)
+	}
+	if len(m.moves) != 1 || m.moves[0] != 102 || e.status.LiveMoves != 1 {
+		t.Fatalf("moves %v, live moves %d; want [102], 1", m.moves, e.status.LiveMoves)
+	}
+}
