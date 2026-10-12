@@ -77,27 +77,80 @@ func tradesIn(client *http.Client, conditionID string, a, b int64) ([]pmTrade, e
 	return append(left, right...), nil
 }
 
-// cachedTrades reads a market's trades from the cache if a complete fetch for
-// the same window start is there, else fetches and caches them, so a long
-// download can be restarted without starting over.
+// cachedTrades returns a market's trades since `from`, caching them so a long
+// download can be restarted without starting over. A cache file from an
+// earlier run that starts on or before `from` is reused: only the trades since
+// its last one are fetched, and the file is rewritten under the new start.
 func cachedTrades(dir string, client *http.Client, conditionID string, from int64) ([]pmTrade, error) {
-	path := filepath.Join(dir, fmt.Sprintf("%s-%d.json", conditionID, from/86400))
-	if b, err := os.ReadFile(path); err == nil {
-		var tr []pmTrade
-		if json.Unmarshal(b, &tr) == nil {
-			return tr, nil
+	path := cachePath(dir, conditionID, from)
+	if tr, err := readCache(path); err == nil {
+		return tr, nil
+	}
+	var tr []pmTrade
+	old, _ := filepath.Glob(filepath.Join(dir, conditionID+"-*.json"))
+	sort.Strings(old)
+	for k := len(old) - 1; k >= 0; k-- {
+		var day int64
+		if _, err := fmt.Sscanf(strings.TrimPrefix(filepath.Base(old[k]), conditionID+"-"), "%d.json", &day); err != nil || day > from/86400 {
+			continue
 		}
+		prev, err := readCache(old[k])
+		if err != nil {
+			continue
+		}
+		since := from
+		for _, t := range prev {
+			if t.Timestamp >= from {
+				tr = append(tr, t)
+			}
+			if t.Timestamp+1 > since {
+				since = t.Timestamp + 1
+			}
+		}
+		tail, err := tradesIn(client, conditionID, since, time.Now().Unix())
+		if err != nil {
+			return nil, err
+		}
+		tr = append(tr, tail...)
+		if writeCache(path, tr) == nil {
+			os.Remove(old[k])
+		}
+		return tr, nil
 	}
 	tr, err := marketTrades(client, conditionID, from)
 	if err != nil {
 		return tr, err
 	}
-	if err := os.MkdirAll(dir, 0o755); err == nil {
-		if b, err := json.Marshal(tr); err == nil {
-			os.WriteFile(path, b, 0o644)
-		}
-	}
+	writeCache(path, tr)
 	return tr, nil
+}
+
+func cachePath(dir, conditionID string, from int64) string {
+	return filepath.Join(dir, fmt.Sprintf("%s-%d.json", conditionID, from/86400))
+}
+
+func readCache(path string) ([]pmTrade, error) {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var tr []pmTrade
+	return tr, json.Unmarshal(b, &tr)
+}
+
+func writeCache(path string, tr []pmTrade) error {
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		return err
+	}
+	b, err := json.Marshal(tr)
+	if err != nil {
+		return err
+	}
+	tmp := path + ".tmp"
+	if err := os.WriteFile(tmp, b, 0o644); err != nil {
+		return err
+	}
+	return os.Rename(tmp, path)
 }
 
 // FetchMarketTrades builds two series per market from its trade log, on
@@ -138,7 +191,10 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 	now := time.Now().Unix() / barSeconds * barSeconds
 	from := now - int64(days)*86400
 	client := &http.Client{Timeout: 60 * time.Second}
-	trades := make([][]pmTrade, len(ms))
+	// Workers only fill the cache; markets are read back one at a time below
+	// so a year of trades never has to sit in memory at once.
+	cacheDir := filepath.Join(outDir, "cache")
+	ok := make([]bool, len(ms))
 	jobs := make(chan int)
 	var wg sync.WaitGroup
 	var mu sync.Mutex
@@ -148,13 +204,12 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 		go func() {
 			defer wg.Done()
 			for i := range jobs {
-				tr, err := cachedTrades(filepath.Join(outDir, "cache"), client, ms[i].ConditionID, from)
+				_, err := cachedTrades(cacheDir, client, ms[i].ConditionID, from)
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "dropped %s: %v\n", ms[i].Question, err)
-					tr = nil
 				}
 				mu.Lock()
-				trades[i] = tr
+				ok[i] = err == nil
 				done++
 				if done%50 == 0 {
 					fmt.Fprintf(os.Stderr, "%d/%d markets\n", done, len(ms))
@@ -184,7 +239,11 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 	for i, m := range ms {
 		var toks []string
 		json.Unmarshal([]byte(m.ClobTokenIds), &toks)
-		if len(toks) < 2 {
+		if len(toks) < 2 || !ok[i] {
+			continue
+		}
+		tr, err := readCache(cachePath(cacheDir, m.ConditionID, from))
+		if err != nil {
 			continue
 		}
 		// The last day before a market resolves is a scramble toward 0 or 1
@@ -193,22 +252,22 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 		if end, err := time.Parse(time.RFC3339, m.EndDate); err == nil && end.Unix()-86400 < stop {
 			stop = end.Unix() - 86400
 		}
-		kept := trades[i][:0]
-		for _, t := range trades[i] {
+		kept := tr[:0]
+		for _, t := range tr {
 			if t.Timestamp < stop {
 				kept = append(kept, t)
 			}
 		}
-		trades[i] = kept
+		tr = kept
 		count := make([]int, nBars)
 		last := make([]float64, nBars)
 		for b := range last {
 			last[b] = math.NaN()
 		}
 		// Oldest first, so each bar ends up with its last trade's price.
-		sort.Slice(trades[i], func(a, c int) bool { return trades[i][a].Timestamp < trades[i][c].Timestamp })
+		sort.Slice(tr, func(a, c int) bool { return tr[a].Timestamp < tr[c].Timestamp })
 		inWindow := 0
-		for _, t := range trades[i] {
+		for _, t := range tr {
 			if t.Timestamp < from || t.Timestamp >= now {
 				continue
 			}
@@ -236,7 +295,7 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 		// per trade, YES price, dollar size. Market index matches markets.txt.
 		mi := len(names)
 		names = append(names, q)
-		for _, t := range trades[i] {
+		for _, t := range tr {
 			if t.Timestamp < from || t.Timestamp >= now {
 				continue
 			}
