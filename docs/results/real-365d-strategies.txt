@@ -1,0 +1,24 @@
+1. OVERREACTION: after a ≥3¢ jump, what happens next? (+ = kept going, − = gave back; ¢, average)
+   attention spike = jump on ≥10 trades and ≥5× the market's usual trades per 5 min
+   on an attention spike   1 h +0.72¢ (±0.38, n=2408)  6 h +0.45¢ (±0.57, n=2152)  24 h -0.81¢ (±0.72, n=2038)
+   on normal volume        1 h -0.86¢ (±0.14, n=8655)  6 h -1.23¢ (±0.24, n=7831)  24 h -1.40¢ (±0.34, n=7493)
+     of which ≥10 trades   1 h +0.14¢ (±0.45, n=1180)  6 h -0.89¢ (±0.82, n=1140)  24 h -0.30¢ (±1.20, n=995)
+   by month, 6 h, spike vs normal:  1: -1.0/-1.6  2: +2.1/-1.9  3: +2.2/-1.5  4: +0.4/-1.5  5: +0.5/-1.4  6: +0.3/-0.4  7: -0.9/-1.1  8: +1.7/-0.8  9: +0.7/-1.0  10: -1.0/-1.0  11: -0.9/-1.7  12: +0.9/-0.8
+
+2. DEADLINE LADDERS: "by an earlier date" priced above "by a later date" (impossible at resolution)
+   79 adjacent ladder pairs · both traded in the last 10 min for 11257 pair-hours
+   gap ≥ 3¢ on last trades 0.03% of that time · 402 separate gaps
+   median gap 4.7¢ (largest 91¢) · median length 5s
+   402 of the gaps exceed 2¢ (1¢ a leg), but most last seconds and are measured on last trades, not quotes you could hit
+   reading: ladders are kept in line; the live order book would show whether any gap is actually tradable
+
+3. CALIBRATION: 916 resolved markets · the cheaper side's price before the end vs how often it won [95% interval]
+   caveat: these are the year's highest-volume closed markets, and a long shot coming in is what drives volume, so surprises are over-represented
+   price       1 day before                        1 week before                       1 month before                    
+     0–2  %    0.3% → won  0.0% [0–1] n=567        0.3% → won  0.9% [0–2] n=434        0.4% → won  0.9% [0–3] n=331     
+     2–5  %    3.0% → won  3.3% [1–11] n=61        3.0% → won  8.2% [3–19] n=49        3.0% → won  2.0% [0–10] n=51     
+     5–10 %    7.0% → won 17.1% [8–33] n=35        6.9% → won 20.6% [13–32] n=68       7.6% → won 17.9% [9–33] n=39     
+    10–20 %   14.8% → won  9.4% [4–20] n=53       15.1% → won 18.3% [11–29] n=71      14.1% → won 22.6% [13–36] n=53    
+    20–30 %   25.1% → won  8.5% [3–20] n=47       24.3% → won 26.5% [16–40] n=49      24.8% → won 28.6% [18–42] n=49    
+    30–40 %   35.2% → won 39.7% [29–52] n=63      34.5% → won 29.2% [20–41] n=65      33.7% → won 31.7% [20–47] n=41    
+    40–50 %   44.5% → won 42.9% [33–54] n=84      44.9% → won 42.0% [31–54] n=69      44.8% → won 51.1% [37–65] n=45    

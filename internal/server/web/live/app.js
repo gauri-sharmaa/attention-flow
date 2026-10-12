@@ -29,7 +29,8 @@
     $("hotHint").textContent = `odds of a 2¢ price move in the next ${Math.round(s.horizon / 60)} minutes, vs a normal moment · busier = trading pace vs its usual`;
     $("hot").innerHTML = s.hot.length ? s.hot.map((h) => {
       const m = s.markets[h.m];
-      const why = h.drivers.length ? "set off by " + h.drivers.map((d) => esc(s.markets[d].q)).join(" · ") : `${h.recent} trades in the last 5 min`;
+      let why = h.drivers.length ? "set off by " + h.drivers.map((d) => esc(s.markets[d].q)).join(" · ") : `${h.recent} trades in the last 5 min`;
+      if (h.up >= 0 && Math.abs(h.up - 0.5) >= 0.05) why = `<span class="lean ${h.up > 0.5 ? "up" : "down"}">book leans ${h.up > 0.5 ? "▲" : "▼"} ${Math.round(Math.max(h.up, 1 - h.up) * 100)}%</span> · ` + why;
       return `<li><div class="row">
         <span class="q"><span class="dot" style="background:${color(m.s)}"></span>${esc(m.q)}</span>
         <span class="num">${Math.round(m.p * 100)}¢</span>
@@ -50,6 +51,59 @@
         <span class="num muted">$${r.usd.toLocaleString()}</span></li>`;
     }).join("") || `<li class="empty">Waiting for the next trade. These markets trade every few seconds to minutes.</li>`;
     lastTape = Math.max(lastTape, newest);
+  }
+
+  // ---- track record ----
+  const pct = (x, d = 0) => (x * 100).toFixed(d) + "%";
+  function track(s) {
+    const T = s.track, all = T.windows[2], el = (id) => $(id);
+    el("trackAlert").hidden = !T.alert; el("trackAlert").textContent = T.alert || "";
+    if (!all.n) {
+      const due = Math.max(0, Math.ceil((s.horizon - (s.now - s.status.fittedAt)) / 60));
+      el("trackLead").innerHTML = `The first predictions were written down when the model went live. They are checked ${Math.round(s.horizon / 60)} minutes after they are made${due ? `, so the first results arrive in about ${due} min` : ""}. ${T.pending.toLocaleString()} waiting.`;
+    } else {
+      // Headline: the busiest calibration bucket above the lowest one.
+      const b = T.calib.filter((c) => c.n >= 30).sort((a, z) => z.lo - a.lo)[0] || T.calib.find((c) => c.n);
+      el("trackLead").innerHTML = b ? `When it said <b>${pct(b.lo)}–${pct(b.hi)}</b>, a 2¢ move followed <b>${pct(b.rate)}</b> of the time (${b.n.toLocaleString()} predictions). Since ${new Date(T.since * 1000).toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}: ${all.n.toLocaleString()} predictions checked, ${T.pending.toLocaleString()} waiting.` : "";
+    }
+    el("tiles").innerHTML = T.windows.map((w) => w.n ? `<div class="tile"><span class="k">${w.label}</span><span class="v ${w.skill > 0 ? "good" : "bad"}">${w.skill > 0 ? "+" : ""}${pct(w.skill, 1)}</span>
+      <span class="s">said ${pct(w.meanP, 1)} on average, happened ${pct(w.rate, 1)} · ${w.n.toLocaleString()} checks · ${w.skill > 0 ? "beats" : "trails"} each market's normal rate</span></div>`
+      : `<div class="tile"><span class="k">${w.label}</span><span class="v">–</span><span class="s">no checked predictions yet</span></div>`).join("");
+    calib(T.calib);
+    const D = T.dir;
+    el("dir").innerHTML = `<div><span class="k muted">Which way next? (order book)</span></div>` + (D.n ? `
+      <div class="big">${pct(D.acc, 1)}</div>
+      <div class="muted">of ${D.n.toLocaleString()} calls on the next 2¢ midpoint move were right${D.ready ? "" : " (still learning: the first 100 calls train it)"}</div>
+      <div class="bar2"><span>order book</span><i style="width:${D.acc * 100}%"></i><span>${pct(D.acc)}</span></div>
+      <div class="bar2"><span>same as last</span><i class="dim" style="width:${D.accLast * 100}%"></i><span>${pct(D.accLast)}</span></div>
+      <div class="bar2"><span>coin flip</span><i class="dim" style="width:50%"></i><span>50%</span></div>
+      <div class="muted small">Every call is made before its outcome and only learned from afterwards. ${D.open} calls open.</div>`
+      : `<div class="muted">No direction calls settled yet. Each market gets a call once a minute; it settles when the midpoint next moves 2¢. ${D.open} open now.</div>`);
+  }
+  function calib(cs) {
+    const svg = $("calib"), NS = "http://www.w3.org/2000/svg", L = 34, R = 290, T = 10, B = 190, max = 0.6;
+    const x = (v) => L + Math.min(v, max) / max * (R - L), y = (v) => B - Math.min(v, max) / max * (B - T);
+    const mk = (tag, a, txt) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; svg.appendChild(e); return e; };
+    svg.innerHTML = "";
+    for (const v of [0, 0.2, 0.4, 0.6]) {
+      mk("line", { x1: L, x2: R, y1: y(v), y2: y(v), stroke: css("--faint") });
+      mk("text", { x: L - 6, y: y(v) + 3, "text-anchor": "end" }, pct(v));
+      mk("text", { x: x(v), y: B + 14, "text-anchor": "middle" }, pct(v));
+    }
+    mk("line", { x1: x(0), y1: y(0), x2: x(max), y2: y(max), stroke: css("--muted"), "stroke-dasharray": "3 3" });
+    mk("text", { x: x(0.45), y: y(0.5) - 4, "text-anchor": "end" }, "perfect");
+    mk("text", { x: (L + R) / 2, y: B + 28, "text-anchor": "middle" }, "said");
+    mk("text", { x: 10, y: (T + B) / 2, transform: `rotate(-90 10 ${(T + B) / 2})`, "text-anchor": "middle" }, "happened");
+    const pts = cs.filter((c) => c.n > 0);
+    if (pts.length > 1) mk("polyline", { points: pts.map((c) => `${x(c.meanP)},${y(c.rate)}`).join(" "), fill: "none", stroke: css("--accent"), "stroke-width": 2 });
+    const big = Math.max(1, ...pts.map((c) => c.n));
+    for (const c of pts) {
+      const r = 4 + 5 * Math.sqrt(c.n / big);
+      const d = mk("circle", { cx: x(c.meanP), cy: y(c.rate), r, fill: css("--accent"), stroke: css("--card"), "stroke-width": 2 });
+      const hit = mk("circle", { cx: x(c.meanP), cy: y(c.rate), r: Math.max(r, 12), fill: "transparent" });
+      hit.addEventListener("mouseenter", () => { d.setAttribute("r", r + 2); $("calibTip").textContent = `Said ${pct(c.lo)}–${pct(c.hi)} (avg ${pct(c.meanP, 1)}): a move followed ${pct(c.rate, 1)} of ${c.n.toLocaleString()} times.`; });
+      hit.addEventListener("mouseleave", () => { d.setAttribute("r", r); $("calibTip").textContent = ""; });
+    }
   }
 
   // ---- network: main cluster with a force layout, small groups in a grid ----
@@ -152,7 +206,7 @@
   es.onmessage = (m) => {
     S = JSON.parse(m.data);
     if (!status(S)) return;
-    hot(S); tape(S);
+    hot(S); tape(S); track(S);
     $("netHint").textContent = `${S.links.length} links fitted on the last ${S.status.window.replace("h0m0s", "h")} · rings pulse when a market trades`;
   };
   requestAnimationFrame(drawNet);

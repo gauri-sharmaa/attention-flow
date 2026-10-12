@@ -32,12 +32,14 @@ type Config struct {
 	Refit    time.Duration // how often to refit
 	MoveSize float64       // price move that counts, in YES-price units
 	Horizon  float64       // seconds ahead for "price move likely"
+	Record   string        // directory for the track record ("" keeps it in memory only)
+	Every    time.Duration // how often predictions are written down
 }
 
 // DefaultConfig is sized for a laptop: ~1-2 minutes of warm-up.
 func DefaultConfig() Config {
 	return Config{Markets: 200, History: 48 * time.Hour, Refit: 10 * time.Minute,
-		MoveSize: 0.02, Horizon: 600}
+		MoveSize: 0.02, Horizon: 600, Record: "data/live", Every: time.Minute}
 }
 
 var betas = []float64{1.0 / 10, 1.0 / 120, 1.0 / 1200}
@@ -49,6 +51,12 @@ type market struct {
 	ref     float64 // price at the last counted move (2¢ hysteresis)
 	lastAct float64 // last activity event time (one per second)
 	recent  []float64
+	moves   []float64    // times of 2¢ trade-price moves (for scoring predictions)
+	flow    [][2]float64 // live trades: time, signed dollars (+ pushes YES up)
+	bk      *book
+	midRef  float64 // midpoint at the last 2¢ midpoint move
+	lastMid float64 // direction of that move (+1, -1, 0 none yet)
+	open    *dirCall
 }
 
 // Engine owns all state; Snapshot and the feed loop lock mu.
@@ -63,10 +71,12 @@ type Engine struct {
 	seen    map[string]bool
 	cross   *hawkes.Live
 	moves   *hawkes.Live
-	normAct []float64 // each market's average trading rate over the window (per second)
-	normMov []float64 // ... and price-move rate
 	tape    []TapeRow
 	status  Status
+	normAct []float64 // each market's average trading rate over the window (per second)
+	normMov []float64 // ... and price-move rate
+	rec     *recorder
+	down    float64 // when the feed dropped (0 = up)
 }
 
 // Status describes progress for the UI.
@@ -93,7 +103,8 @@ type TapeRow struct {
 
 // New prepares an engine; Run does the work.
 func New(cfg Config) *Engine {
-	return &Engine{cfg: cfg, byID: map[string]*market{}, seen: map[string]bool{}, status: Status{Phase: "loading"}}
+	return &Engine{cfg: cfg, byID: map[string]*market{}, seen: map[string]bool{}, status: Status{Phase: "loading"},
+		rec: newRecorder(cfg.Record, cfg.Horizon)}
 }
 
 // Run loads markets and history, fits, then follows the live feed forever.
@@ -104,7 +115,7 @@ func (e *Engine) Run() error {
 	}
 	e.mu.Lock()
 	for i, m := range ms {
-		mk := &market{LiveMarket: m, idx: i, ref: -1}
+		mk := &market{LiveMarket: m, idx: i, ref: -1, bk: newBook(), midRef: -1}
 		e.markets = append(e.markets, mk)
 		e.byID[m.ConditionID] = mk
 	}
@@ -160,6 +171,11 @@ func (e *Engine) Run() error {
 	go func() {
 		for range time.Tick(e.cfg.Refit) {
 			e.refit()
+		}
+	}()
+	go func() {
+		for range time.Tick(e.cfg.Every) {
+			e.predictTick(float64(time.Now().Unix()))
 		}
 	}()
 	return e.follow()
@@ -240,6 +256,7 @@ func (e *Engine) ingest(t source.Trade, live bool) {
 		}
 	}
 	if live {
+		m.flow = append(m.flow, [2]float64{ts, float64(t.Dir) * t.USD})
 		e.status.LiveTrades++
 		e.tape = last(append(e.tape, TapeRow{T: t.T, Market: m.idx, Price: round(t.YesPrice, 3), USD: round(t.USD, 0), Dir: t.Dir}), 60)
 	}
@@ -311,11 +328,19 @@ func (e *Engine) refit() {
 	log.Printf("refit on %d events in %.1fs", len(evs), time.Since(start).Seconds())
 }
 
-// follow streams live trades forever, reconnecting when the socket drops.
+// follow streams live trades and order books forever, reconnecting when the
+// socket drops. Time without a feed is an outage for the track record.
 func (e *Engine) follow() error {
 	ids := map[string]source.LiveMarket{}
 	for _, m := range e.markets {
 		ids[m.ConditionID] = m.LiveMarket
+	}
+	back := func() { // caller holds mu
+		if e.down > 0 {
+			e.rec.outage(e.down, float64(time.Now().Unix())+1)
+			e.down = 0
+		}
+		e.status.Error = ""
 	}
 	wait := time.Second
 	for {
@@ -323,7 +348,7 @@ func (e *Engine) follow() error {
 		err := source.Stream(context.Background(), ids, func(t source.Trade) {
 			e.mu.Lock()
 			defer e.mu.Unlock()
-			e.status.Error = ""
+			back()
 			if e.seen[t.Key] {
 				return
 			}
@@ -335,17 +360,137 @@ func (e *Engine) follow() error {
 				t.T = int64(e.events[len(e.events)-1].T) // keep time order
 			}
 			e.ingest(t, true)
+		}, func(u source.BookUpdate) {
+			e.mu.Lock()
+			defer e.mu.Unlock()
+			back()
+			e.onBook(u)
 		})
 		if time.Since(start) > time.Minute {
 			wait = time.Second
 		}
 		e.mu.Lock()
 		e.status.Error = fmt.Sprint(err)
+		if e.down == 0 {
+			e.down = float64(time.Now().Unix())
+		}
 		e.mu.Unlock()
 		log.Printf("trade stream: %v; reconnecting in %s", err, wait)
 		time.Sleep(wait)
 		wait = min(2*wait, time.Minute)
 	}
+}
+
+// onBook applies an order-book change and settles the market's open
+// direction call when the midpoint moves 2¢ (caller holds mu).
+func (e *Engine) onBook(u source.BookUpdate) {
+	m := e.byID[u.ConditionID]
+	if m == nil {
+		return
+	}
+	m.bk.apply(u)
+	mid, ok := m.bk.mid()
+	if !ok {
+		return
+	}
+	if m.midRef < 0 {
+		m.midRef = mid
+		return
+	}
+	if math.Abs(mid-m.midRef) < e.cfg.MoveSize-1e-9 {
+		return
+	}
+	up := mid > m.midRef
+	if m.open != nil {
+		e.rec.settleDir(*m.open, up)
+		m.open = nil
+	}
+	m.lastMid = map[bool]float64{true: 1, false: -1}[up]
+	m.midRef = mid
+}
+
+// predictTick writes down this minute's predictions and settles the ones
+// whose horizon has passed.
+func (e *Engine) predictTick(now float64) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	if e.cross == nil || e.moves == nil {
+		return
+	}
+	keep := now - 2*e.cfg.Horizon
+	for i, m := range e.markets {
+		k := 0
+		for k < len(m.moves) && m.moves[k] < keep {
+			k++
+		}
+		m.moves = m.moves[k:]
+		if e.down == 0 {
+			_, pm, pn, ok := e.odds(i, now)
+			if ok {
+				e.rec.predict(prediction{now, m.ConditionID, pm, pn})
+			}
+		}
+		if m.open != nil && now-m.open.t > 6*3600 {
+			m.open = nil // no 2¢ midpoint move in six hours: no outcome
+		}
+		if m.open == nil && e.down == 0 {
+			if x, ok := e.bookFeatures(m, now); ok {
+				m.open = &dirCall{now, m.ConditionID, x, e.rec.learner.prob(x), e.rec.pLast(m.lastMid)}
+			}
+		}
+	}
+	e.rec.resolve(now, func(cid string, from, to float64) bool {
+		m := e.byID[cid]
+		if m == nil {
+			return false
+		}
+		for _, t := range m.moves {
+			if t > from && t <= to {
+				return true
+			}
+		}
+		return false
+	})
+}
+
+// odds returns a market's trading heat and its chance of a 2¢ move within
+// the horizon, now and at a normal moment (caller holds mu).
+func (e *Engine) odds(i int, now float64) (heat, pmove, pnorm float64, ok bool) {
+	norm := e.normAct[i]
+	if norm <= 0 {
+		return 0, 0, 0, false
+	}
+	n := len(e.markets)
+	heat = e.cross.Rate(i, now) / norm
+	pmove = 1 - math.Exp(-e.moves.Expected(n+i, now, e.cfg.Horizon))
+	pnorm = 1 - math.Exp(-e.normMov[i]*e.cfg.Horizon)
+	return heat, pmove, pnorm, true
+}
+
+// bookFeatures describes a market's order book and recent flow for the
+// direction learner; ok is false without a two-sided book.
+func (e *Engine) bookFeatures(m *market, now float64) ([]float64, bool) {
+	bid, ask, ok := m.bk.top()
+	if !ok {
+		return nil, false
+	}
+	mid := (bid + ask) / 2
+	k := 0
+	for k < len(m.flow) && m.flow[k][0] < now-300 {
+		k++
+	}
+	m.flow = m.flow[k:]
+	var net, gross float64
+	for _, f := range m.flow {
+		net += f[1]
+		gross += math.Abs(f[1])
+	}
+	flow := 0.0
+	if gross > 0 {
+		flow = net / gross
+	}
+	return []float64{m.bk.imbalance(0.01), m.bk.imbalance(0.03), math.Min((ask-bid)*100, 20) / 5,
+		flow, m.lastMid, mid - 0.5, math.Abs(mid - 0.5)}, true
 }
 
 func last(r []TapeRow, n int) []TapeRow {

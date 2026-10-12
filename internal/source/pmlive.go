@@ -80,10 +80,23 @@ func History(m LiveMarket, from int64) ([]Trade, error) {
 	return out, nil
 }
 
-// Stream follows trades in the given markets in real time over Polymarket's
-// public market websocket and calls fn for each one. It returns when the
-// connection drops; the caller reconnects.
-func Stream(ctx context.Context, markets map[string]LiveMarket, fn func(Trade)) error {
+// BookUpdate is a change to a market's YES order book. A snapshot replaces
+// the whole book; otherwise each level's size is the new total at that
+// price (0 removes the level). Prices are YES prices.
+type BookUpdate struct {
+	ConditionID string
+	T           float64 // unix seconds
+	Snapshot    bool
+	Bids, Asks  []Level
+}
+
+// Level is one price level of an order book.
+type Level struct{ Price, Size float64 }
+
+// Stream follows trades and YES order-book changes in the given markets in
+// real time over Polymarket's public market websocket. It returns when the
+// connection drops; the caller reconnects. onBook may be nil.
+func Stream(ctx context.Context, markets map[string]LiveMarket, fn func(Trade), onBook func(BookUpdate)) error {
 	byToken := map[string]LiveMarket{}
 	var ids []string
 	for _, m := range markets {
@@ -129,6 +142,9 @@ func Stream(ctx context.Context, markets map[string]LiveMarket, fn func(Trade)) 
 			batch = []wsEvent{ev}
 		}
 		for _, ev := range batch {
+			if onBook != nil {
+				bookEvents(ev, byToken, onBook)
+			}
 			m, ok := byToken[ev.AssetID]
 			if ev.EventType != "last_trade_price" || !ok {
 				continue
@@ -143,8 +159,66 @@ func Stream(ctx context.Context, markets map[string]LiveMarket, fn func(Trade)) 
 	}
 }
 
+// bookEvents turns book snapshots and price changes on YES tokens into
+// BookUpdates. The NO book mirrors the YES book, so it is skipped.
+func bookEvents(ev wsEvent, byToken map[string]LiveMarket, onBook func(BookUpdate)) {
+	ms, _ := strconv.ParseInt(ev.Timestamp, 10, 64)
+	t := float64(ms) / 1000
+	levels := func(ls []wsLevel) []Level {
+		out := make([]Level, 0, len(ls))
+		for _, l := range ls {
+			p, _ := strconv.ParseFloat(l.Price, 64)
+			sz, _ := strconv.ParseFloat(l.Size, 64)
+			out = append(out, Level{p, sz})
+		}
+		return out
+	}
+	switch ev.EventType {
+	case "book":
+		if m, ok := byToken[ev.AssetID]; ok && ev.AssetID == m.YesToken {
+			onBook(BookUpdate{ConditionID: m.ConditionID, T: t, Snapshot: true, Bids: levels(ev.Bids), Asks: levels(ev.Asks)})
+		}
+	case "price_change":
+		ups := map[string]*BookUpdate{}
+		for _, pc := range ev.PriceChanges {
+			m, ok := byToken[pc.AssetID]
+			if !ok || pc.AssetID != m.YesToken {
+				continue
+			}
+			u := ups[m.ConditionID]
+			if u == nil {
+				u = &BookUpdate{ConditionID: m.ConditionID, T: t}
+				ups[m.ConditionID] = u
+			}
+			p, _ := strconv.ParseFloat(pc.Price, 64)
+			sz, _ := strconv.ParseFloat(pc.Size, 64)
+			if pc.Side == "BUY" {
+				u.Bids = append(u.Bids, Level{p, sz})
+			} else {
+				u.Asks = append(u.Asks, Level{p, sz})
+			}
+		}
+		for _, u := range ups {
+			onBook(*u)
+		}
+	}
+}
+
+type wsLevel struct {
+	Price string `json:"price"`
+	Size  string `json:"size"`
+}
+
 type wsEvent struct {
-	EventType string `json:"event_type"`
+	EventType    string    `json:"event_type"`
+	Bids         []wsLevel `json:"bids"`
+	Asks         []wsLevel `json:"asks"`
+	PriceChanges []struct {
+		AssetID string `json:"asset_id"`
+		Price   string `json:"price"`
+		Size    string `json:"size"`
+		Side    string `json:"side"`
+	} `json:"price_changes"`
 	AssetID   string `json:"asset_id"`
 	Price     string `json:"price"`
 	Size      string `json:"size"`

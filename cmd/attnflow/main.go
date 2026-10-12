@@ -79,6 +79,8 @@ func main() {
 		err = cmdBacktest(os.Args[2:])
 	case "direction":
 		err = cmdDirection(os.Args[2:])
+	case "strategies":
+		err = cmdStrategies(os.Args[2:])
 	case "eventstudy":
 		err = cmdEventStudy(os.Args[2:])
 	case "outside":
@@ -95,7 +97,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|direction|eventstudy|outside|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|direction|strategies|eventstudy|outside|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
@@ -276,6 +278,7 @@ func cmdServe(args []string) error {
 	addr := fs.String("addr", ":8080", "listen address")
 	n := fs.Int("markets", 200, "how many of the busiest Polymarket markets to follow")
 	hours := fs.Int("hours", 48, "hours of trade history the model is fitted on")
+	record := fs.String("record", "data/live", "directory for the live track record (\"\" = don't save)")
 	sim := fs.Bool("sim", false, "replay the simulator instead of live Polymarket")
 	uni := fs.String("universe", "data/universe.txt", "universe file (-sim)")
 	text := fs.String("text", "", "optional entity descriptions (-sim)")
@@ -286,7 +289,7 @@ func cmdServe(args []string) error {
 	fs.Parse(args)
 	if !*sim {
 		cfg := live.DefaultConfig()
-		cfg.Markets, cfg.History = *n, time.Duration(*hours)*time.Hour
+		cfg.Markets, cfg.History, cfg.Record = *n, time.Duration(*hours)*time.Hour, *record
 		eng := live.New(cfg)
 		go func() {
 			if err := eng.Run(); err != nil {

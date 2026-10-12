@@ -35,6 +35,17 @@
     <ol id="tape"></ol>
   </section>
 
+  <section class="card" id="track-card">
+    <h2>Track record <span class="hint" id="trackHint">every prediction is written down and checked 10 minutes later</span></h2>
+    <div id="trackAlert" class="alert" hidden></div>
+    <p id="trackLead" class="lead"></p>
+    <div class="track">
+      <div id="tiles" class="tiles"></div>
+      <div class="calib"><svg id="calib" viewBox="0 0 300 220" role="img" aria-label="Calibration: predicted chance of a move against how often a move happened"></svg><div id="calibTip" class="tip small"></div></div>
+      <div id="dir" class="dirbox"></div>
+    </div>
+  </section>
+
   <section class="card" id="net-card">
     <h2>What sets off what <span class="hint" id="netHint"></span></h2>
     <canvas id="net"></canvas>

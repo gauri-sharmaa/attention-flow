@@ -14,6 +14,7 @@ type Snapshot struct {
 	Hot     []HotRow  `json:"hot"`
 	Links   []LinkV   `json:"links"`
 	Tape    []TapeRow `json:"tape"`
+	Track   TrackV    `json:"track"`
 	Horizon float64   `json:"horizon"`
 }
 
@@ -34,6 +35,7 @@ type HotRow struct {
 	PNormal float64 `json:"pnorm"` // ... at a normal moment
 	Drivers []int   `json:"drivers"`
 	Recent  int     `json:"recent"`
+	Up      float64 `json:"up"` // order book's P(next 2¢ midpoint move is up); -1 if not ready
 }
 
 // LinkV is a fitted cross-market link.
@@ -51,7 +53,6 @@ func (e *Engine) Snapshot() *Snapshot {
 	now := float64(time.Now().Unix())
 	s := &Snapshot{Now: int64(now), Status: e.status, Tape: append([]TapeRow{}, e.tape...), Horizon: e.cfg.Horizon,
 		Hot: []HotRow{}, Links: []LinkV{}}
-	n := len(e.markets)
 	for _, m := range e.markets {
 		k := 0
 		for k < len(m.recent) && m.recent[k] < now-3600 {
@@ -69,21 +70,31 @@ func (e *Engine) Snapshot() *Snapshot {
 	if e.cross == nil || e.moves == nil {
 		return s
 	}
-	for i := range e.markets {
+	open := 0
+	for _, m := range e.markets {
+		if m.open != nil {
+			open++
+		}
+	}
+	s.Track = e.rec.summary(now, open)
+	for i, m := range e.markets {
 		// "Normal" is the market's own average over the window, so a market
 		// that rarely trades isn't hot just because one trade came in.
-		norm := e.normAct[i]
-		if norm <= 0 {
+		heat, pm, pn, ok := e.odds(i, now)
+		if !ok {
 			continue
 		}
-		heat := e.cross.Rate(i, now) / norm
-		exp := e.moves.Expected(n+i, now, e.cfg.Horizon)
-		pn := 1 - math.Exp(-e.normMov[i]*e.cfg.Horizon)
-		row := HotRow{Market: i, Heat: round(heat, 1), PMove: round(1-math.Exp(-exp), 3),
-			PNormal: round(pn, 3), Recent: s.Markets[i].Recent, Drivers: []int{}}
+		row := HotRow{Market: i, Heat: round(heat, 1), PMove: round(pm, 3), PNormal: round(pn, 3),
+			Recent: s.Markets[i].Recent, Drivers: []int{}, Up: -1}
+		norm := e.normAct[i]
 		for _, c := range e.cross.Contributions(i, now) {
 			if c.From != i && len(row.Drivers) < 2 && c.Rate > 0.1*norm {
 				row.Drivers = append(row.Drivers, c.From)
+			}
+		}
+		if s.Track.Dir.Ready {
+			if x, ok := e.bookFeatures(m, now); ok {
+				row.Up = round(e.rec.learner.prob(x), 3)
 			}
 		}
 		if row.PMove >= row.PNormal+0.01 { // at least a point above normal
