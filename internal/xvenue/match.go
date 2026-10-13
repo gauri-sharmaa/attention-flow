@@ -187,6 +187,10 @@ func hasWord(s, w string) bool {
 // within 12 hours of Kalshi's expected finish; Polymarket's end date is just
 // a deadline a week out, used only when there is no game time.
 func sameGame(p source.PolyMatchMarket, k source.KalshiMarket) bool {
+	kev := seriesRe.ReplaceAllString(k.Event, "") // "Game 4: A vs B" is game 4 of a series, not a map
+	if scope(norm(k.Title+" "+k.YesSub+" "+kev)) != scope(norm(p.Question+" "+p.Event)) {
+		return false // a half, quarter, set or map is not the whole game
+	}
 	switch {
 	case k.Close.IsZero():
 	case !p.GameStart.IsZero():
@@ -211,7 +215,15 @@ func sameGame(p source.PolyMatchMarket, k source.KalshiMarket) bool {
 // (an earlier or later round) is not taken for this one.
 func bothSides(kev, q string) bool {
 	nq := norm(q)
-	for _, side := range vsRe.Split(regexp.MustCompile(`^[^:]*: `).ReplaceAllString(kev, ""), 2) {
+	// Keep only the "A vs B" part: "Contender Series: A vs B" or "A vs B: Map 2".
+	if pre, post, ok := strings.Cut(kev, ": "); ok {
+		if vsRe.MatchString(pre) {
+			kev = pre
+		} else {
+			kev = post
+		}
+	}
+	for _, side := range vsRe.Split(kev, 2) {
 		hit := false
 		for _, w := range strings.Fields(norm(side)) {
 			if len(w) > 2 && !gameStop[w] && hasWord(nq, w) {
@@ -224,6 +236,27 @@ func bothSides(kev, q string) bool {
 		}
 	}
 	return true
+}
+
+var (
+	scopeWords = []string{"half", "1h", "2h", "quarter", "1q", "2q", "3q", "4q", "period", "inning", "innings", "set", "overtime", "corners", "cards", "halftime"}
+	mapRe      = regexp.MustCompile(`\b(?:map|game) (\d)\b`)
+	seriesRe   = regexp.MustCompile(`^Game \d+: `)
+)
+
+// scope names the part of a game a bet covers ("" for the whole game): any
+// period words, plus "mapN" for a numbered map or game of a series.
+func scope(s string) string {
+	var out []string
+	for _, w := range scopeWords {
+		if hasWord(s, w) {
+			out = append(out, w)
+		}
+	}
+	if m := mapRe.FindStringSubmatch(s); m != nil {
+		out = append(out, "map"+m[1])
+	}
+	return strings.Join(out, ",")
 }
 
 var gameStop = setOf("spread total goals points games maps over under both teams score wins more than full game time")

@@ -256,7 +256,11 @@ func xvSummary(dir string) error {
 			continue
 		}
 		seen[t.k] = true
-		fmt.Printf("    %+5.1f¢ net · %6.1f%%/yr · %7.0f contracts · %s · %s\n", 100*t.net, 100*t.ann, t.sz, t.k.kalshi, t.k.route)
+		flag := ""
+		if t.net > 0.10 {
+			flag = "  ← suspect: check the two markets settle the same way"
+		}
+		fmt.Printf("    %+5.1f¢ net · %6.1f%%/yr · %7.0f contracts · %s · %s%s\n", 100*t.net, 100*t.ann, t.sz, t.k.kalshi, t.k.route, flag)
 	}
 	return nil
 }

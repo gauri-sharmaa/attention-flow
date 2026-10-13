@@ -33,9 +33,12 @@ type KalshiMarket struct {
 
 var kalshiClient = &http.Client{Timeout: 60 * time.Second}
 
+// kalshiGet fetches and decodes one API path, backing off on errors and on
+// rate limits (honouring Retry-After) for up to a few minutes.
 func kalshiGet(path string, v any) error {
 	var err error
-	for attempt := 0; attempt < 5; attempt++ {
+	for attempt := 0; attempt < 8; attempt++ {
+		wait := time.Duration(min(60, 1<<attempt)) * time.Second
 		var req *http.Request
 		req, err = http.NewRequest("GET", kalshiAPI+path, nil)
 		if err != nil {
@@ -48,13 +51,16 @@ func kalshiGet(path string, v any) error {
 				err = json.NewDecoder(resp.Body).Decode(v)
 			} else {
 				err = fmt.Errorf("%s: %s", path, resp.Status)
+				if s, e := strconv.Atoi(resp.Header.Get("Retry-After")); e == nil && s > 0 {
+					wait = time.Duration(min(s, 120)) * time.Second
+				}
 			}
 			resp.Body.Close()
 			if err == nil {
 				return nil
 			}
 		}
-		time.Sleep(time.Duration(1<<attempt) * time.Second)
+		time.Sleep(wait)
 	}
 	return err
 }
