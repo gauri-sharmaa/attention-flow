@@ -33,6 +33,7 @@ func cmdHawkes(args []string) error {
 	season := fs.Bool("season", true, "model the shared hour-of-week activity cycle in the background rate")
 	jsonOut := fs.String("json", "", "write the fitted cross-market links and scores here (for the demo page)")
 	jobs := fs.Int("jobs", 2, "walk-forward folds to fit at once")
+	skip := fs.Int("skip", 0, "-moves walk-forward: skip the first N folds (to finish an interrupted run)")
 	folds := fs.Int("folds", 0, "walk-forward: split the span into folds+1 periods, fit on each and score the next")
 	moves := fs.Float64("moves", 0, "if > 0: test whether trading activity predicts price moves of at least this size (e.g. 0.02)")
 	fs.Parse(args)
@@ -42,7 +43,7 @@ func cmdHawkes(args []string) error {
 		return err
 	}
 	if *moves > 0 {
-		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos, *folds, *jobs)
+		return movesTest(*dir, streams, evs, *moves, *k, *iters, *l1, *season, *placebos, *folds, *jobs, *skip)
 	}
 	cand := marketCandidates(streams, *k)
 	nMarkets := len(streams)
@@ -478,7 +479,7 @@ func outsideTest(streams []stream, nM int, evs []hawkes.Event, cand, noLink [][]
 // (measured from the last move, so a trade bouncing between bid and ask does
 // not count). Both models see identical events; the full model also lets each
 // market's activity, and its candidates' activity, excite its moves.
-func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos, folds, jobs int) error {
+func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k, iters int, l1 float64, season bool, placebos, folds, jobs, skip int) error {
 	nM := len(streams)
 	mv, err := priceMoves(dir, nM, size)
 	if err != nil {
@@ -549,7 +550,8 @@ func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k
 			}
 			return t / float64(max(c, 1)), c
 		}
-		inOrder(folds, jobs, func(f int) string {
+		inOrder(folds-skip, jobs, func(f int) string {
+			f += skip
 			rng := rand.New(rand.NewPCG(33, uint64(f+1)))
 			a, b, c := t0+float64(f)*step, t0+float64(f+1)*step, t0+float64(f+2)*step
 			d, n := perDim(evs, a, b, c)
@@ -575,6 +577,9 @@ func movesTest(dir string, streams []stream, act []hawkes.Event, size float64, k
 			pass, tested, tot, nn := 0, 0, 0.0, 0
 			strip := ""
 			for f := range res {
+				if res[f] == nil {
+					continue // skipped
+				}
 				r := res[f][gi]
 				switch {
 				case r.n < 200:

@@ -81,6 +81,8 @@ func main() {
 		err = cmdDirection(os.Args[2:])
 	case "strategies":
 		err = cmdStrategies(os.Args[2:])
+	case "xvenue":
+		err = cmdXVenue(os.Args[2:])
 	case "eventstudy":
 		err = cmdEventStudy(os.Args[2:])
 	case "outside":
@@ -97,7 +99,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|direction|strategies|eventstudy|outside|bluesky|resample|serve|export [flags]")
+	fmt.Fprintln(os.Stderr, "usage: attnflow sim|replay|fetch|markets|polyall|polytrades|hawkes|leadlag|backtest|direction|strategies|xvenue|eventstudy|outside|bluesky|resample|serve|export [flags]")
 	os.Exit(2)
 }
 
