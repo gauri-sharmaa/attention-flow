@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"math"
+	"math/rand/v2"
 	"os"
 	"path/filepath"
 	"sort"
@@ -14,6 +15,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gauri-sharmaa/attention-flow/internal/leadlag"
 	"github.com/gauri-sharmaa/attention-flow/internal/source"
 	"github.com/gauri-sharmaa/attention-flow/internal/xvenue"
 )
@@ -23,9 +25,10 @@ import (
 //	attnflow xvenue match              find pairs (writes pairs.json and a readable pairs.txt)
 //	attnflow xvenue watch -for 24h     price both sides of every pair once a minute (gaps.csv)
 //	attnflow xvenue summary            how often a gap beats both venues' fees, how big, how long
+//	attnflow xvenue leadlag -days 30   which venue's price moves first, on long-running pairs
 func cmdXVenue(args []string) error {
 	if len(args) == 0 {
-		return fmt.Errorf("usage: attnflow xvenue match|watch|summary [flags]")
+		return fmt.Errorf("usage: attnflow xvenue match|watch|summary|leadlag [flags]")
 	}
 	fs := flag.NewFlagSet("xvenue", flag.ExitOnError)
 	dir := fs.String("dir", "data/xvenue", "where pairs and gaps are kept")
@@ -34,6 +37,9 @@ func cmdXVenue(args []string) error {
 	every := fs.Duration("every", time.Minute, "watch: time between sweeps")
 	dur := fs.Duration("for", 24*time.Hour, "watch: how long to run")
 	rematch := fs.Duration("rematch", 2*time.Hour, "watch: refresh pairs this often (games end, new ones list)")
+	days := fs.Int("days", 30, "leadlag: days of trades from each venue")
+	minMoves := fs.Int("min", 20, "leadlag: minimum 2¢ moves on each venue")
+	nNull := fs.Int("null", 99, "leadlag: whole-day shuffles for the p-value")
 	fs.Parse(args[1:])
 	if err := os.MkdirAll(*dir, 0o755); err != nil {
 		return err
@@ -46,6 +52,8 @@ func cmdXVenue(args []string) error {
 		return xvWatch(*dir, *nPoly, *minVol, *every, *dur, *rematch)
 	case "summary":
 		return xvSummary(*dir)
+	case "leadlag":
+		return xvLeadLag(*dir, *days, *minMoves, *nNull)
 	}
 	return fmt.Errorf("unknown xvenue command %q", args[0])
 }
@@ -149,10 +157,19 @@ func xvSummary(dir string) error {
 	}
 	defer f.Close()
 	r := csv.NewReader(bufio.NewReader(f))
-	r.FieldsPerRecord = len(gapHeader)
-	rows, err := r.ReadAll()
+	r.FieldsPerRecord = -1 // the watcher may be mid-write: skip a partial last line
+	all, err := r.ReadAll()
 	if err != nil {
 		return err
+	}
+	var rows [][]string
+	for _, row := range all {
+		if len(row) == len(gapHeader) {
+			rows = append(rows, row)
+		}
+	}
+	if len(rows) == 0 {
+		return fmt.Errorf("no complete rows yet")
 	}
 	type obs struct {
 		t, net, gross, size, cost float64
@@ -241,5 +258,96 @@ func xvSummary(dir string) error {
 		seen[t.k] = true
 		fmt.Printf("    %+5.1f¢ net · %6.1f%%/yr · %7.0f contracts · %s · %s\n", 100*t.net, 100*t.ann, t.sz, t.k.kalshi, t.k.route)
 	}
+	return nil
+}
+
+// xvLeadLag asks, for pairs that trade for weeks, which venue's price moves
+// first: the same HRY estimator and whole-day shuffle test as the
+// within-Polymarket lead-lag, on both venues' trades. Positive lag means
+// Polymarket leads.
+func xvLeadLag(dir string, days, minMoves, nNull int) error {
+	b, err := os.ReadFile(filepath.Join(dir, "pairs.json"))
+	if err != nil {
+		return fmt.Errorf("run xvenue match first: %w", err)
+	}
+	var pairs []xvenue.Pair
+	if err := json.Unmarshal(b, &pairs); err != nil {
+		return err
+	}
+	to := time.Now().Unix()
+	from := to - int64(days)*86400
+	rng := rand.New(rand.NewPCG(71, 72))
+	type row struct {
+		q      string
+		r      leadlag.Result
+		mp, mk int
+	}
+	var rows []row
+	skipped := 0
+	for _, p := range pairs {
+		if p.Kalshi.Close.Before(time.Now().Add(7 * 24 * time.Hour)) {
+			continue // games and soon-to-close markets: too short for whole-day shuffles
+		}
+		lm := source.LiveMarket{ConditionID: p.Poly.ConditionID, YesToken: p.Poly.Tokens[p.Same], NoToken: p.Poly.Tokens[1-p.Same]}
+		pt, err := source.History(lm, from)
+		if err != nil {
+			skipped++
+			continue
+		}
+		kt, err := source.KalshiTrades(p.Kalshi.Ticker, from, to)
+		if err != nil {
+			skipped++
+			continue
+		}
+		var ta, pa, tb, pb []float64
+		for _, t := range pt {
+			ta, pa = append(ta, float64(t.T)), append(pa, t.YesPrice)
+		}
+		for _, t := range kt {
+			tb, pb = append(tb, t.T), append(pb, t.YesPrice)
+		}
+		x, y := moveSeries(ta, pa), moveSeries(tb, pb)
+		f, e := float64(from), float64(to)
+		mp, mk := moves(x, f, e), moves(y, f, e)
+		if mp < minMoves || mk < minMoves {
+			rows = append(rows, row{q: p.Poly.Question, mp: mp, mk: mk, r: leadlag.Result{P: -1}})
+			continue
+		}
+		rows = append(rows, row{p.Poly.Question, leadlag.Estimate(x, y, f, e, f, e, nNull, rng), mp, mk})
+	}
+	tested, sig, polyLeads, kalLeads, together := 0, 0, 0, 0, 0
+	var lags []float64
+	fmt.Printf("which venue moves first · %d days of trades · positive lag = Polymarket leads · %d shuffles\n", days, nNull)
+	sort.Slice(rows, func(a, b int) bool { return rows[a].r.P < rows[b].r.P })
+	for _, r := range rows {
+		if r.r.P < 0 {
+			continue
+		}
+		tested++
+		mark := ""
+		if r.r.P <= 0.01 {
+			sig++
+			mark = " *"
+			switch {
+			case r.r.Lag > 0:
+				polyLeads++
+				lags = append(lags, r.r.Lag)
+			case r.r.Lag < 0:
+				kalLeads++
+				lags = append(lags, -r.r.Lag)
+			default:
+				together++
+			}
+		}
+		fmt.Printf("  p=%.2f lag %+7.0fs rho %+.2f · moves P %4d K %4d · %s%s\n", r.r.P, r.r.Lag, r.r.Rho, r.mp, r.mk, clip(r.q, 70), mark)
+	}
+	sort.Float64s(lags)
+	med := 0.0
+	if len(lags) > 0 {
+		med = lags[len(lags)/2]
+	}
+	fmt.Printf("\n%d long-running pairs with ≥ %d moves on both venues (%d too quiet, %d failed to load)\n", tested, minMoves, len(rows)-tested, skipped)
+	fmt.Printf("significant at 1%%: %d (chance ≈ %.1f) · Polymarket first %d · Kalshi first %d · same time %d · median lead %s\n",
+		sig, 0.01*float64(tested), polyLeads, kalLeads, together, lagStr(med))
 	return nil
 }

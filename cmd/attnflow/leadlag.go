@@ -229,21 +229,32 @@ func priceSeries(dir string, nM int) ([]leadlag.Series, float64, float64, error)
 	out := make([]leadlag.Series, nM)
 	for m, ts := range ticks {
 		sort.Slice(ts, func(a, b int) bool { return ts[a].t < ts[b].t })
-		var tt, xs []float64
-		ref := -1.0
-		for _, x := range ts {
-			if ref < 0 || math.Abs(x.px-ref) >= 0.02-1e-9 {
-				ref = x.px
-				p := math.Min(0.99, math.Max(0.01, x.px))
-				if len(tt) > 0 && tt[len(tt)-1] == x.t {
-					xs[len(xs)-1] = math.Log(p / (1 - p))
-					continue
-				}
-				tt = append(tt, x.t)
-				xs = append(xs, math.Log(p/(1-p)))
-			}
+		t, px := make([]float64, len(ts)), make([]float64, len(ts))
+		for i, x := range ts {
+			t[i], px[i] = x.t, x.px
 		}
-		out[m] = leadlag.FromLevels(tt, xs)
+		out[m] = moveSeries(t, px)
 	}
 	return out, t0, t1 + 1, sc.Err()
+}
+
+// moveSeries turns time-ordered trade prices into a log-odds series that
+// only changes on moves of at least two cents from the last recorded one,
+// so trades alternating between bid and ask don't register as moves.
+func moveSeries(t, px []float64) leadlag.Series {
+	var tt, xs []float64
+	ref := -1.0
+	for i, x := range px {
+		if ref < 0 || math.Abs(x-ref) >= 0.02-1e-9 {
+			ref = x
+			p := math.Min(0.99, math.Max(0.01, x))
+			if len(tt) > 0 && tt[len(tt)-1] == t[i] {
+				xs[len(xs)-1] = math.Log(p / (1 - p))
+				continue
+			}
+			tt = append(tt, t[i])
+			xs = append(xs, math.Log(p/(1-p)))
+		}
+	}
+	return leadlag.FromLevels(tt, xs)
 }

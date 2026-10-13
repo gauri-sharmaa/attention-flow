@@ -1,6 +1,7 @@
 package xvenue
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -46,6 +47,8 @@ func TestSettle(t *testing.T) {
 			km("Will over 3.5 goals be scored?", "Over 3.5 goals scored", "Arsenal vs Lille: Total Goals"), true, 0},
 		{"same spread", pm("Spread: Arsenal FC (-1.5)", "Arsenal FC", "Lille OSC"),
 			km("Arsenal wins by more than 1.5 goals?", "Arsenal wins by more than 1.5 goals", "Arsenal vs Lille: Spread"), true, 0},
+		{"same player, different opponent", pm("Rovereto: Lola Radivojevic vs Teodora Kostovic", "Lola Radivojevic", "Teodora Kostovic"),
+			km("Teodora Kostovic wins", "Teodora Kostovic", "Jacquemot vs Kostovic"), false, 0},
 		{"vice president is not president", pm("Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election?"),
 			km("Who will win the 2028 United States vice presidential election?", "Alexandria Ocasio-Cortez", "2028 Vice President"), false, 0},
 		{"two nominees at once", pm("Will Marco Rubio win the 2028 Republican presidential nomination?"),
@@ -82,5 +85,22 @@ func TestNumbersMustMatch(t *testing.T) {
 	k := []source.KalshiMarket{{Title: "Will Core CPI MoM be 0.3% in September?", YesSub: "0.3%", Event: "CPI core in September", Close: end}}
 	if got := Match(p, k); len(got) != 0 {
 		t.Fatalf("matched different thresholds: %+v", got)
+	}
+}
+
+// Each route must record, and charge fees on, each venue's own price.
+func TestPriceRoutes(t *testing.T) {
+	q := func(p, n float64) source.Quote { return source.Quote{Price: p, Size: n} }
+	rs := priceRoutes(0.05, q(0.30, 100), q(0.68, 50), q(0.29, 20), q(0.72, 500))
+	if len(rs) != 2 {
+		t.Fatalf("got %d routes", len(rs))
+	}
+	a, b := rs[0], rs[1] // Kalshi YES + Polymarket other; Polymarket same + Kalshi NO
+	if a.Kalshi != 0.30 || a.Poly != 0.72 || b.Kalshi != 0.68 || b.Poly != 0.29 {
+		t.Fatalf("prices on the wrong venue: %+v", rs)
+	}
+	wantB := 1 - 0.68 - 0.29 - KalshiFee(0.68) - PolyFee(0.29, 0.05)
+	if math.Abs(b.Net-wantB) > 1e-4 || b.Gross != 0.03 || b.Size != 20 {
+		t.Fatalf("route b = %+v, want net %.4f gross 0.03 size 20", b, wantB)
 	}
 }

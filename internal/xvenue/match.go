@@ -206,6 +206,26 @@ func sameGame(p source.PolyMatchMarket, k source.KalshiMarket) bool {
 	return false
 }
 
+// bothSides checks that each side of Kalshi's "A vs B" names someone in the
+// Polymarket question, so a player's match against a different opponent
+// (an earlier or later round) is not taken for this one.
+func bothSides(kev, q string) bool {
+	nq := norm(q)
+	for _, side := range vsRe.Split(regexp.MustCompile(`^[^:]*: `).ReplaceAllString(kev, ""), 2) {
+		hit := false
+		for _, w := range strings.Fields(norm(side)) {
+			if len(w) > 2 && !gameStop[w] && hasWord(nq, w) {
+				hit = true
+				break
+			}
+		}
+		if !hit {
+			return false
+		}
+	}
+	return true
+}
+
 var gameStop = setOf("spread total goals points games maps over under both teams score wins more than full game time")
 
 func norm(s string) string {
@@ -270,7 +290,7 @@ func settle(p source.PolyMatchMarket, k source.KalshiMarket, score float64) (int
 	case vsRe.MatchString(q) && strings.Contains(kt, " wins") && !propRe.MatchString(q):
 		// Head-to-head with the two sides as outcomes; Kalshi's event must
 		// be the same match-up, not a tournament.
-		if !vsRe.MatchString(kev) || !sameGame(p, k) {
+		if !vsRe.MatchString(kev) || !sameGame(p, k) || !bothSides(kev, q) {
 			return 0, "", false
 		}
 		if strings.Contains(strings.ToLower(q), "women") != strings.Contains(strings.ToLower(kev), "women") {

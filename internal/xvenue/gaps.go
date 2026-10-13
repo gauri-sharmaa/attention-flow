@@ -33,18 +33,30 @@ func Quote(p Pair) ([]Route, error) {
 	}
 	same, err1 := source.PolyAsk(p.Poly.Tokens[p.Same])
 	other, err2 := source.PolyAsk(p.Poly.Tokens[1-p.Same])
+	if err1 != nil {
+		same = source.Quote{}
+	}
+	if err2 != nil {
+		other = source.Quote{}
+	}
+	return priceRoutes(p.Poly.FeeRate, kYes, kNo, same, other), nil
+}
+
+// priceRoutes prices the two ways of holding both sides; a zero quote means
+// that side has no offers.
+func priceRoutes(polyFee float64, kYes, kNo, same, other source.Quote) []Route {
 	var out []Route
-	add := func(name string, k, q source.Quote, err error) {
-		if err != nil || k.Price <= 0 || q.Price <= 0 {
+	add := func(name string, k, q source.Quote) {
+		if k.Price <= 0 || q.Price <= 0 {
 			return
 		}
 		cost := k.Price + q.Price
 		out = append(out, Route{Name: name, Kalshi: k.Price, Poly: q.Price, Gross: round4(1 - cost),
-			Net: round4(1 - cost - KalshiFee(k.Price) - PolyFee(q.Price, p.Poly.FeeRate)), Size: min(k.Size, q.Size)})
+			Net: round4(1 - cost - KalshiFee(k.Price) - PolyFee(q.Price, polyFee)), Size: min(k.Size, q.Size)})
 	}
-	add("kalshi yes + poly other", kYes, other, err2)
-	add("poly same + kalshi no", same, kNo, err1)
-	return out, nil
+	add("kalshi yes + poly other", kYes, other)
+	add("poly same + kalshi no", kNo, same)
+	return out
 }
 
 // Annualized turns a locked-in gain into a yearly return: the gain over the
