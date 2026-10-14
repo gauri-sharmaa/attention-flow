@@ -256,12 +256,8 @@ func PolyMarketsForMatch(n int) ([]PolyMatchMarket, error) {
 	for off := 0; off < n; off += 100 {
 		var page []struct {
 			pmMarket
-			Outcomes    string `json:"outcomes"`
-			GameStart   string `json:"gameStartTime"`
-			FeesEnabled bool   `json:"feesEnabled"`
-			FeeSchedule struct {
-				Rate float64 `json:"rate"`
-			} `json:"feeSchedule"`
+			Outcomes  string `json:"outcomes"`
+			GameStart string `json:"gameStartTime"`
 		}
 		u := fmt.Sprintf("https://gamma-api.polymarket.com/markets?active=true&closed=false&order=volume24hr&ascending=false&limit=100&offset=%d", off)
 		req, _ := http.NewRequest("GET", u, nil)

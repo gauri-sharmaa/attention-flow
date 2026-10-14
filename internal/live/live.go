@@ -76,6 +76,7 @@ type Engine struct {
 	normAct []float64 // each market's average trading rate over the window (per second)
 	normMov []float64 // ... and price-move rate
 	rec     *recorder
+	mm      *mmBook
 	down    float64 // when the feed dropped (0 = up)
 }
 
@@ -105,7 +106,7 @@ type TapeRow struct {
 // New prepares an engine; Run does the work.
 func New(cfg Config) *Engine {
 	return &Engine{cfg: cfg, byID: map[string]*market{}, seen: map[string]bool{}, status: Status{Phase: "loading"},
-		rec: newRecorder(cfg.Record, cfg.Horizon)}
+		rec: newRecorder(cfg.Record, cfg.Horizon), mm: newMM(cfg.Record)}
 }
 
 // Run loads markets and history, fits, then follows the live feed forever.
@@ -177,6 +178,11 @@ func (e *Engine) Run() error {
 	go func() {
 		for range time.Tick(e.cfg.Every) {
 			e.predictTick(float64(time.Now().Unix()))
+		}
+	}()
+	go func() { // paper market maker: requote and score every 10 seconds
+		for range time.Tick(10 * time.Second) {
+			e.mmTick(float64(time.Now().Unix()))
 		}
 	}()
 	return e.follow()
@@ -261,6 +267,7 @@ func (e *Engine) ingest(t source.Trade, live bool) {
 		}
 	}
 	if live {
+		e.mmTrade(m, ts, t.YesPrice, t.Dir, t.Shares)
 		m.flow = append(m.flow, [2]float64{ts, float64(t.Dir) * t.USD})
 		e.status.LiveTrades++
 		e.tape = last(append(e.tape, TapeRow{T: t.T, Market: m.idx, Price: round(t.YesPrice, 3), USD: round(t.USD, 0), Dir: t.Dir}), 60)
@@ -456,6 +463,22 @@ func (e *Engine) predictTick(now float64) {
 		}
 		return false
 	})
+}
+
+// mmTick scores paper fills and replaces every market's paper orders.
+func (e *Engine) mmTick(now float64) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	e.mmMark(now)
+	if e.down > 0 || e.cross == nil {
+		for k := range e.mm.orders {
+			delete(e.mm.orders, k) // no quotes while the feed is down
+		}
+		return
+	}
+	for _, m := range e.markets {
+		e.requote(m, now)
+	}
 }
 
 // odds returns a market's trading heat and its chance of a 2¢ move within

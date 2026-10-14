@@ -106,6 +106,20 @@
     }
   }
 
+  // ---- paper market maker ----
+  function mm(s) {
+    const rows = s.mm || [];
+    const c = (v) => `<span class="${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : ""}${v.toFixed(2)}¢</span>`;
+    $("mmRows").innerHTML = rows.length ? rows.map((r) => `<tr><td>${r.strat}</td><td>${r.rule}</td><td class="n">${r.fills.toLocaleString()}${r.pending ? ` <span class="muted">+${r.pending}</span>` : ""}</td>
+      ${r.fills ? `<td class="n">${c(r.edge[0])}</td><td class="n">${c(r.edge[1])} <span class="muted">±${r.se10.toFixed(2)}</span></td><td class="n">${c(r.edge[2])}</td><td class="n">${c(r.exit)}</td>` : `<td class="n muted" colspan="4">waiting for the 60-minute marks</td>`}</tr>`).join("")
+      : `<tr><td colspan="7" class="muted">No paper fills yet. Orders are re-posted every 10 seconds; each fill is scored 1, 10 and 60 minutes later.</td></tr>`;
+    const get = (st, ru) => rows.find((r) => r.strat === st && r.rule === ru && r.fills >= 30);
+    const b = get("both", "queue"), g = get("signal", "queue");
+    $("mmLead").innerHTML = b && g
+      ? `At 10 minutes, quoting with the signal earned <b>${g.edge[1] > 0 ? "+" : ""}${g.edge[1].toFixed(2)}¢</b> a share against <b>${b.edge[1] > 0 ? "+" : ""}${b.edge[1].toFixed(2)}¢</b> without it (${g.fills.toLocaleString()} and ${b.fills.toLocaleString()} fills, queue rule). ${g.edge[1] - b.edge[1] > 2 * Math.hypot(g.se10, b.se10) ? "The signal helps by more than the noise." : "Not yet distinguishable from noise."}`
+      : "Collecting fills. It takes an hour before the first ones are fully scored, and many hours before the comparison means anything.";
+  }
+
   // ---- network: main cluster with a force layout, small groups in a grid ----
   const canvas = $("net"), ctx = canvas.getContext("2d");
   let pos = new Map(), key = "", hover = -1;
@@ -206,7 +220,7 @@
   es.onmessage = (m) => {
     S = JSON.parse(m.data);
     if (!status(S)) return;
-    hot(S); tape(S); track(S);
+    hot(S); tape(S); track(S); mm(S);
     $("netHint").textContent = `${S.links.length} links fitted on the last ${S.status.window.replace("h0m0s", "h")} · rings pulse when a market trades`;
   };
   requestAnimationFrame(drawNet);

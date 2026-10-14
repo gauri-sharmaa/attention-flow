@@ -28,7 +28,12 @@ type pmMarket struct {
 	ClobTokenIds  string  `json:"clobTokenIds"`
 	Volume24hr    float64 `json:"volume24hr"`
 	VolumeNum     float64 `json:"volumeNum"`
-	Events        []struct {
+	FeesEnabled   bool    `json:"feesEnabled"`
+	FeeSchedule   struct {
+		Rate       float64 `json:"rate"`
+		RebateRate float64 `json:"rebateRate"`
+	} `json:"feeSchedule"`
+	Events []struct {
 		Title string `json:"title"`
 		Slug  string `json:"slug"`
 	} `json:"events"`

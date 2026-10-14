@@ -46,6 +46,13 @@
     </div>
   </section>
 
+  <section class="card" id="mm-card">
+    <h2>Paper market maker <span class="hint">no real money · does the signal pay for someone posting orders?</span></h2>
+    <p id="mmLead" class="lead"></p>
+    <div class="scrollx"><table class="mm"><thead><tr><th>strategy</th><th>fill rule</th><th class="n">fills</th><th class="n">1 min</th><th class="n">10 min</th><th class="n">60 min</th><th class="n">exit as taker</th></tr></thead><tbody id="mmRows"></tbody></table></div>
+    <p class="muted small">Edge = how far the midpoint moved our way after each fill, in ¢ per share, plus Polymarket's maker rebate. <b>both</b>: quote both sides, no signal. <b>signal</b>: quote only the side the order-book model favours. <b>pull</b>: quote both, but pull the side it expects to be run over. <b>strict</b> fills only when the market trades through our price (worst case); <b>queue</b> also counts fills at our price once the orders ahead of us have traded. Exit as taker subtracts half the spread and the taker fee.</p>
+  </section>
+
   <section class="card" id="net-card">
     <h2>What sets off what <span class="hint" id="netHint"></span></h2>
     <canvas id="net"></canvas>

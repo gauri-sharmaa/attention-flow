@@ -18,6 +18,7 @@ type Trade struct {
 	YesPrice    float64 // trade price expressed as the YES price
 	USD         float64 // dollar size
 	Dir         int     // +1 pushes YES up (buy YES / sell NO), -1 down
+	Shares      float64 // contracts traded
 	Key         string  // dedupe key (transaction hash + asset)
 }
 
@@ -30,6 +31,8 @@ type LiveMarket struct {
 	YesToken    string
 	NoToken     string
 	Volume24h   float64
+	FeeRate     float64 // taker fee rate (0 = no fees)
+	RebateRate  float64 // share of taker fees returned to makers
 }
 
 // LiveMarkets returns the n busiest tradable markets (see ListActiveMarkets).
@@ -44,13 +47,18 @@ func LiveMarkets(n int) ([]LiveMarket, error) {
 		if json.Unmarshal([]byte(m.ClobTokenIds), &toks) != nil || len(toks) < 2 {
 			continue
 		}
+		fee, rebate := 0.0, 0.0
+		if m.FeesEnabled {
+			fee, rebate = m.FeeSchedule.Rate, m.FeeSchedule.RebateRate
+		}
 		ev := m.Slug
 		title := m.Question
 		if len(m.Events) > 0 {
 			ev, title = m.Events[0].Slug, m.Events[0].Title
 		}
 		out = append(out, LiveMarket{ConditionID: m.ConditionID, Question: m.Question, Event: ev,
-			Sector: sectorOf(m.Question + " " + title), YesToken: toks[0], NoToken: toks[1], Volume24h: m.Volume24hr})
+			Sector: sectorOf(m.Question + " " + title), YesToken: toks[0], NoToken: toks[1], Volume24h: m.Volume24hr,
+			FeeRate: fee, RebateRate: rebate})
 	}
 	return out, nil
 }
@@ -63,7 +71,7 @@ func toTrade(t pmTrade, conditionID string, m LiveMarket) Trade {
 	if (t.Asset == m.NoToken) == (t.Side == "BUY") {
 		dir = -1
 	}
-	return Trade{T: t.Timestamp, ConditionID: conditionID, YesPrice: p, USD: t.Size * t.Price, Dir: dir}
+	return Trade{T: t.Timestamp, ConditionID: conditionID, YesPrice: p, USD: t.Size * t.Price, Dir: dir, Shares: t.Size}
 }
 
 // History returns a market's trades since `from`, oldest first.

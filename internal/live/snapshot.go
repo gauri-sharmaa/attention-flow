@@ -15,6 +15,7 @@ type Snapshot struct {
 	Links   []LinkV   `json:"links"`
 	Tape    []TapeRow `json:"tape"`
 	Track   TrackV    `json:"track"`
+	MM      []MMRow   `json:"mm"`
 	Horizon float64   `json:"horizon"`
 }
 
@@ -77,6 +78,7 @@ func (e *Engine) Snapshot() *Snapshot {
 		}
 	}
 	s.Track = e.rec.summary(now, open)
+	s.MM = e.mm.summary()
 	for i, m := range e.markets {
 		// "Normal" is the market's own average over the window, so a market
 		// that rarely trades isn't hot just because one trade came in.
