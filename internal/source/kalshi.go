@@ -321,6 +321,7 @@ type PolyMeta struct {
 	Tokens      []string
 	Final       []float64 // settlement prices per outcome (1/0 once resolved)
 	FeeRate     float64
+	Volume24h   float64 // dollars traded in the last day
 }
 
 // PolyMetaByID looks up markets by condition ID, open or closed.
@@ -363,7 +364,7 @@ func PolyMetaByID(ids []string) (map[string]PolyMeta, error) {
 				json.Unmarshal([]byte(m.ClobTokenIds), &toks)
 				json.Unmarshal([]byte(m.OutcomePrices), &prices)
 				end, _ := time.Parse(time.RFC3339, m.EndDate)
-				pm := PolyMeta{ConditionID: m.ConditionID, Question: m.Question, End: end, Closed: m.Closed, Outcomes: outs, Tokens: toks}
+				pm := PolyMeta{ConditionID: m.ConditionID, Question: m.Question, End: end, Closed: m.Closed, Outcomes: outs, Tokens: toks, Volume24h: m.Volume24hr}
 				for _, layout := range []string{time.RFC3339, "2006-01-02 15:04:05-07", "2006-01-02 15:04:05Z07:00"} {
 					if t, err := time.Parse(layout, m.ClosedAt); err == nil {
 						pm.ClosedAt = t

@@ -108,3 +108,30 @@ func TestPriceRoutes(t *testing.T) {
 		t.Fatalf("route b = %+v, want net %.4f gross 0.03 size 20", b, wantB)
 	}
 }
+
+func TestPriceBasket(t *testing.T) {
+	legs := []Leg{
+		{Name: "A", Yes: source.Quote{Price: 0.50, Size: 100}, No: source.Quote{Price: 0.52, Size: 40}},
+		{Name: "B", Yes: source.Quote{Price: 0.30, Size: 10}, No: source.Quote{Price: 0.72, Size: 100}},
+		{Name: "C", Yes: source.Quote{Price: 0.15, Size: 100}, No: source.Quote{Price: 0.70, Size: 100}},
+	}
+	no, yes, nok, yok := PriceBasket(legs)
+	if !nok || !yok {
+		t.Fatal("both sides should price")
+	}
+	if math.Abs(no.Cost-1.94) > 1e-9 || math.Abs(no.Edge-0.06) > 1e-9 || no.Sets != 40 {
+		t.Errorf("all-NO: got %+v, want cost 1.94 edge 0.06 sets 40", no)
+	}
+	if math.Abs(yes.Edge-0.05) > 1e-9 || yes.Sets != 10 {
+		t.Errorf("all-YES: got %+v, want edge 0.05 sets 10", yes)
+	}
+	legs[0].FeeRate = 0.07 // 0.07·0.52·0.48 ≈ 1.75¢ on the NO leg
+	no, _, _, _ = PriceBasket(legs)
+	if math.Abs(no.Edge-(0.06-0.07*0.52*0.48)) > 1e-9 {
+		t.Errorf("fee not charged: %+v", no)
+	}
+	legs[1].No = source.Quote{}
+	if _, _, nok, _ = PriceBasket(legs); nok {
+		t.Error("a leg with no seller can't be bought")
+	}
+}

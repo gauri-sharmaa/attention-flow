@@ -83,6 +83,12 @@ func main() {
 		err = cmdStrategies(os.Args[2:])
 	case "favorites":
 		err = cmdFavorites(os.Args[2:])
+	case "sumarb":
+		err = cmdSumArb(os.Args[2:])
+	case "weather":
+		err = cmdWeather(os.Args[2:])
+	case "rewards":
+		err = cmdRewards(os.Args[2:])
 	case "xvenue":
 		err = cmdXVenue(os.Args[2:])
 	case "eventstudy":
