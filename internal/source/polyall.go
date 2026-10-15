@@ -268,3 +268,6 @@ func ListClosedMarkets(n int, since time.Time) ([]pmMarket, error) {
 	}
 	return out, nil
 }
+
+// SectorOf is sectorOf for callers outside the package.
+func SectorOf(text string) string { return sectorOf(text) }

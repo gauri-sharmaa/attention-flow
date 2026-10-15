@@ -308,3 +308,81 @@ func PolyMarketsForMatch(n int) ([]PolyMatchMarket, error) {
 	}
 	return out, nil
 }
+
+// PolyMeta is the settled state of a Polymarket market.
+type PolyMeta struct {
+	ConditionID string
+	Question    string
+	Event       string
+	End         time.Time // scheduled end date (known in advance)
+	Closed      bool
+	ClosedAt    time.Time // when trading stopped (zero if open or unknown)
+	Outcomes    []string
+	Tokens      []string
+	Final       []float64 // settlement prices per outcome (1/0 once resolved)
+	FeeRate     float64
+}
+
+// PolyMetaByID looks up markets by condition ID, open or closed.
+func PolyMetaByID(ids []string) (map[string]PolyMeta, error) {
+	out := map[string]PolyMeta{}
+	for i := 0; i < len(ids); i += 20 {
+		batch := ids[i:min(i+20, len(ids))]
+		q := url.Values{}
+		for _, id := range batch {
+			q.Add("condition_ids", id)
+		}
+		for _, closed := range []string{"false", "true"} {
+			q.Set("closed", closed)
+			var page []struct {
+				pmMarket
+				Outcomes string `json:"outcomes"`
+				Closed   bool   `json:"closed"`
+				ClosedAt string `json:"closedTime"`
+			}
+			req, _ := http.NewRequest("GET", "https://gamma-api.polymarket.com/markets?"+q.Encode(), nil)
+			req.Header.Set("User-Agent", userAgent)
+			var err error
+			for attempt := 0; attempt < 5; attempt++ {
+				var resp *http.Response
+				if resp, err = kalshiClient.Do(req); err == nil {
+					err = json.NewDecoder(resp.Body).Decode(&page)
+					resp.Body.Close()
+					if err == nil {
+						break
+					}
+				}
+				time.Sleep(time.Duration(1<<attempt) * time.Second)
+			}
+			if err != nil {
+				return nil, err
+			}
+			for _, m := range page {
+				var outs, toks, prices []string
+				json.Unmarshal([]byte(m.Outcomes), &outs)
+				json.Unmarshal([]byte(m.ClobTokenIds), &toks)
+				json.Unmarshal([]byte(m.OutcomePrices), &prices)
+				end, _ := time.Parse(time.RFC3339, m.EndDate)
+				pm := PolyMeta{ConditionID: m.ConditionID, Question: m.Question, End: end, Closed: m.Closed, Outcomes: outs, Tokens: toks}
+				for _, layout := range []string{time.RFC3339, "2006-01-02 15:04:05-07", "2006-01-02 15:04:05Z07:00"} {
+					if t, err := time.Parse(layout, m.ClosedAt); err == nil {
+						pm.ClosedAt = t
+						break
+					}
+				}
+				for _, p := range prices {
+					pm.Final = append(pm.Final, num(p))
+				}
+				if len(m.Events) > 0 {
+					pm.Event = m.Events[0].Title
+				}
+				if m.FeesEnabled {
+					pm.FeeRate = m.FeeSchedule.Rate
+				}
+				out[m.ConditionID] = pm
+			}
+			time.Sleep(150 * time.Millisecond)
+		}
+	}
+	return out, nil
+}

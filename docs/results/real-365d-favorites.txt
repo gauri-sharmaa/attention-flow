@@ -1,0 +1,50 @@
+FAVORITES ("bond") · 992 resolved yes/no markets from the year's busiest 1612 · skipped 596 open or not yes/no · skipped 23 under 20 trades · skipped 1 no clear winner (split or void)
+buy the side priced ≥ threshold at a fixed time before the scheduled end; cost = last price + 0.5¢ + taker fee; $100 a trade
+caveat: the busiest markets of the year over-represent upsets (an upset is what drives volume), which works against favorites
+
+price≥   before       n      won           [95%]    needed avg/trade  total P&L      hold   per year
+0.90     6 hours     74    89.2%   80.1– 94.4%     96.7%    -7.66%       -567     6.0d      -466%
+0.90     1 day       90    85.6%   76.8– 91.4%     96.7%   -11.38%      -1024     4.4d      -940%
+0.90     3 days     100    89.0%   81.4– 93.7%     97.0%    -8.19%       -819     7.4d      -406%
+0.90     7 days     111    88.3%   81.0– 93.0%     96.9%    -9.09%      -1009     8.6d      -386%
+0.95     6 hours     51    88.2%   76.6– 94.5%     98.4%   -10.39%       -530     4.6d      -823%
+0.95     1 day       57    84.2%   72.6– 91.5%     98.7%   -14.73%       -840     4.8d     -1123%
+0.95     3 days      68    89.7%   80.2– 94.9%     98.6%    -9.06%       -616     8.8d      -378%
+0.95     7 days      79    92.4%   84.4– 96.5%     98.5%    -6.26%       -495     8.7d      -264%
+0.97     6 hours     37    89.2%   75.3– 95.7%     99.2%   -10.09%       -373     5.8d      -640%
+0.97     1 day       45    86.7%   73.8– 93.7%     99.2%   -12.70%       -571     4.3d     -1082%
+0.97     3 days      56    89.3%   78.5– 95.0%     99.1%    -9.91%       -555     9.5d      -379%
+0.97     7 days      62    96.8%   89.0– 99.1%     99.1%    -2.34%       -145     8.3d      -103%
+needed = average cost, the win rate that breaks even · per year = profit per dollar-day of capital locked until resolution, ×365 (not compounded)
+
+DETAIL: price ≥ 0.95, one day before the scheduled end (57 trades)
+by month of entry:
+   2025-10       4 trades  100.0% won        +5
+   2025-11       2 trades  100.0% won        +8
+   2025-12       4 trades  100.0% won        +6
+   2026-01       9 trades   88.9% won       -93
+   2026-02       3 trades   33.3% won      -198
+   2026-03       5 trades  100.0% won        +3
+   2026-04       8 trades   62.5% won      -295
+   2026-05       4 trades   50.0% won      -199
+   2026-06       9 trades   88.9% won       -90
+   2026-07       5 trades  100.0% won       +11
+   2026-08       1 trades  100.0% won        +0
+   2026-09       3 trades  100.0% won        +1
+by market type:
+   crypto        5 trades   80.0% won       -97
+   econ         10 trades  100.0% won        +6
+   other        10 trades   70.0% won      -286
+   politics      6 trades  100.0% won       +14
+   sports        1 trades  100.0% won        +3
+   world        25 trades   80.0% won      -479
+the losses (question · favorite's price · what it cost):
+   2026-01-31  Will Bitcoin dip to $80,000 in January?                                0.965  −$100
+   2026-02-13  Government shutdown on Saturday?                                       0.968  −$100
+   2026-02-27  Khamenei out as Supreme Leader of Iran by February 28?                 0.986  −$100
+   2026-04-06  US x Iran ceasefire by April 7?                                        0.977  −$100
+   2026-04-06  Iran x Israel/US conflict ends by April 7?                             0.993  −$100
+   2026-04-29  QatarEnergy announces/resumes LNG production in Qatar by April 30?     0.972  −$100
+   2026-05-15  Will Bulgaria win Eurovision 2026?                                     0.976  −$100
+   2026-05-23  Iran closes its airspace by May 24?                                    0.967  −$100
+   2026-06-07  Iran closes its airspace by June 8?                                    0.973  −$100
