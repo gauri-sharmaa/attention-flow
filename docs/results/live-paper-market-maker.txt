@@ -1,0 +1,33 @@
+Paper market maker on live Polymarket order books, 2026-10-14 23:46 to 2026-10-15 18:30 UTC
+(about 17.7 hours of running across several machine restarts; 400 busiest markets; no real orders)
+
+Every 10 seconds each market got paper orders of 10 shares at the best bid and/or ask.
+  both    quote both sides, no signal (baseline)
+  signal  quote only the side the order-book direction model favours (P(up) >= 55%: bid, <= 45%: ask)
+  pull    quote both, minus the side the model expects to be run over
+Fill rules: strict = only when the market trades through our price; queue = also at our price once the
+resting size ahead of us has traded. Edge = midpoint move in our favour after the fill, per share, plus
+Polymarket's maker rebate (~0.15c/share). Exit = 60-minute edge minus half the spread and the taker fee.
+
+strategy fill    fills   1 min    10 min          60 min          exit as taker
+both     queue    862   -0.18c   -0.51c (+-0.11)  -0.65c (+-0.18)  -2.44c (+-0.20)
+both     strict   699   -0.26c   -0.66c (+-0.12)  -0.74c (+-0.20)  -2.55c (+-0.22)
+pull     queue    466   -0.17c   -0.45c (+-0.16)  -0.43c (+-0.27)  -2.21c (+-0.28)
+pull     strict   387   -0.31c   -0.66c (+-0.18)  -0.52c (+-0.28)  -2.32c (+-0.29)
+signal   queue    282   -0.15c   -0.22c (+-0.19)  -0.08c (+-0.34)  -1.86c (+-0.35)
+signal   strict   232   -0.31c   -0.47c (+-0.21)  -0.37c (+-0.37)  -2.16c (+-0.39)
+
+signal minus baseline, queue:  10 min +0.29c (+-0.22) · 60 min +0.56c (+-0.38)
+signal minus baseline, strict: 10 min +0.19c (+-0.25) · 60 min +0.38c (+-0.42)
+
+Direction calls (next 2c midpoint move, made before the outcome, learned only afterwards):
+4,096 calls · order book right 63.6% · "same way as the last midpoint move" 60.7% · coin flip 50% (SE +-0.8)
+later half of the calls: 65.5% vs 63.3%
+
+Reading: quoting without the signal loses about half a cent a share to better-informed traders
+(adverse selection), clearly. The signal roughly halves that loss and brings the 60-minute edge to
+about zero, but not above it, and the improvement over the baseline is not yet clearly beyond noise.
+Paying to get out (half the spread + taker fee, ~1.8c) makes every strategy lose ~2c a share.
+Quotes here refresh every 10 seconds; a real market maker reacts in milliseconds, so this test leans
+against market making. The order-book direction call beats a coin flip clearly, but only by ~3 points
+beyond simply assuming the last move continues.
