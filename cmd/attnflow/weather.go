@@ -181,17 +181,27 @@ func cmdWeather(args []string) error {
 					key := fmt.Sprintf("%s|%d", b.Ticker, t.Unix())
 					price, ok := data.Prices[key]
 					if !ok {
-						time.Sleep(120 * time.Millisecond) // stay under Kalshi's rate limit
-						tr, err := source.KalshiTrades(b.Ticker, t.Add(-6*time.Hour).Unix(), t.Unix())
+						// One request covers every decision time for this market.
+						var times []time.Time
+						for _, h := range horizons {
+							times = append(times, d.Add(h.offset))
+						}
+						time.Sleep(100 * time.Millisecond) // stay under Kalshi's rate limit
+						tr, err := source.KalshiTradesAt(b.Ticker, times[0].Add(-6*time.Hour).Unix(), times[len(times)-1].Unix(), time.Since(d) > 60*24*time.Hour)
 						if err != nil {
 							continue
 						}
-						price = -1
-						if len(tr) > 0 {
-							price = tr[len(tr)-1].YesPrice
+						for _, at := range times {
+							px := -1.0
+							for _, x := range tr {
+								if x.T < float64(at.Unix()) && x.T >= float64(at.Add(-6*time.Hour).Unix()) {
+									px = x.YesPrice
+								}
+							}
+							data.Prices[fmt.Sprintf("%s|%d", b.Ticker, at.Unix())] = px
 						}
-						data.Prices[key] = price
-						if fetched++; fetched%100 == 0 {
+						price = data.Prices[key]
+						if fetched++; fetched%50 == 0 {
 							save()
 						}
 					}

@@ -178,6 +178,18 @@ func KalshiTrades(ticker string, from, to int64) ([]KalshiTrade, error) {
 	return out, err
 }
 
+// KalshiTradesAt is KalshiTrades, going straight to the archive when the
+// caller knows the market is old.
+func KalshiTradesAt(ticker string, from, to int64, archived bool) ([]KalshiTrade, error) {
+	if archived {
+		out, err := kalshiTrades("/historical/trades", ticker, from, to)
+		if err == nil && len(out) > 0 {
+			return out, nil
+		}
+	}
+	return KalshiTrades(ticker, from, to)
+}
+
 func kalshiTrades(endpoint, ticker string, from, to int64) ([]KalshiTrade, error) {
 	var out []KalshiTrade
 	cursor := ""
