@@ -1,0 +1,54 @@
+FAVORITES ("bond"), WHOLE-YEAR SAMPLE · 153937 of 1517312 closed markets were yes/no, resolved, traded $5k+ and ran 3+ days; sampled 5260 (up to 20 a day), 4962 with price history
+prices are Polymarket's hourly price history (not trades), so the entry price is the last hourly price within 3 hours before entry
+buy the side priced ≥ threshold at a fixed time before the scheduled end; cost = last price + 0.5¢ + taker fee; $100 a trade
+
+price≥   before       n      won           [95%]    needed avg/trade  total P&L      hold   per year
+0.90     6 hours    766    95.4%   93.7– 96.7%     96.8%    -1.42%      -1090     0.2d     -2086%
+0.90     1 day      934    96.3%   94.8– 97.3%     97.0%    -0.81%       -754     1.0d      -297%
+0.90     3 days    1092    97.0%   95.8– 97.8%     96.8%     0.20%        215     3.0d        24%
+0.90     7 days     393    95.9%   93.5– 97.5%     96.2%    -0.34%       -133     6.1d       -20%
+0.95     6 hours    518    97.7%   96.0– 98.7%     98.5%    -0.85%       -443     0.2d     -1253%
+0.95     1 day      669    98.4%   97.1– 99.1%     98.5%    -0.16%       -107     1.0d       -59%
+0.95     3 days     766    98.2%   97.0– 98.9%     98.4%    -0.21%       -161     3.0d       -26%
+0.95     7 days     242    99.2%   97.0– 99.8%     98.2%     0.97%        236     6.2d        57%
+0.97     6 hours    403    97.8%   95.8– 98.8%     99.1%    -1.37%       -551     0.2d     -2002%
+0.97     1 day      520    98.7%   97.2– 99.3%     99.1%    -0.42%       -219     1.0d      -155%
+0.97     3 days     582    99.0%   97.8– 99.5%     98.9%     0.04%         22     3.0d         5%
+0.97     7 days     164    98.8%   95.7– 99.7%     99.0%    -0.22%        -36     6.2d       -13%
+needed = average cost, the win rate that breaks even · per year = profit per dollar-day of capital locked until resolution, ×365 (not compounded)
+
+DETAIL: price ≥ 0.95, one day before the scheduled end (669 trades)
+by month of entry:
+   2025-10      90 trades  100.0% won      +130
+   2025-11      86 trades   98.8% won       +40
+   2025-12      78 trades   96.2% won      -190
+   2026-01      65 trades   98.5% won       -24
+   2026-02      71 trades   97.2% won       -85
+   2026-03      76 trades   94.7% won      -293
+   2026-04      73 trades  100.0% won      +115
+   2026-05      45 trades  100.0% won       +70
+   2026-06      84 trades  100.0% won      +129
+   2026-07       1 trades  100.0% won        +1
+by market type:
+   crypto      271 trades   99.3% won      +147
+   culture      45 trades  100.0% won       +70
+   econ         21 trades   95.2% won       -66
+   other       163 trades   98.2% won       -42
+   politics     41 trades   97.6% won       -31
+   sports       41 trades  100.0% won       +95
+   tech         39 trades   97.4% won       -52
+   world        48 trades   93.8% won      -228
+the losses (question · favorite's price · what it cost):
+   2025-11-14  Will Russia capture Myrnohrad by November 15?                          0.992  −$100
+   2025-12-04  Will ChatGPT be #1 Free App in the US Apple App Store on December 5?   0.976  −$100
+   2025-12-08  Will the price of Bitcoin be between $94,000 and $96,000 on December 9 0.963  −$100
+   2025-12-17  Will a dozen eggs cost between $2.75–3.00 in November?                 0.970  −$100
+   2026-01-30  Will Donald Trump not announce a new nominee for Chair of the Federal  0.984  −$100
+   2026-02-24  Will the price of Ethereum be between $2,000 and $2,100 on February 25 0.985  −$100
+   2026-02-26  Will Trump’s approval rating be between 42.0 and 42.4 on February 27,  0.957  −$100
+   2026-03-19  Will the highest temperature in Chicago be between 70-71°F on March 20 0.971  −$100
+   2026-03-22  Will 15-19 ships transit the Strait of Hormuz between March 17-23?     0.954  −$100
+   2026-03-22  Will 15-19 ships transit the Strait of Hormuz between March 17-23?     0.954  −$100
+   2026-03-27  Will the highest temperature in Los Angeles be 67°F or below on March  0.976  −$100
+
+note: the download stopped at a 2-hour limit, so this sample covers Oct 12 2025 to Jul 1 2026 (263 days), not the full year

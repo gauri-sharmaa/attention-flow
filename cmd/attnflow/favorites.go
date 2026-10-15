@@ -34,6 +34,7 @@ func cmdFavorites(args []string) error {
 	dir := fs.String("dir", "data/pmt365", "polytrades output (cache/ of per-market trades)")
 	slip := fs.Float64("slip", 0.005, "paid above the last trade price when buying")
 	stake := fs.Float64("stake", 100, "dollars per trade")
+	cachedOnly := fs.Bool("cached", false, "with -sample: use only days already downloaded")
 	sample := fs.Int("sample", 0, "instead of the year's busiest markets, sample up to this many closed markets per day from the whole year (priced from Polymarket's price history)")
 	fs.Parse(args)
 
@@ -42,7 +43,7 @@ func cmdFavorites(args []string) error {
 	stale := int64(86400)
 	if *sample > 0 {
 		var err error
-		if mkts, title, err = favoritesSample(*dir, *sample); err != nil {
+		if mkts, title, err = favoritesSample(*dir, *sample, *cachedOnly); err != nil {
 			return err
 		}
 		stale = 3 * 3600 // hourly prices: the last one must be recent
@@ -271,7 +272,7 @@ func favoritesBusiest(dir string) ([]favMkt, string, error) {
 // the past year (any market that traded at least $5k and was open at least
 // three days; short crypto "up or down" markets are left out) and prices
 // them from Polymarket's hourly price history.
-func favoritesSample(dir string, perDay int) ([]favMkt, string, error) {
+func favoritesSample(dir string, perDay int, cachedOnly bool) ([]favMkt, string, error) {
 	type cached struct {
 		Meta   source.PolyMeta
 		Points []source.PricePoint
@@ -296,6 +297,8 @@ func favoritesSample(dir string, perDay int) ([]favMkt, string, error) {
 			json.Unmarshal([]byte(c.Meta.Question), &picks)
 			listed += int(c.Meta.Volume)
 			eligible += int(c.Meta.Volume24h)
+		} else if cachedOnly {
+			continue
 		} else {
 			ms, err := source.PolyClosedMarkets(day, day.AddDate(0, 0, 1))
 			if err != nil {
@@ -319,6 +322,9 @@ func favoritesSample(dir string, perDay int) ([]favMkt, string, error) {
 		sampled += len(picks)
 		for _, m := range picks {
 			c, ok := cache[m.ConditionID]
+			if !ok && cachedOnly {
+				continue
+			}
 			if !ok {
 				close := m.End
 				if !m.ClosedAt.IsZero() && m.ClosedAt.Before(close) {
@@ -345,12 +351,14 @@ func favoritesSample(dir string, perDay int) ([]favMkt, string, error) {
 			}
 			mkts = append(mkts, x)
 		}
-		if day.Day() == 1 {
+		if day.Day() == 1 && !cachedOnly {
 			save()
 			fmt.Fprintf(os.Stderr, "%s: %d markets so far\n", day.Format("2006-01"), len(mkts))
 		}
 	}
-	save()
+	if !cachedOnly {
+		save()
+	}
 	title := fmt.Sprintf("FAVORITES (\"bond\"), WHOLE-YEAR SAMPLE · %d of %d closed markets were yes/no, resolved, traded $5k+ and ran 3+ days; sampled %d (up to %d a day), %d with price history",
 		eligible, listed, sampled, perDay, len(mkts))
 	title += "\nprices are Polymarket's hourly price history (not trades), so the entry price is the last hourly price within 3 hours before entry"
