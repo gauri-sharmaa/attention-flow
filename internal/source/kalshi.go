@@ -403,19 +403,27 @@ func PolyMetaByID(ids []string) (map[string]PolyMeta, error) {
 // [from, to), with how long each was open and its lifetime volume.
 func PolyClosedMarkets(from, to time.Time) ([]PolyMeta, error) {
 	var out []PolyMeta
-	for off := 0; ; off += 100 {
-		var page []struct {
-			pmMarket
-			Outcomes string `json:"outcomes"`
-			ClosedAt string `json:"closedTime"`
-			Start    string `json:"startDate"`
+	cursor := ""
+	for {
+		var resp struct {
+			Next    string `json:"next_cursor"`
+			Markets []struct {
+				pmMarket
+				Outcomes string `json:"outcomes"`
+				ClosedAt string `json:"closedTime"`
+				Start    string `json:"startDate"`
+			} `json:"markets"`
 		}
-		u := fmt.Sprintf("https://gamma-api.polymarket.com/markets?closed=true&limit=100&offset=%d&end_date_min=%s&end_date_max=%s", off,
+		// The keyset endpoint pages past the plain endpoint's offset limit.
+		u := fmt.Sprintf("https://gamma-api.polymarket.com/markets/keyset?closed=true&limit=100&end_date_min=%s&end_date_max=%s",
 			from.UTC().Format(time.RFC3339), to.UTC().Format(time.RFC3339))
-		if err := getJSON(u, &page); err != nil {
+		if cursor != "" {
+			u += "&after_cursor=" + url.QueryEscape(cursor)
+		}
+		if err := getJSON(u, &resp); err != nil {
 			return out, err
 		}
-		for _, m := range page {
+		for _, m := range resp.Markets {
 			var outs, toks, prices []string
 			json.Unmarshal([]byte(m.Outcomes), &outs)
 			json.Unmarshal([]byte(m.ClobTokenIds), &toks)
@@ -440,9 +448,10 @@ func PolyClosedMarkets(from, to time.Time) ([]PolyMeta, error) {
 			}
 			out = append(out, pm)
 		}
-		if len(page) < 100 {
+		if resp.Next == "" || len(resp.Markets) == 0 {
 			return out, nil
 		}
+		cursor = resp.Next
 		time.Sleep(100 * time.Millisecond)
 	}
 }
