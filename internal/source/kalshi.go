@@ -170,6 +170,15 @@ type KalshiTrade struct {
 
 // KalshiTrades returns a market's trades in [from, to), oldest first.
 func KalshiTrades(ticker string, from, to int64) ([]KalshiTrade, error) {
+	out, err := kalshiTrades("/markets/trades", ticker, from, to)
+	if err == nil && len(out) == 0 {
+		// Older markets are archived: their trades are only under /historical.
+		return kalshiTrades("/historical/trades", ticker, from, to)
+	}
+	return out, err
+}
+
+func kalshiTrades(endpoint, ticker string, from, to int64) ([]KalshiTrade, error) {
 	var out []KalshiTrade
 	cursor := ""
 	for {
@@ -182,7 +191,7 @@ func KalshiTrades(ticker string, from, to int64) ([]KalshiTrade, error) {
 				Taker   string `json:"taker_side"`
 			} `json:"trades"`
 		}
-		q := fmt.Sprintf("/markets/trades?ticker=%s&limit=1000&min_ts=%d&max_ts=%d", url.QueryEscape(ticker), from, to-1)
+		q := fmt.Sprintf("%s?ticker=%s&limit=1000&min_ts=%d&max_ts=%d", endpoint, url.QueryEscape(ticker), from, to-1)
 		if cursor != "" {
 			q += "&cursor=" + url.QueryEscape(cursor)
 		}
@@ -321,7 +330,9 @@ type PolyMeta struct {
 	Tokens      []string
 	Final       []float64 // settlement prices per outcome (1/0 once resolved)
 	FeeRate     float64
-	Volume24h   float64 // dollars traded in the last day
+	Volume24h   float64   // dollars traded in the last day
+	Volume      float64   // dollars traded, all time (PolyClosedMarkets only)
+	Start       time.Time // when it opened (PolyClosedMarkets only)
 }
 
 // PolyMetaByID looks up markets by condition ID, open or closed.
@@ -386,4 +397,69 @@ func PolyMetaByID(ids []string) (map[string]PolyMeta, error) {
 		}
 	}
 	return out, nil
+}
+
+// PolyClosedMarkets returns the closed markets whose scheduled end falls in
+// [from, to), with how long each was open and its lifetime volume.
+func PolyClosedMarkets(from, to time.Time) ([]PolyMeta, error) {
+	var out []PolyMeta
+	for off := 0; ; off += 100 {
+		var page []struct {
+			pmMarket
+			Outcomes string `json:"outcomes"`
+			ClosedAt string `json:"closedTime"`
+			Start    string `json:"startDate"`
+		}
+		u := fmt.Sprintf("https://gamma-api.polymarket.com/markets?closed=true&limit=100&offset=%d&end_date_min=%s&end_date_max=%s", off,
+			from.UTC().Format(time.RFC3339), to.UTC().Format(time.RFC3339))
+		if err := getJSON(u, &page); err != nil {
+			return out, err
+		}
+		for _, m := range page {
+			var outs, toks, prices []string
+			json.Unmarshal([]byte(m.Outcomes), &outs)
+			json.Unmarshal([]byte(m.ClobTokenIds), &toks)
+			json.Unmarshal([]byte(m.OutcomePrices), &prices)
+			end, _ := time.Parse(time.RFC3339, m.EndDate)
+			start, _ := time.Parse(time.RFC3339, m.Start)
+			pm := PolyMeta{ConditionID: m.ConditionID, Question: m.Question, End: end, Start: start, Closed: true, Outcomes: outs, Tokens: toks, Volume: m.VolumeNum}
+			for _, layout := range []string{time.RFC3339, "2006-01-02 15:04:05-07", "2006-01-02 15:04:05Z07:00"} {
+				if t, err := time.Parse(layout, m.ClosedAt); err == nil {
+					pm.ClosedAt = t
+					break
+				}
+			}
+			for _, p := range prices {
+				pm.Final = append(pm.Final, num(p))
+			}
+			if len(m.Events) > 0 {
+				pm.Event = m.Events[0].Title
+			}
+			if m.FeesEnabled {
+				pm.FeeRate = m.FeeSchedule.Rate
+			}
+			out = append(out, pm)
+		}
+		if len(page) < 100 {
+			return out, nil
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+// PricePoint is one sample of a token's price history.
+type PricePoint struct {
+	T int64   `json:"t"`
+	P float64 `json:"p"`
+}
+
+// PolyPriceHistory returns a token's hourly price over [from, to]. The API
+// refuses windows much longer than two weeks at this resolution.
+func PolyPriceHistory(token string, from, to time.Time) ([]PricePoint, error) {
+	var d struct {
+		History []PricePoint `json:"history"`
+	}
+	err := getJSON(fmt.Sprintf("https://clob.polymarket.com/prices-history?market=%s&startTs=%d&endTs=%d&fidelity=60",
+		url.QueryEscape(token), from.Unix(), to.Unix()), &d)
+	return d.History, err
 }

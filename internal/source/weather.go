@@ -110,6 +110,15 @@ type KalshiBracket struct {
 	Sub    string
 }
 
+type kalshiBracketMarket struct {
+	Ticker string   `json:"ticker"`
+	Type   string   `json:"strike_type"`
+	Floor  *float64 `json:"floor_strike"`
+	Cap    *float64 `json:"cap_strike"`
+	Result string   `json:"result"`
+	Sub    string   `json:"yes_sub_title"`
+}
+
 // KalshiSettledBrackets returns a temperature series' settled markets. Each
 // bracket covers whole degrees Lo..Hi inclusive (±Inf for the open ends).
 func KalshiSettledBrackets(series string, since time.Time) ([]KalshiBracket, error) {
@@ -119,17 +128,9 @@ func KalshiSettledBrackets(series string, since time.Time) ([]KalshiBracket, err
 		var page struct {
 			Cursor string `json:"cursor"`
 			Events []struct {
-				Ticker     string `json:"event_ticker"`
-				StrikeDate string `json:"strike_date"`
-				Markets    []struct {
-					Ticker string   `json:"ticker"`
-					Type   string   `json:"strike_type"`
-					Floor  *float64 `json:"floor_strike"`
-					Cap    *float64 `json:"cap_strike"`
-					Result string   `json:"result"`
-					Sub    string   `json:"yes_sub_title"`
-					Close  string   `json:"close_time"`
-				} `json:"markets"`
+				Ticker     string                `json:"event_ticker"`
+				StrikeDate string                `json:"strike_date"`
+				Markets    []kalshiBracketMarket `json:"markets"`
 			} `json:"events"`
 		}
 		q := "/events?limit=100&status=settled&with_nested_markets=true&series_ticker=" + url.QueryEscape(series)
@@ -149,7 +150,19 @@ func KalshiSettledBrackets(series string, since time.Time) ([]KalshiBracket, err
 				old = true
 				continue
 			}
-			for _, m := range e.Markets {
+			markets := e.Markets
+			if len(markets) == 0 {
+				// Older events come back without their markets; those are archived.
+				var h struct {
+					Markets []kalshiBracketMarket `json:"markets"`
+				}
+				if err := kalshiGet("/historical/markets?event_ticker="+url.QueryEscape(e.Ticker), &h); err != nil {
+					return out, err
+				}
+				markets = h.Markets
+				time.Sleep(150 * time.Millisecond)
+			}
+			for _, m := range markets {
 				b := KalshiBracket{Ticker: m.Ticker, Event: e.Ticker, Date: date.Format("2006-01-02"), Yes: m.Result == "yes", Sub: m.Sub}
 				switch {
 				case m.Type == "between" && m.Floor != nil && m.Cap != nil:

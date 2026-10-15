@@ -104,6 +104,7 @@ func cmdWeather(args []string) error {
 			}
 		}
 		save()
+		fetched := 0
 
 		// Forecast for a day as known at time t: the latest run ≥ 2h before t.
 		byValid := map[int64][]source.NBMHigh{}
@@ -190,6 +191,9 @@ func cmdWeather(args []string) error {
 							price = tr[len(tr)-1].YesPrice
 						}
 						data.Prices[key] = price
+						if fetched++; fetched%100 == 0 {
+							save()
+						}
 					}
 					if price <= 0 || price >= 1 {
 						continue
