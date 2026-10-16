@@ -34,7 +34,8 @@ type BasketLeg struct {
 
 // PolyBaskets lists open Polymarket "neg risk" events: multi-outcome events
 // built so exactly one market resolves YES. Markets already closed inside an
-// event (decided NO) are left out. In "augmented" events new outcomes can be
+// event are left out when they resolved NO; an event where one resolved YES
+// (or isn't settled yet) is over and skipped. In "augmented" events new outcomes can be
 // added later, so the listed ones aren't known to be exhaustive.
 func PolyBaskets() ([]Basket, error) {
 	var out []Basket
@@ -78,6 +79,14 @@ func PolyBaskets() ([]Basket, error) {
 			b := Basket{Venue: "polymarket", Event: e.Title, Slug: e.Slug, Exhaustive: !e.Augmented}
 			for _, m := range e.Markets {
 				if m.Closed {
+					// A closed market isn't necessarily a NO: if one already
+					// won, the open ones are all worthless and the event is over.
+					var prices []string
+					json.Unmarshal([]byte(m.OutcomePrices), &prices)
+					if len(prices) == 0 || num(prices[0]) > 0.01 {
+						b.Legs = nil
+						break
+					}
 					continue
 				}
 				var toks []string

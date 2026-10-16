@@ -1,0 +1,33 @@
+LIQUIDITY REWARDS · four snapshots, 2026-10-15 20:09–21:42 UTC · what the paper market maker would collect resting the minimum size on both sides
+of the ~145 biggest Polymarket reward pools, against the adverse selection it measured live for the same type of market (cmd: attnflow rewards)
+
+20:09 UTC
+   LIQUIDITY REWARDS · 18721 markets pay rewards, $206714 a day in all · checked the 146 biggest pools against their current books
+   worth quoting if losing the 10-minute markout on each fill: 73 markets · rewards $1910/day · net $1381/day · capital $7026 (net $0.20 per $1 of capital a day)
+         …of which no one else qualified at that moment: 5 markets · rewards $610/day · net $391/day · capital $268 (net $1.46 per $1 of capital a day)
+   worth quoting if exiting every fill as a taker: 26 markets · rewards $831/day · net $510/day · capital $1263 (net $0.40 per $1 of capital a day)
+20:41 UTC
+   LIQUIDITY REWARDS · 18712 markets pay rewards, $204742 a day in all · checked the 145 biggest pools against their current books
+   worth quoting if losing the 10-minute markout on each fill: 76 markets · rewards $3114/day · net $1427/day · capital $6800 (net $0.21 per $1 of capital a day)
+         …of which no one else qualified at that moment: 6 markets · rewards $1447/day · net $486/day · capital $414 (net $1.17 per $1 of capital a day)
+   worth quoting if exiting every fill as a taker: 27 markets · rewards $1251/day · net $505/day · capital $1826 (net $0.28 per $1 of capital a day)
+21:11 UTC
+   LIQUIDITY REWARDS · 18790 markets pay rewards, $203725 a day in all · checked the 144 biggest pools against their current books
+   worth quoting if losing the 10-minute markout on each fill: 77 markets · rewards $5653/day · net $4202/day · capital $6759 (net $0.62 per $1 of capital a day)
+         …of which no one else qualified at that moment: 5 markets · rewards $1545/day · net $1074/day · capital $271 (net $3.97 per $1 of capital a day)
+   worth quoting if exiting every fill as a taker: 27 markets · rewards $4286/day · net $2970/day · capital $1412 (net $2.10 per $1 of capital a day)
+21:42 UTC
+   LIQUIDITY REWARDS · 18690 markets pay rewards, $206228 a day in all · checked the 144 biggest pools against their current books
+   worth quoting if losing the 10-minute markout on each fill: 74 markets · rewards $9520/day · net $7454/day · capital $6130 (net $1.22 per $1 of capital a day)
+         …of which no one else qualified at that moment: 10 markets · rewards $8524/day · net $6855/day · capital $436 (net $15.72 per $1 of capital a day)
+   worth quoting if exiting every fill as a taker: 23 markets · rewards $8344/day · net $6108/day · capital $805 (net $7.59 per $1 of capital a day)
+
+what this says:
+ - the pool is real and large: ~$205k a day across ~18,700 markets, steady across snapshots.
+ - the estimate swings 5x between snapshots ($1.4k–$7.5k a day net), almost all of it from live esports games (Cloud9 vs Karmine Corp, pools of
+   $857–3,429 a day) where for a while no one else was quoting inside the band. In-game is exactly when a lone quote gets run over, and the
+   loss per fill used here is an average over calmer markets, so these rows are the least trustworthy.
+ - the steadier candidates are niche markets with thin competition (YouTube view counts for the GTA VI trailer, MrBeast videos, AI-model
+   races), which show up in every snapshot with positive net even after paying to exit each fill.
+ - not verified: fills are estimated from daily volume, the competition is read from one side of one book, and others re-quote when
+   someone joins. The only way to know is a live paper test that tracks the score share and real fills minute by minute.

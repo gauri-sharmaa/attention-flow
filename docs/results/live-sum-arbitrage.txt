@@ -1,0 +1,28 @@
+SUM ARBITRAGE · live scans 2026-10-15/16 · buy one contract of every outcome in an event where at most one can win, when the set costs less than its guaranteed payout after fees (re-priced from the order books)
+
+scans over ~2.5 hours, every 15 minutes (time UTC · venue · events · re-priced · with a profit · best all-NO edge · best all-YES edge per set):
+   19:31 polymarket   882  10  3  -0.67¢ +0.68¢
+   19:32 kalshi      5859  36  0  -0.09¢ —
+   19:33 polymarket   884  10  3  -0.79¢ +0.78¢
+   19:40 kalshi      5855  35  0  -0.09¢ —
+   19:57 polymarket   887  11  2  -0.28¢ +0.33¢
+   19:57 kalshi      5817  37  0  -0.09¢ —
+   20:14 polymarket   886  12  2  -0.73¢ +0.33¢
+   20:15 kalshi      5816  35  1  +0.12¢ —
+   20:32 kalshi      5797  35  0  -0.09¢ —
+   20:49 kalshi      5805  33  0  -0.09¢ —
+   21:06 kalshi      5784  30  0  -0.09¢ —
+   21:24 kalshi      5779  32  0  -0.09¢ —
+   21:41 kalshi      5776  37  0  -0.09¢ —
+
+five Polymarket scans (20:31–21:40) showed 'edges' of 99.8¢ on football matches: a bug, now fixed. One outcome had already won and
+its market had closed; the scanner assumed closed meant NO and priced the leftover losers (0.1¢ each) as a full set. Those rows are left out above.
+
+after the fix (2026-10-16):
+   "OpenAI IPO Closing Market Cap"                                all-yes edge 1.43¢ × 27 sets, pays out in 441 days
+   "Swiss National Bank decision in December?"                    all-yes edge 0.25¢ × 28 sets, pays out in 54 days
+   "Who wins the Senate pending oil below $85 before the midterms?" all-yes edge 0.82¢ × 2 sets, pays out in 18 days
+   "Maduro Prison Time?"                                          all-yes edge 0.10¢ × 5 sets, pays out in 441 days
+   "Bank of Mexico Decision in December?"                         all-no  edge 0.24¢ × 0 sets, pays out in 62 days
+
+conclusion: within-event prices add up. The gaps that survive the order book are a cent or less, on a few dozen contracts, often locked up for a year.
