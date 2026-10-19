@@ -89,6 +89,8 @@ func main() {
 		err = cmdWeather(os.Args[2:])
 	case "rewards":
 		err = cmdRewards(os.Args[2:])
+	case "rewardsim":
+		err = cmdRewardSim(os.Args[2:])
 	case "xvenue":
 		err = cmdXVenue(os.Args[2:])
 	case "eventstudy":

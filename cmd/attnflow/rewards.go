@@ -35,89 +35,9 @@ func cmdRewards(args []string) error {
 	fs := flag.NewFlagSet("rewards", flag.ExitOnError)
 	top := fs.Int("top", 150, "markets with the biggest reward pools to check")
 	fs.Parse(args)
-	rms, err := source.PolyRewardMarkets()
-	if err != nil && len(rms) == 0 {
-		return err
-	}
-	pool := 0.0
-	for _, r := range rms {
-		pool += r.Daily
-	}
-	nReward := len(rms)
-	sort.Slice(rms, func(a, b int) bool { return rms[a].Daily > rms[b].Daily })
-	if len(rms) > *top {
-		rms = rms[:*top]
-	}
-	ids := make([]string, len(rms))
-	for i, r := range rms {
-		ids[i] = r.ConditionID
-	}
-	meta, err := source.PolyMetaByID(ids)
+	rows, nReward, pool, err := estimateRewards(*top)
 	if err != nil {
 		return err
-	}
-	type row struct {
-		q, sector                          string
-		lossMid, lossExit                  float64
-		daily, share, earn, fills, capital float64
-		mid, v, size                       float64
-	}
-	var rows []row
-	for _, r := range rms {
-		m, ok := meta[r.ConditionID]
-		if !ok || m.Closed || len(m.Tokens) != 2 {
-			continue
-		}
-		bids, asks, err := source.PolyBookLevels(m.Tokens[0])
-		if err != nil || len(bids) == 0 || len(asks) == 0 {
-			continue
-		}
-		bb, ba := bids[0], asks[0]
-		for _, l := range bids {
-			if l.Price > bb.Price {
-				bb = l
-			}
-		}
-		for _, l := range asks {
-			if l.Price < ba.Price {
-				ba = l
-			}
-		}
-		mid := (bb.Price + ba.Price) / 2
-		if mid < 0.02 || mid > 0.98 {
-			continue
-		}
-		v, size := r.MaxSpread, r.MinSize
-		// Our quotes: the best prices, pulled inside the band if they're outside it.
-		bid := math.Max(bb.Price, mid-(v-0.5)/100)
-		ask := math.Min(ba.Price, mid+(v-0.5)/100)
-		bid, ask = math.Floor(bid*100+1e-9)/100, math.Ceil(ask*100-1e-9)/100
-		ourB := rewards.Score(v, 100*(mid-bid), size)
-		ourA := rewards.Score(v, 100*(ask-mid), size)
-		ours := rewards.Credit(ourB, ourA, mid)
-		ob, oa := rewards.BookScores(bids, asks, mid, v, size)
-		theirs := rewards.Credit(ob, oa, mid)
-		if ours <= 0 {
-			continue
-		}
-		share := ours / (ours + theirs)
-		ahead := func(levels []source.Level, p float64) float64 {
-			s := 0.0
-			for _, l := range levels {
-				if math.Abs(l.Price-p) < 1e-9 {
-					s += l.Size
-				}
-			}
-			return s
-		}
-		shares := m.Volume24h / mid / 2 // a day's shares traded on each side, roughly
-		fills := shares*size/(ahead(bids, bid)+size) + shares*size/(ahead(asks, ask)+size)
-		sector := source.SectorOf(m.Question + " " + m.Event)
-		if gameRe.MatchString(m.Question) {
-			sector = "sports"
-		}
-		loss := mmLoss[sector]
-		rows = append(rows, row{m.Question, sector, loss[0], loss[1], r.Daily, share, share * r.Daily, fills, size*bid + size*(1-ask), mid, v, size})
 	}
 	sort.Slice(rows, func(a, b int) bool {
 		return rows[a].earn-rows[a].fills*rows[a].lossMid > rows[b].earn-rows[b].fills*rows[b].lossMid
@@ -177,4 +97,98 @@ func cmdRewards(args []string) error {
 	fmt.Println("caveats: one snapshot, and the markets were picked from it; others re-quote when we join; fills are estimated from volume, not observed;")
 	fmt.Println("rewards need the quotes up around the clock; a 100% share means no one else qualified at that moment, which rarely lasts")
 	return nil
+}
+
+// rewardRow is one market's reward estimate from its current order book.
+type rewardRow struct {
+	q, sector                          string
+	lossMid, lossExit                  float64
+	daily, share, earn, fills, capital float64
+	mid, v, size                       float64
+	meta                               source.PolyMeta
+	rm                                 source.RewardMarket
+}
+
+// estimateRewards prices the top reward pools against their current books.
+// It returns the rows, how many markets pay rewards and the total daily pool.
+func estimateRewards(top int) ([]rewardRow, int, float64, error) {
+	rms, err := source.PolyRewardMarkets()
+	if err != nil && len(rms) == 0 {
+		return nil, 0, 0, err
+	}
+	pool := 0.0
+	for _, r := range rms {
+		pool += r.Daily
+	}
+	nReward := len(rms)
+	sort.Slice(rms, func(a, b int) bool { return rms[a].Daily > rms[b].Daily })
+	if len(rms) > top {
+		rms = rms[:top]
+	}
+	ids := make([]string, len(rms))
+	for i, r := range rms {
+		ids[i] = r.ConditionID
+	}
+	meta, err := source.PolyMetaByID(ids)
+	if err != nil {
+		return nil, 0, 0, err
+	}
+	var rows []rewardRow
+	for _, r := range rms {
+		m, ok := meta[r.ConditionID]
+		if !ok || m.Closed || len(m.Tokens) != 2 {
+			continue
+		}
+		bids, asks, err := source.PolyBookLevels(m.Tokens[0])
+		if err != nil || len(bids) == 0 || len(asks) == 0 {
+			continue
+		}
+		bb, ba := bids[0], asks[0]
+		for _, l := range bids {
+			if l.Price > bb.Price {
+				bb = l
+			}
+		}
+		for _, l := range asks {
+			if l.Price < ba.Price {
+				ba = l
+			}
+		}
+		mid := (bb.Price + ba.Price) / 2
+		if mid < 0.02 || mid > 0.98 {
+			continue
+		}
+		v, size := r.MaxSpread, r.MinSize
+		// Our quotes: the best prices, pulled inside the band if they're outside it.
+		bid := math.Max(bb.Price, mid-(v-0.5)/100)
+		ask := math.Min(ba.Price, mid+(v-0.5)/100)
+		bid, ask = math.Floor(bid*100+1e-9)/100, math.Ceil(ask*100-1e-9)/100
+		ourB := rewards.Score(v, 100*(mid-bid), size)
+		ourA := rewards.Score(v, 100*(ask-mid), size)
+		ours := rewards.Credit(ourB, ourA, mid)
+		ob, oa := rewards.BookScores(bids, asks, mid, v, size)
+		theirs := rewards.Credit(ob, oa, mid)
+		if ours <= 0 {
+			continue
+		}
+		share := ours / (ours + theirs)
+		ahead := func(levels []source.Level, p float64) float64 {
+			s := 0.0
+			for _, l := range levels {
+				if math.Abs(l.Price-p) < 1e-9 {
+					s += l.Size
+				}
+			}
+			return s
+		}
+		shares := m.Volume24h / mid / 2 // a day's shares traded on each side, roughly
+		fills := shares*size/(ahead(bids, bid)+size) + shares*size/(ahead(asks, ask)+size)
+		sector := source.SectorOf(m.Question + " " + m.Event)
+		if gameRe.MatchString(m.Question) {
+			sector = "sports"
+		}
+		loss := mmLoss[sector]
+		rows = append(rows, rewardRow{m.Question, sector, loss[0], loss[1], r.Daily, share, share * r.Daily, fills, size*bid + size*(1-ask), mid, v, size, m, r})
+	}
+	return rows, nReward, pool, nil
 }
