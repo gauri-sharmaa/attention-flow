@@ -427,9 +427,15 @@ func (s *Sim) Report() string {
 		tot.marked += r.marked
 	}
 	sort.Slice(rows, func(a, b int) bool { return rows[a].rewards+rows[a].exit > rows[b].rewards+rows[b].exit })
-	hours := time.Since(s.start).Hours()
+	// Rates count the minutes actually sampled, not time the process was down.
+	sampled := 0
+	for _, st := range s.state {
+		sampled = max(sampled, st.Minutes)
+	}
+	hours := float64(sampled) / 60
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "LIQUIDITY-REWARDS PAPER TEST · %d markets · running %.1f hours since %s UTC\n", len(rows), hours, s.start.UTC().Format("Jan 2 15:04"))
+	fmt.Fprintf(&sb, "LIQUIDITY-REWARDS PAPER TEST · %d markets · %.1f hours sampled since %s UTC (%.1f hours ago)\n", len(rows), hours,
+		s.start.UTC().Format("Jan 2 15:04"), time.Since(s.start).Hours())
 	fmt.Fprintln(&sb, "minimum-size paper orders on both sides at the best prices inside each market's reward band, re-posted every minute and")
 	fmt.Fprintln(&sb, "scored against the real order book; fills from real trades after the queue ahead of us. Nothing is sent to the exchange.")
 	fmt.Fprintf(&sb, "\n%-58s %8s %6s %7s %6s %9s %9s %9s %8s\n", "market", "rewards", "share", "quoted", "fills", "position", "after exit", "net", "capital")
