@@ -166,6 +166,7 @@ func (s *Sim) Run(ctx context.Context) {
 			return
 		case now := <-minute.C:
 			s.sample(now)
+			s.save() // small; a restart loses at most a minute
 		case <-snap.C:
 			s.resnapshot() // websocket deltas can drift; start each market over from the full book
 			s.save()
