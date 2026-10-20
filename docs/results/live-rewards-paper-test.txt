@@ -1,0 +1,65 @@
+LIQUIDITY-REWARDS PAPER TEST · 40 markets · 24.4 hours sampled since Oct 19 14:11 UTC (27.0 hours ago)
+minimum-size paper orders on both sides at the best prices inside each market's reward band, re-posted every minute and
+scored against the real order book; fills from real trades after the queue ahead of us. Nothing is sent to the exchange.
+
+market                                                      rewards  share  quoted  fills  position after exit       net  capital
+Will OpenRouter process between 165T and 175T tokens the w    90.55  66.9%    100%      6     -2.00     -2.00    +88.55       35
+Will Google have the second highest OpenRouter market shar    67.85  63.5%     99%      5     -0.90     -1.20    +66.65       38
+Will Meta be the third-best Math AI lab at the end of Octo    49.69  43.2%    100%      6     +2.22     +2.22    +51.91       38
+Will the Ornn H200 Index be at least $6.50 on November 30,    54.61  42.6%     99%      5     -4.00     -4.60    +50.01       48
+Will Canada's GDP growth rate MoM in August 2026 be betwee    45.27  60.9%     92%      2     -2.00     -2.00    +43.27       27
+Will ISM Services PMI be between 53.0 and 53.9 in October?    32.24  31.1%    100%      2     -3.80     -3.80    +28.44       29
+Will Anthropic have the best AI Agent at the end of Novemb    30.14  19.9%    100%      2     -2.20     -2.20    +27.94       25
+Will OpenAI have the third highest OpenRouter market share    26.23  21.3%    100%      2     +0.00     +0.00    +26.23       28
+Will "Housewife - Tate McRae" be the Billboard Hot 100 #2     30.37  41.4%    100%     14     -3.80     -5.00    +25.37       48
+Will White House post 200+ posts from October 16 to Octobe    26.78  39.3%     98%      2     -1.70     -1.70    +25.08       21
+Will James Comer be the Republican nominee for Kentucky Go    21.38  30.4%     99%      1     -0.60     -1.00    +20.38       26
+Will there be no Hormuz agreement or oil at least $80, and    15.56   3.1%    100%      1     -1.10     -1.20    +14.36      276
+Will ISM Services PMI be between 54.0 and 54.9 in October?    20.58  38.1%    100%      3     -4.15     -6.82    +13.76       34
+Will "Zach Bryan - Young Manhood & Other Donatable Organs"    25.25  47.7%     97%      7    -12.50    -12.60    +12.65       35
+Walmart (WMT) Q3 US eCommerce sales growth 21% to 25%?        11.62  21.1%    100%      1     +0.70     +0.60    +12.22       36
+Will Canada's GDP growth rate MoM in August 2026 be betwee     9.69   9.8%    100%      1     -0.30     -0.80     +8.89       32
+Microsoft (MSFT) Q1 Azure revenue growth (constant currenc     7.73  14.3%    100%      0     +0.00     +0.00     +7.73       20
+Will Alexi Giannoulias win the 2027 Chicago mayoral electi     6.51   9.5%    100%      0     +0.00     +0.00     +6.51       20
+Will Khamenei post 0-4 posts from October 20 to October 27    12.81  20.7%    100%      5     -4.50     -6.60     +6.21       35
+Will PPI YoY be 6.8% or more in October?                       2.99   4.9%    100%      0     +0.00     +0.00     +2.99       20
+Visa (V) Q4 payments volume growth (constant dollars) 9.5%    21.39  40.4%     78%      7     -7.60    -18.40     +2.99       49
+Will OpenAI have the best AI Agent at the end of November      3.09   6.0%    100%      1     -0.10     -0.40     +2.69       36
+Will OpenAI announce another Millennium Prize solution by      2.16   1.1%    100%      0     +0.00     +0.00     +2.16      198
+Will there be between 25 and 29 average daily transits of      1.32   1.1%    100%      0     +0.00     +0.00     +1.32       50
+Will Anthropic's market cap be between $1.75T and $2.0T at     1.15   0.7%    100%      0     +0.00     +0.00     +1.15       50
+Will there be between 30 and 34 average daily transits of      0.64   1.0%    100%      0     +0.00     +0.00     +0.64       50
+Will Robinhood be first to list tokenized stocks in the US     0.45   0.9%    100%      0     +0.00     +0.00     +0.45       50
+Will Marine Le Pen win the most votes in the first round o     0.35   0.5%    100%      0     +0.00     +0.00     +0.35       59
+KOSPI all-time high before 2028?                               0.30   0.4%    100%      0     +0.00     +0.00     +0.30       50
+Will the Democratic Party win the MI-07 House seat?            0.16   0.3%    100%      0     +0.00     +0.00     +0.16       50
+Will the Democratic Party win the NC-09 House seat?            0.15   0.3%    100%      0     +0.00     +0.00     +0.15       50
+Will none of these coins hit a $1B FDV?                        0.14   0.2%    100%      0     +0.00     +0.00     +0.14       50
+Will the Republican Party win the PA-08 House seat?            0.11   0.2%    100%      0     +0.00     +0.00     +0.11       50
+Will the Republican Party win the MI-01 House seat?            0.11   0.2%    100%      0     +0.00     +0.00     +0.11       50
+Will the Republican Party win the MI-10 House seat?            0.09   0.2%    100%      0     +0.00     +0.00     +0.09       50
+Will DeepSeek have the highest OpenRouter market share the     4.78   6.0%     83%      5     -5.50     -7.00     -2.22       29
+Will oil be at least $80 on November 2 and the Democrats w     3.39   0.7%    100%      4     -8.00    -10.00     -6.61      693
+Will there be no change in Fed interest rates after the Ja     0.72   0.7%    100%      5     -7.75     -9.00     -8.28      168
+Will MrBeast's next video get between 180 and 190 million     17.81  22.3%     30%      7    -28.45    -28.60    -10.79      246
+Will MrBeast's next video get between 160 and 170 million     14.47  24.9%     42%     17    -59.55    -59.80    -45.33      338
+
+TOTAL rewards $660.63 · position at midpoint $-157.58 · after paying half the spread to exit $-181.90 · NET $+478.73
+per day at this rate: rewards $649 · net $+470 · on the most capital tied up at once in each market (sum $3232)
+fills: 111 · the price 10 minutes after a fill moved -3.42¢ per share our way on average (negative: we were picked off)
+caveats: our orders aren't really in the book, so no one reacts to them; queue position is estimated; rewards use Polymarket's
+published formula, sampled each minute, not its actual payout; markets were chosen at the start from an estimate.
+
+SPLIT (niche = we averaged at least 25% of the market's reward pool; note this is decided from the same data)
+   niche  12 markets · rewards $485.96 · trading after exit −$56.90 · NET +$429.06 · 60 fills · most capital tied up $428
+   busy   28 markets · rewards $174.67 · trading after exit −$125.00 · NET  +$49.67 · 51 fills · most capital tied up $2,804
+   every niche market finished positive; the five losers were busy markets: the two MrBeast view-count ranges (−$45, −$11),
+   the Fed (−$8), oil + Senate (−$7) and DeepSeek's OpenRouter share (−$2).
+
+FILLS (108 with all markouts): the price had moved against us after 64% of them; on average −3.4¢ a share at 1 and 10 minutes, −4.3¢ at an hour.
+
+WHAT IT MEANS
+ - On paper, collecting rewards in quiet niche markets beat the cost of getting picked off, every one of them, over 24 hours.
+ - Fills still lose on average; the strategy works only because rewards keep arriving between fills.
+ - The losses concentrate in markets that settle on a number released at a known time (MrBeast views), where informed traders arrive.
+ - This is the best case: our orders were invisible, rewards come from the published formula rather than real payouts, and one day is one day.
