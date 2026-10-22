@@ -1,0 +1,17 @@
+KALSHI LIQUIDITY INCENTIVES · one snapshot, 2026-10-22 (public endpoint /trade-api/v2/incentive_programs + each market's order book)
+
+Kalshi pays makers per market: every ~second it snapshots the book, counts orders from the best price outward up to a
+target size, discounts each tick away from the best price, and splits the period's reward by share. Two-sided books only.
+Reward amounts read as centi-cents (period_reward / 10,000 = dollars), which puts multi-day pools at $3–600 a day.
+
+running programs: 6,928 (5,796 multi-day worth ~$130,600 a day; 1,132 short sub-day periods, typically $100 each)
+sample: 250 random multi-day programs, scored against their current order books, quoting 100 contracts at the best price on each side
+   our share of the pool: median 9.1%; at least half the pool in 13 of 225 two-sided books
+   25 of 250 books (10%) were empty or one-sided: a two-sided quoter would be alone (pools $8–100 a day)
+   best examples: Trump approval bracket ($600/day pool, 9% → ~$55/day), OpenRouter tokens ($47/day pool, 44%),
+   Rotten Tomatoes / weather / weekly shipping markets with $12–16/day pools where we'd take 65–95%
+   expected rewards across the 250 sampled: ~$700 a day (plus the one-sided books)
+
+comparison with Polymarket: a similar-sized pool (Polymarket ~$205k a day) and the same shape: lots of small markets
+where few or no makers compete. So the opportunity isn't a Polymarket quirk.
+not measured: getting picked off on Kalshi, maker fees on some Kalshi series, queue priority within the target size.
