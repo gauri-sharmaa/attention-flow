@@ -1,0 +1,34 @@
+LAG: do quiet markets lag their busy relatives? (attnflow families + attnflow lag + scripts/train_lag.py, 2026-10-24)
+470 families from shared Polymarket events; leader jumps of 5c+ in 10 min over the past year (the 25 biggest per family);
+up to 4 quieter followers each, priced from Polymarket's minute price history. No Claude labels yet.
+
+11827 jump x follower reactions, no Claude labels yet
+
+1. HOW QUIET MARKETS REACT when their busy relative jumps 5c+ in 10 minutes
+topic             events  reacted  median lag  done by 1 min  avg 60-min move
+ALL                11827      25%        30m            14%            3.9c
+other               3070      32%        30m            15%            5.7c
+world               2617      27%        15m            10%            2.9c
+politics            1830      15%        30m            15%            1.7c
+sports              1524      38%        30m            14%            9.4c
+tech                1281      14%        15m            11%            1.5c
+econ                 561      11%        15m            17%            0.8c
+crypto               513      14%        30m            17%            1.0c
+culture              431      18%        15m            21%            1.9c
+reacted = moved 2c+ within the hour; median lag = minutes to half its one-hour move; done by 1 min = share of reactions mostly over before anyone could act
+
+2. IS IT TRADABLE? test period = last 30% of the year (3551 trades), enter 1 min after the jump +1c, exit at 60 min -1c
+   every jump:          3551 trades   -1.81c each  (t -13.69)  won   9%
+   model says p>0.5:      199 trades   +2.06c each  (t +1.04)  won  52%
+   model says p>0.6:      111 trades   +3.34c each  (t +1.24)  won  57%
+   model says p>0.7:       42 trades   +3.15c each  (t +0.71)  won  62%
+
+   by topic, model p>0.5:
+   other                50 trades   +1.10c each  (t +0.37)  won  54%
+   politics              8 trades   +3.63c each  (t +0.88)  won  38%
+   sports              107 trades   +1.30c each  (t +0.39)  won  50%
+   tech                 11 trades  +14.65c each  (t +2.95)  won  82%
+   world                23 trades   +1.09c each  (t +0.58)  won  48%
+
+caveats: prices are Polymarket's minute price history, not the order book, so the 1c costs are a guess; a stale price
+doesn't prove an offer was there to take; the families came from shared events, so cross-event relatives are missing until Claude labels them.

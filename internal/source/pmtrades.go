@@ -343,3 +343,23 @@ func FetchMarketTrades(outDir string, n, nClosed, days int, barSeconds int64, wo
 	defer f.Close()
 	return core.WriteEvents(f, all)
 }
+
+// HistTrade is one past trade: the outcome token, its price, size and time.
+type HistTrade struct {
+	Asset string
+	Price float64
+	Size  float64
+	T     int64
+}
+
+// MarketTradeHistory returns a market's trades since `from` (unix seconds),
+// cached in dir. The data API serves at most about 10,000 trades per
+// market, so a very busy market's history starts later than asked.
+func MarketTradeHistory(dir, conditionID string, from int64) ([]HistTrade, error) {
+	tr, err := cachedTrades(dir, &http.Client{Timeout: 30 * time.Second}, conditionID, from)
+	out := make([]HistTrade, len(tr))
+	for i, t := range tr {
+		out[i] = HistTrade{t.Asset, t.Price, t.Size, t.Timestamp}
+	}
+	return out, err
+}

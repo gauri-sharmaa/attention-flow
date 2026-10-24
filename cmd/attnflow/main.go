@@ -91,6 +91,12 @@ func main() {
 		err = cmdRewards(os.Args[2:])
 	case "rewardsim":
 		err = cmdRewardSim(os.Args[2:])
+	case "families":
+		err = cmdFamilies(os.Args[2:])
+	case "famllm":
+		err = cmdFamLLM(os.Args[2:])
+	case "lag":
+		err = cmdLag(os.Args[2:])
 	case "xvenue":
 		err = cmdXVenue(os.Args[2:])
 	case "eventstudy":

@@ -16,3 +16,6 @@ data/weather/
 data/rewards/
 data/*/favsample.json
 data/rewardsim/
+data/*/pricehist/
+data/*/lag_events.json
+data/*/families*.json

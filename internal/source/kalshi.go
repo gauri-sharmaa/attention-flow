@@ -335,6 +335,7 @@ type PolyMeta struct {
 	ConditionID string
 	Question    string
 	Event       string
+	EventSlug   string
 	End         time.Time // scheduled end date (known in advance)
 	Closed      bool
 	ClosedAt    time.Time // when trading stopped (zero if open or unknown)
@@ -398,7 +399,7 @@ func PolyMetaByID(ids []string) (map[string]PolyMeta, error) {
 					pm.Final = append(pm.Final, num(p))
 				}
 				if len(m.Events) > 0 {
-					pm.Event = m.Events[0].Title
+					pm.Event, pm.EventSlug = m.Events[0].Title, m.Events[0].Slug
 				}
 				if m.FeesEnabled {
 					pm.FeeRate = m.FeeSchedule.Rate
@@ -481,6 +482,48 @@ func PolyPriceHistory(token string, from, to time.Time) ([]PricePoint, error) {
 		History []PricePoint `json:"history"`
 	}
 	err := getJSON(fmt.Sprintf("https://clob.polymarket.com/prices-history?market=%s&startTs=%d&endTs=%d&fidelity=60",
+		url.QueryEscape(token), from.Unix(), to.Unix()), &d)
+	return d.History, err
+}
+
+// PolyEventMarkets returns every market in a Polymarket event, open or
+// closed, with its lifetime volume.
+func PolyEventMarkets(slug string) ([]PolyMeta, error) {
+	var page []struct {
+		Title   string `json:"title"`
+		Slug    string `json:"slug"`
+		Markets []struct {
+			pmMarket
+			Outcomes string `json:"outcomes"`
+			Closed   bool   `json:"closed"`
+			Start    string `json:"startDate"`
+		} `json:"markets"`
+	}
+	if err := getJSON("https://gamma-api.polymarket.com/events?slug="+url.QueryEscape(slug), &page); err != nil {
+		return nil, err
+	}
+	var out []PolyMeta
+	for _, e := range page {
+		for _, m := range e.Markets {
+			var outs, toks []string
+			json.Unmarshal([]byte(m.Outcomes), &outs)
+			json.Unmarshal([]byte(m.ClobTokenIds), &toks)
+			end, _ := time.Parse(time.RFC3339, m.EndDate)
+			start, _ := time.Parse(time.RFC3339, m.Start)
+			out = append(out, PolyMeta{ConditionID: m.ConditionID, Question: m.Question, Event: e.Title, EventSlug: e.Slug,
+				End: end, Start: start, Closed: m.Closed, Outcomes: outs, Tokens: toks, Volume: m.VolumeNum})
+		}
+	}
+	return out, nil
+}
+
+// PolyPriceHistoryFine returns a token's minute-by-minute price over
+// [from, to]; windows of up to about ten days are accepted.
+func PolyPriceHistoryFine(token string, from, to time.Time) ([]PricePoint, error) {
+	var d struct {
+		History []PricePoint `json:"history"`
+	}
+	err := getJSON(fmt.Sprintf("https://clob.polymarket.com/prices-history?market=%s&startTs=%d&endTs=%d&fidelity=1",
 		url.QueryEscape(token), from.Unix(), to.Unix()), &d)
 	return d.History, err
 }
