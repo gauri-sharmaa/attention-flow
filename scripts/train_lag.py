@@ -3,7 +3,7 @@
 Input: data/pmt365/lag_events.json from `attnflow lag` (one row per leader
 jump x follower, with the follower's price change 1, 2, 5, 10, 15, 30 and 60
 minutes later), and optionally data/pmt365/families_llm.json from
-`attnflow famllm` (Claude's labels: related, direction, topic, insider risk).
+`attnflow famllm` or scripts/label_families.py (labels: related, direction, topic, insider risk).
 
 Two questions, both answered per topic:
   1. Lag: when the busy market jumps, how often does the quiet one move, and
@@ -16,7 +16,7 @@ Two questions, both answered per topic:
 
 The model (gradient-boosted trees) uses only what is known at entry: topic,
 volumes, jump size, price levels, time to resolution, time of day, how much
-the follower already moved in the first minute, and Claude's labels if
+the follower already moved in the first minute, and the follower labels if
 present. It predicts whether a trade will clear its costs.
 """
 
@@ -38,7 +38,7 @@ llm = {}
 p = os.path.join(DIR, "families_llm.json")
 if os.path.exists(p):
     llm = json.load(open(p))
-print(f"{len(evs)} jump x follower reactions" + (f", {len(llm)} with Claude labels" if llm else ", no Claude labels yet"))
+print(f"{len(evs)} jump x follower reactions" + (f", {len(llm)} with follower labels" if llm else ", no follower labels yet"))
 
 for e in evs:
     lab = llm.get(e["FollowerID"])
@@ -52,7 +52,7 @@ for e in evs:
 if llm:
     before = len(evs)
     evs = [e for e in evs if e["related"] is not False]
-    print(f"dropped {before - len(evs)} rows Claude judged unrelated")
+    print(f"dropped {before - len(evs)} rows labelled unrelated")
 
 # A jump only counts if the leader's own price history confirms it: 10 minutes
 # after the jump the leader's price is still at least 4c away from where it
@@ -167,4 +167,4 @@ for t in topics:
     if gs:
         print(f"   {t:16s} " + summary(gs))
 print("\ncaveats: prices are Polymarket's minute price history, not the order book, so the 1c costs are a guess; a stale price")
-print("doesn't prove an offer was there to take; the families came from shared events, so cross-event relatives are missing until Claude labels them.")
+print("doesn't prove an offer was there to take; the families came from shared events, so relatives in other events aren't included yet.")

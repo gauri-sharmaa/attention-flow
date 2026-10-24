@@ -1,10 +1,10 @@
 LAG: do quiet markets lag their busy relatives? (2026-10-24)
 470 families from shared Polymarket events; leader jumps of 5c+ in 10 min over the past year (25 biggest per family),
 confirmed by the leader's own minute price history; up to 4 followers each, labelled with scripts/label_families.py
-(rules Claude wrote after reading all 389 families with data: related, direction, topic, insider risk, release).
+(rules written after reading all 389 families with data: related, direction, topic, insider risk, release).
 
-11827 jump x follower reactions, 2148 with Claude labels
-dropped 1361 rows Claude judged unrelated
+11827 jump x follower reactions, 2148 with follower labels
+dropped 1361 rows labelled unrelated
 kept 5049 of 10466 rows where the leader's price history confirms the jump
 labelled opposite: the follower moved that way in 446/725 reactions (62%)
 labelled same: the follower moved that way in 335/469 reactions (71%)
@@ -36,4 +36,4 @@ reacted = moved 2c+ within the hour; median lag = minutes to half its one-hour m
    tech_ai               1 trades
 
 caveats: prices are Polymarket's minute price history, not the order book, so the 1c costs are a guess; a stale price
-doesn't prove an offer was there to take; the families came from shared events, so cross-event relatives are missing until Claude labels them.
+doesn't prove an offer was there to take; the families came from shared events, so relatives in other events aren't included yet.

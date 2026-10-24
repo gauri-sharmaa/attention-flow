@@ -16,7 +16,7 @@ import (
 	"github.com/anthropics/anthropic-sdk-go"
 )
 
-// cmdFamLLM asks Claude to read each family (a busy market and its quieter
+// cmdFamLLM asks a language model to read each family (a busy market and its quieter
 // relatives) and label every follower: is it really related to the leader,
 // should it move the same way or the opposite way when the leader jumps,
 // what topic it is, and whether insiders could know its answer early.

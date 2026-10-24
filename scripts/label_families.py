@@ -2,8 +2,8 @@
 way it should move when the leader's YES price rises, topic, insider risk and
 scheduled release.
 
-These rules were written by Claude after reading all 389 families that have
-lag data (scripts read: event title, leader question, follower questions).
+These rules were written after reading all 389 families that have lag data
+(event title, leader question, follower questions).
 They encode the same judgments the `attnflow famllm` command asks a model to
 make, so the training script can't tell the difference: the output has the
 same shape (families_llm.json, keyed by follower condition ID).
