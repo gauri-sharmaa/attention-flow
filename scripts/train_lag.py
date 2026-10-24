@@ -54,6 +54,23 @@ if llm:
     evs = [e for e in evs if e["related"] is not False]
     print(f"dropped {before - len(evs)} rows Claude judged unrelated")
 
+# A jump only counts if the leader's own price history confirms it: 10 minutes
+# after the jump the leader's price is still at least 4c away from where it
+# was 10 minutes before, in the same direction. Single stray trades in a thin
+# book look like jumps but snap straight back.
+if any(e.get("LeaderMoves") for e in evs):
+    before = len(evs)
+    evs = [e for e in evs if e.get("LeaderMoves") and np.sign(e["LeaderMoves"][3]) == np.sign(e["LeaderMove"]) and abs(e["LeaderMoves"][3]) >= 0.04]
+    print(f"kept {len(evs)} of {before} rows where the leader's price history confirms the jump")
+
+agree = defaultdict(lambda: [0, 0])
+for e in evs:
+    if e["llm_dir"] and abs(e["m"][60]) >= 0.02:
+        agree[e["llm_dir"]][0] += np.sign(e["LeaderMove"]) * np.sign(e["m"][60]) == e["llm_dir"]
+        agree[e["llm_dir"]][1] += 1
+for d, (a, n) in agree.items():
+    print(f"labelled {'same' if d > 0 else 'opposite'}: the follower moved that way in {a}/{n} reactions ({100 * a / max(n, 1):.0f}%)")
+
 evs.sort(key=lambda e: e["T"])
 split_t = evs[int(len(evs) * 0.7)]["T"]
 train = [e for e in evs if e["T"] < split_t]

@@ -122,6 +122,7 @@ func cmdLag(args []string) error {
 		FollowerVol, LeaderVol         float64
 		Before                         float64
 		Moves                          []float64 // follower change at 1, 2, 5, 10, 15, 30, 60 minutes
+		LeaderMoves                    []float64 // the leader's own price-history change at the same times (confirms the jump was real)
 		HoursToEnd                     float64
 		Siblings                       int
 	}
@@ -182,6 +183,17 @@ func cmdLag(args []string) error {
 						p = before
 					}
 					e.Moves = append(e.Moves, p-before)
+				}
+				if lpts := history(jb.f.Leader.Tokens[0], jb.j.t); lpts != nil {
+					if lb, ok := priceAt(lpts, jb.j.t-600); ok {
+						for _, h := range horiz {
+							p, ok := priceAt(lpts, jb.j.t+h)
+							if !ok {
+								p = lb
+							}
+							e.LeaderMoves = append(e.LeaderMoves, p-lb)
+						}
+					}
 				}
 				evs[i] = e
 			}
