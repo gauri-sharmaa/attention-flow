@@ -1,0 +1,23 @@
+5049 confirmed jumps x related followers; test period 1518 rows
+
+1. EXPECTED-MOVE FILTER: trade when beta x leader move, minus the follower's first-minute move, is at least:
+   2c:     52 trades   -1.74c each  (t -4.96)  won  12%
+   3c:     33 trades   -1.65c each  (t -4.02)  won  12%
+   5c:     14 trades   -1.29c each  (t -2.55)  won  14%
+   8c:      4 trades   +0.36c each  (t +0.23)  won  50%
+
+2. BUILT-IN LINKS ONLY (direction from the labels, every confirmed jump):
+   date ladder     226 trades   -1.19c each  (t -5.19)  won  18%
+   same side        30 trades   +9.69c each  (t +2.17)  won  30%
+   two-way race     55 trades   -2.13c each  (t -11.42)  won   2%
+
+3. BOTH: built-in links, and the expected move left is at least 3c:
+       0 trades
+
+4. WHERE THE COSTS GO: average follower move in the trade direction (1->60 min), before costs, for the built-in links:
+   date ladder   +0.81c before costs vs 2c of costs  (n=226)
+   same side     +11.69c before costs vs 2c of costs  (n=30)
+   two-way race  -0.13c before costs vs 2c of costs  (n=55)
+
+same-side check: train (first 70%) 276 trades in 41 matches, +1.56c each (t 1.32), median -2c, won 28%;
+test (last 30%) 30 trades in only 4 matches, +9.69c (t 2.17). A few 50-80c swings carry it: most trades just pay costs.
