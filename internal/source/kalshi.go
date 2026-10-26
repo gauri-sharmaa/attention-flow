@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -526,4 +527,75 @@ func PolyPriceHistoryFine(token string, from, to time.Time) ([]PricePoint, error
 	err := getJSON(fmt.Sprintf("https://clob.polymarket.com/prices-history?market=%s&startTs=%d&endTs=%d&fidelity=1",
 		url.QueryEscape(token), from.Unix(), to.Unix()), &d)
 	return d.History, err
+}
+
+// MatchGroup is one match on Polymarket: its main market and side markets,
+// which can be spread over several events ("X vs Y", "X vs Y - More Markets").
+type MatchGroup struct {
+	Title   string
+	Start   time.Time
+	Markets []LiveMarket
+}
+
+var matchSuffix = regexp.MustCompile(`(?i)\s+-\s+(more markets|exact score|halftime result|player props)$`)
+
+// PolyMatchGroups returns open matches starting between now+from and now+to.
+func PolyMatchGroups(from, to time.Duration) ([]MatchGroup, error) {
+	now := time.Now()
+	groups := map[string]*MatchGroup{}
+	for off := 0; off < 1500; off += 100 {
+		var page []struct {
+			Title   string `json:"title"`
+			Slug    string `json:"slug"`
+			Markets []struct {
+				pmMarket
+				Closed    bool   `json:"closed"`
+				Accepting bool   `json:"acceptingOrders"`
+				GameStart string `json:"gameStartTime"`
+			} `json:"markets"`
+		}
+		u := fmt.Sprintf("https://gamma-api.polymarket.com/events?closed=false&active=true&limit=100&offset=%d&order=volume24hr&ascending=false", off)
+		if err := getJSON(u, &page); err != nil {
+			return nil, err
+		}
+		for _, e := range page {
+			if !regexp.MustCompile(`(?i)\bvs\.?\b`).MatchString(e.Title) {
+				continue
+			}
+			title := matchSuffix.ReplaceAllString(e.Title, "")
+			for _, m := range e.Markets {
+				var start time.Time
+				for _, layout := range []string{"2006-01-02 15:04:05Z07", "2006-01-02 15:04:05-07", time.RFC3339, "2006-01-02T15:04:05Z07:00"} {
+					if t, err := time.Parse(layout, m.GameStart); err == nil {
+						start = t
+						break
+					}
+				}
+				if start.IsZero() || start.Before(now.Add(from)) || start.After(now.Add(to)) || m.Closed || !m.Accepting {
+					continue
+				}
+				var toks []string
+				json.Unmarshal([]byte(m.ClobTokenIds), &toks)
+				if len(toks) != 2 {
+					continue
+				}
+				g := groups[title]
+				if g == nil {
+					g = &MatchGroup{Title: title, Start: start}
+					groups[title] = g
+				}
+				g.Markets = append(g.Markets, LiveMarket{ConditionID: m.ConditionID, Question: m.Question, Event: e.Slug,
+					Sector: "sports", YesToken: toks[0], NoToken: toks[1], Volume24h: m.Volume24hr})
+			}
+		}
+		if len(page) < 100 {
+			break
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	out := make([]MatchGroup, 0, len(groups))
+	for _, g := range groups {
+		out = append(out, *g)
+	}
+	return out, nil
 }

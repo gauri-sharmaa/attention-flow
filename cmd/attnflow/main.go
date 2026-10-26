@@ -95,6 +95,8 @@ func main() {
 		err = cmdFamilies(os.Args[2:])
 	case "famllm":
 		err = cmdFamLLM(os.Args[2:])
+	case "sportsrec":
+		err = cmdSportsRec(os.Args[2:])
 	case "lag":
 		err = cmdLag(os.Args[2:])
 	case "xvenue":

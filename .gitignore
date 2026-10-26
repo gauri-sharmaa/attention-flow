@@ -20,3 +20,4 @@ data/*/pricehist/
 data/*/lag_events.json
 data/*/families*.json
 __pycache__/
+data/sportsrec/
