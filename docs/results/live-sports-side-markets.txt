@@ -1,0 +1,29 @@
+SPORTS SIDE-MARKET LAG · 49 matches, 2.0 hours of order books, 542 main-market moves (3c+ in 30s)
+enter L seconds after the move at the real ask (or bid to sell); exit at the real opposite price 60s / 300s after the move
+
+exit after 60s:
+   enter after  1s:  6323 trades in  21 matches   -4.25c each  (t -78.41)  won   6%
+   enter after  2s:  6324 trades in  21 matches   -4.30c each  (t -79.72)  won   6%
+   enter after  5s:  6357 trades in  21 matches   -4.35c each  (t -77.90)  won   6%
+   enter after 10s:  6369 trades in  21 matches   -4.34c each  (t -79.27)  won   5%
+   enter after 30s:  6342 trades in  21 matches   -4.19c each  (t -90.69)  won   3%
+exit after 300s:
+   enter after  1s:  6057 trades in  21 matches   -4.37c each  (t -50.74)  won  15%
+   enter after  2s:  6065 trades in  21 matches   -4.41c each  (t -51.63)  won  14%
+   enter after  5s:  6089 trades in  21 matches   -4.43c each  (t -52.34)  won  15%
+   enter after 10s:  6081 trades in  21 matches   -4.46c each  (t -53.54)  won  14%
+   enter after 30s:  6039 trades in  21 matches   -4.27c each  (t -54.79)  won  14%
+
+waiting at the bid/ask instead (order rested 1s after the move, filled in 855 of 6566 tries within 60s):
+   exit after 60s:   855 trades in  19 matches   -4.14c each  (t -27.65)  won   8%
+   exit after 300s:   840 trades in  19 matches   -5.20c each  (t -17.70)  won  23%
+
+how much of the side market's 5-minute move had already happened when you could enter (when it moved 2c+ the right way):
+   after  1s:   0% done (median, n=1887)
+   after  2s:   7% done (median, n=1896)
+   after  5s:  14% done (median, n=1901)
+   after 10s:  22% done (median, n=1901)
+   after 30s:  33% done (median, n=1913)
+
+before costs: entering 1s after the move, the side market's midpoint moved -0.01c on average in the expected direction by 5 minutes (median 0.00c);
+the bid-ask spread to cross averaged 4.59c. Recorded 2026-10-26 23:33 - 01:30 UTC (NBA, WNBA, football, a little tennis/esports).

@@ -90,6 +90,8 @@ def side_of(follower, A, B):
 
 
 trades = {(L, X): [] for L in LAT for X in EXITS}
+passive = {X: [] for X in EXITS}  # wait with an order at the best bid (or ask, to sell) instead of crossing
+passive_tried = 0
 moves_seen = 0
 stale = defaultdict(list)
 for title, g in groups.items():
@@ -133,6 +135,23 @@ for title, g in groups.items():
                 continue
             want = s * np.sign(d)  # +1: follower should rise
             end = at(cid, t0 + 300)
+            # Passive version: one second after the move, rest an order at the
+            # side market's best bid (to buy) or best ask (to sell). Counted as
+            # filled only if within 60 seconds the opposite best price reaches
+            # our price (someone was willing to trade there); then exit at the
+            # opposite side 60/300 seconds after the move, paying that spread.
+            q1 = at(cid, t0 + 1)
+            if q1 and 0 < q1[0] < q1[1] < 1 and q1[1] - q1[0] <= 0.10:
+                passive_tried += 1
+                price = q1[0] if want > 0 else q1[1]
+                ts_f, bs_f, as_f = quotes[cid]
+                k0, k1 = bisect.bisect_left(ts_f, t0 + 1), bisect.bisect_right(ts_f, t0 + 60)
+                filled = any((as_f[j] <= price if want > 0 else bs_f[j] >= price) for j in range(k0, k1))
+                if filled:
+                    for X in EXITS:
+                        e = at(cid, t0 + X)
+                        if e and 0 < e[0] < e[1] < 1:
+                            passive[X].append(((e[0] - price) if want > 0 else (price - e[1]), title))
             for L in LAT:
                 q = at(cid, t0 + L)
                 if not q or not (0 < q[0] < q[1] < 1) or q[1] - q[0] > 0.10:
@@ -165,6 +184,9 @@ for X in EXITS:
     print(f"exit after {X}s:")
     for L in LAT:
         print(f"   enter after {L:2d}s: " + summary(trades[(L, X)]))
+print(f"\nwaiting at the bid/ask instead (order rested 1s after the move, filled in {len(passive[60])} of {passive_tried} tries within 60s):")
+for X in EXITS:
+    print(f"   exit after {X}s: " + summary(passive[X]))
 print("\nhow much of the side market's 5-minute move had already happened when you could enter (when it moved 2c+ the right way):")
 for L in LAT:
     if stale[L]:
