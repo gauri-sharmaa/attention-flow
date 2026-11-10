@@ -23,6 +23,8 @@ Open http://localhost:8080. It spends a minute or two loading recent trades and 
 
 **[Watch the 2-minute demo](docs/demo.mp4)**: how it works, what each panel means, and what the research found.
 
+**Lag study:** [docs/lag-study.md](docs/lag-study.md) collects everything on whether markets lag each other (lead-lag, quiet-market lag, live sports order books) in one write-up.
+
 ## Real data
 
 A year of every trade on 1,205 Polymarket markets, Oct 2025 to Oct 2026: 24 million trades, including markets that resolved during the year. Every test is walk-forward: fit on one 30-day period, scored on the next, which the model never saw. That gives 11 test months, or 12 periods for the tests that don't fit a model. Each test has a placebo that shifts streams by whole days, keeping their daily rhythm and destroying real timing.
